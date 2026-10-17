@@ -20,7 +20,7 @@ service cloud.firestore{match /databases/{d}/documents{
  match /pages/{x}{allow read:if true;allow write:if adm();}
  match /gallery/{x}{allow read:if true;allow write:if adm();}
  match /news/{x}{allow read:if true;allow write:if adm();}
- match /orders/{x}{allow create:if request.resource.data.keys().hasOnly(['name','email','phone','whatsapp','trx','comicId','comic','price','t'])&&request.resource.data.name is string&&request.resource.data.name.size()<200;allow read,update,delete:if adm();}
+ match /orders/{x}{allow create:if request.resource.data.keys().hasOnly(['name','email','phone','whatsapp','method','trx','comicId','comic','price','t'])&&request.resource.data.name is string&&request.resource.data.name.size()<200;allow read,update,delete:if adm();}
  match /codes/{c}{allow get:if true;allow list,create,delete:if adm();
   allow update:if adm()||(!('device' in resource.data)&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device'])&&request.resource.data.device is string&&request.resource.data.device.size()<80);}
  match /admins/{u}{allow get:if request.auth!=null&&request.auth.uid==u;allow list,write:if adm();}
@@ -305,6 +305,7 @@ footer{background:#ff007b;color:#fff}footer p{color:#ffe9f4}footer a:hover,foote
 .wr{display:flex;gap:10px;align-items:center;color:#ff007b;margin-bottom:6px}.wr .ic{width:32px;height:32px}.wr h2{margin:0;color:#ff007b}
 .wc{background:rgba(255,0,123,.07);border:1.5px solid rgba(255,0,123,.35);border-radius:16px;padding:14px 16px;margin:10px 0 14px;color:#333;line-height:1.7}
 .wc li{margin:4px 0 4px 18px}
+.hero .cta{display:flex;justify-content:center;width:100%}
 /* characters */
 .chg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px;padding-bottom:50px}
 .chc{display:block;width:100%;text-align:left;background:#fff;border:1px solid #e9e8df;border-radius:18px;padding:10px;box-shadow:0 8px 24px -23px #102b25;transition:transform .3s,border-color .3s}
@@ -353,7 +354,7 @@ const cache=async(k,f)=>{let c;try{c=JSON.parse(localStorage['ak_'+k])}catch{}if
 const list=c=>cache(c,async()=>(await tmo(getDocs(collection(db,c)))).docs.map(d=>({id:d.id,...d.data()}))),byT=(a,b)=>(b.t||0)-(a.t||0);
 const I={alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
 const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${I[n]}</svg>`;
-const NAV=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি কমিকস','gift'],['lib','পারচেজ লাইব্রেরি','mark'],['chars','ক্যারেক্টার','star'],['about','আমাদের সম্পর্কে','users']];
+const NAV=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি কমিকস','gift'],['lib','পারচেজ লাইব্রেরি','mark'],['chars','ক্যারেক্টার','star'],['gallery','গ্যালারি','image'],['news','ঘোষণা ও কনটেস্ট','mega'],['about','আমাদের সম্পর্কে','users']];
 const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
 function reveal(){document.querySelectorAll('.card,.chc,.gal button,.nw,.ab section,.mi,.sx,.rail,.gp,.ban').forEach((x,i)=>{if(x.classList.contains('rv')||x.matches('.rail .card'))return;x.classList.add('rv');x.style.setProperty('--d',(i%5)*.08+'s');io?io.observe(x):x.classList.add('in')})}
 addEventListener('scroll',()=>{const h=document.documentElement;$('header').classList.toggle('sh',scrollY>8);$('#pg').style.width=scrollY/Math.max(1,h.scrollHeight-innerHeight)*100+'%'},{passive:true});
@@ -402,7 +403,7 @@ function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.
  step()}
 async function home(){
  const thisRoute=routeVersion;
- $('#app').innerHTML=`<div class=sec><section class=hero><div class=hx><h1><span class=bk>আকানো-আরডিবি স্টুডিও</span><span class=rw id=rw></span></h1><p class=lead>দেশি গল্প আর কল্পনার ঠিকানা।</p></div><div class=stk id=stk aria-label="হোম ব্যানার"></div></section><div id=sv></div></div>`;
+ $('#app').innerHTML=`<div class=sec><section class=hero><div class=hx><h1><span class=bk>আকানো-আরডিবি স্টুডিও</span><span class=rw id=rw></span></h1><p class=lead>দেশি গল্প আর কল্পনার ঠিকানা।</p></div><div class=stk id=stk aria-label="হোম ব্যানার"></div><div class=cta><button class=btn data-go=comics>কমিকস পড়ো${ic('arrow')}</button></div></section><div id=sv></div></div>`;
  typer($('#rw'));
  const[c,n,g,hb]=await Promise.allSettled([list('comics'),list('news'),list('gallery'),dat('site','homeBanner')]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
  if(thisRoute!==routeVersion)return;
@@ -460,13 +461,13 @@ async function openFree(id){try{const p=await dat('pages',id);if(p?.urls)read(p.
 function buy(id){const c=comics[id];
  modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=badge>${bn(c.price)} টাকা</span></div></div>
  ${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
- <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p>
+ <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p>
  <hr><b>কোড আছে?</b><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p>`);
  bindGo(id);
  $('#of').onsubmit=async e=>{e.preventDefault();const d={...Object.fromEntries(new FormData(e.target)),comicId:id,comic:c.title,price:c.price,t:Date.now()};
   $('#om').textContent='পাঠানো হচ্ছে...';
-  try{await addDoc(collection(db,'orders'),d);
-   e.target.hidden=true;$('#om').textContent='অর্ডার জমা হয়েছে। Admin Panel-এর অর্ডার বিভাগে দেখা যাবে। পেমেন্ট যাচাইয়ের পর অ্যাডমিন কোড তৈরি করবেন।'}
+  try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{method,...r}=d;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}
+   e.target.hidden=true;$('#om').textContent='অর্ডার জমা হয়েছে! আপনার বাছাই করা মাধ্যমে (${d.method}) আমরা যোগাযোগ করব। পেমেন্ট যাচাইয়ের পর আপনার ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে কমিকসটি মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে।'}
   catch{$('#om').textContent='অর্ডার সাইটে জমা হয়নি। ইন্টারনেট ও Firestore Rules পরীক্ষা করে আবার চেষ্টা করুন।'}}}
 // একটি কোড একবারই চালু হয়: প্রথম ব্যবহারের ডিভাইসেই বাঁধা পড়ে
 async function redeem(code,id){
@@ -493,7 +494,7 @@ function paint(w,u,t){const im=new Image();
   c.width=W;c.height=H;w.style.aspectRatio=W+'/'+H;const x=c.getContext('2d');x.drawImage(im,0,0,W,H);w.dataset.on=1};
  im.onerror=()=>{delete w.dataset.ld};im.src=u}
 function read(pg,code,title){
- modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>এই কমিকস পড়ার আগে জেনে নিন:</b><ul><li>কোনোভাবেই স্ক্রিনশট, স্ক্রিন রেকর্ড বা ছবি তোলা যাবে না।</li><li>কমিকসের কোনো অংশ কপি, শেয়ার বা অন্য কোথাও পোস্ট করা সম্পূর্ণ নিষিদ্ধ।</li><li>এমন কিছু ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।</li></ul></div><button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`);
+ modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>এই কমিকস পড়ার আগে জেনে নিন:</b><ul><li>কোনোভাবেই স্ক্রিনশট, স্ক্রিন রেকর্ড বা ছবি তোলা যাবে না।</li><li>কমিকসের কোনো অংশ কপি, শেয়ার বা অন্য কোথাও পোস্ট করা সম্পূর্ণ নিষিদ্ধ।</li><li>এমন কিছু ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।</li></ul></div>${code!=='AKANO'?'<p class=note>এই কমিকস মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে, সেখান থেকে যেকোনো সময় পড়তে পারবেন।</p>':''}<button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`);
  $('#okw').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title)}}
 function openReader(pg,code,title){const v=$('#v');z=1;rio?.disconnect();
  v.innerHTML=`<div class=bar><span>${esc(title||'')}</span><span><button data-z="-.25" aria-label="ছোট">&minus;</button><button data-z=".25" aria-label="বড়">+</button><button id=x aria-label="বন্ধ">${ic('x')}</button></span></div><div class=pages>${pg.map((u,i)=>`<div class=pgw data-i=${i}><canvas></canvas></div>`).join('')}</div>`;
@@ -622,7 +623,7 @@ async function refresh(){
  $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al><img src="${esc(x.th)}" width=48 alt=""><span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}</span><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
- $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
+ $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
  $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(comics[x.comicId]?.title||'মুছে গেছে')} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${new Date(+String(x.device).split('_')[1]+20*864e5).toLocaleDateString('bn-BD')}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
  $('#al').innerHTML=a.map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${esc(x.user)}</span>${x.id===me.uid?'<i>আপনি</i>':`<button data-del="admins/${x.id}">সরান</button>`}</div>`).join('')}
 
