@@ -20,9 +20,9 @@ service cloud.firestore{match /databases/{d}/documents{
  match /pages/{x}{allow read:if true;allow write:if adm();}
  match /gallery/{x}{allow read:if true;allow write:if adm();}
  match /news/{x}{allow read:if true;allow write:if adm();}
- match /orders/{x}{allow create:if true;allow read,update,delete:if adm();}
+ match /orders/{x}{allow create:if request.resource.data.keys().hasOnly(['name','email','phone','whatsapp','trx','comicId','comic','price','t'])&&request.resource.data.name is string&&request.resource.data.name.size()<200;allow read,update,delete:if adm();}
  match /codes/{c}{allow get:if true;allow list,create,delete:if adm();
-  allow update:if adm()||(!('device' in resource.data)&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device']));}
+  allow update:if adm()||(!('device' in resource.data)&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device'])&&request.resource.data.device is string&&request.resource.data.device.size()<80);}
  match /admins/{u}{allow get:if request.auth!=null&&request.auth.uid==u;allow list,write:if adm();}
 }}
 ধাপ ৩ - প্রথম অ্যাডমিন (একবারই):
@@ -339,13 +339,13 @@ footer a svg{width:20px;height:20px;flex:none}
 <main id="app"></main><footer><b>আকানো!</b><p>আরডিবি স্টুডিও-র একটি উদ্যোগ, ব্লু ওয়াক স্টুডিও-র সহযোগিতায়।</p><button class="lk" data-go="about">আমাদের সম্পর্কে</button><a href="https://www.facebook.com/share/1Dakj9PjWA/" target="_blank" rel="noopener" aria-label="ফেসবুক পেজ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>ফেসবুক পেজ</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target="_blank" rel="noopener" aria-label="ফেসবুক গ্রুপ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>ফেসবুক গ্রুপ</a><a href="mailto:helpsrdbstudios@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>helpsrdbstudios@gmail.com</a></footer><div id="m"></div><div id="v"></div>
 <script type="module">
 import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import{getFirestore,doc,getDoc,getDocs,setDoc,addDoc,deleteDoc,updateDoc,deleteField,collection}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import{initializeFirestore,doc,getDoc,getDocs,setDoc,addDoc,deleteDoc,updateDoc,deleteField,collection}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import{getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged,signOut,updatePassword}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7a68c.firebaseapp.com",projectId:"hallo-7a68c",storageBucket:"hallo-7a68c.firebasestorage.app",messagingSenderId:"243440324533",appId:"1:243440324533:web:152e65db8239f3602193fc",measurementId:"G-X2ZW15PVRG"}),app=initializeApp(cfg),db=getFirestore(app);
+const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7a68c.firebaseapp.com",projectId:"hallo-7a68c",storageBucket:"hallo-7a68c.firebasestorage.app",messagingSenderId:"243440324533",appId:"1:243440324533:web:152e65db8239f3602193fc",measurementId:"G-X2ZW15PVRG"}),app=initializeApp(cfg),db=initializeFirestore(app,{experimentalAutoDetectLongPolling:true});
 const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
 const TEAM=['আবরারুল হক মারুফ','ওমর ফারুক','সুরাজ দাস','আব্দুল্লাহ আল নাসিফ'];
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
-const tmo=(p,ms=12000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))]);
+const tmo=(p,ms=20000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))]);
 const errMsg=e=>e?.code==='permission-denied'?'ডাটাবেসের অনুমতি (Firestore Rules) ঠিক করা নেই':(e?.code==='timeout'||e?.code==='unavailable')?'ইন্টারনেট সংযোগ নেই বা খুব ধীর':'লোড করা যায়নি';
 const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?x.data():null};
 // কম রিড: ১০ মিনিট ক্যাশ
@@ -371,7 +371,7 @@ document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#m').classList.remove('on');tog(0)}});
 function modal(h,w){$('#m').innerHTML=`<div class="mb${w?' w':''}"><button class=cx aria-label="বন্ধ">${ic('x')}</button>${h}</div>`;$('#m').classList.add('on')}
 $('#m').onclick=e=>{if(e.target.id==='m'||e.target.closest('.cx'))$('#m').classList.remove('on')};
-function bindGo(id){$('#go').onclick=async()=>{$('#msg').textContent='যাচাই হচ্ছে...';try{const r=await redeem($('#cc').value,id);if($('#msg'))$('#msg').textContent=r}catch{if($('#msg'))$('#msg').textContent='সংযোগে সমস্যা, আবার চেষ্টা করুন'}}}
+function bindGo(id){$('#go').onclick=async()=>{$('#msg').textContent='যাচাই হচ্ছে...';try{const r=await redeem($('#cc').value,id);if($('#msg'))$('#msg').textContent=r}catch(e){if($('#msg'))$('#msg').textContent='সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'}}}
 
 // ---------- পেজ ----------
 const V={home,comics:()=>shop(0),free:()=>shop(1),gallery,news,about,lib:library,chars:characters};
@@ -451,7 +451,7 @@ const siteClick=e=>{
  const c=e.target.closest('.card'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]'),h=e.target.closest('[data-ch]');
  if(c)comics[c.dataset.id].free?openFree(c.dataset.id):buy(c.dataset.id);
  if(g){const x=gl[+g.dataset.gi];modal(`<img src="${esc(x.url)}" alt="${esc(x.cap)}" style="width:100%;display:block">${x.cap?`<p>${esc(x.cap)}</p>`:''}`,1)}
- if(l)redeem(l.dataset.lib).then(m=>m&&alert(m));
+ if(l)redeem(l.dataset.lib).then(m=>m&&alert(m)).catch(e=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'));
  if(h){const x=chs.find(y=>y.id===h.dataset.ch);if(x)modal(`<img src="${esc(x.img||x.th)}" alt="${esc(x.name)}" style="width:100%;max-height:60vh;object-fit:contain;border-radius:16px;background:#f6e6ef;display:block"><h2 style="margin-top:14px">${esc(x.name)}</h2>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<p class=note><b>অ্যাপিয়ারেন্স:</b> ${esc(x.app)}</p>`:''}${x.desc?`<p class=note style="white-space:pre-line">${esc(x.desc)}</p>`:''}`)}};
 $('#app').onclick=siteClick;
 
@@ -477,7 +477,7 @@ async function redeem(code,id){
  const EXP=20*864e5,now=Date.now(),le=lib[code],[cd,ca]=String(c.device||'').split('_');let at=+ca||0;
  if(c.device&&cd!==dev)return'এই কোড আগেই ব্যবহার করা হয়েছে';
  if(!at&&le?.e)at=le.e-EXP;
- if(!c.device){at=now;await updateDoc(doc(db,'codes',code),{device:dev+'_'+at})}
+ if(!c.device){at=now;try{await updateDoc(doc(db,'codes',code),{device:dev+'_'+at})}catch(e){if(e?.code==='permission-denied')return'কোডটি সক্রিয় করা যাচ্ছে না। অনুগ্রহ করে helpsrdbstudios@gmail.com এ জানান। (permission-denied)';throw e}}
  if(!at)at=now;
  if(now>at+EXP){lib[code]={t:le?.t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}return'এই কোডের ২০ দিনের মেয়াদ শেষ হয়ে গেছে'}
  const pg=(await dat('pages',c.comicId))?.urls,t=(await dat('comics',c.comicId))?.title;
