@@ -314,9 +314,10 @@ footer{background:#ff007b;color:#fff}footer p{color:#ffe9f4}footer a:hover,foote
 .card[hidden],.chc[hidden],.grp[hidden]{display:none!important}
 /* favourites, new badge, groups, chips, FAQ, reader extras */
 .card,.chc{position:relative}
-.fv{position:absolute;top:16px;right:16px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.92);color:#ff007b;cursor:pointer;box-shadow:0 4px 12px -6px rgba(0,0,0,.45);z-index:2}
-.fv .ic{width:19px;height:19px}.fv.on .ic{fill:#ff007b}
-.nwb{position:absolute;top:18px;left:18px;background:#eeff00;color:#ff007b;font-weight:700;font-size:13px;padding:3px 10px;border-radius:999px;z-index:2;box-shadow:0 0 0 1.5px #ff007b}
+.favb{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1.5px solid #ff007b;background:#fff;color:#ff007b;font-weight:600;cursor:pointer;margin-top:10px}
+.favb .ic{width:19px;height:19px}.favb.on{background:#ff007b;color:#fff}.favb.on .ic{fill:#fff}
+.nb{background:#eeff00;color:#ff007b;box-shadow:inset 0 0 0 1.5px #ff007b}
+.cedit{border:0;border-radius:20px;padding:22px;width:min(92vw,440px);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}.cedit::backdrop{background:rgba(0,0,0,.55)}.cedit form{display:grid;gap:10px}.cedit h3{margin:0 0 4px}.cedit [hidden]{display:none}
 .grp .sx h2 .badge{margin-left:8px;font-size:13px;vertical-align:middle}
 .chp{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:-6px 0 22px}
 .chp button{padding:8px 18px;border-radius:999px;border:1.5px solid #ffc2de;background:#fff;color:#ff007b;font-weight:600;cursor:pointer}
@@ -428,8 +429,10 @@ const banner=(n,t)=>`<${t} class=ban${t==='button'?' data-go=news':''}><div clas
 const LS={get:(k,d)=>{try{const v=JSON.parse(localStorage[k]);return v??d}catch{return d}},set:(k,v)=>{try{localStorage[k]=JSON.stringify(v)}catch{}}};
 let fav=LS.get('akFav',{}),prog=LS.get('akProg',{}),asp=LS.get('akAsp',{});fav.c=fav.c||[];fav.h=fav.h||[];
 const isNew=x=>Date.now()-(x.ct||x.t||0)<14*864e5;
-const favBtn=(t,id)=>`<span class="fv${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}" role=button tabindex=0 aria-label="প্রিয় তালিকা">${ic('heart')}</span>`;
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt="">${isNew(x)?'<span class=nwb>নতুন</span>':''}${favBtn('c',x.id)}<b>${esc(x.title)}</b>${x.type==='series'&&x.series?`<span class=tag>পর্ব ${bn(x.ep||1)}</span>`:'<span class=tag>ওয়ানশট</span>'}<span class="badge${f?' f':''}">${f?'ফ্রি':bn(x.price)+' টাকা'}</span>${f?'':'<span class="badge">কোড নিয়ে পড়ুন</span>'}</button>`;
+const favLbl=(t,id)=>fav[t].includes(id)?'প্রিয় তালিকায় আছে':'প্রিয় তালিকায় রাখুন';
+const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}">${ic('heart')}<span>${favLbl(t,id)}</span></button>`;
+const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=>{const[t,id]=b.dataset.fav.split(':');toggleFav(b);b.querySelector('span').textContent=favLbl(t,id)});
+const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt=""><b>${esc(x.title)}</b>${x.type==='series'&&x.series?`<span class=tag>পর্ব ${bn(x.ep||1)}</span>`:'<span class=tag>ওয়ানশট</span>'}${isNew(x)?'<span class="badge nb">নতুন</span>':''}<span class="badge${f?' f':''}">${f?'ফ্রি':bn(x.price)+' টাকা'}</span>${f?'':'<span class="badge">কোড নিয়ে পড়ুন</span>'}</button>`;
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
  if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=W[0];return}
@@ -438,7 +441,7 @@ function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.
   if(!d){i++;el.textContent=g.slice(0,i).join('');if(i>=g.length){d=1;tw=setTimeout(step,1600)}else tw=setTimeout(step,90);return}
   i--;el.textContent=g.slice(0,i).join('');if(i<=0){d=0;w=(w+1)%W.length;g=seg(W[w]);tw=setTimeout(step,300)}else tw=setTimeout(step,45)};
  step()}
-const chCard=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}">${favBtn('h',x.id)}<b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
+const chCard=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}"><b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
 const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
 async function home(){
  const thisRoute=routeVersion;
@@ -542,7 +545,7 @@ async function characters(){
  const d=await cache('chars',async()=>(await dat('site','characters'))||{list:[]});
  if(thisRoute!==routeVersion)return;
  chs=d.list||[];const g={};chs.forEach(x=>{const k=x.series||'অন্যান্য';(g[k]=g[k]||[]).push(x)});
- const cd=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}">${favBtn('h',x.id)}<b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
+ const cd=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}"><b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
  $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ক্যারেক্টার</span></h1>${chs.length?`<div class=sb>${ic('search')}<input id=q type=search placeholder="ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="ক্যারেক্টার খুঁজুন"></div>`:''}${Object.entries(g).map(([k,a])=>`<div class=grp><div class=sx><div><h2>${ic('star')}${esc(k)}</h2></div></div><div class=chg>${a.map(cd).join('')}</div></div>`).join('')||'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
  if($('#q'))$('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.chc').forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(v));document.querySelectorAll('.grp').forEach(g=>g.hidden=!g.querySelector('.chc:not([hidden])'));$('#nf').hidden=!!document.querySelector('.chc:not([hidden])')}}
 function about(){
@@ -561,18 +564,17 @@ const siteClick=e=>{
  if(c)comics[c.dataset.id].free?openFree(c.dataset.id):buy(c.dataset.id);
  if(g){const x=gl[+g.dataset.gi];modal(`<img src="${esc(x.url)}" alt="${esc(x.cap)}" style="width:100%;display:block">${x.cap?`<p>${esc(x.cap)}</p>`:''}`,1)}
  if(l)redeem(l.dataset.lib).then(m=>m&&alert(m)).catch(e=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'));
- if(h){const x=chs.find(y=>y.id===h.dataset.ch);if(x)modal(`<img src="${esc(x.img||x.th)}" alt="${esc(x.name)}" style="width:100%;max-height:60vh;object-fit:contain;border-radius:16px;background:#f6e6ef;display:block"><h2 style="margin-top:14px">${esc(x.name)}</h2>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<p class=note><b>অ্যাপিয়ারেন্স:</b> ${esc(x.app)}</p>`:''}${x.desc?`<p class=note style="white-space:pre-line">${esc(x.desc)}</p>`:''}`)}};
+ if(h){const x=chs.find(y=>y.id===h.dataset.ch);if(x)modal(`<img src="${esc(x.img||x.th)}" alt="${esc(x.name)}" style="width:100%;max-height:60vh;object-fit:contain;border-radius:16px;background:#f6e6ef;display:block"><h2 style="margin-top:14px">${esc(x.name)}</h2>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<p class=note><b>অ্যাপিয়ারেন্স:</b> ${esc(x.app)}</p>`:''}${x.desc?`<p class=note style="white-space:pre-line">${esc(x.desc)}</p>`:''}${favBtn('h',x.id)}`),favWire()}};
 $('#app').onclick=siteClick;
-$('#app').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList?.contains('fv')){e.preventDefault();toggleFav(e.target)}});
 
 // ---------- কেনা ও কোড ----------
-async function openFree(id){try{const p=await dat('pages',id);if(p?.urls)read(p.urls,'AKANO',comics[id]?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id})}catch(e){alert(errMsg(e))}}
+async function openFree(id){try{const p=await dat('pages',id);if(p?.urls)read(p.urls,'AKANO',comics[id]?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id,cid:id})}catch(e){alert(errMsg(e))}}
 function buy(id){const c=comics[id];
- modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=badge>${bn(c.price)} টাকা</span></div></div>
+ modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=badge>${bn(c.price)} টাকা</span><br>${favBtn('c',id)}</div></div>
  ${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
  <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p>
  <hr><b>কোড আছে?</b><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p>`);
- bindGo(id);
+ bindGo(id);favWire();
  $('#of').onsubmit=async e=>{e.preventDefault();const d={...Object.fromEntries(new FormData(e.target)),comicId:id,comic:c.title,price:c.price,t:Date.now()};
   $('#om').textContent='পাঠানো হচ্ছে...';
   try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{method,...r}=d;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}
@@ -593,7 +595,7 @@ async function redeem(code,id){
  const pg=(await dat('pages',c.comicId))?.urls,t=(await dat('comics',c.comicId))?.title;
  if(!pg)return'কমিকসটি পাওয়া যায়নি';
  lib[code]={t:t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}
- $('#m').classList.remove('on');read(pg,code,t,{k:'c',ref:code});return''}
+ $('#m').classList.remove('on');read(pg,code,t,{k:'c',ref:code,cid:c.comicId});return''}
 
 // ---------- সুরক্ষিত পাঠক ----------
 let z=1;
@@ -603,8 +605,8 @@ function paint(w,u,key){const im=new Image();
   c.width=W;c.height=H;w.style.aspectRatio=W+'/'+H;const x=c.getContext('2d');x.drawImage(im,0,0,W,H);w.dataset.on=1;const ar=(asp[key]=asp[key]||[]),r=+(W/H).toFixed(4),i=+w.dataset.i;if(ar[i]!==r){ar[i]=r;clearTimeout(paint.t);paint.t=setTimeout(()=>LS.set('akAsp',asp),900)}};
  im.onerror=()=>{delete w.dataset.ld};im.src=u}
 function read(pg,code,title,meta){meta=meta||{k:'c',ref:code};const key=meta.k+':'+meta.ref,pr=prog[key],rs=pr&&pr.p>0&&pr.p<pg.length?pr.p:0;
- modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>এই কমিকস পড়ার আগে জেনে নিন:</b><ul><li>কোনোভাবেই স্ক্রিনশট, স্ক্রিন রেকর্ড বা ছবি তোলা যাবে না।</li><li>কমিকসের কোনো অংশ কপি, শেয়ার বা অন্য কোথাও পোস্ট করা সম্পূর্ণ নিষিদ্ধ।</li><li>এমন কিছু ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।</li></ul></div>${code!=='AKANO'?'<p class=note>এই কমিকস মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে'+(lib[code]?.e?' (মেয়াদ: '+new Date(lib[code].e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'')+', সেখান থেকে যেকোনো সময় পড়তে পারবেন।</p>':''}${rs?`<button class="btn full" id=okw>বুঝেছি, পেজ ${bn(rs+1)} থেকে চালিয়ে যান</button><button class="btn full" id=okz style="margin-top:10px;background:#fff;color:#ff007b;border:1.5px solid #ff007b">শুরু থেকে পড়ুন</button>`:`<button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`}`);
- $('#okw').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,rs)};
+ modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>এই কমিকস পড়ার আগে জেনে নিন:</b><ul><li>কোনোভাবেই স্ক্রিনশট, স্ক্রিন রেকর্ড বা ছবি তোলা যাবে না।</li><li>কমিকসের কোনো অংশ কপি, শেয়ার বা অন্য কোথাও পোস্ট করা সম্পূর্ণ নিষিদ্ধ।</li><li>এমন কিছু ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।</li></ul></div>${code!=='AKANO'?'<p class=note>এই কমিকস মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে'+(lib[code]?.e?' (মেয়াদ: '+new Date(lib[code].e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'')+', সেখান থেকে যেকোনো সময় পড়তে পারবেন।</p>':''}${meta.cid?`<div style="margin:0 0 12px">${favBtn('c',meta.cid)}</div>`:''}${rs?`<button class="btn full" id=okw>বুঝেছি, পেজ ${bn(rs+1)} থেকে চালিয়ে যান</button><button class="btn full" id=okz style="margin-top:10px;background:#fff;color:#ff007b;border:1.5px solid #ff007b">শুরু থেকে পড়ুন</button>`:`<button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`}`);
+ favWire();$('#okw').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,rs)};
  if($('#okz'))$('#okz').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,0)}}
 function openReader(pg,code,title,meta,start){meta=meta||{k:'c',ref:code};start=start||0;const v=$('#v'),key=meta.k+':'+meta.ref,ar=asp[key]||[];z=1;rio?.disconnect();rtk?.disconnect();let cur=start,ready=!start;
  v.innerHTML=`<div class=bar><span>${esc(title||'')}<small id=pn></small></span><span><button data-z="-.25" aria-label="ছোট">&minus;</button><button data-z=".25" aria-label="বড়">+</button><button id=x aria-label="বন্ধ">${ic('x')}</button></span></div><div class=pages>${pg.map((u,i)=>`<div class=pgw data-i=${i}${ar[i]?` style="aspect-ratio:${ar[i]}"`:''}><canvas></canvas></div>`).join('')}</div>${start?`<div class=tst id=tst>পেজ ${bn(start+1)} থেকে চালু হয়েছে</div>`:''}`;
@@ -720,7 +722,7 @@ function panel(){
    if(!confirm('মুছে ফেলবেন?'))return;const[c,i]=d.del.split('/');await deleteDoc(D(c,i));if(d.also)await deleteDoc(D(d.also,i));refresh()}
   if(d.edit){const [c,i]=d.edit.split('/');const q=await dat(c,i);if(!q)return alert('তথ্য পাওয়া যায়নি');
    try{
-    if(c==='comics'){const title=prompt('কমিকসের নাম:',q.title);if(title===null)return;const price=prompt('দাম (ফ্রি হলে 0):',q.price??0);if(price===null)return;const cover=prompt('নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(cover===null)return;const ty=prompt('ধরন লিখুন: ওয়ানশট অথবা সিরিজ',q.type==='series'?'সিরিজ':'ওয়ানশট');if(ty===null)return;const isS=ty.trim()==='সিরিজ';let sr='',ep=0;if(isS){sr=prompt('সিরিজের নাম:',q.series||'');if(sr===null)return;const e2=prompt('পর্ব নম্বর:',q.ep||1);if(e2===null)return;ep=Number(e2)||1}const patch={title:title.trim(),price:Number(price),free:Number(price)===0,type:isS?'series':'oneshot',series:isS?sr.trim():'',ep:isS?ep:0,t:Date.now()};if(cover.trim())patch.cover=cover.trim();await updateDoc(D(c,i),patch)}
+    if(c==='comics'){editComic(i,q);return}
     else if(c==='news'){const title=prompt('শিরোনাম:',q.title);if(title===null)return;const body=prompt('বিস্তারিত:',q.text||'');if(body===null)return;const link=prompt('লিংক:',q.link||'');if(link===null)return;await updateDoc(D(c,i),{title:title.trim(),text:body,link:link.trim(),t:Date.now()})}
     else if(c==='gallery'){const cap=prompt('ক্যাপশন:',q.cap||'');if(cap===null)return;const url=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(url===null)return;const patch={cap:cap.trim(),t:Date.now()};if(url.trim()){patch.url=url.trim();patch.th=url.trim()}await updateDoc(D(c,i),patch)}
     refresh()
@@ -729,6 +731,16 @@ function panel(){
   if(d.mk)mk(d.mk,d.em)};
  refresh()}
 
+function editComic(id,q){
+ const d=document.createElement('dialog');d.className='cedit';
+ d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><input name=price type=number min=0 value="${q.price??0}" placeholder="দাম (ফ্রি হলে 0)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
+ document.body.appendChild(d);d.showModal();
+ const ty=d.querySelector('[name=type]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on};tg();ty.onchange=tg;
+ const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
+ d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0;
+  if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
+  const patch={title:f.title.trim(),price:pr,free:pr===0,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
+  try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
 async function mk(id,email){if(!id)return alert('কমিকস বাছাই করুন');
  const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
  await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now()});refresh();
