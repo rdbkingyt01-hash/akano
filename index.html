@@ -733,13 +733,14 @@ function panel(){
 
 function editComic(id,q){
  const d=document.createElement('dialog');d.className='cedit';
- d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><input name=price type=number min=0 value="${q.price??0}" placeholder="দাম (ফ্রি হলে 0)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
+ d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
  document.body.appendChild(d);d.showModal();
- const ty=d.querySelector('[name=type]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on};tg();ty.onchange=tg;
+ const ty=d.querySelector('[name=type]'),fr=d.querySelector('[name=free]'),pi=d.querySelector('[name=price]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on;pi.hidden=fr.checked};tg();ty.onchange=tg;fr.onchange=tg;
  const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
- d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0;
+ d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0,fr=!!f.free;
+  if(!fr&&pr<=0)return alert('পেইড করতে দাম দিন (০ এর বেশি)');
   if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-  const patch={title:f.title.trim(),price:pr,free:pr===0,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
+  const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
   try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
 async function mk(id,email){if(!id)return alert('কমিকস বাছাই করুন');
  const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
