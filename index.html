@@ -16,7 +16,7 @@ rules_version='2';
 service cloud.firestore{match /databases/{d}/documents{
  function adm(){return request.auth!=null&&exists(/databases/$(d)/documents/admins/$(request.auth.uid));}
  match /site/{x}{allow read:if true;allow write:if adm();}
- match /comics/{x}{allow read:if true;allow create,delete:if adm();allow update:if adm()||(resource.data.free==true&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views'])&&request.resource.data.views is int&&request.resource.data.views==resource.data.get('views',0)+1);}
+ match /comics/{x}{allow read:if true;allow create,delete:if adm();allow update:if adm()||(request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views'])&&request.resource.data.views is int&&request.resource.data.views==resource.data.get('views',0)+1);}
  match /pages/{x}{allow read:if true;allow write:if adm();}
  match /gallery/{x}{allow read:if true;allow write:if adm();}
  match /news/{x}{allow read:if true;allow write:if adm();}
@@ -24,6 +24,7 @@ service cloud.firestore{match /databases/{d}/documents{
  match /codes/{c}{allow get:if true;allow list,create,delete:if adm();
   allow update:if adm()||(!('device' in resource.data)&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device'])&&request.resource.data.device is string&&request.resource.data.device.size()<80);}
  match /reviews/{x}{allow read:if resource.data.approved==true||adm();allow create:if request.resource.data.keys().hasOnly(['name','rating','text','comic','approved','t'])&&request.resource.data.approved==false&&request.resource.data.rating is int&&request.resource.data.rating>=1&&request.resource.data.rating<=5&&request.resource.data.name is string&&request.resource.data.name.size()>0&&request.resource.data.name.size()<=60&&request.resource.data.text is string&&request.resource.data.text.size()>0&&request.resource.data.text.size()<=500&&request.resource.data.comic is string&&request.resource.data.comic.size()<=120;allow update,delete:if adm();}
+ match /videoViews/{x}{allow read:if true;allow create:if request.resource.data.keys().hasOnly(['n'])&&request.resource.data.n==1;allow update:if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['n'])&&request.resource.data.n==resource.data.n+1;allow delete:if adm();}
  match /admins/{u}{allow get:if request.auth!=null&&request.auth.uid==u;allow list,write:if adm();}
 }}
 ধাপ ৩ - প্রথম অ্যাডমিন (একবারই):
@@ -351,6 +352,26 @@ footer{background:#ff007b;color:#fff}footer p{color:#ffe9f4}footer a:hover,foote
 .al button{padding:8px 14px;border-radius:999px;border:1.5px solid #ff007b;background:#fff;color:#ff007b;font-weight:600;font-size:15px;cursor:pointer}
 .al button[data-del],.al button[data-cdel]{border-color:#c0392b;color:#c0392b}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#102b25;color:#fff;padding:11px 20px;border-radius:999px;z-index:30;font-size:15px;box-shadow:0 12px 28px -12px rgba(0,0,0,.6)}.toast[hidden]{display:none}
+/* app-style bottom navigation + 'আরও' sheet */
+#bn{position:fixed;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(94%,560px);height:74px;display:flex;align-items:stretch;gap:4px;padding:6px;background:rgba(255,253,247,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1.5px solid #ffc2de;border-radius:28px;box-shadow:0 16px 38px -20px rgba(255,0,123,.6);z-index:6}
+#bn button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:0;background:none;color:#555;font-size:13px;font-weight:600;border-radius:21px;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+#bn button .ic{width:26px;height:26px}
+#bn button.on{background:rgba(255,0,123,.12);color:#ff007b}
+#bn button:active{transform:scale(.95)}
+#sc{z-index:7}
+#sh{position:fixed;left:50%;bottom:0;width:min(100%,560px);max-height:84dvh;overflow:auto;background:#fffdf7;z-index:8;padding:10px 18px calc(22px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;box-shadow:0 -24px 70px -30px rgba(255,0,123,.55);transform:translate(-50%,105%);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+#sh.on{transform:translate(-50%,0)}
+#sh .gh{width:46px;height:5px;border-radius:99px;background:#e2dccd;margin:2px auto 16px;cursor:pointer}
+#sh .mg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#sh .mg button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px 6px;border-radius:20px;border:1.5px solid #ffd2e6;background:#fff;color:#102b25;font-size:15px;font-weight:600;cursor:pointer;text-align:center;line-height:1.3}
+#sh .mg button .ic{width:28px;height:28px;color:#ff007b}
+#sh .mg button:active{background:#ffe0ef}
+#sh .mc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;align-items:center}#sh .mc b{width:100%;color:#666;font-size:14px}
+#sh .mc a{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#fff;border:1.5px solid #ffd2e6;color:#ff007b;font-weight:600;text-decoration:none;font-size:15px}#sh .mc a svg{width:18px;height:18px}
+#sh .adb{display:flex;align-items:center;gap:8px;margin:8px auto 0;background:none;border:0;color:#777;font-size:14px;cursor:pointer}#sh .adb .ic{width:16px;height:16px}
+footer{padding-bottom:128px!important}
+.toast{bottom:104px}
+@media(prefers-reduced-motion:reduce){#sh{transition:none}}
 /* bigger logo */
 header #logo{height:60px;max-width:min(62vw,300px)}
 @media(max-width:760px){header #logo{height:54px}}
@@ -389,20 +410,239 @@ footer{width:100%;flex:none}
 footer a,footer .lk{display:inline-flex;align-items:center;gap:8px}
 footer a svg{width:20px;height:20px;flex:none}
 #v,#v .pages,#v .pages img{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+/* ===== APP SKIN (Webtoon / MANGA Plus / Crunchyroll style) ===== */
+#sq{margin-left:auto;margin-right:8px;background:var(--deep);color:#fff;border:0;border-radius:15px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+#sq .ic{width:22px;height:22px;color:#fff}
+@media(max-width:760px){#sq{width:43px;height:43px;border-radius:13px}}
+.sec>h1.ct{text-align:left;font-size:clamp(26px,6.4vw,38px);margin:22px 0 14px;letter-spacing:-.6px;line-height:1.25}
+.sec>h1.ct span{display:inline;margin-left:8px}
+.sec>.sb{width:100%;max-width:none;margin:12px 0 4px;background:#f4f0f2;border-color:transparent;height:50px}
+.sx{margin:26px 0 12px;align-items:center}
+.sx h2{font-size:20px;gap:8px;letter-spacing:-.3px}
+.sx h2 .ic{width:30px;height:30px;padding:5px;border-radius:10px;background:#ffe0ef;color:#ff007b}
+.more{font-size:14px;color:#ff007b;background:none;border:0;display:inline-flex;align-items:center;gap:4px;font-weight:600;cursor:pointer;white-space:nowrap}
+.more .ic{width:16px;height:16px;background:none;padding:0;border-radius:0}
+.card{background:none;border:0;box-shadow:none;padding:0;border-radius:0;overflow:visible}
+.card:hover{border:0;box-shadow:none;transform:none}
+.card img{aspect-ratio:3/4;border-radius:14px;box-shadow:0 10px 22px -14px rgba(0,0,0,.5)}
+.card b{font-size:15px;margin:9px 2px 4px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#1a1320}
+.card .tag,.card .badge{font-size:11.5px;padding:2px 8px;margin:0 4px 4px 2px;border-radius:6px}
+.card .vw{margin:2px 2px 0;font-size:12.5px}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 10px;padding:6px 0 40px;max-width:none}
+@media(min-width:620px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px 16px}}
+.sec .grid{padding:6px 0 40px;max-width:none;margin:0}
+.rail{gap:12px;margin:0 -5%;padding:4px 5% 8px}
+.rail>*{scroll-snap-align:start}
+.rail .card{flex:0 0 clamp(118px,33vw,170px)}
+.rail .ban{flex:0 0 min(86%,340px);margin:0}
+.hc{position:relative;margin:12px -5% 0;overflow:hidden}
+@media(min-width:760px){.hc{margin:14px 0 0;border-radius:28px}}
+.hcs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hcs::-webkit-scrollbar{display:none}
+.hs{position:relative;flex:0 0 100%;scroll-snap-align:center;height:clamp(300px,64vw,430px);overflow:hidden;background:#1a1320;color:#fff;display:flex;align-items:flex-end}
+.hs .bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(22px) brightness(.5);transform:scale(1.1)}
+.hs:not(.hb):not(.sk):after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,9,17,.82),rgba(13,9,17,.2) 70%,transparent),linear-gradient(0deg,rgba(13,9,17,.7),transparent 55%)}
+.hs .po{position:absolute;right:7%;top:50%;transform:translateY(-52%);height:74%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;box-shadow:0 22px 44px -18px rgba(0,0,0,.8);z-index:1}
+.hs .tx{position:relative;z-index:2;padding:0 22px 48px;width:62%;max-width:560px}
+.hs .ey{display:inline-block;background:#eeff00;color:#ff007b;font-weight:700;font-size:12.5px;padding:3px 11px;border-radius:99px;margin-bottom:10px}
+.hs h2{font-size:clamp(22px,5.6vw,38px);line-height:1.2;margin:0 0 6px;color:#fff;letter-spacing:-.5px;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.hs p{margin:0 0 14px;color:#f6ecf2;font-size:15px}
+.hs .btn{display:inline-flex;align-items:center;gap:8px;background:#ff007b;color:#fff}
+.hs.hb{background:linear-gradient(135deg,#ff007b,#ff4fa3 62%,#ffd84d)}
+.hs.hb .po2{position:absolute;right:4%;bottom:0;height:86%;max-width:44%;object-fit:contain;z-index:1}
+.hs.hb .btn{background:#fff;color:#ff007b}
+.hd{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:7px;z-index:3}
+.hd i{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.5);transition:width .25s,background .25s}.hd i.on{width:24px;background:#fff}
+.qk{display:flex;gap:10px;overflow-x:auto;margin:16px -5% 0;padding:2px 5% 6px;scrollbar-width:none}.qk::-webkit-scrollbar{display:none}
+.qk button{flex:none;display:flex;flex-direction:column;align-items:center;gap:7px;border:0;background:none;color:#333;font-size:13px;font-weight:600;cursor:pointer;width:72px}
+.qk button .ic{width:56px;height:56px;padding:15px;border-radius:50%;background:#ffe0ef;color:#ff007b}
+.cc{flex:0 0 clamp(120px,34vw,170px);background:none;border:0;text-align:left;padding:0;cursor:pointer}
+.cc .cv{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#f0dfe8}
+.cc .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.cc .cv i{position:absolute;left:0;bottom:0;height:5px;background:#ff007b}
+.cc b{display:-webkit-box;font-size:15px;margin:8px 2px 2px;line-height:1.35;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#1a1320}
+.cc small{color:#666;margin:0 2px;font-size:13px}
+.rk{flex:0 0 clamp(150px,44vw,210px);display:flex;align-items:flex-end}
+.rk i{font-style:normal;font-size:64px;font-weight:800;color:transparent;-webkit-text-stroke:2px #ff007b;line-height:.9;margin-right:-8px;position:relative;z-index:1;padding-bottom:34px}
+.rk .card{flex:1;min-width:0}
+.av{flex:0 0 78px;background:none;border:0;padding:0;text-align:center;cursor:pointer}
+.av img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #ff007b;padding:2px;background:#fff}
+.av span{display:block;font-size:13px;margin-top:6px;font-weight:600;line-height:1.25;color:#222}
+
+/* ===== CLEAN-UP ===== */
+.sx h2 .ic{display:none}
+.sx{margin:22px 0 10px}
+.sx h2{font-size:19px}
+.more .ic{display:none}.more{font-size:13.5px}
+.card img{box-shadow:none}
+.card b{font-size:14.5px;margin:8px 2px 2px}
+.card .mt{display:block;margin:0 2px;font-size:12.5px;color:#7a7077;line-height:1.5}
+.card .mt em{font-style:normal;color:#ff007b;font-weight:700}
+.card .mt u{text-decoration:none;color:#ff007b;font-weight:700}
+.card .mt .ic{width:13px;height:13px;vertical-align:-2px;margin-right:2px}
+#sh .mg button{border:0;background:#f6f2f4}
+#sh .mc a{border:0;background:#f6f2f4}
+#bn{border:0;box-shadow:0 10px 30px -14px rgba(0,0,0,.35)}
+
+/* ===== FIXES: alignment, filters, series page, popups ===== */
+.grid{align-items:start}
+.rail{align-items:flex-start}
+.card{display:block;align-self:flex-start}
+.card img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.card .mt{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chp{margin:16px 0 20px;justify-content:flex-start;gap:8px}
+.chp button{padding:7px 18px;font-size:14px}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:#ff007b;font-weight:600;font-size:15px;padding:6px 0;margin-top:14px;cursor:pointer}
+.back .ic{width:18px;height:18px;transform:rotate(180deg)}
+#serp .sh{display:flex;gap:16px;align-items:flex-end;margin:10px 0 18px}
+#serp .sh img{width:112px;aspect-ratio:3/4;object-fit:cover;border-radius:14px;flex:none}
+#serp .sh h1{font-size:clamp(22px,6vw,32px);margin:0 0 4px;line-height:1.25;color:#1a1320}
+#serp .sh p{margin:0;color:#7a7077}
+.eps{display:grid;gap:10px;padding-bottom:40px}
+.ep{display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:1px solid #efe9ec;border-radius:16px;padding:10px;cursor:pointer;width:100%}
+.ep img{width:56px;aspect-ratio:3/4;object-fit:cover;border-radius:10px;flex:none}
+.ep div{flex:1;min-width:0}.ep b{display:block;font-size:16px;color:#1a1320}
+.ep small{display:block;color:#7a7077;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep .pt{font-weight:700;color:#7a7077;font-size:14px;flex:none}.ep .pt.f{color:#ff007b}
+.seg{display:flex;background:#f4f0f2;border-radius:999px;padding:4px;margin:0 0 14px}
+.seg button{flex:1;border:0;background:none;padding:10px;border-radius:999px;font-weight:600;color:#666;cursor:pointer;font-size:15px}
+.seg button.on{background:#fff;color:#ff007b;box-shadow:0 4px 12px -8px rgba(0,0,0,.4)}
+.bp{display:inline-block;font-weight:700;color:#ff007b;font-size:18px}
+.bh img{border-radius:12px}
+.wr{flex-direction:column;align-items:flex-start;gap:8px;margin:2px 0 10px}
+.wr .ic{width:46px;height:46px;padding:11px;border-radius:50%;background:#ffe0ef;color:#ff007b}
+.wr h2{font-size:24px}
+.wc{background:#fff7fb;border:0;border-radius:18px;padding:14px 16px 6px}
+.wc b{display:block;margin-bottom:8px;color:#1a1320}
+.wc ul{list-style:none;margin:0;padding:0}
+.wc li{position:relative;margin:0 0 10px;padding-left:20px;line-height:1.65}
+.wc li:before{content:'';position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:#ff007b}
+
+/* ===== NEW FOOTER + animated scene ===== */
+footer.ft{max-width:none;margin:40px 0 0;padding:0!important;background:#fff0f7;color:#1a1320;border:0;display:block;overflow:hidden}
+footer.ft .fti{max-width:1100px;margin:0 auto;padding:34px 6% 10px}
+footer.ft .fh{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+footer.ft .fh img{height:46px;width:auto;max-width:200px;object-fit:contain;display:block}
+footer.ft .fh b{font-size:32px;color:#ff007b;letter-spacing:-1px}
+footer.ft .fd{margin:0 0 18px;color:#5e5560;max-width:560px;font-weight:400;line-height:1.7}
+footer.ft .fs{display:flex;gap:12px;margin-bottom:24px}
+footer.ft .fs a{width:50px;height:50px;border-radius:50%;background:#ff007b;color:#fff;display:flex;align-items:center;justify-content:center;margin:0;text-decoration:none}
+footer.ft .fs a svg{width:24px;height:24px}
+footer.ft h4{margin:0 0 8px;font-size:16px;color:#1a1320}
+footer.ft .fl{display:flex;flex-wrap:wrap;gap:4px 22px;margin-bottom:22px}
+footer.ft .fl button{background:none;border:0;padding:6px 0;font:inherit;font-weight:500;font-size:16.5px;color:#1a1320;text-decoration:underline;text-decoration-color:#ffb3d5;text-decoration-thickness:2px;text-underline-offset:5px;cursor:pointer}
+footer.ft .fl button:hover{color:#ff007b}
+footer.ft .fb{border-top:1.5px solid #ffd2e6;padding-top:16px;padding-bottom:18px;display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;font-size:15px;color:#5e5560}
+footer.ft .fb a{color:#1a1320;margin:0;text-decoration:underline;text-decoration-color:#ffb3d5;text-underline-offset:5px}
+footer.ft .scn{display:block;width:100%;height:150px}
+@media(min-width:760px){footer.ft .scn{height:auto}}
+footer.ft .gnd{height:86px;background:#ff4fa3}
+.scn .sc-sun{transform-origin:740px 64px;animation:scenePulse 5s ease-in-out infinite}
+.scn .sc-boat{transform-origin:626px 132px;animation:sceneBob 4s ease-in-out infinite}
+.scn .sc-palm{transform-origin:880px 146px;animation:sceneSway 5s ease-in-out infinite alternate}
+.scn .sc-wave{animation:sceneDrift 5s ease-in-out infinite alternate}
+.scn .sc-cloud{animation:sceneCloud 26s ease-in-out infinite alternate}
+.scn .sc-cloud.c2{animation-duration:34s;animation-direction:alternate-reverse}
+.scn .sc-bird{animation:sceneFly 16s linear infinite}
+.scn .sc-bird.b2{animation-duration:21s;animation-delay:-8s}
+@keyframes scenePulse{50%{transform:scale(1.06)}}
+@keyframes sceneBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(4px) rotate(1deg)}}
+@keyframes sceneSway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@keyframes sceneDrift{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+@keyframes sceneCloud{from{transform:translateX(-40px)}to{transform:translateX(60px)}}
+@keyframes sceneFly{from{transform:translate(-60px,0)}to{transform:translate(520px,-22px)}}
+
+/* ===== VIDEO SECTION + CUSTOM PLAYER ===== */
+.vc .pl .ic,#vp .vbig .ic,#vp #vpp .ic{fill:currentColor;stroke:none}
+.vc .mt2{display:flex;align-items:center;gap:5px;margin:4px 2px 0;font-size:13px;color:#7a7077}.vc .mt2 .ic{width:15px;height:15px}
+.vg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px 16px;padding:6px 0 40px;align-items:start}
+@media(max-width:620px){.vg{grid-template-columns:1fr}}
+.vc{display:block;background:none;border:0;padding:0;text-align:left;cursor:pointer;align-self:flex-start}
+.vc[hidden]{display:none}
+.vc .th{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#ff007b,#ff8fc4)}
+.vc .th img{width:100%;height:100%;object-fit:cover;display:block}
+.vc .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,0,123,.92);display:flex;align-items:center;justify-content:center}
+.vc .pl .ic{width:24px;height:24px;color:#fff}
+.vc em{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.72);color:#fff;font-style:normal;font-size:12px;padding:2px 7px;border-radius:6px}
+.vc b{display:-webkit-box;margin:9px 2px 0;font-size:15.5px;line-height:1.4;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#1a1320;font-weight:600}
+.rail .vc{flex:0 0 min(76%,290px)}
+#vls .al img{width:80px;height:45px}
+#vm{margin-top:8px;color:var(--r);font-weight:600}
+#vp{position:fixed;inset:0;background:#000;z-index:11;display:none;flex-direction:column;color:#fff}
+#vp.on{display:flex}
+#vp button{background:none;border:0;color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:6px}
+#vp .vbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(#000,transparent);position:relative;z-index:3;transition:opacity .3s}
+#vp .vbar span{font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#vp .vbar .ic{width:26px;height:26px}
+#vp .vst{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;background:#000}
+#vp .vst iframe{width:100%;height:auto;max-height:100%;aspect-ratio:16/9;border:0;pointer-events:none}
+#vp .vsh{position:absolute;inset:0;z-index:2;cursor:pointer}
+#vp .vbig{position:absolute;z-index:3;width:76px;height:76px;border-radius:50%;background:rgba(255,0,123,.92);box-shadow:0 14px 34px -10px rgba(255,0,123,.8)}
+#vp .vbig .ic{width:34px;height:34px;color:#fff}
+#vp.playing .vbig{display:none}
+#vp .vct{display:flex;align-items:center;gap:12px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#000);position:relative;z-index:3;transition:opacity .3s}
+#vp.hide .vct,#vp.hide .vbar{opacity:0;pointer-events:none}
+#vp .vct .ic{width:24px;height:24px}
+#vp input[type=range]{flex:1;accent-color:#ff007b;height:4px;margin:0;padding:0;background:none;border:0;min-width:0}
+#vp #vtm{font-size:13px;white-space:nowrap;opacity:.9}
+
+/* ===== FOOTER: dark modern city ===== */
+footer.ft{background:linear-gradient(#1a1320,#2b1233);color:#f3eaf1}
+footer.ft .fh b{color:#eeff00}
+footer.ft .fd{color:#cdbfd0}
+footer.ft .fb{border-top-color:rgba(255,255,255,.14);color:#bfb0c3}
+footer.ft .gnd{background:#0c0711}
+footer.ft .fti{padding-bottom:0}
+footer.ft .fb{padding-bottom:22px}
+.scn .sc-sun,.scn .sc-boat,.scn .sc-palm,.scn .sc-wave,.scn .sc-cloud,.scn .sc-bird{animation:none}
+.scn .sc-beam{transform-origin:600px 152px;animation:sceneBeam 7s ease-in-out infinite alternate}
+.scn .sc-w{animation:sceneWin 4s ease-in-out infinite}
+.scn .sc-fog{animation:sceneFog 22s ease-in-out infinite alternate}
+.scn .sc-neon{animation:sceneFlick 5s linear infinite}
+@keyframes sceneBeam{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
+@keyframes sceneWin{0%,100%{opacity:.95}50%{opacity:.2}}
+@keyframes sceneFog{from{transform:translateX(-90px)}to{transform:translateX(90px)}}
+@keyframes sceneFlick{0%,44%,56%,100%{opacity:1}46%{opacity:.3}48%{opacity:1}52%{opacity:.45}}
+html,body{height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:auto}
+body{-webkit-overflow-scrolling:touch}
+#app{flex:1 0 auto;min-height:40vh}
+.rail{-webkit-overflow-scrolling:touch}
+#bn [data-go=videos] .ic{width:30px;height:30px}
+.vc .pl{width:56px;height:56px}
+.vc .pl .ic{width:29px;height:29px}
+#vp:fullscreen,#vp:-webkit-full-screen{width:100vw;height:100vh;height:100dvh;inset:0}
+
+/* ===== ARTICLE (about) + heading fixes ===== */
+h1,h1.ct,.sec>h1.ct,.hs h2,.sx h2,.ab h2,footer b,footer.ft .fh b,#serp .sh h1{letter-spacing:0!important}
+#serp .sh h1{font-weight:600;font-size:clamp(22px,6vw,30px)}
+.art{max-width:720px;margin:0 auto;padding:28px 6% 70px}
+.art .kk{display:block;color:#ff007b;font-weight:600;font-size:15px}
+.art h1{font-size:clamp(30px,8vw,46px);line-height:1.35;margin:8px 0 14px;font-weight:700;color:#1a1320;text-align:left}
+.art .lead{font-size:clamp(18px,4.6vw,21px);line-height:1.85;color:#3a3340;margin:0 0 24px;font-weight:400}
+.art h2{font-size:clamp(21px,5.4vw,26px);line-height:1.4;margin:34px 0 10px;color:#1a1320;font-weight:700}
+.art p{font-size:18px;line-height:1.95;color:#2c2630;margin:0 0 16px;font-weight:400}
+.art blockquote{margin:26px 0;padding:16px 20px;border-left:4px solid #ff007b;background:#fff0f7;border-radius:0 16px 16px 0;font-size:clamp(19px,5vw,23px);line-height:1.7;color:#1a1320;font-weight:600}
+.art .btns{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 8px}
+.art .btn.ghost{background:#fff;color:#ff007b;border:1.5px solid #ff007b;text-decoration:none}
+.art .sig{margin-top:22px;font-weight:600;color:#ff007b}
+.art .acard{margin-top:34px;padding:6px 22px 8px}
+.art .acard section{padding:18px 0;border-top:1px solid rgba(255,0,123,.22)}
+.art .acard section:first-child{border-top:0}
+.art .acard small{display:block;color:#ff007b;font-weight:600;margin-bottom:4px;font-size:15px}
+.art .acard h3{margin:0 0 4px;font-size:22px;font-weight:600;color:#1a1320;letter-spacing:0}
 </style>
 </head>
 <body>
 <div id="pg"></div>
-<header><button id="lgb" aria-label="হোম"><img id="logo" alt="সাইটের লোগো" hidden></button><button id="mb" aria-label="মেনু"><svg width="46" height="34" viewBox="0 0 46 34"><path d="M0 4h46M0 17h46M0 30h46" stroke="#666" stroke-width="6"/></svg></button></header>
-<aside id="dr"></aside><div id="sc"></div>
-<main id="app"></main><footer><b>আকানো!</b><p>আরডিবি স্টুডিও-র একটি উদ্যোগ, ব্লু ওয়াক স্টুডিও-র সহযোগিতায়।</p><button class="lk" data-go="about">আমাদের সম্পর্কে</button><a href="https://www.facebook.com/share/1Dakj9PjWA/" target="_blank" rel="noopener" aria-label="ফেসবুক পেজ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>ফেসবুক পেজ</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target="_blank" rel="noopener" aria-label="ফেসবুক গ্রুপ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>ফেসবুক গ্রুপ</a><a href="mailto:helpsrdbstudios@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>helpsrdbstudios@gmail.com</a></footer><div id="m"></div><div id="v"></div>
+<header><button id="lgb" aria-label="হোম"><img id="logo" alt="সাইটের লোগো" hidden></button><button id="sq" aria-label="খুঁজুন"></button></header>
+<aside id="sh"></aside><div id="sc"></div><nav id="bn" aria-label="প্রধান নেভিগেশন"></nav><div id="vp" role="dialog" aria-label="ভিডিও প্লেয়ার"></div>
+<main id="app"></main><footer class="ft"><div class="fti"><div class="fh"><img id="flogo" alt="আকানো" hidden><b id="fbt">আকানো!</b></div><p class="fd">আরডিবি স্টুডিও-র একটি উদ্যোগ, ব্লু ওয়াক স্টুডিও-র সহযোগিতায়। দেশি গল্প আর কল্পনার ঠিকানা।</p><div class="fs"><a href="https://www.facebook.com/share/1Dakj9PjWA/" target="_blank" rel="noopener" aria-label="ফেসবুক পেজ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a><a href="https://www.facebook.com/share/g/18VCniWUos/" target="_blank" rel="noopener" aria-label="ফেসবুক গ্রুপ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a><a href="mailto:helpsrdbstudios@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a></div><div class="fb"><span>&copy; আকানো-আরডিবি স্টুডিও</span></div></div><div class="scene"><svg class="scn" viewBox="0 0 1440 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="bm" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff3a0" stop-opacity=".55"/><stop offset="1" stop-color="#fff3a0" stop-opacity=".06"/></linearGradient></defs><g><circle cx="860" cy="48" r="46" fill="#fff3c4" opacity=".1"/><circle cx="860" cy="48" r="22" fill="#fff3c4" opacity=".95"/></g><g fill="#2b1d3d"><rect x="-10" y="79" width="56" height="111"/><rect x="49" y="102" width="56" height="88"/><rect x="77" y="90" width="2" height="12"/><rect x="109" y="94" width="58" height="96"/><rect x="138" y="82" width="2" height="12"/><rect x="170" y="125" width="47" height="65"/><path d="M186 125L193 101L200 125Z"/><rect x="222" y="96" width="30" height="94"/><rect x="257" y="95" width="38" height="95"/><path d="M270 95L276 77L282 95Z"/><rect x="295" y="122" width="30" height="68"/><rect x="328" y="106" width="48" height="84"/><rect x="352" y="94" width="2" height="12"/><rect x="377" y="103" width="46" height="87"/><path d="M393 103L400 73L407 103Z"/><rect x="428" y="108" width="45" height="82"/><rect x="473" y="114" width="44" height="76"/><rect x="517" y="98" width="32" height="92"/><rect x="551" y="130" width="52" height="60"/><rect x="603" y="121" width="41" height="69"/><rect x="623" y="109" width="2" height="12"/><rect x="647" y="108" width="53" height="82"/><path d="M665 108L673 78L681 108Z"/><rect x="705" y="113" width="45" height="77"/><path d="M720 113L727 85L734 113Z"/><rect x="753" y="126" width="35" height="64"/><path d="M765 126L770 98L775 126Z"/><rect x="788" y="83" width="57" height="107"/><rect x="846" y="102" width="56" height="88"/><path d="M865 102L874 85L883 102Z"/><rect x="903" y="93" width="54" height="97"/><rect x="958" y="117" width="28" height="73"/><rect x="990" y="78" width="47" height="112"/><path d="M1006 78L1013 58L1020 78Z"/><rect x="1041" y="132" width="34" height="58"/><rect x="1058" y="120" width="2" height="12"/><rect x="1077" y="85" width="28" height="105"/><rect x="1108" y="130" width="32" height="60"/><path d="M1119 130L1124 98L1129 130Z"/><rect x="1141" y="96" width="28" height="94"/><rect x="1170" y="81" width="58" height="109"/><rect x="1229" y="115" width="37" height="75"/><rect x="1267" y="124" width="40" height="66"/><rect x="1308" y="78" width="52" height="112"/><rect x="1334" y="66" width="2" height="12"/><rect x="1360" y="128" width="34" height="62"/><path d="M1372 128L1377 104L1382 128Z"/><rect x="1395" y="118" width="53" height="72"/></g><g fill="#1d1329"><rect x="-10" y="48" width="52" height="142"/><path d="M8 48L16 23L24 48Z"/><rect x="42" y="85" width="42" height="105"/><rect x="88" y="79" width="38" height="111"/><path d="M101 79L107 48L113 79Z"/><rect x="131" y="106" width="35" height="84"/><path d="M143 106L148 79L153 106Z"/><rect x="166" y="92" width="36" height="98"/><rect x="203" y="68" width="39" height="122"/><path d="M216 68L222 37L228 68Z"/><rect x="244" y="97" width="67" height="93"/><rect x="314" y="75" width="56" height="115"/><rect x="342" y="63" width="2" height="12"/><rect x="375" y="53" width="38" height="137"/><path d="M388 53L394 37L400 53Z"/><rect x="414" y="105" width="38" height="85"/><rect x="452" y="71" width="42" height="119"/><rect x="494" y="111" width="60" height="79"/><rect x="558" y="66" width="58" height="124"/><rect x="616" y="100" width="39" height="90"/><rect x="660" y="65" width="55" height="125"/><rect x="718" y="55" width="62" height="135"/><rect x="749" y="43" width="2" height="12"/><rect x="784" y="75" width="35" height="115"/><rect x="820" y="51" width="41" height="139"/><rect x="864" y="113" width="50" height="77"/><rect x="889" y="101" width="2" height="12"/><rect x="918" y="48" width="46" height="142"/><path d="M934 48L941 28L948 48Z"/><rect x="969" y="51" width="62" height="139"/><rect x="1036" y="89" width="50" height="101"/><rect x="1087" y="65" width="47" height="125"/><path d="M1103 65L1110 43L1117 65Z"/><rect x="1135" y="97" width="42" height="93"/><rect x="1177" y="79" width="38" height="111"/><rect x="1196" y="67" width="2" height="12"/><rect x="1218" y="87" width="51" height="103"/><rect x="1273" y="74" width="65" height="116"/><rect x="1342" y="73" width="62" height="117"/><path d="M1363 73L1373 49L1383 73Z"/><rect x="1408" y="79" width="36" height="111"/><rect x="1448" y="97" width="35" height="93"/><rect x="1465" y="85" width="2" height="12"/></g><g><rect x="690" y="62" width="84" height="128" fill="#1d1329"/><path d="M724 62L732 38L740 62Z" fill="#1d1329"/><rect x="698" y="76" width="68" height="22" rx="3" fill="none" stroke="#ff007b" stroke-width="2" class="sc-neon"/><text x="732" y="92" text-anchor="middle" font-size="14" font-weight="800" fill="#ff007b" class="sc-neon" style="font-family:Arial,Helvetica,sans-serif">AKANO!</text><rect x="698" y="112" width="6" height="8" fill="#ffd84d" class="sc-w"/><rect x="716" y="130" width="6" height="8" fill="#ff4fa3"/><rect x="744" y="116" width="6" height="8" fill="#ffd84d"/><rect x="752" y="146" width="6" height="8" fill="#ffd84d" class="sc-w" style="animation-delay:-2s"/></g><g><rect x="-4" y="82" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="-4" y="160" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="6" y="173" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="16" y="69" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.8s" x="16" y="82" width="4" height="6" fill="#ff4fa3"/><rect x="16" y="108" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="26" y="56" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="68" y="93" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="68" y="158" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="94" y="100" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="104" y="87" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="104" y="139" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="114" y="87" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-2.3s" x="114" y="100" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.0s" x="114" y="152" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-0.4s" x="137" y="166" width="4" height="6" fill="#ffd84d"/><rect x="172" y="100" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.5s" x="182" y="152" width="4" height="6" fill="#ff4fa3"/><rect x="192" y="126" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.2s" x="219" y="76" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-4.5s" x="219" y="141" width="4" height="6" fill="#ff4fa3"/><rect x="229" y="141" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="270" y="170" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="280" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="280" y="157" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="280" y="170" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="300" y="157" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="300" y="170" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-4.5s" x="330" y="122" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-1.3s" x="350" y="109" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-2.7s" x="350" y="122" width="4" height="6" fill="#ffd84d"/><rect x="350" y="135" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.3s" x="401" y="139" width="4" height="6" fill="#ff4fa3"/><rect x="401" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="458" y="131" width="4" height="6" fill="#ff4fa3"/><rect x="468" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="468" y="170" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-2.7s" x="478" y="92" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-0.5s" x="478" y="118" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-3.7s" x="478" y="144" width="4" height="6" fill="#eeff00"/><rect x="574" y="113" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="584" y="87" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.8s" x="584" y="100" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.1s" x="604" y="139" width="4" height="6" fill="#ffd84d"/><rect x="622" y="160" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="666" y="99" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="666" y="112" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="666" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="676" y="73" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.7s" x="676" y="151" width="4" height="6" fill="#ff4fa3"/><rect x="686" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="686" y="151" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="686" y="164" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.9s" x="696" y="99" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-3.1s" x="696" y="164" width="4" height="6" fill="#eeff00"/><rect x="800" y="83" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="800" y="148" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.9s" x="800" y="161" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-3.8s" x="846" y="59" width="4" height="6" fill="#eeff00"/><rect x="880" y="134" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.4s" x="880" y="173" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-3.7s" x="900" y="121" width="4" height="6" fill="#ff4fa3"/><rect x="924" y="56" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="924" y="134" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.8s" x="934" y="173" width="4" height="6" fill="#eeff00"/><rect x="944" y="134" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="944" y="173" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="975" y="150" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="995" y="85" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.0s" x="1005" y="137" width="4" height="6" fill="#ffd84d"/><rect x="1005" y="150" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.5s" x="1015" y="85" width="4" height="6" fill="#ffd84d"/><rect x="1015" y="150" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1052" y="110" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.1s" x="1062" y="149" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-0.9s" x="1093" y="86" width="4" height="6" fill="#eeff00"/><rect x="1103" y="164" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1113" y="99" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1123" y="112" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1123" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.3s" x="1123" y="151" width="4" height="6" fill="#ff4fa3"/><rect x="1141" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1183" y="139" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1183" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1193" y="100" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1193" y="152" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1203" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1244" y="121" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1244" y="173" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.1s" x="1254" y="108" width="4" height="6" fill="#eeff00"/><rect x="1254" y="121" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1279" y="82" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.7s" x="1279" y="95" width="4" height="6" fill="#ffd84d"/><rect x="1279" y="134" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.9s" x="1299" y="82" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-4.7s" x="1309" y="147" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-4.7s" x="1319" y="147" width="4" height="6" fill="#ffd84d"/><rect x="1329" y="108" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.1s" x="1348" y="159" width="4" height="6" fill="#ffd84d"/><rect x="1378" y="81" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="1378" y="107" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-2.5s" x="1388" y="120" width="4" height="6" fill="#ff4fa3"/><rect x="1434" y="113" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.5s" x="1454" y="131" width="4" height="6" fill="#ffd84d"/></g><g class="sc-beam"><polygon points="600,152 564,8 636,8" fill="url(#bm)"/><ellipse cx="600" cy="10" rx="36" ry="9" fill="#eeff00" opacity=".92"/><text x="600" y="15" text-anchor="middle" font-size="14" font-weight="800" fill="#ff007b" style="font-family:Arial,Helvetica,sans-serif">!</text></g><g class="sc-fog" fill="#fff" opacity=".07"><ellipse cx="300" cy="172" rx="260" ry="14"/><ellipse cx="900" cy="176" rx="300" ry="16"/><ellipse cx="1250" cy="170" rx="200" ry="12"/></g><g fill="#120b1a"><rect x="-10" y="159" width="55" height="31"/><rect x="45" y="162" width="68" height="28"/><rect x="115" y="156" width="44" height="34"/><path d="M130 156L137 133L144 156Z"/><rect x="160" y="168" width="85" height="22"/><rect x="245" y="154" width="51" height="36"/><path d="M262 154L270 130L278 154Z"/><rect x="301" y="136" width="73" height="54"/><rect x="377" y="154" width="90" height="36"/><path d="M407 154L422 131L437 154Z"/><rect x="472" y="160" width="64" height="30"/><rect x="504" y="148" width="2" height="12"/><rect x="536" y="133" width="64" height="57"/><rect x="602" y="148" width="69" height="42"/><rect x="636" y="136" width="2" height="12"/><rect x="676" y="161" width="81" height="29"/><path d="M703 161L716 138L729 161Z"/><rect x="757" y="134" width="59" height="56"/><rect x="818" y="167" width="85" height="23"/><rect x="860" y="155" width="2" height="12"/><rect x="906" y="133" width="61" height="57"/><rect x="936" y="121" width="2" height="12"/><rect x="967" y="164" width="53" height="26"/><rect x="993" y="152" width="2" height="12"/><rect x="1024" y="160" width="61" height="30"/><rect x="1090" y="140" width="73" height="50"/><rect x="1168" y="154" width="45" height="36"/><rect x="1218" y="158" width="75" height="32"/><rect x="1297" y="149" width="56" height="41"/><rect x="1357" y="149" width="53" height="41"/><rect x="1414" y="132" width="57" height="58"/><rect x="570" y="150" width="62" height="40"/><rect x="592" y="144" width="16" height="8"/></g><rect x="0" y="178" width="1440" height="12" fill="#0c0711"/></svg><div class="gnd"></div></div></footer><div id="m"></div><div id="v"></div>
 <script type="module">
 import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import{initializeFirestore,doc,getDoc,getDocs,setDoc,addDoc,deleteDoc,updateDoc,deleteField,increment,query,where,collection}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import{getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged,signOut,updatePassword}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7a68c.firebaseapp.com",projectId:"hallo-7a68c",storageBucket:"hallo-7a68c.firebasestorage.app",messagingSenderId:"243440324533",appId:"1:243440324533:web:152e65db8239f3602193fc",measurementId:"G-X2ZW15PVRG"}),app=initializeApp(cfg),db=initializeFirestore(app,{experimentalAutoDetectLongPolling:true});
 const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
-const TEAM=['আবরারুল হক মারুফ','ওমর ফারুক','সুরাজ দাস'];
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
 const tmo=(p,ms=20000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))]);
 const errMsg=e=>e?.code==='permission-denied'?'ডাটাবেসের অনুমতি (Firestore Rules) ঠিক করা নেই':(e?.code==='timeout'||e?.code==='unavailable')?'ইন্টারনেট সংযোগ নেই বা খুব ধীর':'লোড করা যায়নি';
@@ -410,9 +650,9 @@ const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?
 // কম রিড: ১০ মিনিট ক্যাশ
 const cache=async(k,f)=>{let c;try{c=JSON.parse(localStorage['ak_'+k])}catch{}if(c&&Date.now()-c.t<6e5)return c.d;try{const d=await f();try{localStorage['ak_'+k]=JSON.stringify({t:Date.now(),d})}catch{}return d}catch(e){if(c)return c.d;throw e}};
 const list=c=>cache(c,async()=>(await tmo(getDocs(collection(db,c)))).docs.map(d=>({id:d.id,...d.data()}))),byT=(a,b)=>(b.t||0)-(a.t||0);
-const I={heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
+const I={film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',tri:'<path d="M8 5.5v13l11-6.5z"/>',play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>',pause:'<path d="M8 5v14M16 5v14"/>',vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/>',mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',full:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',shelf:'<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="4" width="4" height="16" rx="1"/><path d="M15.2 5.6l3.5-1 3.2 14.6-3.5 1z"/>',panels:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v9M9 12v9"/>',bookmark:'<path d="M6 3h12v18l-6-4.5L6 21z"/>',face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01"/>',grid:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
 const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${I[n]}</svg>`;
-const NAV=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি কমিকস','gift'],['lib','পারচেজ লাইব্রেরি','mark'],['favs','প্রিয় তালিকা','heart'],['chars','ক্যারেক্টার','star'],['gallery','গ্যালারি','image'],['news','ঘোষণা ও কনটেস্ট','mega'],['reviews','রিভিউ','msg'],['faq','প্রশ্নোত্তর','help'],['about','আমাদের সম্পর্কে','users']];
+const NAV=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি কমিকস','gift'],['videos','ভিডিও','play'],['lib','পারচেজ লাইব্রেরি','shelf'],['favs','প্রিয় তালিকা','bookmark'],['chars','ক্যারেক্টার','face'],['gallery','গ্যালারি','image'],['news','ঘোষণা ও কনটেস্ট','mega'],['reviews','রিভিউ','msg'],['faq','প্রশ্নোত্তর','help']];
 const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
 function reveal(){document.querySelectorAll('.card,.chc,.gal button,.nw,.ab section,.mi,.sx,.rail,.gp,.ban').forEach((x,i)=>{if(x.classList.contains('rv')||x.matches('.rail .card'))return;x.classList.add('rv');x.style.setProperty('--d',(i%5)*.08+'s');io?io.observe(x):x.classList.add('in')})}
 addEventListener('scroll',()=>{const h=document.documentElement;$('header').classList.toggle('sh',scrollY>8);$('#pg').style.width=scrollY/Math.max(1,h.scrollHeight-innerHeight)*100+'%'},{passive:true});
@@ -421,11 +661,16 @@ Object.keys(lib).forEach(k=>{if(typeof lib[k]==='string')lib[k]={t:lib[k],e:Date
 let tw;
 
 // ---------- মেনু ও মোডাল ----------
-const dr=$('#dr'),sc=$('#sc'),tog=o=>{dr.classList.toggle('on',o);sc.classList.toggle('on',o)};
-dr.innerHTML=`<button id=dc aria-label="বন্ধ করুন">${ic('x')}</button>`+NAV.map(([v,t,i])=>`<button data-go=${v}>${ic(i)}${t}</button>`).join('')+`<button id=rc>${ic('key')}কোড দিয়ে পড়ুন</button><details><summary>${ic('link')}কমিউনিটি</summary><a href="https://www.facebook.com/share/1Dakj9PjWA/" target=_blank rel=noopener>ফেসবুক পেজ</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>ফেসবুক গ্রুপ</a></details><button id=ad>${ic('lock')}অ্যাডমিন</button>`;
+const dr=$('#sh'),sc=$('#sc'),tog=o=>{dr.classList.toggle('on',o);sc.classList.toggle('on',o)};
+const FBX='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
+const BN=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি','gift'],['videos','ভিডিও','play']],MORE=NAV.filter(n=>!BN.some(b=>b[0]===n[0]));
+const bnSet=v=>document.querySelectorAll('#bn button').forEach(b=>b.classList.toggle('on',b.dataset.bn===(BN.some(x=>x[0]===v)?v:'more')));
+$('#bn').innerHTML=BN.map(([v,t,i])=>`<button data-go=${v} data-bn=${v}>${ic(i)}<span>${t}</span></button>`).join('')+`<button id=bm data-bn=more>${ic('grid')}<span>আরও</span></button>`;
+$('#bm').onclick=()=>tog(!dr.classList.contains('on'));
+dr.innerHTML=`<div class=gh id=gh></div><div class=mg>${MORE.map(([v,t,i])=>`<button data-go=${v}>${ic(i)}<span>${t}</span></button>`).join('')}</div><div class=mc><b>কমিউনিটি ও যোগাযোগ</b><a href="https://www.facebook.com/share/1Dakj9PjWA/" target=_blank rel=noopener>${FBX}ফেসবুক পেজ</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>${FBX}ফেসবুক গ্রুপ</a><a href="mailto:helpsrdbstudios@gmail.com">${ic('mail')}ইমেইল</a></div><button class=adb id=ad>${ic('lock')}অ্যাডমিন লগইন</button>`;
 $('#ad').onclick=()=>openAdmin();
-$('#mb').onclick=()=>tog(1);$('#dc').onclick=sc.onclick=()=>tog(0);$('#lgb').onclick=()=>go('home');
-$('#rc').onclick=()=>{tog(0);modal(`<h2>কোড দিয়ে পড়ুন</h2><p class=note>ইমেইলে পাওয়া কোডটি লিখুন।</p><div class=row><input id=cc placeholder="আপনার কোড" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p>`);bindGo()};
+$('#sq').innerHTML=ic('search');$('#sq').onclick=()=>{const q=$('#hq');if(q){scrollTo({top:0,behavior:'smooth'});q.focus()}else go('home').then(()=>$('#hq')?.focus())};
+$('#gh').onclick=sc.onclick=()=>tog(0);$('#lgb').onclick=()=>go('home');
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#m').classList.remove('on');tog(0)}});
 function modal(h,w){$('#m').innerHTML=`<div class="mb${w?' w':''}"><button class=cx aria-label="বন্ধ">${ic('x')}</button>${h}</div>`;$('#m').classList.add('on')}
@@ -433,11 +678,12 @@ $('#m').onclick=e=>{if(e.target.id==='m'||e.target.closest('.cx'))$('#m').classL
 function bindGo(id){$('#go').onclick=async()=>{$('#msg').textContent='যাচাই হচ্ছে...';try{const r=await redeem($('#cc').value,id);if($('#msg'))$('#msg').textContent=r}catch(e){if($('#msg'))$('#msg').textContent='সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'}}}
 
 // ---------- পেজ ----------
-const V={home,comics:()=>shop(0),free:()=>shop(1),gallery,news,about,lib:library,chars:characters,reviews,favs,faq};
+const V={home,comics:()=>shop(0),free:()=>shop(1),gallery,news,about,lib:library,chars:characters,reviews,favs,faq,videos};
 const SK='<div class=sg>'+'<div class=sk></div>'.repeat(6)+'</div>';
-let routeVersion=0;
+let routeVersion=0,lastShop='comics';
 async function go(v){
  if(!V[v])return;
+ bnSet(v);
  const thisRoute=++routeVersion;
  tog(0);scrollTo(0,0);clearTimeout(tw);$('#app').innerHTML=SK;
  try{
@@ -452,12 +698,18 @@ async function go(v){
 const banner=(n,t)=>`<${t} class=ban${t==='button'?' data-go=news':''}><div class=im><img src="${esc(n.img)}" loading=lazy alt=""></div><b><span class=tag>${esc(n.type)}</span><br>${esc(n.title)}</b></${t}>`;
 const LS={get:(k,d)=>{try{const v=JSON.parse(localStorage[k]);return v??d}catch{return d}},set:(k,v)=>{try{localStorage[k]=JSON.stringify(v)}catch{}}};
 let fav=LS.get('akFav',{}),prog=LS.get('akProg',{}),asp=LS.get('akAsp',{});fav.c=fav.c||[];fav.h=fav.h||[];
-const countView=id=>{const m=LS.get('akVw',{}),n=Date.now();if(m[id]&&n-m[id]<864e5)return;m[id]=n;LS.set('akVw',m);updateDoc(doc(db,'comics',id),{views:increment(1)}).catch(()=>{})};
+const countView=id=>{if(!id)return;const m=LS.get('akVw',{}),n=Date.now();if(m[id]&&n-m[id]<864e5)return;
+ updateDoc(doc(db,'comics',id),{views:increment(1)}).then(()=>{m[id]=Date.now();LS.set('akVw',m);const x=comics[id];if(x)x.views=(+x.views||0)+1;
+  try{const c=JSON.parse(localStorage.ak_comics);if(c&&Array.isArray(c.d)){const q=c.d.find(y=>y.id===id);if(q){q.views=(+q.views||0)+1;localStorage.ak_comics=JSON.stringify(c)}}}catch{}}).catch(()=>{})};
 const isNew=x=>Date.now()-(x.ct||x.t||0)<14*864e5;
 const favLbl=(t,id)=>fav[t].includes(id)?'প্রিয় তালিকায় আছে':'প্রিয় তালিকায় রাখুন';
-const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}">${ic('heart')}<span>${favLbl(t,id)}</span></button>`;
+const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}">${ic('bookmark')}<span>${favLbl(t,id)}</span></button>`;
 const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=>{const[t,id]=b.dataset.fav.split(':');toggleFav(b);b.querySelector('span').textContent=favLbl(t,id)});
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt=""><b>${esc(x.title)}</b>${x.type==='series'&&x.series?`<span class=tag>পর্ব ${bn(x.ep||1)}</span>`:'<span class=tag>ওয়ানশট</span>'}${isNew(x)?'<span class="badge nb">নতুন</span>':''}<span class="badge${f?' f':''}">${f?'ফ্রি':bn(x.price)+' টাকা'}</span>${f?'':'<span class="badge">কোড নিয়ে পড়ুন</span>'}${f?`<span class=vw>${ic('eye')}${bn(x.views||0)} বার পড়া হয়েছে</span>`:''}</button>`;
+const isSer=c=>c.type==='series'&&c.series;
+const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt=""><b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)} বার দেখা</span></button>`;
+function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.series])return;seen[c.series]=1;out.push({ser:c.series,top:c,eps:l.filter(x=>isSer(x)&&x.series===c.series)})}else out.push({one:c})});return out}
+const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"><img src="${esc(g.top.cover)}" loading=lazy alt=""><b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)} বার দেখা</span></button>`};
+const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
  if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=W[0];return}
@@ -470,39 +722,46 @@ const chCard=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||
 const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
 async function home(){
  const thisRoute=routeVersion;
- $('#app').innerHTML=`<div class=sec><section class=hero><div class=hx><h1><span class=bk>আকানো-আরডিবি স্টুডিও</span><span class=rw id=rw></span></h1><p class=lead>দেশি গল্প আর কল্পনার ঠিকানা।</p></div><div class=stk id=stk aria-label="হোম ব্যানার"></div><div class=cta><button class=btn data-go=comics>কমিকস পড়ো${ic('arrow')}</button></div></section><div class=cnt>${contBtn()}</div><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv></div></div>`;
- typer($('#rw'));
-  let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
+ $('#app').innerHTML=`<div class=sec><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:210px;border-radius:14px;margin-top:22px"></div></div></div>`;
+ let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
   if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
   $('#sv').hidden=true;
-  try{if(!sd){const[cl,cr]=await Promise.all([list('comics'),cache('chars',async()=>(await dat('site','characters'))||{list:[]})]);sd={cl:cl.sort(byT),ch:cr.list||[]};comics=Object.fromEntries(sd.cl.map(c=>[c.id,c]));chs=sd.ch}}catch{$('#sr').innerHTML='<p class=ld>লোড করা যায়নি।</p>';return}
+  try{if(!sd){const[cl,cr,vr]=await Promise.all([list('comics'),cache('chars',async()=>(await dat('site','characters'))||{list:[]}),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]);sd={cl:cl.sort(byT),ch:cr.list||[],vd:[...(vr.list||[])].sort(byT)};comics=Object.fromEntries(sd.cl.map(c=>[c.id,c]));chs=sd.ch;vds=sd.vd}}catch{$('#sr').innerHTML='<p class=ld>লোড করা যায়নি।</p>';return}
   if($('#hq').value.trim().toLowerCase()!==v)return;
-  const a=sd.cl.filter(c=>String((c.title||'')+' '+(c.series||'')).toLowerCase().includes(v)),b=sd.ch.filter(x=>[x.name,x.series,x.app].join(' ').toLowerCase().includes(v));
-  $('#sr').innerHTML=(a.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${a.map(c=>cardH(c,!!c.free)).join('')}</div>`:'')+(b.length?`<div class=sx><div><h2>${ic('star')}ক্যারেক্টার</h2></div></div><div class=chg>${b.map(chCard).join('')}</div>`:'')||'<p class=ld>কিছু পাওয়া যায়নি।</p>'};
- const[c,n,g,hb]=await Promise.allSettled([list('comics'),list('news'),list('gallery'),dat('site','homeBanner')]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
+   const a=sd.cl.filter(c=>String((c.title||'')+' '+(c.series||'')).toLowerCase().includes(v)),b=sd.ch.filter(x=>[x.name,x.series,x.app].join(' ').toLowerCase().includes(v)),vm=sd.vd.filter(x=>[x.title,x.desc].join(' ').toLowerCase().includes(v));
+   try{vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
+   if($('#hq').value.trim().toLowerCase()!==v)return;
+  $('#sr').innerHTML=(a.length?`<div class=sx><div><h2>কমিকস</h2></div></div><div class=grid>${a.map(c=>cardH(c,!!c.free)).join('')}</div>`:'')+(b.length?`<div class=sx><div><h2>ক্যারেক্টার</h2></div></div><div class=chg>${b.map(chCard).join('')}</div>`:'')+(vm.length?`<div class=sx><div><h2>ভিডিও</h2></div></div><div class=vg>${vm.map(vCard).join('')}</div>`:'')||'<p class=ld>কিছু পাওয়া যায়নি।</p>'};
+ const[c,vr]=await Promise.allSettled([list('comics'),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
  if(thisRoute!==routeVersion)return;
- if(c.status==='rejected'&&n.status==='rejected'&&g.status==='rejected')throw c.reason;
+ if(c.status==='rejected'&&vr.status==='rejected')throw c.reason;
  if(!$('#sv'))return;
- const cs=ok(c),ns=ok(n).slice(0,2),gs=ok(g).slice(0,6);comics=Object.fromEntries(cs.map(x=>[x.id,x]));
- const heroImage=hb.status==='fulfilled'?hb.value:null;
- if(heroImage?.url)$('#stk').innerHTML=`<img src="${esc(heroImage.url)}" alt="হোম ব্যানার">`;
- else $('#stk').remove();
- const sx=(i,t,s,v,b)=>`<div class=sx><div><h2>${ic(i)}${t}</h2><p class=sub>${s}</p></div><button class=more data-go=${v}>সব দেখুন${ic('arrow')}</button></div>${b}`,soon='<p class=soon>শীঘ্রই আসছে</p>';
- $('#sv').innerHTML=(ns.length?sx('mega','ঘোষণা ও কনটেস্ট','নতুন খবর আর প্রতিযোগিতা','news',ns.map(x=>banner(x,'button')).join('')):'')
-  +(gs.length?sx('image','গ্যালারি','ছবির আড্ডা','gallery',`<div class=gp>${gs.map(x=>`<button data-go=gallery aria-label="গ্যালারি"><img src="${esc(x.th||x.url)}" loading=lazy alt=""></button>`).join('')}</div>`):'');
+ const cs=ok(c);
+ comics=Object.fromEntries(cs.map(x=>[x.id,x]));
+ vds=vr.status==='fulfilled'?[...(vr.value.list||[])].sort(byT):[];
+  const selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8);
+  try{vv={...vv,...await vviews(featuredVideos.map(x=>x.id))}}catch{}
+  if(thisRoute!==routeVersion)return;
+ const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class=rail>${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
+ $('#sv').innerHTML=rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):'<p class=soon>শীঘ্রই আসছে</p>')
+  +rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class=soon>শীঘ্রই আসছে</p>');
  reveal()}
+async function openSeries(name){
+ const thisRoute=++routeVersion;scrollTo(0,0);bnSet(lastShop);$('#app').innerHTML=SK;
+ let l=[];try{l=(await list('comics')).filter(c=>isSer(c)&&c.series===name).sort((x,y)=>(+x.ep||0)-(+y.ep||0))}catch(e){if(thisRoute===routeVersion)$('#app').innerHTML=`<p class=ld>${errMsg(e)}</p>`;return}
+ if(thisRoute!==routeVersion)return;
+ Object.assign(comics,Object.fromEntries(l.map(c=>[c.id,c])));
+ const top=l[l.length-1],by=l.find(x=>x.creator)?.creator;
+ $('#app').innerHTML=`<div class=sec id=serp><button class=back data-go=${lastShop}>${ic('arrow')}<span>পেছনে</span></button>${l.length?`<div class=sh><img src="${esc(top.cover)}" alt=""><div><h1>${esc(name)}</h1><p>${bn(l.length)} পর্ব${by?' · '+esc(by):''}</p></div></div><div class=eps>${l.map(c=>`<button class=ep data-open data-id="${c.id}"><img src="${esc(c.cover)}" loading=lazy alt=""><div><b>পর্ব ${bn(c.ep||1)}</b><small>${esc(c.title)}</small></div><span class="pt${c.free?' f':''}">${c.free?'ফ্রি':bn(c.price)+' টাকা'}</span></button>`).join('')}</div>`:'<p class=ld>কোনো পর্ব পাওয়া যায়নি।</p>'}</div>`}
 async function shop(f){
  const thisRoute=routeVersion;
  const l=(await list('comics')).filter(c=>!!c.free==!!f).sort(byT);
  if(thisRoute!==routeVersion)return;
+ lastShop=f?'free':'comics';
  comics=Object.fromEntries(l.map(c=>[c.id,c]));
- const ser={},one=[];l.forEach(c=>{if(c.type==='series'&&c.series)(ser[c.series]=ser[c.series]||[]).push(c);else one.push(c)});
- Object.values(ser).forEach(a=>a.sort((x,y)=>(+x.ep||0)-(+y.ep||0)));
- const gs=Object.entries(ser).sort((a,b)=>Math.max(...b[1].map(x=>x.t||0))-Math.max(...a[1].map(x=>x.t||0)));
- const grp=(ty,h,a)=>`<div class=grp data-ty=${ty}><div class=sx><div><h2>${ic('book')}${h}</h2></div></div><div class=grid>${a.map(c=>cardH(c,f)).join('')}</div></div>`;
- const body=gs.map(([n,a])=>grp('series',esc(n)+` <span class=badge>চলমান সিরিজ &middot; ${bn(a.length)} পর্ব</span>`,a)).join('')+(one.length?grp('oneshot','ওয়ানশট',one):'');
- $('#app').innerHTML=`<div class=sec><h1 class=ct>${f?'বিনামূল্যে':'বাংলায়'}<span>পড় কমিকস</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="কমিকস বা সিরিজ খুঁজুন..." autocomplete=off aria-label="কমিকস খুঁজুন"></div><div class=chp id=chp><button class=on data-t="">সব</button><button data-t=oneshot>ওয়ানশট</button><button data-t=series>সিরিজ</button></div>${body||'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- let ty='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.grp .card').forEach(c=>c.hidden=!(c.dataset.q||'').includes(v));document.querySelectorAll('.grp').forEach(g=>g.hidden=(ty&&g.dataset.ty!==ty)||!g.querySelector('.card:not([hidden])'));$('#nf').hidden=!!document.querySelector('.grp:not([hidden])')||!l.length};
+ const body=collapse(l).map(g=>g.ser?serCard(g):cardH(g.one,!!f)).join('');
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>${f?'বিনামূল্যে':'বাংলায়'}<span>পড় কমিকস</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="কমিকস বা সিরিজ খুঁজুন..." autocomplete=off aria-label="কমিকস খুঁজুন"></div><div class=chp id=chp><button class=on data-t="">সব</button><button data-t=oneshot>ওয়ানশট</button><button data-t=series>সিরিজ</button></div>${body?`<div class=grid>${body}</div>`:'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
+ let ty='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.grid .card').forEach(c=>{c.hidden=(ty&&c.dataset.ty!==ty)||!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.grid .card:not([hidden])')||!l.length};
  $('#q').oninput=ap;$('#chp').onclick=e=>{const b=e.target.closest('button');if(!b)return;ty=b.dataset.t;[...$('#chp').children].forEach(x=>x.classList.toggle('on',x===b));ap()}}
 async function gallery(){
  const thisRoute=routeVersion;
@@ -520,7 +779,7 @@ async function favs(){
  try{cr=((await cache('chars',async()=>(await dat('site','characters'))||{list:[]})).list||[]).filter(x=>fav.h.includes(x.id))}catch{}
  if(thisRoute!==routeVersion)return;
  comics=Object.fromEntries(cl.map(c=>[c.id,c]));chs=cr;
- $('#app').innerHTML=`<div class=sec id=favp><h1 class=ct>প্রিয়<span>তালিকা</span></h1>${cl.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${cl.map(c=>cardH(c,!!c.free)).join('')}</div>`:''}${cr.length?`<div class=sx><div><h2>${ic('star')}ক্যারেক্টার</h2></div></div><div class=chg>${cr.map(chCard).join('')}</div>`:''}${cl.length||cr.length?'':'<p class=ld>কমিকস বা ক্যারেক্টারের কার্ডের হার্ট আইকনে ট্যাপ করলে এখানে জমা হবে (এই ডিভাইসে)।</p>'}</div>`}
+ $('#app').innerHTML=`<div class=sec id=favp><h1 class=ct>প্রিয়<span>তালিকা</span></h1>${cl.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${cl.map(c=>cardH(c,!!c.free)).join('')}</div>`:''}${cr.length?`<div class=sx><div><h2>${ic('face')}ক্যারেক্টার</h2></div></div><div class=chg>${cr.map(chCard).join('')}</div>`:''}${cl.length||cr.length?'':'<p class=ld>কমিকস বা ক্যারেক্টারের কার্ডের হার্ট আইকনে ট্যাপ করলে এখানে জমা হবে (এই ডিভাইসে)।</p>'}</div>`}
 function faq(){
  const Q=[
   ['কীভাবে কমিকস কিনব?','কমিকসের কার্ডে ট্যাপ করুন। অর্ডার ফর্মে নাম, ইমেইল, ফোন, হোয়াটসঅ্যাপ নম্বর, পেমেন্টের মাধ্যম ও (পেমেন্টের পর) ট্রানজেকশন আইডি দিয়ে অর্ডার পাঠান।'],
@@ -535,6 +794,63 @@ function faq(){
   ['স্ক্রিনশট বা শেয়ার করা যাবে?','না। কমিকসের স্ক্রিনশট, স্ক্রিন রেকর্ড, কপি বা শেয়ার সম্পূর্ণ নিষিদ্ধ। ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।'],
   ['সমস্যা হলে কোথায় জানাব?','helpsrdbstudios@gmail.com এ ইমেইল করুন অথবা আমাদের ফেসবুক গ্রুপে জানান।']];
  $('#app').innerHTML=`<div class=sec><h1 class=ct>প্রশ্নোত্তর<span>সাধারণ জিজ্ঞাসা</span></h1>${Q.map(([q,a])=>`<details class=fq><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}<p style="text-align:center;margin:26px 0 50px"><a class=fbl href="mailto:helpsrdbstudios@gmail.com">helpsrdbstudios@gmail.com</a></p></div>`}
+let vds=[],vv={};
+async function vviews(ids){
+ const keys=Array.isArray(ids)?[...new Set(ids.filter(Boolean))]:[...new Set(vds.map(x=>x.id).filter(Boolean))],out={},need=[],stale={};
+ keys.forEach(id=>{let c;try{c=JSON.parse(localStorage.getItem('ak_vvc_'+id))}catch{}
+  if(c&&Number.isFinite(+c.n)){out[id]=+c.n;if(Date.now()-c.t<6e5)return;stale[id]=+c.n}
+  need.push(id)});
+ if(!need.length)return out;
+ try{const docs=await tmo(Promise.all(need.map(id=>getDoc(doc(db,'videoViews',id)))));
+  docs.forEach((d,i)=>{const id=need[i],n=d.exists()?d.data().n||0:0;out[id]=n;try{localStorage.setItem('ak_vvc_'+id,JSON.stringify({t:Date.now(),n}))}catch{}})
+ }catch{need.forEach(id=>{if(out[id]===undefined)out[id]=stale[id]||0})}
+ return out
+}
+const countVideo=id=>{if(!id)return;const m=LS.get('akVv',{}),n=Date.now();if(m[id]&&n-m[id]<864e5)return;
+ setDoc(doc(db,'videoViews',id),{n:increment(1)},{merge:true}).then(()=>{m[id]=Date.now();LS.set('akVv',m);vv[id]=(vv[id]||0)+1;
+  try{localStorage.setItem('ak_vvc_'+id,JSON.stringify({t:Date.now(),n:vv[id]}))}catch{}
+  document.querySelectorAll('.vc[data-vid]').forEach(card=>{if(card.dataset.vid===id){const el=card.querySelector('.mt2');if(el)el.innerHTML=ic('eye')+bn(vv[id])+' বার দেখা'}})}).catch(()=>{})};
+const vFmt=t=>{t=Math.round(t||0);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),r=t%60;return bn((h?h+':'+String(m).padStart(2,'0'):m)+':'+String(r).padStart(2,'0'))};
+const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')).toLowerCase())}"><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class=pl>${ic('tri')}</span>${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)} বার দেখা</span></button>`;
+const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
+async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
+const vdGet=async()=>{const x=await getDoc(D('site','videos'));return x.exists()?(x.data().list||[]):[]},vdSave=l=>setDoc(D('site','videos'),{list:l,t:Date.now()});
+async function videos(){
+ const thisRoute=routeVersion;
+ const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});
+ if(thisRoute!==routeVersion)return;
+ vds=[...(d.list||[])].sort(byT);try{vv=await vviews(vds.map(x=>x.id))}catch{}
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ভিডিও</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div>${vds.length?`<div class=vg>${vds.map(vCard).join('')}</div>`:'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
+ $('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.vg .vc').forEach(c=>{c.hidden=!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.vg .vc:not([hidden])')||!vds.length}}
+let vpl=null,vhide=0;
+const loadVimeo=()=>window.Vimeo?Promise.resolve():new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://player.vimeo.com/api/player.js';sc.onload=ok;sc.onerror=no;document.head.appendChild(sc)});
+function closeVP(){const el=$('#vp');if(!el.classList.contains('on'))return;try{vpl?.destroy()}catch{}vpl=null;clearTimeout(vhide);el.classList.remove('on','playing','hide');el.innerHTML='';if(document.fullscreenElement)document.exitFullscreen?.()}
+async function playVideo(v){
+ closeVP();const el=$('#vp');
+ el.innerHTML=`<div class=vbar><span>${esc(v.title)}</span><button id=vx aria-label="বন্ধ">${ic('x')}</button></div><div class=vst><iframe id=vif src="https://player.vimeo.com/video/${esc(v.vid)}?${v.h?'h='+esc(v.h)+'&':''}controls=0&title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autopause=0" allow="autoplay; fullscreen; picture-in-picture" tabindex=-1 title="${esc(v.title)}"></iframe><div class=vsh id=vsh></div><button class=vbig id=vbig aria-label="চালান">${ic('tri')}</button></div><div class=vct><button id=vpp aria-label="চালান/থামান">${ic('tri')}</button><input id=vsk type=range min=0 max=1000 value=0 aria-label="সময়"><span id=vtm>০:০০ / ০:০০</span><button id=vmu aria-label="শব্দ">${ic('vol')}</button><button id=vfs aria-label="ফুল স্ক্রিন">${ic('full')}</button></div>`;
+ el.classList.add('on');
+ $('#vx').onclick=closeVP;
+ try{await loadVimeo()}catch{$('#vtm').textContent='ভিডিও লোড করা যায়নি';return}
+ if(!el.classList.contains('on'))return;
+  const pl=new Vimeo.Player($('#vif'));vpl=pl;let dur=0,drag=false,muted=false,counted=false;
+ const kick=()=>{el.classList.remove('hide');clearTimeout(vhide);if(el.classList.contains('playing'))vhide=setTimeout(()=>el.classList.add('hide'),2800)};
+ const tg=()=>pl.getPaused().then(p=>p?pl.play():pl.pause()).catch(()=>{});
+ const paint=(a,b)=>{$('#vtm').textContent=vFmt(a)+' / '+vFmt(b)};
+  pl.on('play',()=>{el.classList.add('playing');$('#vpp').innerHTML=ic('pause');if(!counted){counted=true;countVideo(v.id)}kick()});
+ pl.on('pause',()=>{last=null;el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
+ pl.on('ended',()=>{el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
+  pl.on('timeupdate',e=>{dur=e.duration||dur;if(!drag)$('#vsk').value=dur?Math.round(e.seconds/dur*1000):0;paint(e.seconds,dur)});
+ pl.getDuration().then(d=>{dur=d;paint(0,d)}).catch(()=>{});
+ $('#vsh').onclick=()=>{tg();kick()};$('#vbig').onclick=tg;$('#vpp').onclick=()=>{tg();kick()};
+ $('#vsk').oninput=()=>{drag=true;kick()};
+ $('#vsk').onchange=()=>{drag=false;if(dur)pl.setCurrentTime(dur*$('#vsk').value/1000).catch(()=>{})};
+ $('#vmu').onclick=()=>{muted=!muted;pl.setMuted(muted).catch(()=>{});$('#vmu').innerHTML=ic(muted?'mute':'vol')};
+  $('#vfs').onclick=async()=>{const fs=document.fullscreenElement||document.webkitFullscreenElement;if(fs){try{if(pl.exitFullscreen)await pl.exitFullscreen();else if(document.exitFullscreen)await document.exitFullscreen()}catch{}return}
+   try{if(pl.requestFullscreen){await pl.requestFullscreen();return}}catch{}
+   try{const req=el.requestFullscreen||el.webkitRequestFullscreen;if(req)await req.call(el)}catch{}};
+ el.onmousemove=el.ontouchstart=kick;
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVP()});
 const FBG='https://www.facebook.com/share/g/18VCniWUos/',FBI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
 async function reviews(){
  const thisRoute=routeVersion;let rv=[],ok=true,cl=[],rate=0;
@@ -571,21 +887,35 @@ async function characters(){
  if(thisRoute!==routeVersion)return;
  chs=d.list||[];const g={};chs.forEach(x=>{const k=x.series||'অন্যান্য';(g[k]=g[k]||[]).push(x)});
  const cd=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}"><b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
- $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ক্যারেক্টার</span></h1>${chs.length?`<div class=sb>${ic('search')}<input id=q type=search placeholder="ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="ক্যারেক্টার খুঁজুন"></div>`:''}${Object.entries(g).map(([k,a])=>`<div class=grp><div class=sx><div><h2>${ic('star')}${esc(k)}</h2></div></div><div class=chg>${a.map(cd).join('')}</div></div>`).join('')||'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ক্যারেক্টার</span></h1>${chs.length?`<div class=sb>${ic('search')}<input id=q type=search placeholder="ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="ক্যারেক্টার খুঁজুন"></div>`:''}${Object.entries(g).map(([k,a])=>`<div class=grp><div class=sx><div><h2>${ic('face')}${esc(k)}</h2></div></div><div class=chg>${a.map(cd).join('')}</div></div>`).join('')||'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
  if($('#q'))$('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.chc').forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(v));document.querySelectorAll('.grp').forEach(g=>g.hidden=!g.querySelector('.chc:not([hidden])'));$('#nf').hidden=!!document.querySelector('.chc:not([hidden])')}}
 function about(){
- $('#app').innerHTML=`<div class="sec ab"><h1>আমাদের<span>কথা</span></h1><p class=lead>কল্পনার দুনিয়া গড়ার একটি দল।</p>
- <div class=acard><section class=cr2><small>প্রতিষ্ঠাতা</small><h2>আহমাদ শোয়াইব</h2></section>
- <section><small>আমাদের টিম</small><div class=mg>${TEAM.map(n=>`<div class=mi>${n}</div>`).join('')}</div></section>
- <div class=two><section><small>অংশ</small><h2>আরডিবি স্টুডিও</h2></section><section><small>সহযোগিতায়</small><h2>ব্লু ওয়াক স্টুডিও</h2></section></div></div></div>`}
+ $('#app').innerHTML=`<article class="sec art"><span class=kk>আকানো · আরডিবি স্টুডিও</span><h1>গল্প বলার ভাষা বদলে দিতে চাই আমরা</h1>
+ <p class=lead>আকানো আরডিবি স্টুডিও-র একটি উদ্যোগ। আমাদের লক্ষ্য একটাই: বিশ্বের সবচেয়ে বড় পপ কালচার প্রতিষ্ঠান হয়ে ওঠা।</p>
+ <h2>স্বপ্নটা বড়, আর সেটাই আমাদের শক্তি</h2>
+ <p>মার্ভেল কমিকসের কয়েকটি পাতা থেকে শুরু করে পুরো পৃথিবীর গল্প বলার ধরন বদলে দিয়েছে। আমরা বিশ্বাস করি, বাংলার মাটি থেকেও তেমন একটি জগৎ গড়ে ওঠা সম্ভব। তাই আমরা খোলাখুলি বলি, মার্ভেলের সঙ্গে পাল্লা দেওয়ার স্বপ্ন দেখতে আমরা ভয় পাই না।</p>
+ <blockquote>আমরা শুধু গল্প বলতে চাই না, আমরা একটি জগৎ গড়তে চাই।</blockquote>
+ <h2>আকানো মানে শুধু কমিকস নয়</h2>
+ <p>শিল্প, সংস্কৃতি আর বিনোদন, এই তিন জায়গাতেই আমরা কাজ করতে চাই। কমিকস দিয়ে শুরু হলেও আমাদের যাত্রা সেখানে থেমে থাকবে না। চরিত্র, গল্প, ভিডিও আর ছবি মিলিয়ে ধীরে ধীরে একটি পূর্ণ জগৎ তৈরি হচ্ছে, যেখানে প্রতিটি চরিত্রের নিজস্ব ইতিহাস আছে।</p>
+ <h2>কেন দেশি গল্প</h2>
+ <p>আমাদের চারপাশে বলার মতো গল্পের অভাব নেই। অভাব ছিল সেই গল্পগুলোকে বিশ্বমানের চেহারা দেওয়ার। আমরা চাই বাংলাদেশের তরুণরা শুধু বিদেশি গল্পের পাঠক হয়ে না থেকে নতুন গল্পের স্রষ্টা হয়ে উঠুক। নিজেদের চরিত্র, নিজেদের নায়ক আর নিজেদের জগৎ নিয়ে গর্ব করার দিন আসছে।</p>
+ <h2>আমরা এখন যা করছি</h2>
+ <p>ওয়ানশট আর ধারাবাহিক সিরিজ কমিকস প্রকাশ করছি, যার কিছু সবার জন্য বিনামূল্যে, আর কিছু কোড দিয়ে পড়ার জন্য। আকানো জগতের চরিত্রদের পরিচয় তুলে ধরছি, আর ভিডিও ও ঘোষণার মাধ্যমে পাঠকদের সঙ্গে সংযোগ রাখছি।</p>
+ <h2>এই যাত্রায় আপনিও আছেন</h2>
+ <p>প্রতিটি পাঠক, প্রতিটি রিভিউ আর প্রতিটি শেয়ার আমাদের এগিয়ে যাওয়ার জ্বালানি। কমিকস পড়ুন, রিভিউ দিন, বন্ধুদের জানান, আর আমাদের ফেসবুক গ্রুপে যোগ দিন। পথটা লম্বা, কিন্তু আমরা হাঁটতে শুরু করেছি।</p>
+ <div class=btns><button class=btn data-go=comics>কমিকস পড়ো</button><a class="btn ghost" href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>ফেসবুক গ্রুপে যোগ দিন</a></div>
+ <p class=sig>&mdash; আকানো পরিবার</p>
+  <div class=acard><section><small>প্রতিষ্ঠাতা</small><h3>আহমাদ শোয়াইব</h3></section><section><small>উদ্যোগ</small><h3>আরডিবি স্টুডিও</h3></section><section><small>সহযোগিতায়</small><h3>ব্লু ওয়াক স্টুডিও</h3></section></div></article>`}
 function library(){
  const k=Object.entries(lib),nw=nowT();
  $('#app').innerHTML=`<div class=sec><h1 class=ct>পারচেজ<span>লাইব্রেরি</span></h1>${k.map(([c,o])=>{const d=Math.ceil((o.e-nw)/864e5);return `<div class=li><span>${esc(o.t)}<br><small style="color:var(--m)">${d>0?bn(d)+' দিন বাকি (মেয়াদ: '+new Date(o.e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'মেয়াদ শেষ'}</small>${prog['c:'+c]&&prog['c:'+c].p>0?'<br><small style="color:var(--m)">পেজ '+bn(prog['c:'+c].p+1)+'/'+bn(prog['c:'+c].n)+' পর্যন্ত পড়েছেন</small>':''}</span>${d>0?`<button class=btn data-lib="${c}">পড়ুন</button>`:''}</div>`}).join('')||'<p class=ld>কোড দিয়ে কেনা কমিকস এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।</p>'}</div>`}
 function toggleFav(el){const[t,id]=el.dataset.fav.split(':'),a=fav[t],i=a.indexOf(id);i<0?a.push(id):a.splice(i,1);LS.set('akFav',fav);document.querySelectorAll('[data-fav="'+el.dataset.fav+'"]').forEach(x=>x.classList.toggle('on',i<0));if($('#favp'))favs()}
 const siteClick=e=>{
  const fv=e.target.closest('[data-fav]');if(fv){toggleFav(fv);return}
+ const vi=e.target.closest('[data-vid]');if(vi){const x=vds.find(y=>y.id===vi.dataset.vid);if(x)playVideo(x);return}
+ const sr=e.target.closest('[data-series]');if(sr){openSeries(sr.dataset.series);return}
  const ct=e.target.closest('[data-cont]');if(ct){const[k,r]=ct.dataset.cont.split(':');if(k==='f')openFree(r);else redeem(r).then(m=>m&&alert(m)).catch(er=>alert('সংযোগে সমস্যা ('+(er?.code||'error')+')'));return}
- const c=e.target.closest('.card'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]'),h=e.target.closest('[data-ch]');
+ const c=e.target.closest('.card,[data-open]'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]'),h=e.target.closest('[data-ch]');
  if(c)comics[c.dataset.id].free?openFree(c.dataset.id):buy(c.dataset.id);
  if(g){const x=gl[+g.dataset.gi];modal(`<img src="${esc(x.url)}" alt="${esc(x.cap)}" style="width:100%;display:block">${x.cap?`<p>${esc(x.cap)}</p>`:''}`,1)}
  if(l)redeem(l.dataset.lib).then(m=>m&&alert(m)).catch(e=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'));
@@ -596,11 +926,11 @@ $('#app').addEventListener('input',e=>{const t=e.target;if(!t.classList?.contain
 // ---------- কেনা ও কোড ----------
 async function openFree(id){try{const[p,cm]=await Promise.all([dat('pages',id),comics[id]?Promise.resolve(comics[id]):dat('comics',id)]);if(p?.urls)read(p.urls,'AKANO',cm?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id,cid:id,by:cm?.creator})}catch(e){alert(errMsg(e))}}
 function buy(id){const c=comics[id];
- modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=badge>${bn(c.price)} টাকা</span><br>${favBtn('c',id)}</div></div>
- ${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
- <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p>
- <hr><b>কোড আছে?</b><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p>`);
+ modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=bp>${bn(c.price)} টাকা</span><br>${favBtn('c',id)}</div></div>
+ <div class=seg id=seg><button class=on data-p=ord>অর্ডার করুন</button><button data-p=cod>কোড আছে</button></div><div id=pord>${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
+ <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p></div><div id=pcod hidden><p class=note>ইমেইল বা হোয়াটসঅ্যাপে পাওয়া কোডটি লিখুন।</p><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p></div>`);
  bindGo(id);favWire();
+ $('#seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#seg').children].forEach(x=>x.classList.toggle('on',x===b));$('#pord').hidden=b.dataset.p!=='ord';$('#pcod').hidden=b.dataset.p!=='cod'};
  $('#of').onsubmit=async e=>{e.preventDefault();const d={...Object.fromEntries(new FormData(e.target)),comicId:id,comic:c.title,price:c.price,t:Date.now()};
   $('#om').textContent='পাঠানো হচ্ছে...';
   try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{method,...r}=d;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}
@@ -635,10 +965,10 @@ function read(pg,code,title,meta){meta=meta||{k:'c',ref:code};const key=meta.k+'
  modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>${free?'ফ্রি কমিকস পড়ার আগে জেনে নিন:':'এই কমিকস পড়ার আগে জেনে নিন:'}</b><ul>${wl.map(t=>`<li>${t}</li>`).join('')}</ul></div>${code!=='AKANO'?'<p class=note>এই কমিকস মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে'+(lib[code]?.e?' (মেয়াদ: '+new Date(lib[code].e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'')+', সেখান থেকে যেকোনো সময় পড়তে পারবেন।</p>':''}${meta.cid?`<div style="margin:0 0 12px">${favBtn('c',meta.cid)}</div>`:''}${rs?`<button class="btn full" id=okw>বুঝেছি, পেজ ${bn(rs+1)} থেকে চালিয়ে যান</button><button class="btn full" id=okz style="margin-top:10px;background:#fff;color:#ff007b;border:1.5px solid #ff007b">শুরু থেকে পড়ুন</button>`:`<button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`}`);
  favWire();$('#okw').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,rs)};
  if($('#okz'))$('#okz').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,0)}}
-function openReader(pg,code,title,meta,start){meta=meta||{k:'c',ref:code};start=start||0;if(meta.k==='f')countView(meta.cid||meta.ref);const v=$('#v'),key=meta.k+':'+meta.ref,ar=asp[key]||[];z=1;rio?.disconnect();rtk?.disconnect();let cur=start,ready=!start;
+function openReader(pg,code,title,meta,start){meta=meta||{k:'c',ref:code};start=start||0;const viewId=meta.cid||(meta.k==='f'?meta.ref:'');if(viewId)countView(viewId);const v=$('#v'),key=meta.k+':'+meta.ref,ar=asp[key]||[];z=1;rio?.disconnect();rtk?.disconnect();let cur=start,ready=!start;
  v.innerHTML=`<div class=bar><span>${esc(title||'')}<small id=pn></small></span><span><button data-z="-.25" aria-label="ছোট">&minus;</button><button data-z=".25" aria-label="বড়">+</button><button id=x aria-label="বন্ধ">${ic('x')}</button></span></div><div class=pages>${pg.map((u,i)=>`<div class=pgw data-i=${i}${ar[i]?` style="aspect-ratio:${ar[i]}"`:''}><canvas></canvas></div>`).join('')}</div>${start?`<div class=tst id=tst>পেজ ${bn(start+1)} থেকে চালু হয়েছে</div>`:''}`;
  v.classList.add('on');
- const pgs=v.querySelector('.pages'),pn=$('#pn'),show=()=>{pn.textContent=' '+bn(cur+1)+'/'+bn(pg.length)},sv=()=>{show();prog[key]={p:cur,n:pg.length,t:title,k:meta.k,ref:meta.ref,at:Date.now()};LS.set('akProg',prog)};
+ const pgs=v.querySelector('.pages'),pn=$('#pn'),show=()=>{pn.textContent=' '+bn(cur+1)+'/'+bn(pg.length)},sv=()=>{show();prog[key]={p:cur,n:pg.length,t:title,k:meta.k,ref:meta.ref,cid:meta.cid,at:Date.now()};LS.set('akProg',prog)};
  rio=new IntersectionObserver(es=>es.forEach(e=>{const w=e.target;
   if(e.isIntersecting){if(!w.dataset.ld){w.dataset.ld=1;paint(w,pg[+w.dataset.i],key)}}
   else if(w.dataset.ld){const c=w.firstChild;c.width=c.height=1;delete w.dataset.on;delete w.dataset.ld}}),{root:pgs,rootMargin:'1500px 0px'});
@@ -697,13 +1027,14 @@ async function pdfPages(file,cb){await loadPdf();const d=await pdfjsLib.getDocum
 function panel(){
  $('#app').innerHTML=`<div class="box adm"><div class=ah><div><h2>স্বাগতম, ${esc(me.name)}</h2><small>অ্যাডমিন প্যানেল</small></div><div class=row><button class=lnk id=hm>সাইট</button><button class=btn id=lo>লগআউট</button></div></div>
 <div class=stats><div class=st><b id=as1>–</b><span>কমিকস</span><small id=as1b></small></div><div class=st><b id=as2>–</b><span>অর্ডার</span></div><div class=st><b id=as3>–</b><span>অব্যবহৃত কোড</span></div><div class=st><b id=as4>–</b><span>অপেক্ষমাণ রিভিউ</span></div><div class=st><b id=as5>–</b><span>ফ্রি কমিকসের ভিউ</span></div></div>
-<nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=set>সেটিংস</button></nav>
-<section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label>
+<nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=video>ভিডিও</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=set>সেটিংস</button></nav>
+ <section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label><label><input type=checkbox id=cfh style="width:auto"> হোম পেজে ফিচারড</label>
  <select id=cty><option value=oneshot>ওয়ানশট (একক কমিকস)</option><option value=series>সিরিজ (চলমান, পর্ব আছে)</option></select><input id=csr placeholder="সিরিজের নাম (সিরিজ হলে)"><input id=cep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><input id=ccr placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)">
  <label>কভার ছবি (না দিলে প্রথম পেজ কভার হবে)<input type=file id=cv accept="image/*"></label><label>কমিকসের PDF<input type=file id=cf accept="application/pdf"></label><button class=btn id=ca>আপলোড</button><p id=pr></p></details><div class=ahd><h3>কমিকস তালিকা</h3><input class=asr data-for=cl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=cl></div></section>
 <section class=ap data-tab=orders><div class=ahd><h3>অর্ডার</h3><input class=asr data-for=ol placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=ol></div><details class=apd><summary>কোড তৈরি করুন</summary><select id=cs></select><input id=ce type=email placeholder="ক্রেতার ইমেইল (ঐচ্ছিক)"><button class=btn id=cg>কোড তৈরি করুন</button></details><div class=ahd><h3>কোড তালিকা</h3><input class=asr data-for=kl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=kl></div></section>
 <section class=ap data-tab=chars><details class=apd><summary>নতুন ক্যারেক্টার যোগ করুন</summary><input id=chn placeholder="নাম"><input id=chs placeholder="কোন সিরিজ (যেমন: গর্ডেন্স)"><input id=cha placeholder="অ্যাপিয়ারেন্স (যেমন: প্রথম আবির্ভাব, সংখ্যা ১)"><textarea id=chd placeholder="বিবরণ (ঐচ্ছিক)"></textarea><label>ছবি<input type=file id=chi accept="image/*"></label><button class=btn id=chb>ক্যারেক্টার যোগ করুন</button><p id=chm></p></details><div class=ahd><h3>ক্যারেক্টার তালিকা</h3><input class=asr data-for=chl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=chl></div></section>
 <section class=ap data-tab=media><details class=apd><summary>নতুন ঘোষণা / কনটেস্ট</summary><select id=nt><option>ঘোষণা</option><option>কনটেস্ট</option></select><input id=nh placeholder="শিরোনাম (ব্যানারে নামসহ দেখাবে)"><textarea id=nb placeholder="বিস্তারিত লেখা (ঐচ্ছিক)"></textarea><label>ব্যানার ছবি<input type=file id=ni accept="image/*"></label><input id=nk placeholder="লিংক (ঐচ্ছিক, https://...)"><button class=btn id=na>প্রকাশ করুন</button></details><div class=ahd><h3>ঘোষণা / কনটেস্ট</h3></div><div id=nls></div><details class=apd><summary>গ্যালারিতে ছবি যোগ করুন</summary><input id=gc placeholder="ক্যাপশন (ঐচ্ছিক)"><input type=file id=gi accept="image/*" multiple><button class=btn id=ga>ছবি আপলোড</button><p id=gp></p></details><div class=ahd><h3>গ্যালারি</h3></div><div id=gl></div></section>
+<section class=ap data-tab=video><details class=apd><summary>নতুন ভিডিও যোগ করুন (Vimeo)</summary><input id=vl placeholder="Vimeo লিংক (যেমন: https://vimeo.com/123456789)"><input id=vt placeholder="শিরোনাম (না দিলে Vimeo থেকে নেওয়া হবে)"><textarea id=vd placeholder="বর্ণনা (ঐচ্ছিক)"></textarea><input id=vth placeholder="থাম্বনেইল URL (ঐচ্ছিক, না দিলে Vimeo থেকে আসবে)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vf style="width:auto"> হোম পেজে ফিচারড</label><button class=btn id=vb>ভিডিও যোগ করুন</button><p id=vm></p></details><div class=ahd><h3>ভিডিও তালিকা</h3><input class=asr data-for=vls placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=vls></div></section>
 <section class=ap data-tab=rev><div class=ahd><h3>রিভিউ</h3><input class=asr data-for=rvl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=rvl></div></section>
 <section class=ap data-tab=set><details class=apd><summary>লোগো</summary><p class=note>হেডারে শুধু আপলোড করা লোগো দেখাবে। PNG, JPG, WebP বা GIF ছবি ব্যবহার করতে পারো। স্বচ্ছ ব্যাকগ্রাউন্ডের জন্য PNG/WebP ভালো।</p><input type=file id=lg accept="image/png,image/webp,image/jpeg,image/gif"><button class=btn id=logoUploadBtn>লোগো আপলোড / বদলান</button> <button class=lnk id=lgd>লোগো সরান</button></details><details class=apd><summary>হোম ব্যানার ছবি</summary><p class=note>“দেশি ফিকশন” লেখার নিচে সোজাভাবে দেখাবে। স্বচ্ছ ব্যাকগ্রাউন্ডের PNG/WebP সবচেয়ে ভালো।</p><input type=file id=hb accept="image/*"><button class=btn id=hbb>ব্যানার আপলোড / বদলান</button> <button class=lnk id=hbd>ব্যানার সরান</button></details><div class=ahd><h3>অ্যাডমিনগণ</h3></div><div id=al></div><details class=apd><summary>নতুন অ্যাডমিন যোগ করুন</summary><input id=an placeholder="নাম (যেমন: সাইফুল)"><input id=au placeholder="ইউজারনেম (ইংরেজি, ৩-২০ অক্ষর)"><input id=ap type=password placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="new-password"><button class=btn id=aa>অ্যাডমিন যোগ করুন</button></details><details class=apd><summary>আমার পাসওয়ার্ড</summary><button class=btn id=pw>পাসওয়ার্ড বদলান</button></details></section></div>`;
  refresh.first=true;
@@ -715,16 +1046,21 @@ function panel(){
   $('#lgd').onclick=async()=>{if(!confirm('লোগো সরাবেন?'))return;try{await deleteDoc(D('site','logo'));$('#logo').hidden=true;$('#logo').removeAttribute('src');alert('লোগো সরানো হয়েছে')}catch{alert('লোগো সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
  $('#hbb').onclick=async()=>{const f=$('#hb').files[0];if(!f)return alert('ব্যানার ছবি বাছাই করুন');try{const url=await ib(f);await setDoc(D('site','homeBanner'),{url,t:Date.now()});$('#hb').value='';alert('হোম ব্যানার সেভ হয়েছে');}catch(e){alert('ব্যানার আপলোড হয়নি: '+(e?.message||'ইন্টারনেট/API key পরীক্ষা করুন'))}};
  $('#hbd').onclick=async()=>{if(!confirm('হোম ব্যানার সরাবেন?'))return;try{await deleteDoc(D('site','homeBanner'));alert('ব্যানার সরানো হয়েছে');}catch{alert('ব্যানার সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
- $('#ca').onclick=async()=>{const t=$('#ct').value.trim(),f=$('#cf').files[0],p=$('#cp').value,fr=$('#fr').checked;if(!t||!f||(!p&&!fr))return alert('শিরোনাম, দাম (বা ফ্রি টিক) ও PDF দিন');
+  $('#ca').onclick=async()=>{const t=$('#ct').value.trim(),f=$('#cf').files[0],p=$('#cp').value,fr=$('#fr').checked;if(!t||!f||(!p&&!fr))return alert('শিরোনাম, দাম (বা ফ্রি টিক) ও PDF দিন');
   const ty=$('#cty').value,sr=$('#csr').value.trim(),ep=+$('#cep').value||0;if(ty==='series'&&(!sr||!ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-  try{const urls=await pdfPages(f,(i,n)=>$('#pr').textContent=`পেজ ${bn(i)}/${bn(n)} আপলোড হচ্ছে...`),cf=$('#cv').files[0],cover=cf?(await ib(cf),ib.th):pdfPages.th,id=doc(collection(db,'comics')).id;
-   await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),t:Date.now(),ct:Date.now()});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
+   try{const urls=await pdfPages(f,(i,n)=>$('#pr').textContent=`পেজ ${bn(i)}/${bn(n)} আপলোড হচ্ছে...`),cf=$('#cv').files[0],cover=cf?(await ib(cf),ib.th):pdfPages.th,id=doc(collection(db,'comics')).id;
+    await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,feat:$('#cfh').checked,cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),t:Date.now(),ct:Date.now()});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
   catch(e){$('#pr').textContent='আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট, ImgBB API key ও Firestore Rules পরীক্ষা করুন')}};
  $('#na').onclick=async()=>{const h=$('#nh').value.trim(),f=$('#ni').files[0];if(!h||!f)return alert('শিরোনাম ও ব্যানার ছবি দিন');
   try{const img=await ib(f);await setDoc(doc(collection(db,'news')),{type:$('#nt').value,title:h,text:$('#nb').value.trim(),img,link:$('#nk').value.trim(),t:Date.now()});['nh','nb','nk','ni'].forEach(i=>$('#'+i).value='');refresh()}catch{alert('প্রকাশ করা যায়নি')}};
  $('#ga').onclick=async()=>{const fs=[...$('#gi').files];if(!fs.length)return alert('ছবি বাছাই করুন');
   try{for(let i=0;i<fs.length;i++){$('#gp').textContent=`ছবি ${bn(i+1)}/${bn(fs.length)} আপলোড হচ্ছে...`;const url=await ib(fs[i]);await setDoc(doc(collection(db,'gallery')),{url,th:ib.th,cap:$('#gc').value.trim(),t:Date.now()+i})}
    $('#gp').textContent='আপলোড সম্পূর্ণ';$('#gc').value='';$('#gi').value='';refresh()}catch{$('#gp').textContent='আপলোড ব্যর্থ'}};
+ $('#vb').onclick=async()=>{const u=$('#vl').value.trim(),pp=vmParse(u);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
+  try{$('#vm').textContent='তথ্য আনা হচ্ছে...';const m=await vimeoMeta(u),l=await vdGet();
+   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:$('#vt').value.trim()||m.title||'ভিডিও',desc:$('#vd').value.trim(),vid:pp.vid,h:pp.h,thumb:$('#vth').value.trim()||m.thumb||'',dur:m.dur||0,feat:$('#vf').checked,t:Date.now()});
+   await vdSave(l);['vl','vt','vd','vth'].forEach(i=>$('#'+i).value='');$('#vf').checked=false;$('#vm').textContent='ভিডিও যোগ হয়েছে';refresh()}
+  catch(e){$('#vm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট ও Firestore Rules পরীক্ষা করুন')}};
  $('#chb').onclick=async()=>{const n=$('#chn').value.trim(),f=$('#chi').files[0];if(!n||!f)return alert('নাম ও ছবি দিন');
   try{$('#chm').textContent='আপলোড হচ্ছে...';const img=await ib(f),th=ib.th,l=await chGet();
    l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:n,series:$('#chs').value.trim(),app:$('#cha').value.trim(),desc:$('#chd').value.trim(),img,th,t:Date.now()});
@@ -740,6 +1076,11 @@ function panel(){
  $('#pw').onclick=async()=>{const p=prompt('নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর):');if(!p)return;if(p.length<6)return alert('খুব ছোট');
   try{await updatePassword(au.currentUser,p);alert('পাসওয়ার্ড বদলেছে')}catch{alert('নিরাপত্তার জন্য লগআউট করে আবার লগইন করে চেষ্টা করুন')}};
  $('#app').onclick=async e=>{const b=e.target.closest('button'),d=b?.dataset;if(!d)return;
+  if(d.vpv){const v=(await vdGet()).find(x=>x.id===d.vpv);if(v)playVideo(v);return}
+  if(d.vdel){if(!confirm('মুছে ফেলবেন?'))return;try{await vdSave((await vdGet()).filter(x=>x.id!==d.vdel));refresh()}catch{alert('মুছা যায়নি')}return}
+   if(d.vft){try{const l=await vdGet(),x=l.find(y=>y.id===d.vft);if(x){x.feat=!x.feat;await vdSave(l);refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
+   if(d.cft){try{const x=await dat('comics',d.cft);if(x){await updateDoc(D('comics',d.cft),{feat:!x.feat,t:Date.now()});refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
+  if(d.ved){const l=await vdGet(),x=l.find(y=>y.id===d.ved);if(x)editVideo(x,l);return}
   if(d.cdel){if(!confirm('মুছে ফেলবেন?'))return;try{await chSave((await chGet()).filter(x=>x.id!==d.cdel));refresh()}catch{alert('মুছা যায়নি')}return}
   if(d.ced){const l=await chGet(),x=l.find(y=>y.id===d.ced);if(!x)return alert('তথ্য পাওয়া যায়নি');
    const nm=prompt('নাম:',x.name);if(nm===null)return;const se=prompt('সিরিজ:',x.series||'');if(se===null)return;const ap=prompt('অ্যাপিয়ারেন্স:',x.app||'');if(ap===null)return;const ds=prompt('বিবরণ:',x.desc||'');if(ds===null)return;const im=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(im===null)return;
@@ -761,19 +1102,27 @@ function panel(){
 
 function editComic(id,q){
  const d=document.createElement('dialog');d.className='cedit';
- d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
+  d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${q.feat?' checked':''}> হোম পেজে ফিচারড</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
  document.body.appendChild(d);d.showModal();
  const ty=d.querySelector('[name=type]'),fr=d.querySelector('[name=free]'),pi=d.querySelector('[name=price]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on;pi.hidden=fr.checked};tg();ty.onchange=tg;fr.onchange=tg;
  const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
  d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0,fr=!!f.free;
   if(!fr&&pr<=0)return alert('পেইড করতে দাম দিন (০ এর বেশি)');
   if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-  const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
+   const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,feat:!!f.feat,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
   try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
+function editVideo(x,l){
+ const d=document.createElement('dialog');d.className='cedit';
+ d.innerHTML=`<form><h3>ভিডিও এডিট</h3><input name=title value="${esc(x.title)}" required><textarea name=desc placeholder="বর্ণনা">${esc(x.desc||'')}</textarea><input name=link value="https://vimeo.com/${esc(x.vid)}${x.h?'/'+esc(x.h):''}" placeholder="Vimeo লিংক"><input name=thumb value="${esc(x.thumb||'')}" placeholder="থাম্বনেইল URL"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${x.feat?' checked':''}> হোম পেজে ফিচারড</label><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=vcx>বাতিল</button></div></form>`;
+ document.body.appendChild(d);d.showModal();
+ const cl=()=>{d.close();d.remove()};d.querySelector('#vcx').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
+ d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),pp=vmParse(f.link);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
+  Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:f.thumb.trim(),feat:!!f.feat});
+  try{await vdSave(l);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
 async function mk(id,email){if(!id)return alert('কমিকস বাছাই করুন');
  const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
  await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now()});refresh();
- if(email)open(`mailto:${email}?subject=${encodeURIComponent('আকানো! কমিকসের কোড')}&body=${encodeURIComponent(`আপনার কোড: ${code}\nকমিকস: ${comics[id]?.title}\nআকানো সাইটের মেনু থেকে "কোড দিয়ে পড়ুন" এ কোডটি দিন।`)}`);else prompt('কোড:',code)}
+ if(email)open(`mailto:${email}?subject=${encodeURIComponent('আকানো! কমিকসের কোড')}&body=${encodeURIComponent(`আপনার কোড: ${code}\nকমিকস: ${comics[id]?.title}\nআকানো সাইটের কমিকসের কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`)}`);else prompt('কোড:',code)}
 
 function toast(m){let t=$('#tos');if(!t){t=document.createElement('div');t.id='tos';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{t.hidden=true},2200)}
 function adminStats(cs,o,k,rv,quiet){const fr=cs.filter(c=>c.free),pend=rv.filter(x=>!x.approved).length;
@@ -784,21 +1133,23 @@ function adminStats(cs,o,k,rv,quiet){const fr=cs.filter(c=>c.free),pend=rv.filte
  if(!quiet)toast('আপডেট হয়েছে')}
 async function refresh(){
  const quiet=refresh.first;refresh.first=false;
- ['comics','news','gallery','chars'].forEach(k=>{try{localStorage.removeItem('ak_'+k)}catch{}});
- const[cs,o,k,a,n,g,ch,rv]=await Promise.all([all('comics'),all('orders'),all('codes'),all('admins'),all('news'),all('gallery'),chGet(),all('reviews').catch(()=>[])]),by=(x,y)=>(y.t||0)-(x.t||0);
+ ['comics','news','gallery','chars','videos'].forEach(k=>{try{localStorage.removeItem('ak_'+k)}catch{}});
+ const[cs,o,k,a,n,g,ch,rv,vd]=await Promise.all([all('comics'),all('orders'),all('codes'),all('admins'),all('news'),all('gallery'),chGet(),all('reviews').catch(()=>[]),vdGet().catch(()=>[])]),by=(x,y)=>(y.t||0)-(x.t||0);
  comics=Object.fromEntries(cs.map(c=>[c.id,c]));
  $('#nls').innerHTML=n.sort(by).map(x=>`<div class=al><img src="${esc(x.img)}" width=48 alt=""><span><b>${esc(x.type)}</b> | ${esc(x.title)}</span><button data-edit="news/${x.id}">এডিট</button><button data-del="news/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#chl').innerHTML=ch.map(x=>`<div class=al><img src="${esc(x.th||x.img)}" width=48 alt=""><span><b>${esc(x.name)}</b> | ${esc(x.series||'-')} | ${esc(x.app||'-')}</span><button data-ced="${esc(x.id)}">এডিট</button><button data-cdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
+ vds=[...vd].sort(by);vv=await vviews();
+ $('#vls').innerHTML=vds.map(x=>`<div class=al>${x.thumb?`<img src="${esc(x.thumb)}" alt="">`:''}<span><b>${esc(x.title)}</b> | ${x.feat?'ফিচারড':'সাধারণ'} | ভিউ: ${bn(vv[x.id]||0)}</span><button data-vpv="${esc(x.id)}">দেখুন</button><button data-vft="${esc(x.id)}">${x.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-ved="${esc(x.id)}">এডিট</button><button data-vdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#rvl').innerHTML=rv.sort(by).map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${bn(x.rating)}/৫ | ${esc(x.comic||'সাধারণ')} | ${x.approved?'অনুমোদিত':'অপেক্ষমাণ'}<br>${esc(x.text)}</span>${x.approved?'':`<button data-apv="${x.id}">অনুমোদন</button>`}<button data-del="reviews/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al><img src="${esc(x.th)}" width=48 alt=""><span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
+ $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-cft="${c.id}">${c.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
  $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
  $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(comics[x.comicId]?.title||'মুছে গেছে')} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${new Date(+String(x.device).split('_')[1]+20*864e5).toLocaleDateString('bn-BD')}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
  adminStats(cs,o,k,rv,quiet);
  $('#al').innerHTML=a.map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${esc(x.user)}</span>${x.id===me.uid?'<i>আপনি</i>':`<button data-del="admins/${x.id}">সরান</button>`}</div>`).join('')}
 
-cache('logo',()=>dat('site','logo')).then(l=>{if(l?.url){$('#logo').src=l.url;$('#logo').hidden=false}}).catch(()=>{});
+cache('logo',()=>dat('site','logo')).then(l=>{if(l?.url){$('#logo').src=l.url;$('#logo').hidden=false;$('#flogo').src=l.url;$('#flogo').hidden=false;$('#fbt').hidden=true}}).catch(()=>{});
 if(location.hash==='#admin')openAdmin();else go('home');
 </script>
 </body>
