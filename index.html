@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#ff007b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="আকানো">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="application-name" content="আকানো!">
+<script>window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__pwa=e});</script>
 <meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
 <title>আকানো!</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!--
 ধাপ ১ - Firebase Console:
   Authentication > Sign-in method > Email/Password চালু করুন।
@@ -37,7 +45,7 @@ service cloud.firestore{match /databases/{d}/documents{
 :root{--r:#d90000;--k:#0d0d0d;--g:#dcdcdc;--l:#e8e8e8;--m:#666}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{font-family:'Hind Siliguri',sans-serif;background:#fff;color:var(--k);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--k);line-height:1.6;-webkit-font-smoothing:antialiased}
 button{font:inherit;cursor:pointer;color:inherit}img{max-width:100%}
 :focus-visible{outline:3px solid var(--r);outline-offset:2px}
 @keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
@@ -630,11 +638,219 @@ h1,h1.ct,.sec>h1.ct,.hs h2,.sx h2,.ab h2,footer b,footer.ft .fh b,#serp .sh h1{l
 .art .acard section:first-child{border-top:0}
 .art .acard small{display:block;color:#ff007b;font-weight:600;margin-bottom:4px;font-size:15px}
 .art .acard h3{margin:0 0 4px;font-size:22px;font-weight:600;color:#1a1320;letter-spacing:0}
+/* Requested typography, language toggle, and fixed-width vertical comic reader */
+body{font-family:Arial,Helvetica,sans-serif!important;overflow-x:hidden}
+body button,body input,body select,body textarea{font-family:Arial,Helvetica,sans-serif!important}
+body :is(h1,h2,h3,h4,b,strong,summary,.btn,.lnk,.more,.badge,.tag,.favb,.chp button,.atabs button,.atabs i,.al button,.apd summary,.card .mt em,.card .mt u,.ep .pt,.bp,.fq summary,.hs .ey,.rk i,.av span,svg text){font-weight:600!important}
+#langToggle{flex:none;margin:0 8px 0 auto;padding:7px 11px;border:1px solid #dce2d9;border-radius:999px;background:#fff;color:var(--deep);font-size:13px;font-weight:600;line-height:1;cursor:pointer}
+#sq{margin-left:0}
+#v .pages{padding:8px 0;overflow-x:hidden;overscroll-behavior-x:none;touch-action:pan-y}
+#v .pgw{width:min(calc(100vw - 16px),900px)!important;max-width:100%;touch-action:pan-y}
+html,body,#app{max-width:100%;overflow-x:hidden}
+/* Bangla typeface and refreshed Reviews experience */
+html[lang="bn"] body,html[lang="bn"] body button,html[lang="bn"] body input,html[lang="bn"] body select,html[lang="bn"] body textarea{font-family:'Hind Siliguri',Arial,sans-serif!important}
+.review-page{max-width:1040px;padding:24px 5% 74px}
+.review-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin:8px 0 24px}
+.review-kicker{display:block;color:#d90068;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.review-heading .ct{margin:0!important;font-size:clamp(29px,6vw,42px)!important;line-height:1.2!important;color:#211526}
+.review-heading .ct span{margin-left:7px}
+.review-lead{max-width:560px;margin:9px 0 0;color:#716873;font-size:16px;line-height:1.7}
+.review-summary{flex:0 0 auto;min-width:195px;display:flex;align-items:center;gap:13px;padding:16px 19px;border:1px solid #f2c8db;border-radius:20px;background:linear-gradient(135deg,#fff2f8,#fff 78%);box-shadow:0 14px 28px -25px #9a2158}
+.review-score{font-size:34px;line-height:1;color:#26152a;font-weight:600}
+.review-summary-copy{display:grid;gap:4px;color:#766772;font-size:12px;line-height:1.3}
+.review-summary-copy .rs{gap:1px}
+.review-summary-copy .rs .ic{width:14px;height:14px;color:#e7a620}
+.review-summary-copy .rs i.on .ic{fill:#e7a620}
+.review-form{width:100%;max-width:100%;margin:0 auto 36px;padding:clamp(18px,3vw,28px);gap:18px;background:linear-gradient(145deg,#fff8fb,#fff 58%);border:1px solid #f2d5e2;border-radius:24px;box-shadow:0 16px 36px -30px #521a39}
+.review-form-header h2{margin:0;color:#23162a;font-size:22px;line-height:1.35}
+.review-form-header p{margin:6px 0 0;color:#766c78;font-size:14px;line-height:1.65}
+.review-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.review-field{display:grid;gap:7px;min-width:0}
+.review-field.full{grid-column:1/-1}
+.review-label{color:#34283a;font-size:14px;font-weight:600}
+.review-form select,.review-form input:not([name=website]),.review-form textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid #e6dfe6;border-radius:13px;background:#fff;color:#241b28;font-size:15px;outline:none;transition:border-color .18s,box-shadow .18s}
+.review-form textarea{min-height:132px;resize:vertical;line-height:1.7}
+.review-form select:focus,.review-form input:focus,.review-form textarea:focus{border-color:#ff4a9f;box-shadow:0 0 0 4px rgba(255,0,123,.1)}
+.review-rating{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;padding:12px 14px;border:1px solid #f1d8e4;border-radius:14px;background:#fff}
+.review-rating .rt{gap:7px}
+.review-rating .rt button{display:grid;place-items:center;width:36px;height:36px;padding:3px;border-radius:10px;color:#d9d2da;transition:background .18s,color .18s,transform .18s}
+.review-rating .rt button:hover{background:#fff2f8;transform:translateY(-1px)}
+.review-rating .rt button.on{color:#e7a620}
+.review-rating .rt button.on .ic{fill:#e7a620}
+.review-rating .rt .ic{width:26px;height:26px}
+.review-rating-hint{margin-left:auto;color:#8a7c89;font-size:13px}
+.review-submit-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.review-submit{width:auto!important;min-width:190px;min-height:48px;padding:11px 20px;box-shadow:0 8px 18px -12px #b50c62}
+.review-social{margin:0;color:#716873;font-size:13px}
+.review-social a{color:#d90068;font-weight:600;text-decoration:none}
+.review-feedback{margin:0;text-align:left;color:#6d5362;font-size:14px;line-height:1.6}
+.review-list{width:100%;max-width:100%;margin:0 auto 54px;gap:14px}
+.review-list-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 2px}
+.review-list-head h2{margin:0;color:#26172d;font-size:21px}
+.review-count{padding:6px 11px;border-radius:999px;background:#fff1f7;color:#b20c5c;font-size:13px}
+.rvc{padding:17px 19px;border-color:#eee7ee;border-radius:18px;box-shadow:0 10px 24px -26px #2c1930;transition:transform .18s,border-color .18s,box-shadow .18s}
+.rvc:hover{transform:translateY(-2px);border-color:#edbfd3;box-shadow:0 16px 26px -24px #8b2554}
+.rvh{align-items:flex-start}
+.rv-author{display:flex;align-items:center;gap:11px;min-width:0}
+.rv-avatar{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ffcae1,#ffeaf3);color:#a80e59;font-size:17px;font-weight:600}
+.rv-author-info{min-width:0;display:grid;gap:2px}
+.rv-author-info b{overflow-wrap:anywhere;color:#281c2c;font-size:15px}
+.rv-topic{color:#ab155c!important}
+.rvc .rs{flex:none;margin-top:2px}
+.rvc .rs .ic{width:16px;height:16px}
+.rvc p{margin:13px 0 0 51px;color:#4f4652;font-size:15px;line-height:1.8;overflow-wrap:anywhere}
+.rv-date{display:block;margin:9px 0 0 51px;color:#938894;font-size:12px}
+.review-empty{display:grid;justify-items:center;gap:8px;padding:30px 18px;border:1px dashed #edc8d9;border-radius:20px;background:linear-gradient(145deg,#fff8fb,#fff);text-align:center}
+.review-empty .ic{width:30px;height:30px;color:#e53483}
+.review-empty h3{margin:0;color:#302234;font-size:18px}
+.review-empty p{max-width:390px;margin:0;color:#7b707e;line-height:1.65}
+@media(max-width:620px){
+ .review-page{padding:18px 5% 60px}
+ .review-hero{align-items:stretch;flex-direction:column;gap:14px;margin-bottom:18px}
+ .review-summary{min-width:0;width:100%;padding:12px 15px}
+ .review-score{font-size:29px}
+ .review-form{border-radius:19px;margin-bottom:28px}
+ .review-fields{grid-template-columns:1fr;gap:13px}
+ .review-field.full{grid-column:auto}
+ .review-rating{align-items:flex-start;gap:8px;flex-direction:column}
+ .review-rating-hint{margin-left:0}
+ .review-submit-row{align-items:stretch}
+ .review-submit{width:100%!important}
+ .review-social{width:100%;text-align:center}
+ .review-list-head h2{font-size:19px}
+ .rvc{padding:14px}
+ .rvc .rs .ic{width:14px;height:14px}
+ .rvc p,.rv-date{margin-left:0}
+}
+
+/* ===== v2: cover size in English, compact reviews, small FB icon, paid videos, landscape player ===== */
+.bh{align-items:center}
+.bh img{flex:0 0 96px;width:96px;height:auto;aspect-ratio:3/4;object-fit:cover}
+.bh img.v{flex:0 0 140px;width:140px;aspect-ratio:16/9}
+.bh>div{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.hs .po{flex:none;max-width:none}
+.review-page{max-width:640px;padding:14px 5% 50px}
+.review-hero{margin:0 0 14px;gap:12px}
+.review-kicker{font-size:11px;margin-bottom:4px}
+.review-heading .ct{font-size:clamp(22px,5vw,28px)!important}
+.review-lead{font-size:13.5px;margin:4px 0 0;line-height:1.55}
+.review-summary{min-width:0;padding:8px 12px;gap:10px;border-radius:14px}
+.review-score{font-size:24px}
+.review-summary-copy{font-size:11.5px;gap:2px}
+.review-form{padding:14px;gap:10px;margin-bottom:22px;border-radius:16px}
+.review-form-header h2{font-size:17px}
+.review-form-header p{font-size:12.5px;margin:3px 0 0;line-height:1.5}
+.review-fields{gap:9px}
+.review-label{font-size:12.5px}
+.review-form select,.review-form input:not([name=website]),.review-form textarea{min-height:38px;padding:8px 11px;border-radius:10px;font-size:14px}
+.review-form textarea{min-height:76px;line-height:1.55}
+.review-rating{padding:5px 10px;border-radius:10px;gap:4px 10px}
+.review-rating .rt{gap:2px}
+.review-rating .rt button{width:28px;height:28px;padding:2px}
+.review-rating .rt .ic{width:20px;height:20px}
+.review-rating-hint{font-size:12px}
+.review-submit{min-width:0;min-height:38px;padding:8px 16px;font-size:14px}
+.review-submit .ic{width:18px;height:18px}
+.review-social{font-size:12px}
+.review-social a{display:inline-flex;align-items:center;gap:5px}
+.review-social svg{width:13px;height:13px;flex:none}
+.review-list{gap:9px;margin-bottom:34px}
+.review-list-head h2{font-size:17px}
+.review-count{padding:4px 10px;font-size:12px}
+.rvc{padding:11px 13px}
+.rv-avatar{width:30px;height:30px;font-size:14px}
+.rvc p{margin:8px 0 0 41px;font-size:14px;line-height:1.65}
+.rv-date{margin:5px 0 0 41px}
+.review-empty{padding:18px 14px}
+.review-empty h3{font-size:16px}
+@media(max-width:620px){.review-page{padding:12px 5% 44px}.review-summary{padding:8px 12px}.review-score{font-size:22px}.review-form{border-radius:14px;margin-bottom:18px}.rvc p,.rv-date{margin-left:0}}
+.vc .vpr{position:absolute;left:8px;top:8px;background:#ff007b;color:#fff;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;line-height:1.5}
+.vc .vpr.own{background:#0a7a2f}
+.vc .pl.lk{background:rgba(26,19,32,.78)}
+.vc .pl.lk .ic{fill:none;stroke:currentColor}
+.vtag{display:inline-block;margin-bottom:3px;padding:1px 9px;border-radius:99px;background:#ffe0ef;color:#d90068;font-size:12px;font-weight:600}
+@media(orientation:landscape){
+ #vp .vst{position:absolute;inset:0}
+ #vp .vst iframe{width:min(100vw,calc(100dvh*16/9));height:min(100dvh,calc(100vw*9/16));max-height:none}
+ #vp .vbar{position:absolute;top:0;left:0;right:0;padding:8px max(16px,env(safe-area-inset-right)) 8px max(16px,env(safe-area-inset-left))}
+ #vp .vct{position:absolute;bottom:0;left:0;right:0;padding:8px max(16px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+}
+
+/* equal-size cards in rails (English text must not widen a card) */
+.rail .card{--cw:clamp(175px,22vw,230px);flex:0 0 var(--cw)!important;width:var(--cw)!important;min-width:0!important;max-width:var(--cw)!important}
+@media(max-width:760px){.rail .card{--cw:clamp(118px,33vw,170px)}}
+.rail .card .mt{white-space:normal;overflow-wrap:anywhere}
+.grid .card{min-width:0}
+.nws{display:flex;align-items:center;gap:9px;margin:2px 0 14px;font-size:14.5px;color:#4f4652;cursor:pointer}
+.nws input{width:18px;height:18px;accent-color:#ff007b;flex:none;margin:0}
+
+/* ===== empty states (monochrome vector) ===== */
+.emp::before{content:'';display:block;width:84px;height:84px;margin:0 auto 12px;background:#cfc6d0;-webkit-mask:var(--ei) center/contain no-repeat;mask:var(--ei) center/contain no-repeat}
+.emp.e-search{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48Y2lyY2xlIGN4PSc0MicgY3k9JzQyJyByPScyMicvPjxwYXRoIGQ9J001OCA1OGwyMCAyMCcvPjxwYXRoIGQ9J00zNCAzOHYuMDFNNTAgMzh2LjAxJyBzdHJva2Utd2lkdGg9JzUnLz48cGF0aCBkPSdNMzUgNTJjNC00IDEwLTQgMTQgMCcvPjxwYXRoIGQ9J003NCAxNmwyIDYgNiAyLTYgMi0yIDYtMi02LTYtMiA2LTJ6Jy8+PHBhdGggZD0nTTE0IDc0aDgnLz48L3N2Zz4=")}
+.emp.e-soon{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMzAgMTZoMzZNMzAgODBoMzYnLz48cGF0aCBkPSdNMzQgMTZjMCAxOCAxNCAyMiAxNCAzMlMzNCA2MiAzNCA4ME02MiAxNmMwIDE4LTE0IDIyLTE0IDMyczE0IDE0IDE0IDMyJy8+PHBhdGggZD0nTTQyIDI4aDEyTTQxIDcyaDE0Jy8+PHBhdGggZD0nTTc0IDE2bDIgNiA2IDItNiAyLTIgNi0yLTYtNi0yIDYtMnonLz48L3N2Zz4=")}
+.emp.e-error{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMzAgNjZhMTQgMTQgMCAwMS0xLjUtMjcuOUEyMCAyMCAwIDAxNjcgMzRhMTYgMTYgMCAwMTMgMzJ6Jy8+PHBhdGggZD0nTTQ4IDQ0djEyJyBzdHJva2Utd2lkdGg9JzQnLz48cGF0aCBkPSdNNDggNjJ2LjAxJyBzdHJva2Utd2lkdGg9JzUnLz48cGF0aCBkPSdNNzQgMTZsMiA2IDYgMi02IDItMiA2LTItNi02LTIgNi0yeicvPjwvc3ZnPg==")}
+.emp.e-fav{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMzAgMTRoMzZ2NjhMNDggNjggMzAgODJ6Jy8+PHBhdGggZD0nTTQ4IDUyYy04LTUtMTEtOS0xMS0xM2E2IDYgMCAwMTExLTIgNiA2IDAgMDExMSAyYzAgNC0zIDgtMTEgMTN6Jy8+PHBhdGggZD0nTTc0IDE2bDIgNiA2IDItNiAyLTIgNi0yLTYtNi0yIDYtMnonLz48L3N2Zz4=")}
+.emp.e-lib{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cmVjdCB4PScyMCcgeT0nMjYnIHdpZHRoPScxNCcgaGVpZ2h0PSc0Nicgcng9JzInLz48cmVjdCB4PSczOCcgeT0nMjAnIHdpZHRoPScxNCcgaGVpZ2h0PSc1Micgcng9JzInLz48cGF0aCBkPSdNNTggMjhsMTItMyAxMCA0Ni0xMiAzeicvPjxwYXRoIGQ9J00xMiA4MGg3MicvPjxwYXRoIGQ9J00yNCAzNmg2TTQyIDMyaDYnLz48L3N2Zz4=")}
+.emp.e-news{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMjIgNDBoMTBsMzAtMTZ2NDhMMzIgNTZIMjJ6Jy8+PHBhdGggZD0nTTMyIDU2bDUgMThoOWwtNS0xOCcvPjxwYXRoIGQ9J003MCAzOGM0IDMgNCAxNyAwIDIwJy8+PHBhdGggZD0nTTc0IDE2bDIgNiA2IDItNiAyLTIgNi0yLTYtNi0yIDYtMnonLz48L3N2Zz4=")}
+.emp.e-chat{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMTggMjJoNjB2NDBINDZMMzAgNzZWNjJIMTh6Jy8+PHBhdGggZD0nTTM2IDQydi4wMU00OCA0MnYuMDFNNjAgNDJ2LjAxJyBzdHJva2Utd2lkdGg9JzUnLz48L3N2Zz4=")}
+.ld.emp{padding:40px 8% 44px;line-height:1.7}
+.soon.emp{text-align:center;padding:10px 0 24px}
+/* ===== clean reviews ===== */
+.rv-page{max-width:620px;margin:0 auto;padding:14px 5% 56px}
+.rv-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 16px}
+.rv-top h1.ct{margin:0!important;font-size:clamp(24px,6vw,30px)!important;line-height:1.2!important;color:#1a1320}
+.rv-top h1.ct span{margin-left:6px}
+.rv-sum{display:flex;flex-direction:column;align-items:flex-end;gap:1px;line-height:1.25}
+.rv-sum-row{display:flex;align-items:center;gap:7px}
+.rv-sum-row b{font-size:22px;color:#1a1320}
+.rv-sum small{font-size:12px;color:#8a7f8b}
+.rv-page .rs{gap:1px}
+.rv-page .rs i .ic{width:14px;height:14px;color:#ddd4dc;fill:none}
+.rv-page .rs i.on .ic{color:#f0a81c;fill:#f0a81c}
+.rv-write{margin:0 0 16px;border:1px solid #efe6ed;border-radius:16px;background:#fff;overflow:hidden}
+.rv-write>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;font-size:15px;font-weight:600;color:#d90068}
+.rv-write>summary::-webkit-details-marker{display:none}
+.rv-write>summary:after{content:'';width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-4px;transition:transform .2s}
+.rv-write[open]>summary:after{transform:rotate(-135deg);margin-top:4px}
+.rv-form{position:relative;display:grid;gap:10px;padding:2px 16px 16px}
+.rv-form select,.rv-form input:not([name=website]),.rv-form textarea{width:100%;min-height:42px;padding:10px 12px;border:0;border-radius:10px;background:#f6f2f5;font-size:14.5px;color:#1a1320;outline:none;box-shadow:none}
+.rv-form textarea{min-height:88px;resize:vertical;line-height:1.6}
+.rv-form select:focus,.rv-form input:focus,.rv-form textarea:focus{box-shadow:0 0 0 2px rgba(255,0,123,.35)}
+.rv-rate{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rv-rate .rt{gap:0}
+.rv-rate .rt button{display:grid;place-items:center;width:32px;height:32px;padding:0;color:#d9d0d8}
+.rv-rate .rt button.on{color:#f0a81c}
+.rv-rate .rt button.on .ic{fill:#f0a81c}
+.rv-rate .rt .ic{width:22px;height:22px}
+.rv-hint{font-size:12.5px;color:#8a7f8b;text-align:right}
+.rv-send{width:100%;min-height:42px;border:0;border-radius:12px;background:#ff007b;color:#fff;font-size:15px;font-weight:600}
+.rv-fb{margin:0;text-align:center;font-size:12px;color:#8a7f8b}
+.rv-fb a{display:inline-flex;align-items:center;gap:5px;color:#8a7f8b;text-decoration:none}
+.rv-fb svg{width:12px;height:12px;flex:none}
+.rv-msg{margin:0;font-size:13.5px;line-height:1.6;color:#6d5362}
+.rv-msg:empty{display:none}
+.rv-list{display:grid}
+.rv-card{padding:14px 2px;border-bottom:1px solid #f0e9ef}
+.rv-card:last-child{border-bottom:0}
+.rv-head{display:flex;align-items:center;gap:10px}
+.rv-av{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#ffe3f0;color:#b50c62;font-size:15px;font-weight:600}
+.rv-meta{flex:1;min-width:0;display:grid;line-height:1.3}
+.rv-meta b{font-size:14.5px;color:#1a1320;overflow-wrap:anywhere}
+.rv-meta small{font-size:12px;color:#8a7f8b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rv-card p{margin:8px 0 0 44px;font-size:14.5px;line-height:1.7;color:#4a414d;white-space:pre-line;overflow-wrap:anywhere}
+.rv-empty{text-align:center;padding:26px 10px}
+.rv-empty h3{margin:0 0 4px;font-size:16px;color:#302234}
+.rv-empty p{margin:0;font-size:13.5px;line-height:1.65;color:#8a7f8b}
+@media(max-width:420px){.rv-card p{margin-left:0}}
+
+/* admin panel font */
+html[lang] body .adm,html[lang] body .adm *,html[lang] body #lf,html[lang] body #lf *,html[lang] body .cedit,html[lang] body .cedit *,html[lang] body .atabs,html[lang] body .atabs *,html[lang] body .ap,html[lang] body .ap *,html[lang] body .ah,html[lang] body .ah *{font-family:'Hind Siliguri',Arial,sans-serif!important}
+#pwaI{margin-bottom:10px}
 </style>
 </head>
 <body>
 <div id="pg"></div>
-<header><button id="lgb" aria-label="হোম"><img id="logo" alt="সাইটের লোগো" hidden></button><button id="sq" aria-label="খুঁজুন"></button></header>
+<header><button id="lgb" aria-label="হোম"><img id="logo" alt="সাইটের লোগো" hidden></button><button id="langToggle" type="button" aria-label="Switch language">বাংলা</button><button id="sq" aria-label="খুঁজুন"></button></header>
 <aside id="sh"></aside><div id="sc"></div><nav id="bn" aria-label="প্রধান নেভিগেশন"></nav><div id="vp" role="dialog" aria-label="ভিডিও প্লেয়ার"></div>
 <main id="app"></main><footer class="ft"><div class="fti"><div class="fh"><img id="flogo" alt="আকানো" hidden><b id="fbt">আকানো!</b></div><p class="fd">আরডিবি স্টুডিও-র একটি উদ্যোগ, ব্লু ওয়াক স্টুডিও-র সহযোগিতায়। দেশি গল্প আর কল্পনার ঠিকানা।</p><div class="fs"><a href="https://www.facebook.com/share/1Dakj9PjWA/" target="_blank" rel="noopener" aria-label="ফেসবুক পেজ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a><a href="https://www.facebook.com/share/g/18VCniWUos/" target="_blank" rel="noopener" aria-label="ফেসবুক গ্রুপ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a><a href="mailto:helpsrdbstudios@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a></div><div class="fb"><span>&copy; আকানো-আরডিবি স্টুডিও</span></div></div><div class="scene"><svg class="scn" viewBox="0 0 1440 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="bm" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff3a0" stop-opacity=".55"/><stop offset="1" stop-color="#fff3a0" stop-opacity=".06"/></linearGradient></defs><g><circle cx="860" cy="48" r="46" fill="#fff3c4" opacity=".1"/><circle cx="860" cy="48" r="22" fill="#fff3c4" opacity=".95"/></g><g fill="#2b1d3d"><rect x="-10" y="79" width="56" height="111"/><rect x="49" y="102" width="56" height="88"/><rect x="77" y="90" width="2" height="12"/><rect x="109" y="94" width="58" height="96"/><rect x="138" y="82" width="2" height="12"/><rect x="170" y="125" width="47" height="65"/><path d="M186 125L193 101L200 125Z"/><rect x="222" y="96" width="30" height="94"/><rect x="257" y="95" width="38" height="95"/><path d="M270 95L276 77L282 95Z"/><rect x="295" y="122" width="30" height="68"/><rect x="328" y="106" width="48" height="84"/><rect x="352" y="94" width="2" height="12"/><rect x="377" y="103" width="46" height="87"/><path d="M393 103L400 73L407 103Z"/><rect x="428" y="108" width="45" height="82"/><rect x="473" y="114" width="44" height="76"/><rect x="517" y="98" width="32" height="92"/><rect x="551" y="130" width="52" height="60"/><rect x="603" y="121" width="41" height="69"/><rect x="623" y="109" width="2" height="12"/><rect x="647" y="108" width="53" height="82"/><path d="M665 108L673 78L681 108Z"/><rect x="705" y="113" width="45" height="77"/><path d="M720 113L727 85L734 113Z"/><rect x="753" y="126" width="35" height="64"/><path d="M765 126L770 98L775 126Z"/><rect x="788" y="83" width="57" height="107"/><rect x="846" y="102" width="56" height="88"/><path d="M865 102L874 85L883 102Z"/><rect x="903" y="93" width="54" height="97"/><rect x="958" y="117" width="28" height="73"/><rect x="990" y="78" width="47" height="112"/><path d="M1006 78L1013 58L1020 78Z"/><rect x="1041" y="132" width="34" height="58"/><rect x="1058" y="120" width="2" height="12"/><rect x="1077" y="85" width="28" height="105"/><rect x="1108" y="130" width="32" height="60"/><path d="M1119 130L1124 98L1129 130Z"/><rect x="1141" y="96" width="28" height="94"/><rect x="1170" y="81" width="58" height="109"/><rect x="1229" y="115" width="37" height="75"/><rect x="1267" y="124" width="40" height="66"/><rect x="1308" y="78" width="52" height="112"/><rect x="1334" y="66" width="2" height="12"/><rect x="1360" y="128" width="34" height="62"/><path d="M1372 128L1377 104L1382 128Z"/><rect x="1395" y="118" width="53" height="72"/></g><g fill="#1d1329"><rect x="-10" y="48" width="52" height="142"/><path d="M8 48L16 23L24 48Z"/><rect x="42" y="85" width="42" height="105"/><rect x="88" y="79" width="38" height="111"/><path d="M101 79L107 48L113 79Z"/><rect x="131" y="106" width="35" height="84"/><path d="M143 106L148 79L153 106Z"/><rect x="166" y="92" width="36" height="98"/><rect x="203" y="68" width="39" height="122"/><path d="M216 68L222 37L228 68Z"/><rect x="244" y="97" width="67" height="93"/><rect x="314" y="75" width="56" height="115"/><rect x="342" y="63" width="2" height="12"/><rect x="375" y="53" width="38" height="137"/><path d="M388 53L394 37L400 53Z"/><rect x="414" y="105" width="38" height="85"/><rect x="452" y="71" width="42" height="119"/><rect x="494" y="111" width="60" height="79"/><rect x="558" y="66" width="58" height="124"/><rect x="616" y="100" width="39" height="90"/><rect x="660" y="65" width="55" height="125"/><rect x="718" y="55" width="62" height="135"/><rect x="749" y="43" width="2" height="12"/><rect x="784" y="75" width="35" height="115"/><rect x="820" y="51" width="41" height="139"/><rect x="864" y="113" width="50" height="77"/><rect x="889" y="101" width="2" height="12"/><rect x="918" y="48" width="46" height="142"/><path d="M934 48L941 28L948 48Z"/><rect x="969" y="51" width="62" height="139"/><rect x="1036" y="89" width="50" height="101"/><rect x="1087" y="65" width="47" height="125"/><path d="M1103 65L1110 43L1117 65Z"/><rect x="1135" y="97" width="42" height="93"/><rect x="1177" y="79" width="38" height="111"/><rect x="1196" y="67" width="2" height="12"/><rect x="1218" y="87" width="51" height="103"/><rect x="1273" y="74" width="65" height="116"/><rect x="1342" y="73" width="62" height="117"/><path d="M1363 73L1373 49L1383 73Z"/><rect x="1408" y="79" width="36" height="111"/><rect x="1448" y="97" width="35" height="93"/><rect x="1465" y="85" width="2" height="12"/></g><g><rect x="690" y="62" width="84" height="128" fill="#1d1329"/><path d="M724 62L732 38L740 62Z" fill="#1d1329"/><rect x="698" y="76" width="68" height="22" rx="3" fill="none" stroke="#ff007b" stroke-width="2" class="sc-neon"/><text x="732" y="92" text-anchor="middle" font-size="14" font-weight="800" fill="#ff007b" class="sc-neon" style="font-family:Arial,Helvetica,sans-serif">AKANO!</text><rect x="698" y="112" width="6" height="8" fill="#ffd84d" class="sc-w"/><rect x="716" y="130" width="6" height="8" fill="#ff4fa3"/><rect x="744" y="116" width="6" height="8" fill="#ffd84d"/><rect x="752" y="146" width="6" height="8" fill="#ffd84d" class="sc-w" style="animation-delay:-2s"/></g><g><rect x="-4" y="82" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="-4" y="160" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="6" y="173" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="16" y="69" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.8s" x="16" y="82" width="4" height="6" fill="#ff4fa3"/><rect x="16" y="108" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="26" y="56" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="68" y="93" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="68" y="158" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="94" y="100" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="104" y="87" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="104" y="139" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="114" y="87" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-2.3s" x="114" y="100" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.0s" x="114" y="152" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-0.4s" x="137" y="166" width="4" height="6" fill="#ffd84d"/><rect x="172" y="100" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.5s" x="182" y="152" width="4" height="6" fill="#ff4fa3"/><rect x="192" y="126" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.2s" x="219" y="76" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-4.5s" x="219" y="141" width="4" height="6" fill="#ff4fa3"/><rect x="229" y="141" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="270" y="170" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="280" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="280" y="157" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="280" y="170" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="300" y="157" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="300" y="170" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-4.5s" x="330" y="122" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-1.3s" x="350" y="109" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-2.7s" x="350" y="122" width="4" height="6" fill="#ffd84d"/><rect x="350" y="135" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.3s" x="401" y="139" width="4" height="6" fill="#ff4fa3"/><rect x="401" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="458" y="131" width="4" height="6" fill="#ff4fa3"/><rect x="468" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.8s" x="468" y="170" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-2.7s" x="478" y="92" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-0.5s" x="478" y="118" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-3.7s" x="478" y="144" width="4" height="6" fill="#eeff00"/><rect x="574" y="113" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="584" y="87" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.8s" x="584" y="100" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-1.1s" x="604" y="139" width="4" height="6" fill="#ffd84d"/><rect x="622" y="160" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="666" y="99" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="666" y="112" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="666" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="676" y="73" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.7s" x="676" y="151" width="4" height="6" fill="#ff4fa3"/><rect x="686" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="686" y="151" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="686" y="164" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.9s" x="696" y="99" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-3.1s" x="696" y="164" width="4" height="6" fill="#eeff00"/><rect x="800" y="83" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="800" y="148" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.9s" x="800" y="161" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-3.8s" x="846" y="59" width="4" height="6" fill="#eeff00"/><rect x="880" y="134" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.4s" x="880" y="173" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-3.7s" x="900" y="121" width="4" height="6" fill="#ff4fa3"/><rect x="924" y="56" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="924" y="134" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.8s" x="934" y="173" width="4" height="6" fill="#eeff00"/><rect x="944" y="134" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="944" y="173" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="975" y="150" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="995" y="85" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.0s" x="1005" y="137" width="4" height="6" fill="#ffd84d"/><rect x="1005" y="150" width="4" height="6" fill="#eeff00" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.5s" x="1015" y="85" width="4" height="6" fill="#ffd84d"/><rect x="1015" y="150" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1052" y="110" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.1s" x="1062" y="149" width="4" height="6" fill="#ffd84d"/><rect class="sc-w" style="animation-delay:-0.9s" x="1093" y="86" width="4" height="6" fill="#eeff00"/><rect x="1103" y="164" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1113" y="99" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1123" y="112" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1123" y="125" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.3s" x="1123" y="151" width="4" height="6" fill="#ff4fa3"/><rect x="1141" y="144" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1183" y="139" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1183" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1193" y="100" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1193" y="152" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1203" y="152" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect x="1244" y="121" width="4" height="6" fill="#eeff00" opacity=".8"/><rect x="1244" y="173" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.1s" x="1254" y="108" width="4" height="6" fill="#eeff00"/><rect x="1254" y="121" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect x="1279" y="82" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-1.7s" x="1279" y="95" width="4" height="6" fill="#ffd84d"/><rect x="1279" y="134" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-0.9s" x="1299" y="82" width="4" height="6" fill="#ff4fa3"/><rect class="sc-w" style="animation-delay:-4.7s" x="1309" y="147" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-4.7s" x="1319" y="147" width="4" height="6" fill="#ffd84d"/><rect x="1329" y="108" width="4" height="6" fill="#ff4fa3" opacity=".8"/><rect class="sc-w" style="animation-delay:-2.1s" x="1348" y="159" width="4" height="6" fill="#ffd84d"/><rect x="1378" y="81" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-3.4s" x="1378" y="107" width="4" height="6" fill="#eeff00"/><rect class="sc-w" style="animation-delay:-2.5s" x="1388" y="120" width="4" height="6" fill="#ff4fa3"/><rect x="1434" y="113" width="4" height="6" fill="#ffd84d" opacity=".8"/><rect class="sc-w" style="animation-delay:-4.5s" x="1454" y="131" width="4" height="6" fill="#ffd84d"/></g><g class="sc-beam"><polygon points="600,152 564,8 636,8" fill="url(#bm)"/><ellipse cx="600" cy="10" rx="36" ry="9" fill="#eeff00" opacity=".92"/><text x="600" y="15" text-anchor="middle" font-size="14" font-weight="800" fill="#ff007b" style="font-family:Arial,Helvetica,sans-serif">!</text></g><g class="sc-fog" fill="#fff" opacity=".07"><ellipse cx="300" cy="172" rx="260" ry="14"/><ellipse cx="900" cy="176" rx="300" ry="16"/><ellipse cx="1250" cy="170" rx="200" ry="12"/></g><g fill="#120b1a"><rect x="-10" y="159" width="55" height="31"/><rect x="45" y="162" width="68" height="28"/><rect x="115" y="156" width="44" height="34"/><path d="M130 156L137 133L144 156Z"/><rect x="160" y="168" width="85" height="22"/><rect x="245" y="154" width="51" height="36"/><path d="M262 154L270 130L278 154Z"/><rect x="301" y="136" width="73" height="54"/><rect x="377" y="154" width="90" height="36"/><path d="M407 154L422 131L437 154Z"/><rect x="472" y="160" width="64" height="30"/><rect x="504" y="148" width="2" height="12"/><rect x="536" y="133" width="64" height="57"/><rect x="602" y="148" width="69" height="42"/><rect x="636" y="136" width="2" height="12"/><rect x="676" y="161" width="81" height="29"/><path d="M703 161L716 138L729 161Z"/><rect x="757" y="134" width="59" height="56"/><rect x="818" y="167" width="85" height="23"/><rect x="860" y="155" width="2" height="12"/><rect x="906" y="133" width="61" height="57"/><rect x="936" y="121" width="2" height="12"/><rect x="967" y="164" width="53" height="26"/><rect x="993" y="152" width="2" height="12"/><rect x="1024" y="160" width="61" height="30"/><rect x="1090" y="140" width="73" height="50"/><rect x="1168" y="154" width="45" height="36"/><rect x="1218" y="158" width="75" height="32"/><rect x="1297" y="149" width="56" height="41"/><rect x="1357" y="149" width="53" height="41"/><rect x="1414" y="132" width="57" height="58"/><rect x="570" y="150" width="62" height="40"/><rect x="592" y="144" width="16" height="8"/></g><rect x="0" y="178" width="1440" height="12" fill="#0c0711"/></svg><div class="gnd"></div></div></footer><div id="m"></div><div id="v"></div>
 <script type="module">
@@ -642,516 +858,21 @@ import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-ap
 import{initializeFirestore,doc,getDoc,getDocs,setDoc,addDoc,deleteDoc,updateDoc,deleteField,increment,query,where,collection}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import{getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged,signOut,updatePassword}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7a68c.firebaseapp.com",projectId:"hallo-7a68c",storageBucket:"hallo-7a68c.firebasestorage.app",messagingSenderId:"243440324533",appId:"1:243440324533:web:152e65db8239f3602193fc",measurementId:"G-X2ZW15PVRG"}),app=initializeApp(cfg),db=initializeFirestore(app,{experimentalAutoDetectLongPolling:true});
-const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
-const tmo=(p,ms=20000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))]);
-const errMsg=e=>e?.code==='permission-denied'?'ডাটাবেসের অনুমতি (Firestore Rules) ঠিক করা নেই':(e?.code==='timeout'||e?.code==='unavailable')?'ইন্টারনেট সংযোগ নেই বা খুব ধীর':'লোড করা যায়নি';
-const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?x.data():null};
-// কম রিড: ১০ মিনিট ক্যাশ
-const cache=async(k,f)=>{let c;try{c=JSON.parse(localStorage['ak_'+k])}catch{}if(c&&Date.now()-c.t<6e5)return c.d;try{const d=await f();try{localStorage['ak_'+k]=JSON.stringify({t:Date.now(),d})}catch{}return d}catch(e){if(c)return c.d;throw e}};
-const cacheSet=(k,d)=>{try{localStorage.setItem('ak_'+k,JSON.stringify({t:Date.now(),d}))}catch{}};
-const list=c=>cache(c,async()=>(await tmo(getDocs(collection(db,c)))).docs.map(d=>({id:d.id,...d.data()}))),byT=(a,b)=>(b.t||0)-(a.t||0);
-const I={film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',tri:'<path d="M8 5.5v13l11-6.5z"/>',play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>',pause:'<path d="M8 5v14M16 5v14"/>',vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/>',mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',full:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',shelf:'<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="4" width="4" height="16" rx="1"/><path d="M15.2 5.6l3.5-1 3.2 14.6-3.5 1z"/>',panels:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v9M9 12v9"/>',bookmark:'<path d="M6 3h12v18l-6-4.5L6 21z"/>',face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01"/>',grid:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
-const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${I[n]}</svg>`;
-const NAV=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি কমিকস','gift'],['videos','ভিডিও','play'],['lib','পারচেজ লাইব্রেরি','shelf'],['favs','প্রিয় তালিকা','bookmark'],['chars','ক্যারেক্টার','face'],['gallery','গ্যালারি','image'],['news','ঘোষণা ও কনটেস্ট','mega'],['reviews','রিভিউ','msg'],['faq','প্রশ্নোত্তর','help']];
-const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
-function reveal(){document.querySelectorAll('.card,.chc,.gal button,.nw,.ab section,.mi,.sx,.rail,.gp,.ban').forEach((x,i)=>{if(x.classList.contains('rv')||x.matches('.rail .card'))return;x.classList.add('rv');x.style.setProperty('--d',(i%5)*.08+'s');io?io.observe(x):x.classList.add('in')})}
-addEventListener('scroll',()=>{const h=document.documentElement;$('header').classList.toggle('sh',scrollY>8);$('#pg').style.width=scrollY/Math.max(1,h.scrollHeight-innerHeight)*100+'%'},{passive:true});
-let comics={},gl=[],chs=[],lib={};try{lib=JSON.parse(localStorage.akLib||'{}')}catch{}
-Object.keys(lib).forEach(k=>{if(typeof lib[k]==='string')lib[k]={t:lib[k],e:Date.now()+20*864e5}});
-let tw;
-
-// ---------- মেনু ও মোডাল ----------
-const dr=$('#sh'),sc=$('#sc'),tog=o=>{dr.classList.toggle('on',o);sc.classList.toggle('on',o)};
-const FBX='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
-const BN=[['home','হোম','home'],['comics','কমিকস','book'],['free','ফ্রি','gift'],['videos','ভিডিও','play']],MORE=NAV.filter(n=>!BN.some(b=>b[0]===n[0]));
-const bnSet=v=>document.querySelectorAll('#bn button').forEach(b=>b.classList.toggle('on',b.dataset.bn===(BN.some(x=>x[0]===v)?v:'more')));
-$('#bn').innerHTML=BN.map(([v,t,i])=>`<button data-go=${v} data-bn=${v}>${ic(i)}<span>${t}</span></button>`).join('')+`<button id=bm data-bn=more>${ic('grid')}<span>আরও</span></button>`;
-$('#bm').onclick=()=>tog(!dr.classList.contains('on'));
-dr.innerHTML=`<div class=gh id=gh></div><div class=mg>${MORE.map(([v,t,i])=>`<button data-go=${v}>${ic(i)}<span>${t}</span></button>`).join('')}</div><div class=mc><b>কমিউনিটি ও যোগাযোগ</b><a href="https://www.facebook.com/share/1Dakj9PjWA/" target=_blank rel=noopener>${FBX}ফেসবুক পেজ</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>${FBX}ফেসবুক গ্রুপ</a><a href="mailto:helpsrdbstudios@gmail.com">${ic('mail')}ইমেইল</a></div><button class=adb id=ad>${ic('lock')}অ্যাডমিন লগইন</button>`;
-$('#ad').onclick=()=>openAdmin();
-$('#sq').innerHTML=ic('search');$('#sq').onclick=()=>{const q=$('#hq');if(q){scrollTo({top:0,behavior:'smooth'});q.focus()}else go('home').then(()=>$('#hq')?.focus())};
-$('#gh').onclick=sc.onclick=()=>tog(0);$('#lgb').onclick=()=>go('home');
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#m').classList.remove('on');tog(0)}});
-function modal(h,w){$('#m').innerHTML=`<div class="mb${w?' w':''}"><button class=cx aria-label="বন্ধ">${ic('x')}</button>${h}</div>`;$('#m').classList.add('on')}
-$('#m').onclick=e=>{if(e.target.id==='m'||e.target.closest('.cx'))$('#m').classList.remove('on')};
-function bindGo(id){$('#go').onclick=async()=>{$('#msg').textContent='যাচাই হচ্ছে...';try{const r=await redeem($('#cc').value,id);if($('#msg'))$('#msg').textContent=r}catch(e){if($('#msg'))$('#msg').textContent='সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'}}}
-
-// ---------- পেজ ----------
-const V={home,comics:()=>shop(0),free:()=>shop(1),gallery,news,about,lib:library,chars:characters,reviews,favs,faq,videos};
-const SK='<div class=sg>'+'<div class=sk></div>'.repeat(6)+'</div>';
-let routeVersion=0,lastShop='comics';
-async function go(v){
- if(!V[v])return;
- bnSet(v);
- const thisRoute=++routeVersion;
- tog(0);scrollTo(0,0);clearTimeout(tw);$('#app').innerHTML=SK;
- try{
-  await V[v]();
-  if(thisRoute!==routeVersion)return;
-  reveal();
- }catch(e){
-  if(thisRoute!==routeVersion)return;
-  $('#app').innerHTML=`<p class=ld>${errMsg(e)}<br><br><button class=btn data-go=${v}>আবার চেষ্টা করুন</button></p>`;
- }
-}
-const banner=(n,t)=>`<${t} class=ban${t==='button'?' data-go=news':''}><div class=im><img src="${esc(n.img)}" loading=lazy alt=""></div><b><span class=tag>${esc(n.type)}</span><br>${esc(n.title)}</b></${t}>`;
-const LS={get:(k,d)=>{try{const v=JSON.parse(localStorage[k]);return v??d}catch{return d}},set:(k,v)=>{try{localStorage[k]=JSON.stringify(v)}catch{}}};
-let fav=LS.get('akFav',{}),prog=LS.get('akProg',{}),asp=LS.get('akAsp',{});fav.c=fav.c||[];fav.h=fav.h||[];
-const countView=id=>{if(!id)return;const m=LS.get('akVw',{}),n=Date.now();if(m[id]&&n-m[id]<864e5)return;
- updateDoc(doc(db,'comics',id),{views:increment(1)}).then(()=>{m[id]=Date.now();LS.set('akVw',m);const x=comics[id];if(x)x.views=(+x.views||0)+1;
-  try{const c=JSON.parse(localStorage.ak_comics);if(c&&Array.isArray(c.d)){const q=c.d.find(y=>y.id===id);if(q){q.views=(+q.views||0)+1;localStorage.ak_comics=JSON.stringify(c)}}}catch{}}).catch(()=>{})};
-const isNew=x=>Date.now()-(x.ct||x.t||0)<14*864e5;
-const favLbl=(t,id)=>fav[t].includes(id)?'প্রিয় তালিকায় আছে':'প্রিয় তালিকায় রাখুন';
-const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}">${ic('bookmark')}<span>${favLbl(t,id)}</span></button>`;
-const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=>{const[t,id]=b.dataset.fav.split(':');toggleFav(b);b.querySelector('span').textContent=favLbl(t,id)});
-const isSer=c=>c.type==='series'&&c.series;
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt=""><b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)} বার দেখা</span></button>`;
-function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.series])return;seen[c.series]=1;out.push({ser:c.series,top:c,eps:l.filter(x=>isSer(x)&&x.series===c.series)})}else out.push({one:c})});return out}
-const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"><img src="${esc(g.top.cover)}" loading=lazy alt=""><b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)} বার দেখা</span></button>`};
-const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
-// প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
-function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
- if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=W[0];return}
- let w=0,i=0,d=0,g=seg(W[0]);
- const step=()=>{if(!el.isConnected)return;
-  if(!d){i++;el.textContent=g.slice(0,i).join('');if(i>=g.length){d=1;tw=setTimeout(step,1600)}else tw=setTimeout(step,90);return}
-  i--;el.textContent=g.slice(0,i).join('');if(i<=0){d=0;w=(w+1)%W.length;g=seg(W[w]);tw=setTimeout(step,300)}else tw=setTimeout(step,45)};
- step()}
-const chCard=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}"><b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
-const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
-async function home(){
- const thisRoute=routeVersion;
- $('#app').innerHTML=`<div class=sec><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:210px;border-radius:14px;margin-top:22px"></div></div></div>`;
- let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
-  if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
-  $('#sv').hidden=true;
-  try{if(!sd){const[cl,cr,vr]=await Promise.all([list('comics'),cache('chars',async()=>(await dat('site','characters'))||{list:[]}),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]);sd={cl:cl.sort(byT),ch:cr.list||[],vd:[...(vr.list||[])].sort(byT)};comics=Object.fromEntries(sd.cl.map(c=>[c.id,c]));chs=sd.ch;vds=sd.vd}}catch{$('#sr').innerHTML='<p class=ld>লোড করা যায়নি।</p>';return}
-  if($('#hq').value.trim().toLowerCase()!==v)return;
-   const a=sd.cl.filter(c=>String((c.title||'')+' '+(c.series||'')).toLowerCase().includes(v)),b=sd.ch.filter(x=>[x.name,x.series,x.app].join(' ').toLowerCase().includes(v)),vm=sd.vd.filter(x=>[x.title,x.desc].join(' ').toLowerCase().includes(v));
-   try{vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
-   if($('#hq').value.trim().toLowerCase()!==v)return;
-  $('#sr').innerHTML=(a.length?`<div class=sx><div><h2>কমিকস</h2></div></div><div class=grid>${a.map(c=>cardH(c,!!c.free)).join('')}</div>`:'')+(b.length?`<div class=sx><div><h2>ক্যারেক্টার</h2></div></div><div class=chg>${b.map(chCard).join('')}</div>`:'')+(vm.length?`<div class=sx><div><h2>ভিডিও</h2></div></div><div class=vg>${vm.map(vCard).join('')}</div>`:'')||'<p class=ld>কিছু পাওয়া যায়নি।</p>'};
- const[c,vr]=await Promise.allSettled([list('comics'),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
- if(thisRoute!==routeVersion)return;
- if(c.status==='rejected'&&vr.status==='rejected')throw c.reason;
- if(!$('#sv'))return;
- const cs=ok(c);
- comics=Object.fromEntries(cs.map(x=>[x.id,x]));
- vds=vr.status==='fulfilled'?[...(vr.value.list||[])].sort(byT):[];
-  const selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8);
-  try{vv={...vv,...await vviews(featuredVideos.map(x=>x.id))}}catch{}
-  if(thisRoute!==routeVersion)return;
- const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class=rail>${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
- $('#sv').innerHTML=rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):'<p class=soon>শীঘ্রই আসছে</p>')
-  +rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class=soon>শীঘ্রই আসছে</p>');
- reveal()}
-async function openSeries(name){
- const thisRoute=++routeVersion;scrollTo(0,0);bnSet(lastShop);$('#app').innerHTML=SK;
- let l=[];try{l=(await list('comics')).filter(c=>isSer(c)&&c.series===name).sort((x,y)=>(+x.ep||0)-(+y.ep||0))}catch(e){if(thisRoute===routeVersion)$('#app').innerHTML=`<p class=ld>${errMsg(e)}</p>`;return}
- if(thisRoute!==routeVersion)return;
- Object.assign(comics,Object.fromEntries(l.map(c=>[c.id,c])));
- const top=l[l.length-1],by=l.find(x=>x.creator)?.creator;
- $('#app').innerHTML=`<div class=sec id=serp><button class=back data-go=${lastShop}>${ic('arrow')}<span>পেছনে</span></button>${l.length?`<div class=sh><img src="${esc(top.cover)}" alt=""><div><h1>${esc(name)}</h1><p>${bn(l.length)} পর্ব${by?' · '+esc(by):''}</p></div></div><div class=eps>${l.map(c=>`<button class=ep data-open data-id="${c.id}"><img src="${esc(c.cover)}" loading=lazy alt=""><div><b>পর্ব ${bn(c.ep||1)}</b><small>${esc(c.title)}</small></div><span class="pt${c.free?' f':''}">${c.free?'ফ্রি':bn(c.price)+' টাকা'}</span></button>`).join('')}</div>`:'<p class=ld>কোনো পর্ব পাওয়া যায়নি।</p>'}</div>`}
-async function shop(f){
- const thisRoute=routeVersion;
- const l=(await list('comics')).filter(c=>!!c.free==!!f).sort(byT);
- if(thisRoute!==routeVersion)return;
- lastShop=f?'free':'comics';
- comics=Object.fromEntries(l.map(c=>[c.id,c]));
- const body=collapse(l).map(g=>g.ser?serCard(g):cardH(g.one,!!f)).join('');
- $('#app').innerHTML=`<div class=sec><h1 class=ct>${f?'বিনামূল্যে':'বাংলায়'}<span>পড় কমিকস</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="কমিকস বা সিরিজ খুঁজুন..." autocomplete=off aria-label="কমিকস খুঁজুন"></div><div class=chp id=chp><button class=on data-t="">সব</button><button data-t=oneshot>ওয়ানশট</button><button data-t=series>সিরিজ</button></div>${body?`<div class=grid>${body}</div>`:'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- let ty='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.grid .card').forEach(c=>{c.hidden=(ty&&c.dataset.ty!==ty)||!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.grid .card:not([hidden])')||!l.length};
- $('#q').oninput=ap;$('#chp').onclick=e=>{const b=e.target.closest('button');if(!b)return;ty=b.dataset.t;[...$('#chp').children].forEach(x=>x.classList.toggle('on',x===b));ap()}}
-async function gallery(){
- const thisRoute=routeVersion;
- gl=(await list('gallery')).sort(byT);
- if(thisRoute!==routeVersion)return;
- $('#app').innerHTML=`<div class=sec><h1 class=ct>গ্যালারি</h1><div class=gal>${gl.map((g,i)=>`<button data-gi=${i} aria-label="${esc(g.cap||'ছবি')}"><img src="${esc(g.th||g.url)}" loading=lazy alt="${esc(g.cap)}"></button>`).join('')||'<p class=ld>শীঘ্রই আসছে।</p>'}</div></div>`}
-async function news(){
- const thisRoute=routeVersion;
- const n=(await list('news')).sort(byT);
- if(thisRoute!==routeVersion)return;
- $('#app').innerHTML=`<div class=sec><h1 class=ct>ঘোষণা<span>ও কনটেস্ট</span></h1>${n.map(x=>`<article class=nw>${banner(x,'div')}<div class=dt>${new Date(x.t).toLocaleDateString('bn-BD')}</div><p>${esc(x.text)}</p>${/^https?:\/\//.test(x.link)?`<a class=btn href="${esc(x.link)}" target=_blank rel=noopener>বিস্তারিত দেখুন${ic('arrow')}</a>`:''}</article>`).join('')||'<p class=ld>এখনো কোনো ঘোষণা নেই।</p>'}</div>`}
-async function favs(){
- const thisRoute=routeVersion;let cl=[],cr=[];
- try{cl=(await list('comics')).filter(c=>fav.c.includes(c.id)).sort(byT)}catch{}
- try{cr=((await cache('chars',async()=>(await dat('site','characters'))||{list:[]})).list||[]).filter(x=>fav.h.includes(x.id))}catch{}
- if(thisRoute!==routeVersion)return;
- comics=Object.fromEntries(cl.map(c=>[c.id,c]));chs=cr;
- $('#app').innerHTML=`<div class=sec id=favp><h1 class=ct>প্রিয়<span>তালিকা</span></h1>${cl.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${cl.map(c=>cardH(c,!!c.free)).join('')}</div>`:''}${cr.length?`<div class=sx><div><h2>${ic('face')}ক্যারেক্টার</h2></div></div><div class=chg>${cr.map(chCard).join('')}</div>`:''}${cl.length||cr.length?'':'<p class=ld>কমিকস বা ক্যারেক্টারের কার্ডের হার্ট আইকনে ট্যাপ করলে এখানে জমা হবে (এই ডিভাইসে)।</p>'}</div>`}
-function faq(){
- const Q=[
-  ['কীভাবে কমিকস কিনব?','কমিকসের কার্ডে ট্যাপ করুন। অর্ডার ফর্মে নাম, ইমেইল, ফোন, হোয়াটসঅ্যাপ নম্বর, পেমেন্টের মাধ্যম ও (পেমেন্টের পর) ট্রানজেকশন আইডি দিয়ে অর্ডার পাঠান।'],
-  ['কীভাবে টাকা পাঠাব?','ফর্মে যে মাধ্যমে (বিকাশ, নগদ, রকেট বা অন্যান্য) টাকা পাঠাতে চান সেটি বেছে নিন। সেই মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।'],
-  ['কোড কীভাবে ও কখন পাব?','পেমেন্ট যাচাইয়ের পর আপনার ইমেইল বা হোয়াটসঅ্যাপে কোড পাঠানো হয়।'],
-  ['কোড কীভাবে ব্যবহার করব?','কমিকসের কার্ডে ট্যাপ করে নিচের “কোড আছে?” অংশে কোড লিখে “পড়ুন” চাপুন।'],
-  ['কোডের মেয়াদ কত দিন?','কোড প্রথমবার ব্যবহারের পর ২০ দিন কমিকসটি খোলা থাকে। মেনুর “পারচেজ লাইব্রেরি”-তে কত দিন বাকি তা দেখা যায় এবং সেখান থেকেই আবার পড়া যায়।'],
-  ['একটি কোড কয়টি ডিভাইসে চলে?','একটি ডিভাইসে। প্রথমবার ব্যবহারের ডিভাইসেই কোডটি বাঁধা পড়ে। ব্রাউজারের ডেটা মুছলে বা ডিভাইস বদলালে ইমেইলে জানান।'],
-  ['ফ্রি কমিকস পড়তে কি কোড লাগে?','না। “ফ্রি কমিকস” অংশের কমিকস কোড ছাড়াই পড়া যায়।'],
-  ['ওয়ানশট আর সিরিজ কী?','ওয়ানশট হলো এক পর্বে সম্পূর্ণ কমিকস। সিরিজ হলো চলমান কমিকস, যার সব পর্ব এক জায়গায় পর্ব নম্বর অনুযায়ী সাজানো থাকে।'],
-  ['পড়া কি মনে থাকে?','হ্যাঁ। আপনি শেষ কোন পেজে ছিলেন তা এই ডিভাইসে মনে রাখা হয় এবং আবার খুললে সেখান থেকে চালিয়ে যাওয়ার অপশন আসে। হোম পেজেও “পড়া চালিয়ে যান” বাটন দেখা যায়।'],
-  ['স্ক্রিনশট বা শেয়ার করা যাবে?','না। কমিকসের স্ক্রিনশট, স্ক্রিন রেকর্ড, কপি বা শেয়ার সম্পূর্ণ নিষিদ্ধ। ধরা পড়লে আইনানুগ ব্যবস্থা নেওয়া হবে।'],
-  ['সমস্যা হলে কোথায় জানাব?','helpsrdbstudios@gmail.com এ ইমেইল করুন অথবা আমাদের ফেসবুক গ্রুপে জানান।']];
- $('#app').innerHTML=`<div class=sec><h1 class=ct>প্রশ্নোত্তর<span>সাধারণ জিজ্ঞাসা</span></h1>${Q.map(([q,a])=>`<details class=fq><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}<p style="text-align:center;margin:26px 0 50px"><a class=fbl href="mailto:helpsrdbstudios@gmail.com">helpsrdbstudios@gmail.com</a></p></div>`}
-let vds=[],vv={};
-async function vviews(ids){
- const keys=Array.isArray(ids)?[...new Set(ids.filter(Boolean))]:[...new Set(vds.map(x=>x.id).filter(Boolean))],out={},need=[],stale={};
- keys.forEach(id=>{let c;try{c=JSON.parse(localStorage.getItem('ak_vvc_'+id))}catch{}
-  if(c&&Number.isFinite(+c.n)){out[id]=+c.n;if(Date.now()-c.t<6e5)return;stale[id]=+c.n}
-  need.push(id)});
- if(!need.length)return out;
- try{const docs=await tmo(Promise.all(need.map(id=>getDoc(doc(db,'videoViews',id)))));
-  docs.forEach((d,i)=>{const id=need[i],n=d.exists()?d.data().n||0:0;out[id]=n;try{localStorage.setItem('ak_vvc_'+id,JSON.stringify({t:Date.now(),n}))}catch{}})
- }catch{need.forEach(id=>{if(out[id]===undefined)out[id]=stale[id]||0})}
- return out
-}
-const countVideo=id=>{if(!id)return;const m=LS.get('akVv',{}),n=Date.now();if(m[id]&&n-m[id]<864e5)return;
- setDoc(doc(db,'videoViews',id),{n:increment(1)},{merge:true}).then(()=>{m[id]=Date.now();LS.set('akVv',m);vv[id]=(vv[id]||0)+1;
-  try{localStorage.setItem('ak_vvc_'+id,JSON.stringify({t:Date.now(),n:vv[id]}))}catch{}
-  document.querySelectorAll('.vc[data-vid]').forEach(card=>{if(card.dataset.vid===id){const el=card.querySelector('.mt2');if(el)el.innerHTML=ic('eye')+bn(vv[id])+' বার দেখা'}})}).catch(()=>{})};
-const vFmt=t=>{t=Math.round(t||0);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),r=t%60;return bn((h?h+':'+String(m).padStart(2,'0'):m)+':'+String(r).padStart(2,'0'))};
-const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')).toLowerCase())}"><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class=pl>${ic('tri')}</span>${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)} বার দেখা</span></button>`;
-const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
-async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
-const vdGet=async()=>{const x=await getDoc(D('site','videos'));return x.exists()?(x.data().list||[]):[]},vdSave=l=>setDoc(D('site','videos'),{list:l,t:Date.now()});
-async function videos(){
- const thisRoute=routeVersion;
- const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});
- if(thisRoute!==routeVersion)return;
- vds=[...(d.list||[])].sort(byT);try{vv=await vviews(vds.map(x=>x.id))}catch{}
- $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ভিডিও</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div>${vds.length?`<div class=vg>${vds.map(vCard).join('')}</div>`:'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- $('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.vg .vc').forEach(c=>{c.hidden=!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.vg .vc:not([hidden])')||!vds.length}}
-let vpl=null,vhide=0;
-const loadVimeo=()=>window.Vimeo?Promise.resolve():new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://player.vimeo.com/api/player.js';sc.onload=ok;sc.onerror=no;document.head.appendChild(sc)});
-function closeVP(){const el=$('#vp');if(!el.classList.contains('on'))return;try{vpl?.destroy()}catch{}vpl=null;clearTimeout(vhide);el.classList.remove('on','playing','hide');el.innerHTML='';if(document.fullscreenElement)document.exitFullscreen?.()}
-async function playVideo(v){
- closeVP();const el=$('#vp');
- el.innerHTML=`<div class=vbar><span>${esc(v.title)}</span><button id=vx aria-label="বন্ধ">${ic('x')}</button></div><div class=vst><iframe id=vif src="https://player.vimeo.com/video/${esc(v.vid)}?${v.h?'h='+esc(v.h)+'&':''}controls=0&title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autopause=0" allow="autoplay; fullscreen; picture-in-picture" tabindex=-1 title="${esc(v.title)}"></iframe><div class=vsh id=vsh></div><button class=vbig id=vbig aria-label="চালান">${ic('tri')}</button></div><div class=vct><button id=vpp aria-label="চালান/থামান">${ic('tri')}</button><input id=vsk type=range min=0 max=1000 value=0 aria-label="সময়"><span id=vtm>০:০০ / ০:০০</span><button id=vmu aria-label="শব্দ">${ic('vol')}</button><button id=vfs aria-label="ফুল স্ক্রিন">${ic('full')}</button></div>`;
- el.classList.add('on');
- $('#vx').onclick=closeVP;
- try{await loadVimeo()}catch{$('#vtm').textContent='ভিডিও লোড করা যায়নি';return}
- if(!el.classList.contains('on'))return;
-  const pl=new Vimeo.Player($('#vif'));vpl=pl;let dur=0,drag=false,muted=false,counted=false;
- const kick=()=>{el.classList.remove('hide');clearTimeout(vhide);if(el.classList.contains('playing'))vhide=setTimeout(()=>el.classList.add('hide'),2800)};
- const tg=()=>pl.getPaused().then(p=>p?pl.play():pl.pause()).catch(()=>{});
- const paint=(a,b)=>{$('#vtm').textContent=vFmt(a)+' / '+vFmt(b)};
-  pl.on('play',()=>{el.classList.add('playing');$('#vpp').innerHTML=ic('pause');if(!counted){counted=true;countVideo(v.id)}kick()});
- pl.on('pause',()=>{last=null;el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
- pl.on('ended',()=>{el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
-  pl.on('timeupdate',e=>{dur=e.duration||dur;if(!drag)$('#vsk').value=dur?Math.round(e.seconds/dur*1000):0;paint(e.seconds,dur)});
- pl.getDuration().then(d=>{dur=d;paint(0,d)}).catch(()=>{});
- $('#vsh').onclick=()=>{tg();kick()};$('#vbig').onclick=tg;$('#vpp').onclick=()=>{tg();kick()};
- $('#vsk').oninput=()=>{drag=true;kick()};
- $('#vsk').onchange=()=>{drag=false;if(dur)pl.setCurrentTime(dur*$('#vsk').value/1000).catch(()=>{})};
- $('#vmu').onclick=()=>{muted=!muted;pl.setMuted(muted).catch(()=>{});$('#vmu').innerHTML=ic(muted?'mute':'vol')};
-  $('#vfs').onclick=async()=>{const fs=document.fullscreenElement||document.webkitFullscreenElement;if(fs){try{if(pl.exitFullscreen)await pl.exitFullscreen();else if(document.exitFullscreen)await document.exitFullscreen()}catch{}return}
-   try{if(pl.requestFullscreen){await pl.requestFullscreen();return}}catch{}
-   try{const req=el.requestFullscreen||el.webkitRequestFullscreen;if(req)await req.call(el)}catch{}};
- el.onmousemove=el.ontouchstart=kick;
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVP()});
-const FBG='https://www.facebook.com/share/g/18VCniWUos/',FBI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
-async function reviews(){
- const thisRoute=routeVersion;let rv=[],ok=true,cl=[],rate=0;
- try{cl=(await list('comics')).sort(byT)}catch{}
- try{rv=(await tmo(getDocs(query(collection(db,'reviews'),where('approved','==',true))))).docs.map(d=>({id:d.id,...d.data()})).sort(byT)}catch{ok=false}
- if(thisRoute!==routeVersion)return;
- const st=r=>`<span class=rs>${[1,2,3,4,5].map(i=>`<i class="${i<=r?'on':''}">${ic('star')}</i>`).join('')}</span>`;
- $('#app').innerHTML=`<div class=sec><h1 class=ct>পাঠকদের<span>রিভিউ</span></h1>
- <form class=rvf id=rvf autocomplete=off>
-  <select name=comic><option value="">সাধারণ রিভিউ (আকানো সম্পর্কে)</option>${cl.map(c=>`<option>${esc(c.title)}</option>`).join('')}</select>
-  <input name=name maxlength=60 placeholder="আপনার নাম" required>
-  <div class=rt id=rt role=group aria-label="রেটিং">${[1,2,3,4,5].map(i=>`<button type=button data-rt=${i} aria-label="${bn(i)} তারা">${ic('star')}</button>`).join('')}</div>
-  <textarea name=text maxlength=500 placeholder="আপনার মতামত লিখুন" required></textarea>
-  <input name=website tabindex=-1 autocomplete=off aria-hidden=true style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-  <button class="btn full" type=submit>রিভিউ জমা দিন</button>
-  <p class=note id=rvm style="margin:0;text-align:center"></p>
-  <a class=fbl href="${FBG}" target=_blank rel=noopener>${FBI}ফেসবুক গ্রুপেও রিভিউ দিতে পারেন</a>
- </form>
- <div class=rvl>${rv.map(r=>`<div class=rvc><div class=rvh><b>${esc(r.name)}</b>${st(r.rating)}</div>${r.comic?`<small>${esc(r.comic)}</small>`:''}<p>${esc(r.text)}</p></div>`).join('')||(ok?'<p class=ld>এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!</p>':`<p class=ld>রিভিউ দেখানো যাচ্ছে না। <a href="${FBG}" target=_blank rel=noopener style="color:#ff007b">ফেসবুক গ্রুপে</a> রিভিউ দেখুন ও দিন।</p>`)}</div></div>`;
- const msg=h=>{$('#rvm').innerHTML=h};
- $('#rt').onclick=e=>{const b=e.target.closest('button');if(!b)return;rate=+b.dataset.rt;[...$('#rt').children].forEach((x,i)=>x.classList.toggle('on',i<rate))};
- $('#rvf').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);if(f.get('website'))return;
-  const name=String(f.get('name')||'').trim().slice(0,60),text=String(f.get('text')||'').trim().slice(0,500);
-  if(!name||!text)return msg('নাম ও মতামত লিখুন');if(!rate)return msg('তারা দিয়ে রেটিং দিন');
-  let last=0;try{last=+localStorage.akRv||0}catch{}if(Date.now()-last<60000)return msg('একটু পরে আবার চেষ্টা করুন');
-  msg('জমা হচ্ছে...');
-  try{await addDoc(collection(db,'reviews'),{name,rating:rate,text,comic:String(f.get('comic')||'').slice(0,120),approved:false,t:Date.now()});
-   try{localStorage.akRv=Date.now()}catch{}
-   e.target.reset();rate=0;[...$('#rt').children].forEach(x=>x.classList.remove('on'));msg('ধন্যবাদ! অ্যাডমিন অনুমোদনের পর আপনার রিভিউ এখানে দেখা যাবে।')}
-  catch{msg(`রিভিউ জমা দেওয়া যায়নি। অনুগ্রহ করে <a href="${FBG}" target=_blank rel=noopener style="color:#ff007b">ফেসবুক গ্রুপে</a> আপনার রিভিউ জানান।`)}}}
-async function characters(){
- const thisRoute=routeVersion;
- const d=await cache('chars',async()=>(await dat('site','characters'))||{list:[]});
- if(thisRoute!==routeVersion)return;
- chs=d.list||[];const g={};chs.forEach(x=>{const k=x.series||'অন্যান্য';(g[k]=g[k]||[]).push(x)});
- const cd=x=>`<button class=chc data-ch="${esc(x.id)}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${esc(x.name)}"><b>${esc(x.name)}</b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<small>${esc(x.app)}</small>`:''}</button>`;
- $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ক্যারেক্টার</span></h1>${chs.length?`<div class=sb>${ic('search')}<input id=q type=search placeholder="ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="ক্যারেক্টার খুঁজুন"></div>`:''}${Object.entries(g).map(([k,a])=>`<div class=grp><div class=sx><div><h2>${ic('face')}${esc(k)}</h2></div></div><div class=chg>${a.map(cd).join('')}</div></div>`).join('')||'<p class=ld>শীঘ্রই আসছে।</p>'}<p class=ld id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- if($('#q'))$('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.chc').forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(v));document.querySelectorAll('.grp').forEach(g=>g.hidden=!g.querySelector('.chc:not([hidden])'));$('#nf').hidden=!!document.querySelector('.chc:not([hidden])')}}
-function about(){
- $('#app').innerHTML=`<article class="sec art"><span class=kk>আকানো · আরডিবি স্টুডিও</span><h1>গল্প বলার ভাষা বদলে দিতে চাই আমরা</h1>
- <p class=lead>আকানো আরডিবি স্টুডিও-র একটি উদ্যোগ। আমাদের লক্ষ্য একটাই: বিশ্বের সবচেয়ে বড় পপ কালচার প্রতিষ্ঠান হয়ে ওঠা।</p>
- <h2>স্বপ্নটা বড়, আর সেটাই আমাদের শক্তি</h2>
- <p>মার্ভেল কমিকসের কয়েকটি পাতা থেকে শুরু করে পুরো পৃথিবীর গল্প বলার ধরন বদলে দিয়েছে। আমরা বিশ্বাস করি, বাংলার মাটি থেকেও তেমন একটি জগৎ গড়ে ওঠা সম্ভব। তাই আমরা খোলাখুলি বলি, মার্ভেলের সঙ্গে পাল্লা দেওয়ার স্বপ্ন দেখতে আমরা ভয় পাই না।</p>
- <blockquote>আমরা শুধু গল্প বলতে চাই না, আমরা একটি জগৎ গড়তে চাই।</blockquote>
- <h2>আকানো মানে শুধু কমিকস নয়</h2>
- <p>শিল্প, সংস্কৃতি আর বিনোদন, এই তিন জায়গাতেই আমরা কাজ করতে চাই। কমিকস দিয়ে শুরু হলেও আমাদের যাত্রা সেখানে থেমে থাকবে না। চরিত্র, গল্প, ভিডিও আর ছবি মিলিয়ে ধীরে ধীরে একটি পূর্ণ জগৎ তৈরি হচ্ছে, যেখানে প্রতিটি চরিত্রের নিজস্ব ইতিহাস আছে।</p>
- <h2>কেন দেশি গল্প</h2>
- <p>আমাদের চারপাশে বলার মতো গল্পের অভাব নেই। অভাব ছিল সেই গল্পগুলোকে বিশ্বমানের চেহারা দেওয়ার। আমরা চাই বাংলাদেশের তরুণরা শুধু বিদেশি গল্পের পাঠক হয়ে না থেকে নতুন গল্পের স্রষ্টা হয়ে উঠুক। নিজেদের চরিত্র, নিজেদের নায়ক আর নিজেদের জগৎ নিয়ে গর্ব করার দিন আসছে।</p>
- <h2>আমরা এখন যা করছি</h2>
- <p>ওয়ানশট আর ধারাবাহিক সিরিজ কমিকস প্রকাশ করছি, যার কিছু সবার জন্য বিনামূল্যে, আর কিছু কোড দিয়ে পড়ার জন্য। আকানো জগতের চরিত্রদের পরিচয় তুলে ধরছি, আর ভিডিও ও ঘোষণার মাধ্যমে পাঠকদের সঙ্গে সংযোগ রাখছি।</p>
- <h2>এই যাত্রায় আপনিও আছেন</h2>
- <p>প্রতিটি পাঠক, প্রতিটি রিভিউ আর প্রতিটি শেয়ার আমাদের এগিয়ে যাওয়ার জ্বালানি। কমিকস পড়ুন, রিভিউ দিন, বন্ধুদের জানান, আর আমাদের ফেসবুক গ্রুপে যোগ দিন। পথটা লম্বা, কিন্তু আমরা হাঁটতে শুরু করেছি।</p>
- <div class=btns><button class=btn data-go=comics>কমিকস পড়ো</button><a class="btn ghost" href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>ফেসবুক গ্রুপে যোগ দিন</a></div>
- <p class=sig>&mdash; আকানো পরিবার</p>
-  <div class=acard><section><small>প্রতিষ্ঠাতা</small><h3>আহমাদ শোয়াইব</h3></section><section><small>উদ্যোগ</small><h3>আরডিবি স্টুডিও</h3></section><section><small>সহযোগিতায়</small><h3>ব্লু ওয়াক স্টুডিও</h3></section></div></article>`}
-function library(){
- const k=Object.entries(lib),nw=nowT();
- $('#app').innerHTML=`<div class=sec><h1 class=ct>পারচেজ<span>লাইব্রেরি</span></h1>${k.map(([c,o])=>{const d=Math.ceil((o.e-nw)/864e5);return `<div class=li><span>${esc(o.t)}<br><small style="color:var(--m)">${d>0?bn(d)+' দিন বাকি (মেয়াদ: '+new Date(o.e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'মেয়াদ শেষ'}</small>${prog['c:'+c]&&prog['c:'+c].p>0?'<br><small style="color:var(--m)">পেজ '+bn(prog['c:'+c].p+1)+'/'+bn(prog['c:'+c].n)+' পর্যন্ত পড়েছেন</small>':''}</span>${d>0?`<button class=btn data-lib="${c}">পড়ুন</button>`:''}</div>`}).join('')||'<p class=ld>কোড দিয়ে কেনা কমিকস এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।</p>'}</div>`}
-function toggleFav(el){const[t,id]=el.dataset.fav.split(':'),a=fav[t],i=a.indexOf(id);i<0?a.push(id):a.splice(i,1);LS.set('akFav',fav);document.querySelectorAll('[data-fav="'+el.dataset.fav+'"]').forEach(x=>x.classList.toggle('on',i<0));if($('#favp'))favs()}
-const siteClick=e=>{
- const fv=e.target.closest('[data-fav]');if(fv){toggleFav(fv);return}
- const vi=e.target.closest('[data-vid]');if(vi){const x=vds.find(y=>y.id===vi.dataset.vid);if(x)playVideo(x);return}
- const sr=e.target.closest('[data-series]');if(sr){openSeries(sr.dataset.series);return}
- const ct=e.target.closest('[data-cont]');if(ct){const[k,r]=ct.dataset.cont.split(':');if(k==='f')openFree(r);else redeem(r).then(m=>m&&alert(m)).catch(er=>alert('সংযোগে সমস্যা ('+(er?.code||'error')+')'));return}
- const c=e.target.closest('.card,[data-open]'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]'),h=e.target.closest('[data-ch]');
- if(c)comics[c.dataset.id].free?openFree(c.dataset.id):buy(c.dataset.id);
- if(g){const x=gl[+g.dataset.gi];modal(`<img src="${esc(x.url)}" alt="${esc(x.cap)}" style="width:100%;display:block">${x.cap?`<p>${esc(x.cap)}</p>`:''}`,1)}
- if(l)redeem(l.dataset.lib).then(m=>m&&alert(m)).catch(e=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'));
- if(h){const x=chs.find(y=>y.id===h.dataset.ch);if(x)modal(`<img src="${esc(x.img||x.th)}" alt="${esc(x.name)}" style="width:100%;max-height:60vh;object-fit:contain;border-radius:16px;background:#f6e6ef;display:block"><h2 style="margin-top:14px">${esc(x.name)}</h2>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}${x.app?`<p class=note><b>অ্যাপিয়ারেন্স:</b> ${esc(x.app)}</p>`:''}${x.desc?`<p class=note style="white-space:pre-line">${esc(x.desc)}</p>`:''}${favBtn('h',x.id)}`),favWire()}};
-$('#app').onclick=siteClick;
-$('#app').addEventListener('input',e=>{const t=e.target;if(!t.classList?.contains('asr'))return;const v=t.value.trim().toLowerCase();document.querySelectorAll('#'+t.dataset.for+' .al').forEach(r=>{r.hidden=!r.textContent.toLowerCase().includes(v)})});
-
-// ---------- কেনা ও কোড ----------
-async function openFree(id){try{const[p,cm]=await Promise.all([dat('pages',id),comics[id]?Promise.resolve(comics[id]):dat('comics',id)]);if(p?.urls)read(p.urls,'AKANO',cm?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id,cid:id,by:cm?.creator})}catch(e){alert(errMsg(e))}}
-function buy(id){const c=comics[id];
- modal(`<div class=bh><img src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=bp>${bn(c.price)} টাকা</span><br>${favBtn('c',id)}</div></div>
- <div class=seg id=seg><button class=on data-p=ord>অর্ডার করুন</button><button data-p=cod>কোড আছে</button></div><div id=pord>${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
- <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p></div><div id=pcod hidden><p class=note>ইমেইল বা হোয়াটসঅ্যাপে পাওয়া কোডটি লিখুন।</p><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>পড়ুন</button></div><p id=msg></p></div>`);
- bindGo(id);favWire();
- $('#seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#seg').children].forEach(x=>x.classList.toggle('on',x===b));$('#pord').hidden=b.dataset.p!=='ord';$('#pcod').hidden=b.dataset.p!=='cod'};
- $('#of').onsubmit=async e=>{e.preventDefault();const d={...Object.fromEntries(new FormData(e.target)),comicId:id,comic:c.title,price:c.price,t:Date.now()};
-  $('#om').textContent='পাঠানো হচ্ছে...';
-  try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{method,...r}=d;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}
-   e.target.hidden=true;$('#om').textContent=`অর্ডার জমা হয়েছে! আপনার বাছাই করা মাধ্যমে (${d.method}) আমরা যোগাযোগ করব। পেমেন্ট যাচাইয়ের পর আপনার ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে কমিকসটি মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে।`}
-  catch{$('#om').textContent='অর্ডার সাইটে জমা হয়নি। ইন্টারনেট ও Firestore Rules পরীক্ষা করে আবার চেষ্টা করুন।'}}}
-// একটি কোড একবারই চালু হয়: প্রথম ব্যবহারের ডিভাইসেই বাঁধা পড়ে
-async function redeem(code,id){
- code=code.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');if(!code)return'কোড লিখুন';
- const c=await dat('codes',code);if(!c)return'কোড সঠিক নয়';
- if(id&&c.comicId!==id)return'এই কোড অন্য কমিকসের';
- let dev;try{dev=localStorage.akDev||(localStorage.akDev=Math.random().toString(36).slice(2))}catch{dev=window.__d||(window.__d=Math.random().toString(36).slice(2))}
- const EXP=20*864e5,now=nowT(),le=lib[code],[cd,ca]=String(c.device||'').split('_');let at=+ca||0;
- if(c.device&&cd!==dev)return'এই কোড আগেই ব্যবহার করা হয়েছে';
- if(!at&&le?.e)at=le.e-EXP;
- if(!c.device){at=now;try{await updateDoc(doc(db,'codes',code),{device:dev+'_'+at})}catch(e){if(e?.code==='permission-denied')return'কোডটি সক্রিয় করা যাচ্ছে না। অনুগ্রহ করে helpsrdbstudios@gmail.com এ জানান। (permission-denied)';throw e}}
- if(!at)at=now;
- if(now>at+EXP){lib[code]={t:le?.t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}return'এই কোডের ২০ দিনের মেয়াদ শেষ হয়ে গেছে'}
- const pg=(await dat('pages',c.comicId))?.urls,t=(await dat('comics',c.comicId))?.title;
- if(!pg)return'কমিকসটি পাওয়া যায়নি';
- lib[code]={t:t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}
- $('#m').classList.remove('on');read(pg,code,t,{k:'c',ref:code,cid:c.comicId});return''}
-
-// ---------- সুরক্ষিত পাঠক ----------
-let z=1;
-let rio,rtk;
-function paint(w,u,key){const im=new Image();
- im.onload=()=>{if(!live())return;const c=w.firstChild,k=Math.min(1,1600/im.naturalWidth),W=Math.round(im.naturalWidth*k),H=Math.round(im.naturalHeight*k);
-  c.width=W;c.height=H;w.style.aspectRatio=W+'/'+H;const x=c.getContext('2d');x.drawImage(im,0,0,W,H);w.dataset.on=1;const ar=(asp[key]=asp[key]||[]),r=+(W/H).toFixed(4),i=+w.dataset.i;if(ar[i]!==r){ar[i]=r;clearTimeout(paint.t);paint.t=setTimeout(()=>LS.set('akAsp',asp),900)}};
- im.onerror=()=>{delete w.dataset.ld};im.src=u}
-function read(pg,code,title,meta){meta=meta||{k:'c',ref:code};const key=meta.k+':'+meta.ref,pr=prog[key],rs=pr&&pr.p>0&&pr.p<pg.length?pr.p:0;
- const free=meta.k==='f',by=esc(meta.by||'আকানো (আরডিবি স্টুডিও)'),wl=free?['কমিকসের স্ক্রিনশট বা স্ক্রিন রেকর্ড করা যাবে না।',`শেয়ার বা পোস্ট করলে সেখানে অবশ্যই ক্রিয়েটরের নাম উল্লেখ করতে হবে: <b>${by}</b>।`,'ক্রেডিট ছাড়া শেয়ার করলে বা নিজের নামে চালালে আইনানুগ ব্যবস্থা নেওয়া হবে।']:['এই কমিকস শুধু আপনার ডিভাইসে, কোডের মেয়াদ পর্যন্ত পড়ার জন্য।','স্ক্রিনশট, স্ক্রিন রেকর্ড, কপি, শেয়ার বা কোড অন্য কাউকে দেওয়া সম্পূর্ণ নিষিদ্ধ।','নিয়ম ভাঙলে কোড বাতিল করা হবে এবং আইনানুগ শাস্তির ব্যবস্থা নেওয়া হবে।'];
- modal(`<div class=wr>${ic('alert')}<h2>সতর্কতা</h2></div><div class=wc><b>${free?'ফ্রি কমিকস পড়ার আগে জেনে নিন:':'এই কমিকস পড়ার আগে জেনে নিন:'}</b><ul>${wl.map(t=>`<li>${t}</li>`).join('')}</ul></div>${code!=='AKANO'?'<p class=note>এই কমিকস মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে'+(lib[code]?.e?' (মেয়াদ: '+new Date(lib[code].e).toLocaleDateString('bn-BD')+' পর্যন্ত)':'')+', সেখান থেকে যেকোনো সময় পড়তে পারবেন।</p>':''}${meta.cid?`<div style="margin:0 0 12px">${favBtn('c',meta.cid)}</div>`:''}${rs?`<button class="btn full" id=okw>বুঝেছি, পেজ ${bn(rs+1)} থেকে চালিয়ে যান</button><button class="btn full" id=okz style="margin-top:10px;background:#fff;color:#ff007b;border:1.5px solid #ff007b">শুরু থেকে পড়ুন</button>`:`<button class="btn full" id=okw>বুঝেছি, পড়ুন</button>`}`);
- favWire();$('#okw').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,rs)};
- if($('#okz'))$('#okz').onclick=()=>{$('#m').classList.remove('on');openReader(pg,code,title,meta,0)}}
-function openReader(pg,code,title,meta,start){meta=meta||{k:'c',ref:code};start=start||0;const viewId=meta.cid||(meta.k==='f'?meta.ref:'');if(viewId)countView(viewId);const v=$('#v'),key=meta.k+':'+meta.ref,ar=asp[key]||[];z=1;rio?.disconnect();rtk?.disconnect();let cur=start,ready=!start;
- v.innerHTML=`<div class=bar><span>${esc(title||'')}<small id=pn></small></span><span><button data-z="-.25" aria-label="ছোট">&minus;</button><button data-z=".25" aria-label="বড়">+</button><button id=x aria-label="বন্ধ">${ic('x')}</button></span></div><div class=pages>${pg.map((u,i)=>`<div class=pgw data-i=${i}${ar[i]?` style="aspect-ratio:${ar[i]}"`:''}><canvas></canvas></div>`).join('')}</div>${start?`<div class=tst id=tst>পেজ ${bn(start+1)} থেকে চালু হয়েছে</div>`:''}`;
- v.classList.add('on');
- const pgs=v.querySelector('.pages'),pn=$('#pn'),show=()=>{pn.textContent=' '+bn(cur+1)+'/'+bn(pg.length)},sv=()=>{show();prog[key]={p:cur,n:pg.length,t:title,k:meta.k,ref:meta.ref,cid:meta.cid,at:Date.now()};LS.set('akProg',prog)};
- rio=new IntersectionObserver(es=>es.forEach(e=>{const w=e.target;
-  if(e.isIntersecting){if(!w.dataset.ld){w.dataset.ld=1;paint(w,pg[+w.dataset.i],key)}}
-  else if(w.dataset.ld){const c=w.firstChild;c.width=c.height=1;delete w.dataset.on;delete w.dataset.ld}}),{root:pgs,rootMargin:'1500px 0px'});
- rtk=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&ready){cur=+e.target.dataset.i;sv()}}),{root:pgs,rootMargin:'-45% 0px -45% 0px'});
- v.querySelectorAll('.pgw').forEach(w=>{rio.observe(w);rtk.observe(w)});
- show();if(!start)sv();
- if(start)setTimeout(()=>{v.querySelector('.pgw[data-i="'+start+'"]')?.scrollIntoView({block:'start'});setTimeout(()=>{ready=true},300)},30);
- setTimeout(()=>$('#tst')?.remove(),3200);
- v.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='x'){rio.disconnect();rtk.disconnect();v.classList.remove('on');v.innerHTML=''}else if(b.dataset.z){z=Math.min(3,Math.max(.5,z+ +b.dataset.z));pgs.style.setProperty('--z',z)}}}
-const live=()=>$('#v').classList.contains('on'),hide=b=>$('#v').classList.toggle('blur',b);
-addEventListener('blur',()=>live()&&hide(1));addEventListener('focus',()=>hide(0));
-document.addEventListener('visibilitychange',()=>live()&&hide(document.hidden));
-document.addEventListener('contextmenu',e=>live()&&e.preventDefault());
-const shield=e=>{if(!live())return;const k=(e.key||'').toLowerCase(),c=e.code||'';
- if(k==='printscreen'||c==='PrintScreen'||k==='meta'&&e.shiftKey||((e.ctrlKey||e.metaKey)&&'pscu'.includes(k))||(e.metaKey&&e.shiftKey&&/^Digit[345]$/.test(c))){e.preventDefault();hide(1);navigator.clipboard?.writeText('').catch(()=>{});setTimeout(()=>hide(0),1500)}};
-document.addEventListener('keydown',shield);document.addEventListener('keyup',shield);
-addEventListener('pagehide',()=>live()&&hide(1));addEventListener('pageshow',()=>hide(0));
-
-// ---------- অ্যাডমিন (সাইটের URL এর শেষে #admin দিন) ----------
-const au=getAuth(app);
-const IMGBB='5486f519fe859e46f895428b61090a68';
-const D=(c,i)=>doc(db,c,i),all=async c=>(await getDocs(collection(db,c))).docs.map(d=>({id:d.id,...d.data()}));
-const nowT=()=>{let l=0;try{l=+localStorage.akLast||0}catch{}const t=Math.max(Date.now(),l);try{localStorage.akLast=t}catch{}return t};
-const wa=n=>{let d=String(n||'').replace(/[০-৯]/g,c=>'০১২৩৪৫৬৭৮৯'.indexOf(c)).replace(/\D/g,'');if(d.length===11&&d[0]==='0')d='88'+d;return d};
-const chGet=async()=>{const x=await getDoc(D('site','characters'));return x.exists()?(x.data().list||[]):[]},chSave=l=>setDoc(D('site','characters'),{list:l,t:Date.now()});
-const em=u=>{const v=u.trim().toLowerCase();return v.includes('@')?v:v+'@akano-admin.com'},okUser=u=>/^[a-z0-9_.]{3,20}$/i.test(u.trim());
-let me=null,note='',adm=false,auInit=false;
-const aerr=x=>({'auth/too-many-requests':'অনেকবার ভুল হয়েছে, কিছুক্ষণ পর চেষ্টা করুন','auth/operation-not-supported-in-this-environment':'এই ফাইল সরাসরি ফোন থেকে খুললে লগইন চলে না, সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে','auth/operation-not-allowed':'Firebase এ Email/Password সাইন-ইন চালু করা হয়নি','auth/network-request-failed':'ইন্টারনেট সংযোগ নেই','auth/unauthorized-domain':'এই ডোমেইন Firebase এর Authorized domains এ যোগ করা হয়নি','auth/invalid-credential':'ইউজারনেম বা পাসওয়ার্ড ভুল','auth/user-not-found':'ইউজারনেম বা পাসওয়ার্ড ভুল','auth/wrong-password':'ইউজারনেম বা পাসওয়ার্ড ভুল'}[x.code]||'লগইন হয়নি ('+(x.code||'অজানা ত্রুটি')+')');
-const onAuth=async u=>{if(!adm)return;
- if(!u){me=null;return login()}
- let a,er;try{a=await getDoc(D('admins',u.uid))}catch(e){er=e}
- if(!a?.exists()){note=er?.code==='permission-denied'?'Firestore Rules পাবলিশ করা হয়নি':'এই অ্যাকাউন্টের admins ডকুমেন্ট নেই (Document ID = UID মিলিয়ে দেখুন)';await signOut(au);return}
- note='';me={uid:u.uid,...a.data()};panel()};
-function startAdmin(){if(auInit)onAuth(au.currentUser);else{auInit=true;onAuthStateChanged(au,onAuth)}}
-function openAdmin(){adm=true;tog(0);$('header').style.display='none';$('footer').style.display='none';scrollTo(0,0);$('#app').innerHTML='<p class=ld>লোড হচ্ছে...</p>';startAdmin()}
-function closeAdmin(){adm=false;$('header').style.display='';$('footer').style.display='';$('#app').onclick=siteClick;go('home')}
-
-function login(){
- $('#app').innerHTML=`<form id=lf class=box><h2>অ্যাডমিন লগইন</h2><input name=u placeholder="ইউজারনেম অথবা ইমেইল" autocomplete="username" required><input name=p type=password placeholder="পাসওয়ার্ড" autocomplete="current-password" required><button class=btn>লগইন</button> <button type=button class=lnk id=hm>সাইটে ফিরুন</button><p id=msg>${esc(note||(/^https?:$/.test(location.protocol)?'':'এই ফাইল সরাসরি ফোন থেকে খোলা হয়েছে (content://)। অ্যাডমিন লগইন করতে হলে সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে।'))}</p></form>`;
- $('#hm').onclick=closeAdmin;
- $('#lf').onsubmit=async e=>{e.preventDefault();const f=e.target;$('#msg').textContent='';
-  try{await signInWithEmailAndPassword(au,em(f.u.value),f.p.value)}
-  catch(x){$('#msg').textContent=aerr(x)}}}
-
-const shrink=(f,w=2400,q=.96)=>new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,w/i.width),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(ok,'image/jpeg',q)};i.src=URL.createObjectURL(f)});
-// লোগোর বড় PNG/WebP ফাইল ছোট করে, স্বচ্ছ ব্যাকগ্রাউন্ড বজায় রেখে আপলোড
-const prepareLogo=f=>new Promise((resolve,reject)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{URL.revokeObjectURL(u);const k=Math.min(1,1200/Math.max(i.naturalWidth,i.naturalHeight)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(i.naturalWidth*k));c.height=Math.max(1,Math.round(i.naturalHeight*k));const x=c.getContext('2d');if(!x){reject(new Error('ছবি প্রসেস করা যায়নি'));return}x.drawImage(i,0,0,c.width,c.height);c.toBlob(b=>b?resolve(new File([b],'akano-logo.webp',{type:'image/webp'})):reject(new Error('ছবি ছোট করা যায়নি')),'image/webp',.88)};i.onerror=()=>{URL.revokeObjectURL(u);reject(new Error('এই ছবিটি খোলা যাচ্ছে না। PNG, JPG বা WebP ছবি দিন।'))};i.src=u});
-async function ib(b){const f=new FormData();f.append('image',b);let res;try{res=await fetch('https://api.imgbb.com/1/upload?key='+IMGBB,{method:'POST',body:f});}catch(e){throw new Error('ইন্টারনেট/ImgBB সংযোগ হচ্ছে না। ইন্টারনেট চালু করে আবার চেষ্টা করো।')}let r;try{r=await res.json()}catch(e){throw new Error('ImgBB থেকে সঠিক response আসেনি।')}if(!res.ok||!r.success||!r.data?.url)throw new Error(r.error?.message||('ImgBB upload failed (HTTP '+res.status+'). API key ঠিক আছে কি না দেখো।'));ib.th=r.data.medium?.url||r.data.url;return r.data.url}
-function loadPdf(){return window.pdfjsLib?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=()=>{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';ok()};s.onerror=no;document.head.append(s)})}
-async function pdfPages(file,cb){await loadPdf();const d=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise,out=[];
- for(let i=1;i<=d.numPages;i++){const p=await d.getPage(i),w=p.getViewport({scale:1}).width,vp=p.getViewport({scale:Math.min(2.2,2200/w)}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
-  await p.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;cb(i,d.numPages);
-  const u=await ib(await new Promise(r=>c.toBlob(r,'image/jpeg',.94)));if(i==1)pdfPages.th=ib.th;out.push(u)}
- return out}
-
-function panel(){
- $('#app').innerHTML=`<div class="box adm"><div class=ah><div><h2>স্বাগতম, ${esc(me.name)}</h2><small>অ্যাডমিন প্যানেল</small></div><div class=row><button class=lnk id=hm>সাইট</button><button class=btn id=lo>লগআউট</button></div></div>
-<div class=stats><div class=st><b id=as1>–</b><span>কমিকস</span><small id=as1b></small></div><div class=st><b id=as2>–</b><span>অর্ডার</span></div><div class=st><b id=as3>–</b><span>অব্যবহৃত কোড</span></div><div class=st><b id=as4>–</b><span>অপেক্ষমাণ রিভিউ</span></div><div class=st><b id=as5>–</b><span>ফ্রি কমিকসের ভিউ</span></div></div>
-<nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=video>ভিডিও</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=set>সেটিংস</button></nav>
- <section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label><label><input type=checkbox id=cfh style="width:auto"> হোম পেজে ফিচারড</label>
- <select id=cty><option value=oneshot>ওয়ানশট (একক কমিকস)</option><option value=series>সিরিজ (চলমান, পর্ব আছে)</option></select><input id=csr placeholder="সিরিজের নাম (সিরিজ হলে)"><input id=cep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><input id=ccr placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)">
- <label>কভার ছবি (না দিলে প্রথম পেজ কভার হবে)<input type=file id=cv accept="image/*"></label><label>কমিকসের PDF<input type=file id=cf accept="application/pdf"></label><button class=btn id=ca>আপলোড</button><p id=pr></p></details><div class=ahd><h3>কমিকস তালিকা</h3><input class=asr data-for=cl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=cl></div></section>
-<section class=ap data-tab=orders><div class=ahd><h3>অর্ডার</h3><input class=asr data-for=ol placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=ol></div><details class=apd><summary>কোড তৈরি করুন</summary><select id=cs></select><input id=ce type=email placeholder="ক্রেতার ইমেইল (ঐচ্ছিক)"><button class=btn id=cg>কোড তৈরি করুন</button></details><div class=ahd><h3>কোড তালিকা</h3><input class=asr data-for=kl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=kl></div></section>
-<section class=ap data-tab=chars><details class=apd><summary>নতুন ক্যারেক্টার যোগ করুন</summary><input id=chn placeholder="নাম"><input id=chs placeholder="কোন সিরিজ (যেমন: গর্ডেন্স)"><input id=cha placeholder="অ্যাপিয়ারেন্স (যেমন: প্রথম আবির্ভাব, সংখ্যা ১)"><textarea id=chd placeholder="বিবরণ (ঐচ্ছিক)"></textarea><label>ছবি<input type=file id=chi accept="image/*"></label><button class=btn id=chb>ক্যারেক্টার যোগ করুন</button><p id=chm></p></details><div class=ahd><h3>ক্যারেক্টার তালিকা</h3><input class=asr data-for=chl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=chl></div></section>
-<section class=ap data-tab=media><details class=apd><summary>নতুন ঘোষণা / কনটেস্ট</summary><select id=nt><option>ঘোষণা</option><option>কনটেস্ট</option></select><input id=nh placeholder="শিরোনাম (ব্যানারে নামসহ দেখাবে)"><textarea id=nb placeholder="বিস্তারিত লেখা (ঐচ্ছিক)"></textarea><label>ব্যানার ছবি<input type=file id=ni accept="image/*"></label><input id=nk placeholder="লিংক (ঐচ্ছিক, https://...)"><button class=btn id=na>প্রকাশ করুন</button></details><div class=ahd><h3>ঘোষণা / কনটেস্ট</h3></div><div id=nls></div><details class=apd><summary>গ্যালারিতে ছবি যোগ করুন</summary><input id=gc placeholder="ক্যাপশন (ঐচ্ছিক)"><input type=file id=gi accept="image/*" multiple><button class=btn id=ga>ছবি আপলোড</button><p id=gp></p></details><div class=ahd><h3>গ্যালারি</h3></div><div id=gl></div></section>
-<section class=ap data-tab=video><details class=apd><summary>নতুন ভিডিও যোগ করুন (Vimeo)</summary><input id=vl placeholder="Vimeo লিংক (যেমন: https://vimeo.com/123456789)"><input id=vt placeholder="শিরোনাম (না দিলে Vimeo থেকে নেওয়া হবে)"><textarea id=vd placeholder="বর্ণনা (ঐচ্ছিক)"></textarea><input id=vth placeholder="থাম্বনেইল URL (ঐচ্ছিক, না দিলে Vimeo থেকে আসবে)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vf style="width:auto"> হোম পেজে ফিচারড</label><button class=btn id=vb>ভিডিও যোগ করুন</button><p id=vm></p></details><div class=ahd><h3>ভিডিও তালিকা</h3><input class=asr data-for=vls placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=vls></div></section>
-<section class=ap data-tab=rev><div class=ahd><h3>রিভিউ</h3><input class=asr data-for=rvl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=rvl></div></section>
-<section class=ap data-tab=set><details class=apd><summary>লোগো</summary><p class=note>হেডারে শুধু আপলোড করা লোগো দেখাবে। PNG, JPG, WebP বা GIF ছবি ব্যবহার করতে পারো। স্বচ্ছ ব্যাকগ্রাউন্ডের জন্য PNG/WebP ভালো।</p><input type=file id=lg accept="image/png,image/webp,image/jpeg,image/gif"><button class=btn id=logoUploadBtn>লোগো আপলোড / বদলান</button> <button class=lnk id=lgd>লোগো সরান</button></details><details class=apd><summary>হোম ব্যানার ছবি</summary><p class=note>“দেশি ফিকশন” লেখার নিচে সোজাভাবে দেখাবে। স্বচ্ছ ব্যাকগ্রাউন্ডের PNG/WebP সবচেয়ে ভালো।</p><input type=file id=hb accept="image/*"><button class=btn id=hbb>ব্যানার আপলোড / বদলান</button> <button class=lnk id=hbd>ব্যানার সরান</button></details><div class=ahd><h3>অ্যাডমিনগণ</h3></div><div id=al></div><details class=apd><summary>নতুন অ্যাডমিন যোগ করুন</summary><input id=an placeholder="নাম (যেমন: সাইফুল)"><input id=au placeholder="ইউজারনেম (ইংরেজি, ৩-২০ অক্ষর)"><input id=ap type=password placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="new-password"><button class=btn id=aa>অ্যাডমিন যোগ করুন</button></details><details class=apd><summary>আমার পাসওয়ার্ড</summary><button class=btn id=pw>পাসওয়ার্ড বদলান</button></details></section></div>`;
- refresh.first=true;
- {const showTab=t=>{document.querySelectorAll('.ap').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));document.querySelectorAll('#atabs button').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));try{sessionStorage.akTab=t}catch{}};
-  $('#atabs').onclick=e=>{const b=e.target.closest('button');if(b){showTab(b.dataset.tab);window.scrollTo({top:0,behavior:'smooth'})}};
-  let t0='comics';try{t0=sessionStorage.akTab||'comics'}catch{}if(!document.querySelector('.ap[data-tab="'+t0+'"]'))t0='comics';showTab(t0)}
- $('#lo').onclick=()=>signOut(au);$('#hm').onclick=closeAdmin;
- $('#logoUploadBtn').onclick=async()=>{const f=$('#lg').files[0];if(!f)return alert('ছবি বাছাই করুন');if(!f.type.startsWith('image/'))return alert('একটি image ফাইল বাছাই করুন');try{const url=await ib(f),logo={url,t:Date.now()};await setDoc(D('site','logo'),logo);cacheSet('logo_v2',logo);$('#logo').src=url;$('#logo').hidden=false;$('#flogo').src=url;$('#flogo').hidden=false;$('#fbt').hidden=true;$('#lg').value='';alert('লোগো সেভ হয়েছে')}catch(e){alert('লোগো আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট/API key/ImgBB সংযোগ পরীক্ষা করুন। কিছুক্ষণ পর আবার চেষ্টা করুন।'))}};
-  $('#lgd').onclick=async()=>{if(!confirm('লোগো সরাবেন?'))return;try{await deleteDoc(D('site','logo'));cacheSet('logo_v2',null);$('#logo').hidden=true;$('#logo').removeAttribute('src');$('#flogo').hidden=true;$('#flogo').removeAttribute('src');$('#fbt').hidden=false;alert('লোগো সরানো হয়েছে')}catch{alert('লোগো সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
- $('#hbb').onclick=async()=>{const f=$('#hb').files[0];if(!f)return alert('ব্যানার ছবি বাছাই করুন');try{const url=await ib(f);await setDoc(D('site','homeBanner'),{url,t:Date.now()});$('#hb').value='';alert('হোম ব্যানার সেভ হয়েছে');}catch(e){alert('ব্যানার আপলোড হয়নি: '+(e?.message||'ইন্টারনেট/API key পরীক্ষা করুন'))}};
- $('#hbd').onclick=async()=>{if(!confirm('হোম ব্যানার সরাবেন?'))return;try{await deleteDoc(D('site','homeBanner'));alert('ব্যানার সরানো হয়েছে');}catch{alert('ব্যানার সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
-  $('#ca').onclick=async()=>{const t=$('#ct').value.trim(),f=$('#cf').files[0],p=$('#cp').value,fr=$('#fr').checked;if(!t||!f||(!p&&!fr))return alert('শিরোনাম, দাম (বা ফ্রি টিক) ও PDF দিন');
-  const ty=$('#cty').value,sr=$('#csr').value.trim(),ep=+$('#cep').value||0;if(ty==='series'&&(!sr||!ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-   try{const urls=await pdfPages(f,(i,n)=>$('#pr').textContent=`পেজ ${bn(i)}/${bn(n)} আপলোড হচ্ছে...`),cf=$('#cv').files[0],cover=cf?(await ib(cf),ib.th):pdfPages.th,id=doc(collection(db,'comics')).id;
-    await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,feat:$('#cfh').checked,cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),t:Date.now(),ct:Date.now()});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
-  catch(e){$('#pr').textContent='আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট, ImgBB API key ও Firestore Rules পরীক্ষা করুন')}};
- $('#na').onclick=async()=>{const h=$('#nh').value.trim(),f=$('#ni').files[0];if(!h||!f)return alert('শিরোনাম ও ব্যানার ছবি দিন');
-  try{const img=await ib(f);await setDoc(doc(collection(db,'news')),{type:$('#nt').value,title:h,text:$('#nb').value.trim(),img,link:$('#nk').value.trim(),t:Date.now()});['nh','nb','nk','ni'].forEach(i=>$('#'+i).value='');refresh()}catch{alert('প্রকাশ করা যায়নি')}};
- $('#ga').onclick=async()=>{const fs=[...$('#gi').files];if(!fs.length)return alert('ছবি বাছাই করুন');
-  try{for(let i=0;i<fs.length;i++){$('#gp').textContent=`ছবি ${bn(i+1)}/${bn(fs.length)} আপলোড হচ্ছে...`;const url=await ib(fs[i]);await setDoc(doc(collection(db,'gallery')),{url,th:ib.th,cap:$('#gc').value.trim(),t:Date.now()+i})}
-   $('#gp').textContent='আপলোড সম্পূর্ণ';$('#gc').value='';$('#gi').value='';refresh()}catch{$('#gp').textContent='আপলোড ব্যর্থ'}};
- $('#vb').onclick=async()=>{const u=$('#vl').value.trim(),pp=vmParse(u);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
-  try{$('#vm').textContent='তথ্য আনা হচ্ছে...';const m=await vimeoMeta(u),l=await vdGet();
-   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:$('#vt').value.trim()||m.title||'ভিডিও',desc:$('#vd').value.trim(),vid:pp.vid,h:pp.h,thumb:$('#vth').value.trim()||m.thumb||'',dur:m.dur||0,feat:$('#vf').checked,t:Date.now()});
-   await vdSave(l);['vl','vt','vd','vth'].forEach(i=>$('#'+i).value='');$('#vf').checked=false;$('#vm').textContent='ভিডিও যোগ হয়েছে';refresh()}
-  catch(e){$('#vm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট ও Firestore Rules পরীক্ষা করুন')}};
- $('#chb').onclick=async()=>{const n=$('#chn').value.trim(),f=$('#chi').files[0];if(!n||!f)return alert('নাম ও ছবি দিন');
-  try{$('#chm').textContent='আপলোড হচ্ছে...';const img=await ib(f),th=ib.th,l=await chGet();
-   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:n,series:$('#chs').value.trim(),app:$('#cha').value.trim(),desc:$('#chd').value.trim(),img,th,t:Date.now()});
-   await chSave(l);['chn','chs','cha','chd','chi'].forEach(i=>$('#'+i).value='');$('#chm').textContent='ক্যারেক্টার যোগ হয়েছে';refresh()}
-  catch(e){$('#chm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট, ImgBB ও Firestore Rules পরীক্ষা করুন')}};
- $('#cg').onclick=()=>mk($('#cs').value,$('#ce').value.trim());
- $('#aa').onclick=async()=>{const n=$('#an').value.trim(),u=$('#au').value.trim().toLowerCase(),p=$('#ap').value;
-  if(!n||!okUser(u)||p.length<6)return alert('নাম, সঠিক ইউজারনেম ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
-  try{const s=initializeApp(cfg,'s'+Date.now()),sa=getAuth(s),c=await createUserWithEmailAndPassword(sa,em(u),p);
-   await setDoc(D('admins',c.user.uid),{name:n,user:u,t:Date.now()});await signOut(sa);
-   ['an','au','ap'].forEach(i=>$('#'+i).value='');refresh();alert('অ্যাডমিন যোগ হয়েছে')}
-  catch(x){alert(x.code==='auth/email-already-in-use'?'এই ইউজারনেম আগেই আছে':'যোগ করা যায়নি')}};
- $('#pw').onclick=async()=>{const p=prompt('নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর):');if(!p)return;if(p.length<6)return alert('খুব ছোট');
-  try{await updatePassword(au.currentUser,p);alert('পাসওয়ার্ড বদলেছে')}catch{alert('নিরাপত্তার জন্য লগআউট করে আবার লগইন করে চেষ্টা করুন')}};
- $('#app').onclick=async e=>{const b=e.target.closest('button'),d=b?.dataset;if(!d)return;
-  if(d.vpv){const v=(await vdGet()).find(x=>x.id===d.vpv);if(v)playVideo(v);return}
-  if(d.vdel){if(!confirm('মুছে ফেলবেন?'))return;try{await vdSave((await vdGet()).filter(x=>x.id!==d.vdel));refresh()}catch{alert('মুছা যায়নি')}return}
-   if(d.vft){try{const l=await vdGet(),x=l.find(y=>y.id===d.vft);if(x){x.feat=!x.feat;await vdSave(l);refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
-   if(d.cft){try{const x=await dat('comics',d.cft);if(x){await updateDoc(D('comics',d.cft),{feat:!x.feat,t:Date.now()});refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
-  if(d.ved){const l=await vdGet(),x=l.find(y=>y.id===d.ved);if(x)editVideo(x,l);return}
-  if(d.cdel){if(!confirm('মুছে ফেলবেন?'))return;try{await chSave((await chGet()).filter(x=>x.id!==d.cdel));refresh()}catch{alert('মুছা যায়নি')}return}
-  if(d.ced){const l=await chGet(),x=l.find(y=>y.id===d.ced);if(!x)return alert('তথ্য পাওয়া যায়নি');
-   const nm=prompt('নাম:',x.name);if(nm===null)return;const se=prompt('সিরিজ:',x.series||'');if(se===null)return;const ap=prompt('অ্যাপিয়ারেন্স:',x.app||'');if(ap===null)return;const ds=prompt('বিবরণ:',x.desc||'');if(ds===null)return;const im=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(im===null)return;
-   Object.assign(x,{name:nm.trim()||x.name,series:se.trim(),app:ap.trim(),desc:ds.trim()});if(im.trim()){x.img=im.trim();x.th=im.trim()}
-   try{await chSave(l);refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}return}
-  if(d.apv){try{await updateDoc(D('reviews',d.apv),{approved:true});refresh()}catch{alert('অনুমোদন করা যায়নি—Firestore Rules পরীক্ষা করুন')}return}
-  if(d.del){if(d.del==='admins/'+me.uid)return alert('নিজেকে মুছা যাবে না');
-   if(!confirm('মুছে ফেলবেন?'))return;const[c,i]=d.del.split('/');await deleteDoc(D(c,i));if(d.also)await deleteDoc(D(d.also,i));refresh()}
-  if(d.edit){const [c,i]=d.edit.split('/');const q=await dat(c,i);if(!q)return alert('তথ্য পাওয়া যায়নি');
-   try{
-    if(c==='comics'){editComic(i,q);return}
-    else if(c==='news'){const title=prompt('শিরোনাম:',q.title);if(title===null)return;const body=prompt('বিস্তারিত:',q.text||'');if(body===null)return;const link=prompt('লিংক:',q.link||'');if(link===null)return;await updateDoc(D(c,i),{title:title.trim(),text:body,link:link.trim(),t:Date.now()})}
-    else if(c==='gallery'){const cap=prompt('ক্যাপশন:',q.cap||'');if(cap===null)return;const url=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(url===null)return;const patch={cap:cap.trim(),t:Date.now()};if(url.trim()){patch.url=url.trim();patch.th=url.trim()}await updateDoc(D(c,i),patch)}
-    refresh()
-   }catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}
-  if(d.rs){await updateDoc(D('codes',d.rs),{device:deleteField()});refresh()}
-  if(d.mk)mk(d.mk,d.em)};
- refresh()}
-
-function editComic(id,q){
- const d=document.createElement('dialog');d.className='cedit';
-  d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${q.feat?' checked':''}> হোম পেজে ফিচারড</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><input name=cover placeholder="নতুন কভার ছবির URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
- document.body.appendChild(d);d.showModal();
- const ty=d.querySelector('[name=type]'),fr=d.querySelector('[name=free]'),pi=d.querySelector('[name=price]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on;pi.hidden=fr.checked};tg();ty.onchange=tg;fr.onchange=tg;
- const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
- d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0,fr=!!f.free;
-  if(!fr&&pr<=0)return alert('পেইড করতে দাম দিন (০ এর বেশি)');
-  if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-   const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,feat:!!f.feat,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};if(f.cover.trim())patch.cover=f.cover.trim();
-  try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
-function editVideo(x,l){
- const d=document.createElement('dialog');d.className='cedit';
- d.innerHTML=`<form><h3>ভিডিও এডিট</h3><input name=title value="${esc(x.title)}" required><textarea name=desc placeholder="বর্ণনা">${esc(x.desc||'')}</textarea><input name=link value="https://vimeo.com/${esc(x.vid)}${x.h?'/'+esc(x.h):''}" placeholder="Vimeo লিংক"><input name=thumb value="${esc(x.thumb||'')}" placeholder="থাম্বনেইল URL"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${x.feat?' checked':''}> হোম পেজে ফিচারড</label><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=vcx>বাতিল</button></div></form>`;
- document.body.appendChild(d);d.showModal();
- const cl=()=>{d.close();d.remove()};d.querySelector('#vcx').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
- d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),pp=vmParse(f.link);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
-  Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:f.thumb.trim(),feat:!!f.feat});
-  try{await vdSave(l);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
-async function mk(id,email){if(!id)return alert('কমিকস বাছাই করুন');
- const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
- await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now()});refresh();
- if(email)open(`mailto:${email}?subject=${encodeURIComponent('আকানো! কমিকসের কোড')}&body=${encodeURIComponent(`আপনার কোড: ${code}\nকমিকস: ${comics[id]?.title}\nআকানো সাইটের কমিকসের কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`)}`);else prompt('কোড:',code)}
-
-function toast(m){let t=$('#tos');if(!t){t=document.createElement('div');t.id='tos';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{t.hidden=true},2200)}
-function adminStats(cs,o,k,rv,quiet){const fr=cs.filter(c=>c.free),pend=rv.filter(x=>!x.approved).length;
- $('#as1').textContent=bn(cs.length);$('#as1b').textContent=bn(cs.length-fr.length)+' পেইড · '+bn(fr.length)+' ফ্রি';
- $('#as2').textContent=bn(o.length);$('#as3').textContent=bn(k.filter(x=>!x.device).length);$('#as4').textContent=bn(pend);
- $('#as5').textContent=bn(fr.reduce((t,c)=>t+(c.views||0),0));
- $('#at2').textContent=o.length?bn(o.length):'';$('#at4').textContent=pend?bn(pend):'';
- if(!quiet)toast('আপডেট হয়েছে')}
-async function refresh(){
- const quiet=refresh.first;refresh.first=false;
- ['comics','news','gallery','chars','videos'].forEach(k=>{try{localStorage.removeItem('ak_'+k)}catch{}});
- const[cs,o,k,a,n,g,ch,rv,vd]=await Promise.all([all('comics'),all('orders'),all('codes'),all('admins'),all('news'),all('gallery'),chGet(),all('reviews').catch(()=>[]),vdGet().catch(()=>[])]),by=(x,y)=>(y.t||0)-(x.t||0);
- comics=Object.fromEntries(cs.map(c=>[c.id,c]));
- $('#nls').innerHTML=n.sort(by).map(x=>`<div class=al><img src="${esc(x.img)}" width=48 alt=""><span><b>${esc(x.type)}</b> | ${esc(x.title)}</span><button data-edit="news/${x.id}">এডিট</button><button data-del="news/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#chl').innerHTML=ch.map(x=>`<div class=al><img src="${esc(x.th||x.img)}" width=48 alt=""><span><b>${esc(x.name)}</b> | ${esc(x.series||'-')} | ${esc(x.app||'-')}</span><button data-ced="${esc(x.id)}">এডিট</button><button data-cdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
- vds=[...vd].sort(by);vv=await vviews();
- $('#vls').innerHTML=vds.map(x=>`<div class=al>${x.thumb?`<img src="${esc(x.thumb)}" alt="">`:''}<span><b>${esc(x.title)}</b> | ${x.feat?'ফিচারড':'সাধারণ'} | ভিউ: ${bn(vv[x.id]||0)}</span><button data-vpv="${esc(x.id)}">দেখুন</button><button data-vft="${esc(x.id)}">${x.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-ved="${esc(x.id)}">এডিট</button><button data-vdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#rvl').innerHTML=rv.sort(by).map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${bn(x.rating)}/৫ | ${esc(x.comic||'সাধারণ')} | ${x.approved?'অনুমোদিত':'অপেক্ষমাণ'}<br>${esc(x.text)}</span>${x.approved?'':`<button data-apv="${x.id}">অনুমোদন</button>`}<button data-del="reviews/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al><img src="${esc(x.th)}" width=48 alt=""><span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-cft="${c.id}">${c.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
- $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
- $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(comics[x.comicId]?.title||'মুছে গেছে')} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${new Date(+String(x.device).split('_')[1]+20*864e5).toLocaleDateString('bn-BD')}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
- adminStats(cs,o,k,rv,quiet);
- $('#al').innerHTML=a.map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${esc(x.user)}</span>${x.id===me.uid?'<i>আপনি</i>':`<button data-del="admins/${x.id}">সরান</button>`}</div>`).join('')}
-
-cache('logo_v2',()=>dat('site','logo')).then(l=>{if(l?.url){$('#logo').src=l.url;$('#logo').hidden=false;$('#flogo').src=l.url;$('#flogo').hidden=false;$('#fbt').hidden=true}}).catch(()=>{});
-if(location.hash==='#admin')openAdmin();else go('home');
-</script>
-</body>
-</html>
+ const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
+ let language='en';try{language=localStorage.akLang==='bn'?'bn':'en'}catch{}document.documentElement.lang=language;
+ const LANG_EN=Object.freeze({
+  'অ্যাপ ইনস্টল করুন':'Install app',
+  'আর দেখাবেন না':'Don’t show this again',
+  'কেনা':'Purchased','▶ ভিডিও':'▶ Video','এই কোড অন্য ভিডিওর':'This code belongs to another video','ভিডিওটি পাওয়া যায়নি':'Video not found','কোড দিয়ে কেনা কমিকস ও ভিডিও এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।':'Comics and videos purchased with a code are saved here for 20 days on this device.','এই ভিডিও কিনলে ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'This video will be saved in your Purchase Library for 20 days.',
+  'হোম':'Home','কমিকস':'Comics','ফ্রি':'Free','রিভিউ':'Reviews','ভিডিও':'Videos','আরও':'More','ক্যারেক্টার':'Characters','পারচেজ লাইব্রেরি':'Purchase Library','প্রিয় তালিকা':'Favorites','গ্যালারি':'Gallery','ঘোষণা ও কনটেস্ট':'News & Contests','প্রশ্নোত্তর':'FAQ',
+  'কমিউনিটি ও যোগাযোগ':'Community & Contact','ফেসবুক পেজ':'Facebook Page','ফেসবুক গ্রুপ':'Facebook Group','ইমেইল':'Email','অ্যাডমিন লগইন':'Admin Login','খুঁজুন':'Search','ফিচারড কমিকস':'Featured Comics','ফিচারড ভিডিও':'Featured Videos','সব দেখুন':'See all','শীঘ্রই আসছে':'Coming soon',
+  'কমিকস বা ক্যারেক্টার খুঁজুন...':'Search comics or characters...','কমিকস বা সিরিজ খুঁজুন...':'Search comics or series...','ক্যারেক্টার খুঁজুন...':'Search characters...','কমিকস খুঁজুন':'Search comics','কিছু পাওয়া যায়নি।':'No results found.','এখনো কোনো ঘোষণা নেই।':'No announcements yet.','এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!':'No reviews yet. Be the first to leave one!','রিভিউ দেখানো যাচ্ছে না। ':'Reviews could not be loaded. ',
+  'সব':'All','ওয়ানশট':'One-shot','সিরিজ':'Series','বাংলায়':'In Bangla','পড় কমিকস':'Comics','পেছনে':'Back','পড়ুন':'Read','ফ্রি কমিকস':'Free comic','পেইড':'Paid','টাকা':'BDT','বার দেখা':'views','নতুন':'New',
+  'পাঠকদের':'Readers’','রিভিউ':'Reviews','সাধারণ রিভিউ (আকানো সম্পর্কে)':'General review (about Akano)','আপনার নাম':'Your name','রেটিং':'Rating','আপনার মতামত লিখুন':'Write your review','রিভিউ জমা দিন':'Submit review','ফেসবুক গ্রুপেও রিভিউ দিতে পারেন':'You can also review us in the Facebook group','প্রথম রিভিউ আপনিই দিন!':'Be the first to leave a review!','নাম ও মতামত লিখুন':'Enter your name and review','তারা দিয়ে রেটিং দিন':'Choose a star rating','একটু পরে আবার চেষ্টা করুন':'Please try again shortly','জমা হচ্ছে...':'Submitting...','ধন্যবাদ! অ্যাডমিন অনুমোদনের পর আপনার রিভিউ এখানে দেখা যাবে।':'Thank you! Your review will appear here after admin approval.',
+  'গ্যালারি':'Gallery','ঘোষণা':'Announcements','কনটেস্ট':'Contest','বিস্তারিত দেখুন':'View details','কোনো পর্ব পাওয়া যায়নি।':'No episodes found.','পর্ব ':'Episode ','কিছু পর্ব ফ্রি':'Some episodes free','থেকে':'from',
+  'সতর্কতা':'Notice','ফ্রি কমিকস পড়ার আগে জেনে নিন:':'Before reading this free comic:','এই কমিকস পড়ার আগে জেনে নিন:':'Before reading this comic:','বুঝেছি, পড়ুন':'I understand — read','শুরু থেকে পড়ুন':'Start from the beginning','বন্ধ':'Close','ছোট':'Zoom out','বড়':'Zoom in','পড়া চালিয়ে যান':'Continue reading',
+  'কোড লিখুন':'Enter code','কোড আছে':'Have a code?','অর্ডার করুন':'Place order','কোডের জন্য অর্ডার পাঠান':'Submit order','আপনার ইমেইল (কোডের জন্য যোগাযোগ)':'Your email (for your reading code)','ফোন / বিকাশ নম্বর':'Phone / bKash number','হোয়াটসঅ্যাপ নম্বর':'WhatsApp number','ট্রানজেকশন আইডি (পেমেন্টের পর)':'Transaction ID (after payment)','রিভিউ জমা দেওয়া যায়নি। অনুগ্রহ করে ':'Could not submit the review. Please ',
+  'গল্প বলার ভাষা বদলে দিতে চাই আমরা':'We want to change how stories are told','স্বপ্নটা বড়, আর সেটাই আমাদের শক্তি':'Big dreams are our strength','আকানো মানে শুধু কমিকস নয়':'Akano is more than comics','কেন দেশি গল্প':'Why local stories','আমরা এখন যা করছি':'What we are doing','এই যাত্রায় আপনিও আছেন':'You are part of this journey',
+  'লগইন হয়নি':'Sign-in failed','যাচাই হচ্ছে...':'Checking...','আপলোড':'Upload','সেভ হয়েছে':'Saved','মুছুন':'Delete','এডিট':'Edit','দেখুন':'View','ফিচারড করুন':'Feature','ফিচারড সরান':'Remove featured','সাধারণ':'Standard','ভিউ:':'Views:',
+  'আকানো':'Akano','আরডিবি স্টুডিও':'RDB Studios','পারচেজ':'Purchase','লাইব্রেরি':'Library','সাধারণ জিজ্ঞাসা':'Frequently asked questions','পাঠকদের':'Readers’','ছবি':'Image','অন্যান্য':'Other','দিন বাকি':'days left','মেয়াদ শেষ':'Expired','পেজ ':'Page ','পড়া চালিয়ে যান:':'Continue reading:','শেয়ার বা পোস্ট করলে সেখানে অবশ্যই ক্রিয়েটরের নাম উল্লেখ করতে হবে: ':'If you share or post, credit the creator: ','ক্রেডিট ছাড়া শেয়ার করলে বা নিজের নামে চালালে আইনানুগ ব্যবস্থা নেওয়া হবে।':'Sharing without credit or claiming the work as your own may result in legal action.','কমিকসের স্ক্রিনশট বা স্ক্রিন রেকর্ড করা যাবে না।':'Screenshots and screen recordings are not allowed.','এই কমিকস শুধু আপনার ডিভাইসে, কোডের মেয়াদ পর্যন্ত পড়ার জন্য।':'This comic is for reading on your device until the code expires.','স্ক্রিনশট, স্ক্রিন রেকর্ড, কপি, শেয়ার বা কোড অন্য কাউকে দেওয়া সম্পূর্ণ নিষিদ্ধ।':'Screenshots, screen recordings, copying, sharing, or giving your code to someone else are prohibited.','নিয়ম ভাঙলে কোড বাতিল করা হবে এবং আইনানুগ শাস্তির ব্যবস্থা নেওয়া হবে।':'Violations may result in code cancellation and legal action.',
+  'কীভাবে কমিকস কিনব?':'How do I buy a comic?','কমিকসের কার্ডে ট্যাপ করুন। অর্ডার ফর্মে নাম, ইমেইল, ফোন, হোয়াটসঅ্যাপ নম্বর, পেমেন্টের মাধ্যম ও (পেমেন্টের পর) ট্রানজেকশন আইডি দিয়ে অর্ডার পাঠান।':'Tap a comic card. Enter your name, email, phone, WhatsApp number, payment method, and transaction ID in the order form, then submit it.','কীভাবে টাকা পাঠাব?':'How do I pay?','ফর্মে যে মাধ্যমে (বিকাশ, নগদ, রকেট বা অন্যান্য) টাকা পাঠাতে চান সেটি বেছে নিন। সেই মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।':'Choose a payment method in the form (bKash, Nagad, Rocket, or another option). We will contact you with the payment number.','কোড কীভাবে ও কখন পাব?':'How and when will I receive my code?','পেমেন্ট যাচাইয়ের পর আপনার ইমেইল বা হোয়াটসঅ্যাপে কোড পাঠানো হয়।':'After payment is verified, your code will be sent by email or WhatsApp.','কোড কীভাবে ব্যবহার করব?':'How do I use my code?','কোডের মেয়াদ কত দিন?':'How long is the code valid?','একটি কোড কয়টি ডিভাইসে চলে?':'How many devices can use one code?','ফ্রি কমিকস পড়তে কি কোড লাগে?':'Do free comics need a code?','ওয়ানশট আর সিরিজ কী?':'What is the difference between a one-shot and a series?','পড়া কি মনে থাকে?':'Is my reading progress saved?','স্ক্রিনশট বা শেয়ার করা যাবে?':'Can I take screenshots or share a comic?','সমস্যা হলে কোথায় জানাব?':'Where can I report a problem?','এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!':'No reviews yet. Be the first to leave one!','কমিকস বা ক্যারেক্টারের কার্ডের হার্ট আইকনে ট্যাপ করলে এখানে জমা হবে (এই ডিভাইসে)।':'Tap the heart on a comic or character card to save it here on this device.','কোড দিয়ে কেনা কমিকস এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।':'Comics purchased with a code are saved here for 20 days on this device.','কোনো ঘোষণা নেই':'No announcements','পড় কমিকস':'Read comics','ফেসবুক গ্রুপে যোগ দিন':'Join the Facebook group','আপনার ইমেইল':'Your email','আমি যে মাধ্যমে টাকা পাঠাতে চাই':'Choose a payment method','কোডের জন্য অর্ডার পাঠান':'Submit order for a code','পেমেন্ট যাচাইয়ের পর আপনার ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে।':'Your code will be sent by email or WhatsApp after payment verification.','ইমেইল বা হোয়াটসঅ্যাপে পাওয়া কোডটি লিখুন।':'Enter the code you received by email or WhatsAp
