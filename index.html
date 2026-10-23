@@ -24,11 +24,12 @@ rules_version='2';
 service cloud.firestore{match /databases/{d}/documents{
  function adm(){return request.auth!=null&&exists(/databases/$(d)/documents/admins/$(request.auth.uid));}
  match /site/{x}{allow read:if true;allow write:if adm();}
+ match /vsecure/{x}{allow read,write:if adm();}
  match /comics/{x}{allow read:if true;allow create,delete:if adm();allow update:if adm()||(request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views'])&&request.resource.data.views is int&&request.resource.data.views==resource.data.get('views',0)+1);}
  match /pages/{x}{allow read:if true;allow write:if adm();}
  match /gallery/{x}{allow read:if true;allow write:if adm();}
  match /news/{x}{allow read:if true;allow write:if adm();}
- match /orders/{x}{allow create:if request.resource.data.keys().hasOnly(['name','email','phone','whatsapp','method','trx','comicId','comic','price','t'])&&request.resource.data.name is string&&request.resource.data.name.size()<200;allow read,update,delete:if adm();}
+ match /orders/{x}{allow create:if request.resource.data.keys().hasOnly(['name','email','phone','whatsapp','method','lang','trx','comicId','comic','price','t'])&&request.resource.data.name is string&&request.resource.data.name.size()<200;allow read,update,delete:if adm();}
  match /codes/{c}{allow get:if true;allow list,create,delete:if adm();
   allow update:if adm()||(!('device' in resource.data)&&request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device'])&&request.resource.data.device is string&&request.resource.data.device.size()<80);}
  match /reviews/{x}{allow read:if resource.data.approved==true||adm();allow create:if request.resource.data.keys().hasOnly(['name','rating','text','comic','approved','t'])&&request.resource.data.approved==false&&request.resource.data.rating is int&&request.resource.data.rating>=1&&request.resource.data.rating<=5&&request.resource.data.name is string&&request.resource.data.name.size()>0&&request.resource.data.name.size()<=60&&request.resource.data.text is string&&request.resource.data.text.size()>0&&request.resource.data.text.size()<=500&&request.resource.data.comic is string&&request.resource.data.comic.size()<=120;allow update,delete:if adm();}
@@ -852,6 +853,73 @@ html[lang] body .adm,html[lang] body .adm *,html[lang] body #lf,html[lang] body 
 @media(orientation:landscape){#vp .sk,#vp #vpt{display:inline-flex}}
 #vp:fullscreen .sk,#vp:-webkit-full-screen .sk,#vp:fullscreen #vpt,#vp:-webkit-full-screen #vpt{display:inline-flex}
 #vp .sk .ic{width:28px;height:28px}
+
+.emp.e-ok{--ei:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA5NiA5NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48Y2lyY2xlIGN4PSc0OCcgY3k9JzQ4JyByPSczMCcvPjxwYXRoIGQ9J00zNSA0OWw5IDkgMTctMTknLz48cGF0aCBkPSdNNzYgMTRsMiA2IDYgMi02IDItMiA2LTItNi02LTIgNi0yeicvPjwvc3ZnPg==")}
+/* ===== clean purchase page ===== */
+.pc-top{display:flex;gap:14px;align-items:center;margin:2px 0 14px}
+.pc-top img{flex:0 0 84px;width:84px;aspect-ratio:3/4;object-fit:cover;border-radius:12px;box-shadow:0 12px 20px -12px #0007}
+.pc-top img.v{flex:0 0 132px;width:132px;aspect-ratio:16/9}
+.pc-top>div{flex:1;min-width:0;overflow-wrap:anywhere}
+.pc-ty{display:inline-block;margin-bottom:6px;padding:2px 10px;border-radius:99px;background:#f4f0f2;color:#6d5362;font-size:12px}
+.pc-top h2{margin:0 0 6px;font-size:19px;line-height:1.3}
+.pc-pr{display:block;font-size:22px;font-weight:700;color:#ff007b;line-height:1.2}
+.pc-how{display:flex;gap:6px;list-style:none;margin:0 0 14px;padding:10px 12px;background:#faf7f9;border-radius:12px;counter-reset:n;font-size:12.5px;color:#6d5362}
+.pc-how li{flex:1;display:flex;align-items:center;gap:6px;counter-increment:n;line-height:1.3}
+.pc-how li:before{content:counter(n,bengali);flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#ffe3f0;color:#b50c62;font-size:11.5px;font-weight:600}
+html[lang=en] .pc-how li:before{content:counter(n,decimal)}
+.pc-f{display:grid;gap:10px}
+.pc-f input:not([type=radio]),.pc-code input{width:100%;min-height:44px;padding:10px 12px;border:0;border-radius:10px;background:#f6f2f5;font-size:14.5px;color:#1a1320;outline:none;box-shadow:none}
+.pc-f input:focus,.pc-code input:focus{box-shadow:0 0 0 2px rgba(255,0,123,.35)}
+.pc-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:420px){.pc-2{grid-template-columns:1fr}}
+.pc-lb{margin:2px 0 -4px;font-size:12.5px;color:#8a7f8b}
+.pc-m{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pc-m label{position:relative;display:block}
+.pc-m input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0}
+.pc-m span{display:block;padding:10px 4px;text-align:center;border-radius:10px;background:#f6f2f5;border:1.5px solid transparent;font-size:14px;color:#4a414d}
+.pc-m input:checked+span{background:#fff0f7;border-color:#ff007b;color:#d90068;font-weight:600}
+.pc-m input:focus-visible+span{box-shadow:0 0 0 2px rgba(255,0,123,.35)}
+.pc-n{margin:0;font-size:12.5px;line-height:1.6;color:#8a7f8b}
+.pc-n:empty{display:none}
+.pc-code{display:flex;gap:8px}
+.pc-code input{flex:1;min-width:0;font-size:16px;letter-spacing:.12em;text-transform:uppercase}
+.pc-ok{text-align:center;padding:10px 4px 6px}
+.pc-ok h3{margin:0 0 6px;font-size:18px}
+.pc-ok p{margin:0;font-size:13.5px;line-height:1.7;color:#6d5362}
+/* video resume */
+.vc .vpg{position:absolute;left:0;bottom:0;height:3px;background:#ff007b;border-radius:0 3px 3px 0;z-index:2}
+#vp .vrs{position:absolute;left:12px;bottom:14px;z-index:4;padding:8px 14px;border:0;border-radius:999px;background:rgba(26,19,32,.8);color:#fff;font-size:13.5px}
+#vp .vrs[hidden]{display:none}
+
+.pc-top .favb{width:38px;height:38px;padding:0;justify-content:center;border-radius:50%;margin-top:8px}
+.pc-top .favb span{display:none}
+.pc-l{grid-template-columns:repeat(2,1fr)}
+
+/* ===== purchase library ===== */
+.lb{max-width:640px;margin:0 auto}
+.lb-list{display:grid;gap:12px;margin-top:14px}
+.lb-card{display:flex;gap:14px;align-items:center;padding:12px;background:#fff;border:1px solid #efe6ed;border-radius:18px;box-shadow:0 10px 24px -20px rgba(26,19,32,.5)}
+.lb-card.end{opacity:.62}
+.lb-th{flex:0 0 64px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#f6f2f5;display:grid;place-items:center;color:#cfc6d0}
+.lb-th.v{flex-basis:96px;aspect-ratio:16/9}
+.lb-th img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-th>.ic{width:28px;height:28px}
+.lb-in{flex:1;min-width:0;display:grid;gap:5px}
+.lb-tp{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lb-k,.lb-d{font-size:11.5px;padding:2px 9px;border-radius:99px;line-height:1.5}
+.lb-k{background:#f4f0f2;color:#6d5362}
+.lb-d{font-weight:600}
+.lb-d.ok{background:#e6f6ec;color:#12803d}
+.lb-d.warn{background:#fff3dc;color:#a76a00}
+.lb-d.bad{background:#ffe5e8;color:#c0243a}
+.lb-d.end{background:#eee;color:#777}
+.lb-t{font-size:16px;line-height:1.35;color:#1a1320;overflow-wrap:anywhere}
+.lb-pg{height:4px;border-radius:99px;background:#f0e9ef;overflow:hidden}
+.lb-pg i{display:block;height:100%;background:#ff007b;border-radius:99px}
+.lb-card small{font-size:12px;line-height:1.4;color:#8a7f8b}
+.lb-go{justify-self:start;min-height:0;margin-top:4px;padding:8px 20px;font-size:14px}
+.lb-note{margin:16px 2px 0;text-align:center;font-size:12.5px;color:#8a7f8b}
+
 </style>
 </head>
 <body>
@@ -867,6 +935,11 @@ const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7
  const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
  let language='en';try{language=localStorage.akLang==='bn'?'bn':'en'}catch{}document.documentElement.lang=language;
  const LANG_EN=Object.freeze({
+  'কমিক':'Comic','কোড দিয়ে কেনা কমিকস ও ভিডিও ২০ দিন এই ডিভাইসে জমা থাকে।':'Comics and videos bought with a code stay on this device for 20 days.',
+  'কোডের মেইল কোন ভাষায় চান?':'Which language should we send the code in?','বাংলা ভাষায়':'Bangla','প্রিয় তালিকা':'Favourites',
+  '⟲ শুরু থেকে দেখুন':'⟲ Watch from start','বিকাশ':'bKash','নগদ':'Nagad','রকেট':'Rocket','অর্ডার পাঠান':'Send order','পেমেন্ট করুন':'Pay','কোড পান':'Get code','অর্ডার জমা হয়েছে!':'Order submitted!',
+  'পেমেন্ট যাচাইয়ের পর ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে কমিকসটি ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'After we verify your payment, the code will be sent by email/WhatsApp. Once you enter it, the comic stays in your Purchase Library for 20 days.',
+  'পেমেন্ট যাচাইয়ের পর ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে ভিডিওটি ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'After we verify your payment, the code will be sent by email/WhatsApp. Once you enter it, the video stays in your Purchase Library for 20 days.',
   '১০ সেকেন্ড পেছনে':'Back 10 seconds','১০ সেকেন্ড সামনে':'Forward 10 seconds','পোর্ট্রেট মোড':'Portrait mode',
   'অ্যাপ ইনস্টল করুন':'Install app',
   'আর দেখাবেন না':'Don’t show this again',
@@ -910,12 +983,15 @@ const textSources=new WeakMap(),attrSources=new WeakMap();
 function englishBase(s,n){
  if(Object.hasOwn(LANG_EN,s))return LANG_EN[s];
  const p=n?.parentElement;
+ if(s.includes('টাকা')&&!p?.closest('.adm,.cedit')){const R=122;/* ১ ডলার = ১২২ টাকা — দাম বদলাতে এই সংখ্যা বদলান */
+  s=s.replace(/(\d+(?:\.\d+)?)\s*টাকা থেকে/g,(m,a)=>'from $'+(a/R).toFixed(2));
+  s=s.replace(/(\d+(?:\.\d+)?)\s*টাকা/g,(m,a)=>'$'+(a/R).toFixed(2)+(p?.classList.contains('pc-pr')?' (৳'+a+')':''))}
  if(p?.classList.contains('mt'))return s.replace(/নতুন/g,'New').replace(/পর্ব\s*/g,'Episode ').replace(/ওয়ানশট/g,'One-shot').replace(/সিরিজ/g,'Series').replace(/ফ্রি/g,'Free').replace(/টাকা/g,'BDT').replace(/বার দেখা/g,'views');
  if(p?.classList.contains('mt2'))return s.replace(/বার দেখা/g,'views');
- if(p?.classList.contains('vpr'))return s.replace(/টাকা/g,'BDT');
+ if(p?.classList.contains('vpr')||p?.classList.contains('pc-pr'))return s.replace(/টাকা/g,'BDT');
  if(p?.matches('.ep .pt'))return s.replace(/ফ্রি/g,'Free').replace(/টাকা/g,'BDT').replace(/পর্ব\s*/g,'Episode ');
  if(p?.matches('.ep b'))return s.replace(/পর্ব\s*/g,'Episode ');
- if(p?.closest('.li'))return s.replace(/দিন বাকি/g,'days left').replace(/মেয়াদ:/g,'Expires:').replace(/মেয়াদ শেষ/g,'Expired').replace(/পেজ /g,'Page ').replace(/পড়েছেন/g,'read').replace(/পর্যন্ত/g,'until');
+ if(p?.closest('.li,.lb-card'))return s.replace(/দিন বাকি/g,'days left').replace(/মেয়াদ:/g,'Expires:').replace(/মেয়াদ শেষ/g,'Expired').replace(/পেজ /g,'Page ').replace(/পড়েছেন/g,'read').replace(/পর্যন্ত/g,'until');
  if(s.startsWith('পড়া চালিয়ে যান:'))return s.replace('পড়া চালিয়ে যান:','Continue reading:').replace(/পেজ /g,'Page ');
  if(s.startsWith('পেজ ')&&s.includes('থেকে চালু হয়েছে'))return s.replace('পেজ ','Page ').replace('থেকে চালু হয়েছে','resumed from');
  return s;
@@ -1129,10 +1205,20 @@ const countVideo=id=>{if(!id)return;const m=LS.get('akVv',{}),n=Date.now();if(m[
   document.querySelectorAll('.vc[data-vid]').forEach(card=>{if(card.dataset.vid===id){const el=card.querySelector('.mt2');if(el)el.innerHTML=ic('eye')+bn(vv[id])}})}).catch(()=>{})};
 const vFmt=t=>{t=Math.round(t||0);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),r=t%60;return bn((h?h+':'+String(m).padStart(2,'0'):m)+':'+String(r).padStart(2,'0'))};
 const vOwnE=id=>Object.entries(lib).find(([c,o])=>o&&o.k==='v'&&o.vid===id&&o.e>nowT()),vPaid=x=>+x.price>0,vLk=x=>vPaid(x)&&!vOwnE(x.id),vBadge=x=>vPaid(x)?`<span class="vpr${vOwnE(x.id)?' own':''}">${vOwnE(x.id)?'কেনা':bn(x.price)+' টাকা'}</span>`:'';
-const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')).toLowerCase())}"><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)}</span></button>`;
+function vSavePos(id,p,d){if(!id)return;const m=LS.get('akVpos',{});if(!d||p<3||p>d-8)delete m[id];else m[id]={p:Math.floor(p),d:Math.floor(d),at:Date.now()};LS.set('akVpos',m);vPgUpd(id)}
+function vPgUpd(id){const r=LS.get('akVpos',{})[id];document.querySelectorAll('.vc[data-vid="'+id+'"] .th').forEach(t=>{let b=t.querySelector('.vpg');if(!r){b?.remove();return}if(!b){b=document.createElement('i');b.className='vpg';t.appendChild(b)}b.style.width=Math.min(100,Math.round(r.p/r.d*100))+'%'})}
+const vPgH=x=>{const r=LS.get('akVpos',{})[x.id];return r?`<i class=vpg style="width:${Math.min(100,Math.round(r.p/r.d*100))}%"></i>`:''};
+const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')).toLowerCase())}"><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)}</span></button>`;
 const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
 async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
-const vdGet=async()=>{const x=await getDoc(D('site','videos'));return x.exists()?(x.data().list||[]):[]},vdSave=l=>setDoc(D('site','videos'),{list:l,t:Date.now()});
+const vdPub=x=>{if(!(+x.price>0))return x;const{vid,h,...r}=x;return r},
+vdGet=async()=>{let x=null;try{x=await getDoc(D('vsecure','list'))}catch{}
+ if(x&&x.exists())return x.data().list||[];
+ const p=await getDoc(D('site','videos')),l=p.exists()?(p.data().list||[]):[];
+ if(l.length)vdSave(l).catch(()=>{});
+ return l},
+vdSave=async l=>{try{await setDoc(D('vsecure','list'),{list:l,t:Date.now()})}catch(e){if(!(e?.code==='permission-denied'&&!l.some(x=>+x.price>0)))throw new Error('Firestore Rules এ vsecure অংশ যোগ করতে হবে (কোডের শুরুর নিয়মগুলো দেখুন)')}
+ await setDoc(D('site','videos'),{list:l.map(vdPub),t:Date.now()})};
 async function videos(){
  const thisRoute=routeVersion;
  const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});
@@ -1142,23 +1228,27 @@ async function videos(){
  $('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.vg .vc').forEach(c=>{c.hidden=!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.vg .vc:not([hidden])')||!vds.length}}
 let vpl=null,vhide=0;
 const loadVimeo=()=>window.Vimeo?Promise.resolve():new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://player.vimeo.com/api/player.js';sc.onload=ok;sc.onerror=no;document.head.appendChild(sc)});
-function closeVP(){const el=$('#vp');if(!el.classList.contains('on'))return;try{vpl?.destroy()}catch{}vpl=null;clearTimeout(vhide);el.classList.remove('on','playing','hide');el.innerHTML='';try{screen.orientation?.unlock?.()}catch{}if(document.fullscreenElement)document.exitFullscreen?.()}
+var vSaver=null;
+function closeVP(){const el=$('#vp');if(!el.classList.contains('on'))return;if(vSaver){try{vSaver()}catch{}vSaver=null}try{vpl?.destroy()}catch{}vpl=null;clearTimeout(vhide);el.classList.remove('on','playing','hide');el.innerHTML='';try{screen.orientation?.unlock?.()}catch{}if(document.fullscreenElement)document.exitFullscreen?.()}
 function openVideo(x){if(!vPaid(x))return playVideo(x);const e=vOwnE(x.id);if(e)return redeem(e[0]).then(m=>m&&alert(m)).catch(er=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(er?.code||'error')+')'));buy('v_'+x.id)}
 async function playVideo(v){
  closeVP();const el=$('#vp');
- el.innerHTML=`<div class=vbar><span>${esc(v.title)}</span><button id=vx aria-label="বন্ধ">${ic('x')}</button></div><div class=vst><iframe id=vif src="https://player.vimeo.com/video/${esc(v.vid)}?${v.h?'h='+esc(v.h)+'&':''}controls=0&title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autopause=0" allow="autoplay; fullscreen; picture-in-picture" tabindex=-1 title="${esc(v.title)}"></iframe><div class=vsh id=vsh></div><button class=vbig id=vbig aria-label="চালান">${ic('tri')}</button></div><div class=vct><button id=vpp aria-label="চালান/থামান">${ic('tri')}</button><button class=sk id=vbk aria-label="১০ সেকেন্ড পেছনে">${ic('bk10')}</button><button class=sk id=vfw aria-label="১০ সেকেন্ড সামনে">${ic('fw10')}</button><input id=vsk type=range min=0 max=1000 value=0 aria-label="সময়"><span id=vtm>০:০০ / ০:০০</span><button id=vmu aria-label="শব্দ">${ic('vol')}</button><button id=vpt aria-label="পোর্ট্রেট মোড">${ic('pt')}</button><button id=vfs aria-label="ফুল স্ক্রিন">${ic('full')}</button></div>`;
+ el.innerHTML=`<div class=vbar><span>${esc(v.title)}</span><button id=vx aria-label="বন্ধ">${ic('x')}</button></div><div class=vst><iframe id=vif src="https://player.vimeo.com/video/${esc(v.vid)}?${v.h?'h='+esc(v.h)+'&':''}controls=0&title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autopause=0" allow="autoplay; fullscreen; picture-in-picture" tabindex=-1 title="${esc(v.title)}"></iframe><div class=vsh id=vsh></div><button class=vbig id=vbig aria-label="চালান">${ic('tri')}</button><button class=vrs id=vrs hidden>⟲ শুরু থেকে দেখুন</button></div><div class=vct><button id=vpp aria-label="চালান/থামান">${ic('tri')}</button><button class=sk id=vbk aria-label="১০ সেকেন্ড পেছনে">${ic('bk10')}</button><button class=sk id=vfw aria-label="১০ সেকেন্ড সামনে">${ic('fw10')}</button><input id=vsk type=range min=0 max=1000 value=0 aria-label="সময়"><span id=vtm>০:০০ / ০:০০</span><button id=vmu aria-label="শব্দ">${ic('vol')}</button><button id=vpt aria-label="পোর্ট্রেট মোড">${ic('pt')}</button><button id=vfs aria-label="ফুল স্ক্রিন">${ic('full')}</button></div>`;
  el.classList.add('on');
  $('#vx').onclick=closeVP;
  try{await loadVimeo()}catch{$('#vtm').textContent='ভিডিও লোড করা যায়নি';return}
  if(!el.classList.contains('on'))return;
-  const pl=new Vimeo.Player($('#vif'));vpl=pl;let dur=0,drag=false,muted=false,counted=false;
+  const pl=new Vimeo.Player($('#vif'));vpl=pl;let dur=0,drag=false,muted=false,counted=false,cur=0,lsv=0;
+ const rp=LS.get('akVpos',{})[v.id];vSaver=()=>vSavePos(v.id,cur,dur);
+ if(rp&&rp.p>3)pl.ready().then(()=>pl.setCurrentTime(rp.p)).then(()=>{const b=$('#vrs');if(b){b.hidden=false;setTimeout(()=>{if(b)b.hidden=true},7000)}}).catch(()=>{});
+ $('#vrs').onclick=()=>{pl.setCurrentTime(0).catch(()=>{});$('#vrs').hidden=true};
  const kick=()=>{el.classList.remove('hide');clearTimeout(vhide);if(el.classList.contains('playing'))vhide=setTimeout(()=>el.classList.add('hide'),2800)};
  const tg=()=>pl.getPaused().then(p=>p?pl.play():pl.pause()).catch(()=>{});
  const paint=(a,b)=>{$('#vtm').textContent=vFmt(a)+' / '+vFmt(b)};
   pl.on('play',()=>{el.classList.add('playing');$('#vpp').innerHTML=ic('pause');if(!counted){counted=true;countVideo(v.id)}kick()});
- pl.on('pause',()=>{last=null;el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
- pl.on('ended',()=>{el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
-  pl.on('timeupdate',e=>{dur=e.duration||dur;if(!drag)$('#vsk').value=dur?Math.round(e.seconds/dur*1000):0;paint(e.seconds,dur)});
+ pl.on('pause',()=>{last=null;vSavePos(v.id,cur,dur);el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
+ pl.on('ended',()=>{cur=0;vSavePos(v.id,0,dur);el.classList.remove('playing');$('#vpp').innerHTML=ic('tri');kick()});
+  pl.on('timeupdate',e=>{dur=e.duration||dur;cur=e.seconds;{const n=Date.now();if(n-lsv>4000){lsv=n;vSavePos(v.id,cur,dur)}}if(!drag)$('#vsk').value=dur?Math.round(e.seconds/dur*1000):0;paint(e.seconds,dur)});
  pl.getDuration().then(d=>{dur=d;paint(0,d)}).catch(()=>{});
  const skip=async d=>{try{const t=await pl.getCurrentTime();await pl.setCurrentTime(Math.max(0,Math.min((dur||1e9)-.2,t+d)))}catch{}kick()};
  let lt=0,ltm=0;
@@ -1176,6 +1266,7 @@ async function playVideo(v){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVP()});
 let vptLock=0;
+addEventListener('pagehide',()=>{if(vSaver)try{vSaver()}catch{}});
 ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{if(!$('#vp')?.classList.contains('on'))return;const f=document.fullscreenElement||document.webkitFullscreenElement;try{if(f)screen.orientation?.lock?.('landscape').catch(()=>{});else if(!vptLock)screen.orientation?.unlock?.()}catch{}}));
 const FBG='https://www.facebook.com/share/g/18VCniWUos/',FBI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
 async function reviews(){
@@ -1241,8 +1332,11 @@ function about(){
  <p class=sig>&mdash; আকানো পরিবার</p>
   <div class=acard><section><small>প্রতিষ্ঠাতা</small><h3>আহমাদ শোয়াইব</h3></section><section><small>উদ্যোগ</small><h3>আরডিবি স্টুডিও</h3></section><section><small>সহযোগিতায়</small><h3>ব্লু ওক স্টুডিও</h3></section></div></article>`}
 function library(){
- const k=Object.entries(lib),nw=nowT();
- $('#app').innerHTML=`<div class=sec><h1 class=ct>পারচেজ<span>লাইব্রেরি</span></h1>${k.map(([c,o])=>{const d=Math.ceil((o.e-nw)/864e5),isV=o.k==='v';return `<div class=li><span>${isV?'<small class=vtag>▶ ভিডিও</small><br>':''}${esc(o.t)}<br><small style="color:var(--m)">${d>0?bn(d)+' দিন বাকি (মেয়াদ: '+dateLabel(o.e)+' পর্যন্ত)':'মেয়াদ শেষ'}</small>${!isV&&prog['c:'+c]&&prog['c:'+c].p>0?'<br><small style="color:var(--m)">পেজ '+bn(prog['c:'+c].p+1)+'/'+bn(prog['c:'+c].n)+' পর্যন্ত পড়েছেন</small>':''}</span>${d>0?`<button class=btn data-lib="${c}">${isV?'দেখুন':'পড়ুন'}</button>`:''}</div>`}).join('')||'<p class="ld emp e-lib">কোড দিয়ে কেনা কমিকস ও ভিডিও এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।</p>'}</div>`}
+ const nw=nowT(),pos=LS.get('akVpos',{}),all=Object.entries(lib).map(([c,o])=>({c,o,d:Math.ceil((o.e-nw)/864e5),v:o.k==='v'})).sort((x,y)=>(y.d>0)-(x.d>0)||y.o.e-x.o.e);
+ const row=({c,o,d,v})=>{const live=d>0,cls=!live?'end':d>7?'ok':d>2?'warn':'bad',pr=v?pos[o.vid]:prog['c:'+c];
+  let pct=0,lab='';if(v&&pr&&pr.d){pct=Math.round(pr.p/pr.d*100);lab=vFmt(pr.p)+' / '+vFmt(pr.d)}else if(!v&&pr&&pr.p>0&&pr.n){pct=Math.min(100,Math.round((pr.p+1)/pr.n*100));lab='পেজ '+bn(pr.p+1)+'/'+bn(pr.n)}
+  return `<article class="lb-card${live?'':' end'}"><div class="lb-th${v?' v':''}">${o.cv?`<img src="${esc(o.cv)}" loading=lazy alt="">`:ic(v?'film':'book')}</div><div class=lb-in><div class=lb-tp><span class=lb-k>${v?'▶ ভিডিও':'কমিক'}</span><span class="lb-d ${cls}">${live?bn(d)+' দিন বাকি':'মেয়াদ শেষ'}</span></div><b class=lb-t>${esc(o.t)}</b>${pct?`<div class=lb-pg><i style="width:${pct}%"></i></div><small>${lab}</small>`:''}<small>মেয়াদ: ${dateLabel(o.e)} পর্যন্ত</small>${live?`<button class="btn lb-go" data-lib="${c}">${v?'দেখুন':'পড়ুন'}</button>`:''}</div></article>`};
+ $('#app').innerHTML=`<div class="sec lb"><h1 class=ct>পারচেজ<span>লাইব্রেরি</span></h1>${all.length?`<div class=lb-list>${all.map(row).join('')}</div><p class=lb-note>কোড দিয়ে কেনা কমিকস ও ভিডিও ২০ দিন এই ডিভাইসে জমা থাকে।</p>`:'<p class="ld emp e-lib">কোড দিয়ে কেনা কমিকস ও ভিডিও এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।</p>'}</div>`}
 function toggleFav(el){const[t,id]=el.dataset.fav.split(':'),a=fav[t],i=a.indexOf(id);i<0?a.push(id):a.splice(i,1);LS.set('akFav',fav);document.querySelectorAll('[data-fav="'+el.dataset.fav+'"]').forEach(x=>x.classList.toggle('on',i<0));if($('#favp'))favs()}
 const siteClick=e=>{
  const fv=e.target.closest('[data-fav]');if(fv){toggleFav(fv);return}
@@ -1260,21 +1354,38 @@ $('#app').addEventListener('input',e=>{const t=e.target;if(!t.classList?.contain
 // ---------- কেনা ও কোড ----------
 async function openFree(id){try{const[p,cm]=await Promise.all([dat('pages',id),comics[id]?Promise.resolve(comics[id]):dat('comics',id)]);if(p?.urls)read(p.urls,'AKANO',cm?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id,cid:id,by:cm?.creator})}catch(e){alert(errMsg(e))}}
 function buy(id){const isV=String(id).startsWith('v_'),vx=isV?vds.find(y=>y.id===id.slice(2)):null,c=isV?(vx&&{title:vx.title,price:vx.price,cover:vx.thumb||''}):comics[id];if(!c)return;
- modal(`<div class=bh><img${isV?' class=v':''} src="${esc(c.cover)}" alt=""><div><h2>${esc(c.title)}</h2><span class=bp>${bn(c.price)} টাকা</span>${isV?'':'<br>'+favBtn('c',id)}</div></div>${isV?'<p class=note>এই ভিডিও কিনলে ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।</p>':''}
- <div class=seg id=seg><button class=on data-p=ord>অর্ডার করুন</button><button data-p=cod>কোড আছে</button></div><div id=pord>${PAY_NOTE?`<p class=note>${esc(PAY_NOTE)}</p>`:''}
- <form id=of><input name=name placeholder="আপনার নাম" required><input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required><select name=method required><option value="" selected disabled>আমি যে মাধ্যমে টাকা পাঠাতে চাই</option><option>বিকাশ</option><option>নগদ</option><option>রকেট</option><option>অন্যান্য</option></select><p class=note id=mn style="margin:0 0 6px;font-size:14px">আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p><input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)"><button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button></form><p id=om></p></div><div id=pcod hidden><p class=note>ইমেইল বা হোয়াটসঅ্যাপে পাওয়া কোডটি লিখুন।</p><div class=row><input id=cc placeholder="কোড লিখুন" autocomplete=off><button class=btn id=go>${isV?'দেখুন':'পড়ুন'}</button></div><p id=msg></p></div>`);
+ const chip=isV?'▶ ভিডিও':(isSer(c)?esc(c.series)+' · পর্ব '+bn(c.ep||1):'ওয়ানশট');
+ modal(`<div class=pc-top><img${isV?' class=v':''} src="${esc(c.cover)}" alt=""><div><span class=pc-ty>${chip}</span><h2>${esc(c.title)}</h2><span class=pc-pr>${bn(c.price)} টাকা</span>${isV?'':favBtn('c',id).replace('<button ','<button aria-label="প্রিয় তালিকা" ')}</div></div>
+ <ol class=pc-how><li>অর্ডার পাঠান</li><li>পেমেন্ট করুন</li><li>কোড পান</li></ol>
+ <div class=seg id=seg><button class=on data-p=ord>অর্ডার করুন</button><button data-p=cod>কোড আছে</button></div>
+ <div id=pord>${PAY_NOTE?`<p class=pc-n>${esc(PAY_NOTE)}</p>`:''}
+  <form class=pc-f id=of>
+   <input name=name placeholder="আপনার নাম" required>
+   <input name=email type=email placeholder="আপনার ইমেইল (কোডের জন্য যোগাযোগ)" required>
+   <div class=pc-2><input name=phone placeholder="ফোন / বিকাশ নম্বর" required><input name=whatsapp type=tel inputmode=tel placeholder="হোয়াটসঅ্যাপ নম্বর" required></div>
+   <span class=pc-lb>আমি যে মাধ্যমে টাকা পাঠাতে চাই</span>
+   <div class=pc-m role=radiogroup>${['বিকাশ','নগদ','রকেট','অন্যান্য'].map((m,i)=>`<label><input type=radio name=method value="${m}"${i?'':' required'}><span>${m}</span></label>`).join('')}</div>
+   <span class=pc-lb>কোডের মেইল কোন ভাষায় চান?</span>
+   <div class="pc-m pc-l" role=radiogroup><label><input type=radio name=lang value=bn${language==='en'?'':' checked'}><span>বাংলা ভাষায়</span></label><label><input type=radio name=lang value=en${language==='en'?' checked':''}><span>English</span></label></div>
+   <input name=trx placeholder="ট্রানজেকশন আইডি (পেমেন্টের পর)">
+   <button class="btn full">কোডের জন্য অর্ডার পাঠান${ic('arrow')}</button>
+   <p class=pc-n>আপনার বাছাই করা মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।</p>
+   <p class=pc-n id=om></p>
+  </form></div>
+ <div id=pcod hidden><p class=pc-n style="margin:0 0 10px">ইমেইল বা হোয়াটসঅ্যাপে পাওয়া কোডটি লিখুন।</p><div class=pc-code><input id=cc placeholder="কোড লিখুন" autocomplete=off autocapitalize=characters><button class=btn id=go>${isV?'দেখুন':'পড়ুন'}</button></div><p class=pc-n id=msg></p></div>`);
  bindGo(id);favWire();
  $('#seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#seg').children].forEach(x=>x.classList.toggle('on',x===b));$('#pord').hidden=b.dataset.p!=='ord';$('#pcod').hidden=b.dataset.p!=='cod'};
  $('#of').onsubmit=async e=>{e.preventDefault();const d={...Object.fromEntries(new FormData(e.target)),comicId:id,comic:(isV?'[ভিডিও] ':'')+c.title,price:c.price,t:Date.now()};
   $('#om').textContent='পাঠানো হচ্ছে...';
-  try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{method,...r}=d;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}
-   e.target.hidden=true;$('#om').textContent=`অর্ডার জমা হয়েছে! আপনার বাছাই করা মাধ্যমে (${d.method}) আমরা যোগাযোগ করব। পেমেন্ট যাচাইয়ের পর আপনার ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে ${isV?'ভিডিওটি':'কমিকসটি'} মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে।`}
+  try{try{await addDoc(collection(db,'orders'),d)}catch(er){if(er?.code!=='permission-denied')throw er;const{lang,...r0}=d;r0.trx=(lang==='en'?'[কোড: English] ':'')+(r0.trx||'');try{await addDoc(collection(db,'orders'),r0)}catch(e2){if(e2?.code!=='permission-denied')throw e2;const{method,...r}=r0;r.trx=(method?'['+method+'] ':'')+(r.trx||'');await addDoc(collection(db,'orders'),r)}}
+   $('#pord').innerHTML=`<div class="pc-ok emp e-ok"><h3>অর্ডার জমা হয়েছে!</h3><p>${isV?'পেমেন্ট যাচাইয়ের পর ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে ভিডিওটি ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'পেমেন্ট যাচাইয়ের পর ইমেইল/হোয়াটসঅ্যাপে কোড পাঠানো হবে। কোড দিলে কমিকসটি ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।'}</p></div>`}
   catch{$('#om').textContent='অর্ডার সাইটে জমা হয়নি। ইন্টারনেট ও Firestore Rules পরীক্ষা করে আবার চেষ্টা করুন।'}}}
 // একটি কোড একবারই চালু হয়: প্রথম ব্যবহারের ডিভাইসেই বাঁধা পড়ে
 async function redeem(code,id){
  code=code.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');if(!code)return'কোড লিখুন';
  const c=await dat('codes',code);if(!c)return'কোড সঠিক নয়';
  if(id&&c.comicId!==id)return String(id).startsWith('v_')?'এই কোড অন্য ভিডিওর':'এই কোড অন্য কমিকসের';
+ if(String(c.comicId||'').startsWith('v_')&&!c.vid)return'এই কোডে ভিডিওর তথ্য নেই। অনুগ্রহ করে নতুন কোডের জন্য যোগাযোগ করুন';
  let dev;try{dev=localStorage.akDev||(localStorage.akDev=Math.random().toString(36).slice(2))}catch{dev=window.__d||(window.__d=Math.random().toString(36).slice(2))}
  const EXP=20*864e5,now=nowT(),le=lib[code],[cd,ca]=String(c.device||'').split('_');let at=+ca||0;
  if(c.device&&cd!==dev)return'এই কোড আগেই ব্যবহার করা হয়েছে';
@@ -1283,11 +1394,11 @@ async function redeem(code,id){
  if(!at)at=now;
  if(now>at+EXP){lib[code]={...(le||{}),t:le?.t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}return'এই কোডের ২০ দিনের মেয়াদ শেষ হয়ে গেছে'}
  if(String(c.comicId||'').startsWith('v_')){const vid=c.comicId.slice(2),v=((await dat('site','videos'))?.list||[]).find(x=>x.id===vid);if(!v)return'ভিডিওটি পাওয়া যায়নি';
-  lib[code]={t:v.title,e:at+EXP,k:'v',vid};try{localStorage.akLib=JSON.stringify(lib)}catch{}
-  $('#m').classList.remove('on');playVideo(v);return''}
- const pg=(await dat('pages',c.comicId))?.urls,t=(await dat('comics',c.comicId))?.title;
+  lib[code]={t:v.title,e:at+EXP,k:'v',vid,cv:v.thumb||''};try{localStorage.akLib=JSON.stringify(lib)}catch{}
+  $('#m').classList.remove('on');playVideo({...v,vid:c.vid,h:c.h||''});return''}
+ const pg=(await dat('pages',c.comicId))?.urls,cm=await dat('comics',c.comicId),t=cm?.title;
  if(!pg)return'কমিকসটি পাওয়া যায়নি';
- lib[code]={t:t||'কমিকস',e:at+EXP};try{localStorage.akLib=JSON.stringify(lib)}catch{}
+ lib[code]={t:t||'কমিকস',e:at+EXP,cv:cm?.cover||''};try{localStorage.akLib=JSON.stringify(lib)}catch{}
  $('#m').classList.remove('on');read(pg,code,t,{k:'c',ref:code,cid:c.comicId});return''}
 
 // ---------- সুরক্ষিত পাঠক ----------
@@ -1436,7 +1547,7 @@ function panel(){
     refresh()
    }catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}
   if(d.rs){await updateDoc(D('codes',d.rs),{device:deleteField()});refresh()}
-  if(d.mk)mk(d.mk,d.em)};
+  if(d.mk)mk(d.mk,d.em,d.ml)};
  refresh()}
 
 function editComic(id,q){
@@ -1458,10 +1569,14 @@ function editVideo(x,l){
  d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),pp=vmParse(f.link);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
   Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:f.thumb.trim(),price:Math.max(0,+f.price||0),feat:!!f.feat});
   try{await vdSave(l);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
-async function mk(id,email){if(!id)return alert('কমিকস বা ভিডিও বাছাই করুন');const isVd=String(id).startsWith('v_'),ttl=isVd?vds.find(y=>y.id===id.slice(2))?.title:comics[id]?.title;
+const ordEn=o=>o.lang==='en'||/\[কোড: English\]/.test(o.trx||'');
+async function mk(id,email,lang){if(!id)return alert('কমিকস বা ভিডিও বাছাই করুন');const isVd=String(id).startsWith('v_'),ttl=isVd?vds.find(y=>y.id===id.slice(2))?.title:comics[id]?.title;
  const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
- await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now()});refresh();
- if(email)open(`mailto:${email}?subject=${encodeURIComponent(isVd?'আকানো! ভিডিওর কোড':'আকানো! কমিকসের কোড')}&body=${encodeURIComponent(isVd?`আপনার কোড: ${code}\nভিডিও: ${ttl}\nআকানো সাইটের ভিডিওর কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`:`আপনার কোড: ${code}\nকমিকস: ${ttl}\nআকানো সাইটের কমিকসের কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`)}`);else prompt('কোড:',code)}
+ let sec={};if(isVd){const v=(await vdGet()).find(y=>y.id===id.slice(2));if(!v||!v.vid)return alert('ভিডিওর Vimeo তথ্য পাওয়া যায়নি');sec={vid:v.vid,h:v.h||''}}
+ await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now(),...sec});refresh();
+ const en=lang==='en',sub=en?(isVd?'AKANO! Your video code':'AKANO! Your comic code'):(isVd?'আকানো! ভিডিওর কোড':'আকানো! কমিকসের কোড'),
+  body=en?`Your code: ${code}\n${isVd?'Video':'Comic'}: ${ttl}\nOn the Akano site, tap the ${isVd?'video':'comic'} card and enter this code under "Have a code?".`:(isVd?`আপনার কোড: ${code}\nভিডিও: ${ttl}\nআকানো সাইটের ভিডিওর কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`:`আপনার কোড: ${code}\nকমিকস: ${ttl}\nআকানো সাইটের কমিকসের কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`);
+ if(email)open(`mailto:${email}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`);else prompt('কোড:',code)}
 
 function toast(m){let t=$('#tos');if(!t){t=document.createElement('div');t.id='tos';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{t.hidden=true},2200)}
 function adminStats(cs,o,k,rv,quiet){const fr=cs.filter(c=>c.free),pend=rv.filter(x=>!x.approved).length;
@@ -1483,7 +1598,7 @@ async function refresh(){
  $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al><img src="${esc(x.th)}" width=48 alt=""><span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-cft="${c.id}">${c.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('')+vds.filter(x=>+x.price>0).map(x=>`<option value="v_${esc(x.id)}">[ভিডিও] ${esc(x.title)}</option>`).join('');
- $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
+ $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | কোডের ভাষা: ${ordEn(x)?'English':'বাংলা ভাষা'} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}" data-ml="${ordEn(x)?'en':'bn'}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
  $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(String(x.comicId).startsWith('v_')?(vds.find(y=>y.id===String(x.comicId).slice(2))?.title?'[ভিডিও] '+vds.find(y=>y.id===String(x.comicId).slice(2)).title:'মুছে গেছে'):(comics[x.comicId]?.title||'মুছে গেছে'))} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${dateLabel(+String(x.device).split('_')[1]+20*864e5)}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
  adminStats(cs,o,k,rv,quiet);
  $('#al').innerHTML=a.map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${esc(x.user)}</span>${x.id===me.uid?'<i>আপনি</i>':`<button data-del="admins/${x.id}">সরান</button>`}</div>`).join('')}
