@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#ff007b">
+<script>try{var __t=localStorage.akTheme;if(__t==="dark"||(!__t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="আকানো">
@@ -985,6 +986,417 @@ html[lang=en] .pc-how li:before{content:counter(n,decimal)}
 .mb.w .gvf p{padding:0;margin:0;flex:1;font-size:14.5px;line-height:1.6}
 .gvf span{flex:none;font-size:12.5px;color:#8a7f8b}
 @media print{#v.on{display:none!important}}
+
+/* ===== home v2 ===== */
+.hsw{position:relative;margin:14px 0 4px;border-radius:22px;overflow:hidden;box-shadow:0 22px 40px -28px rgba(26,19,32,.75)}
+.hsl{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hsl::-webkit-scrollbar{display:none}
+.hsw .hs{height:clamp(270px,68vw,400px)}
+.hsw .hs .tx{padding-bottom:42px}
+.hsw .hs .btn{padding:9px 18px;font-size:14.5px;min-height:0}
+.hsw .hs .btn .ic{width:16px;height:16px}
+.cts{display:flex;align-items:center;gap:12px;width:100%;margin:14px 0 0;padding:10px;text-align:left;border:1px solid #efe6ed;border-radius:18px;background:#fff;box-shadow:0 10px 22px -20px rgba(26,19,32,.6)}
+.cts img,.cts .cts-i{flex:0 0 46px;width:46px;aspect-ratio:3/4;object-fit:cover;border-radius:9px;background:#f6f2f5;display:grid;place-items:center;color:#cfc6d0}
+.cts>div{flex:1;min-width:0;display:grid;gap:4px}
+.cts small{font-size:11.5px;color:#8a7f8b;line-height:1.3}
+.cts b{font-size:15px;line-height:1.3;color:#1a1320;overflow-wrap:anywhere}
+.cts .cts-go{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#ff007b;color:#fff}
+.cts .cts-go .ic{width:16px;height:16px;fill:currentColor;stroke:none}
+.tp{flex:none;display:flex;align-items:flex-end}
+.tpn{flex:none;position:relative;z-index:1;margin-right:-8px;font-size:92px;font-weight:800!important;line-height:.78;letter-spacing:-6px;color:transparent;-webkit-text-stroke:2px #ff007b}
+.tp .card{position:relative;z-index:2}
+
+/* ===== originals, series with videos ===== */
+.orb{position:absolute;left:8px;top:8px;z-index:3;padding:2px 9px;border-radius:99px;background:#1a1320;color:#eeff00;font-size:10.5px;font-weight:700!important;line-height:1.5;letter-spacing:.2px;pointer-events:none}
+.vc .orb{left:auto;right:8px}
+.pc-ty.or{margin-left:6px;background:#1a1320;color:#eeff00}
+.ep.epv .epvt{position:relative;flex:0 0 96px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#f6f2f5}
+.ep.epv .epvt img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0}
+.ep.epv .epvt i{position:absolute;inset:0;display:grid;place-items:center;color:#fff;background:rgba(26,19,32,.3)}
+.ep.epv .epvt i .ic{width:22px;height:22px;fill:currentColor;stroke:none}
+.ep.epv .epvt i.lk .ic{fill:none;stroke:currentColor}
+.ep.epv .lb-k{margin-left:8px}
+.ep .epd{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:normal;font-size:12.5px;line-height:1.5;color:#8a7f8b}
+
+/* ===== DARK MODE (auto-generated) ===== */
+html[data-theme=dark]{color-scheme:dark;--k:#ece7ee;--deep:#f4eff5;--m:#a79fa9;--paper:#0f0e12;--g:#1b1a20;--l:#2b2931;--mint:#3a1a2a}
+html[data-theme=dark] body{background:#0f0e12!important;background-image:none!important;color:#ece7ee}
+html[data-theme=dark] ::placeholder{color:#8f8793}
+html[data-theme=dark] img{filter:brightness(.92)}
+html[data-theme=dark] .sb input,html[data-theme=dark] header input{background:transparent!important}
+html[data-theme=dark] .emp::before{background:#4a4550}
+html[data-theme=dark] .sb input,html[data-theme=dark] header input{border:0!important;outline:0!important;box-shadow:none!important}
+html[data-theme=dark] header{background:#17161b!important;background-image:none!important;border-color:#2b2931!important}
+html[data-theme=dark] footer,html[data-theme=dark] footer.ft{background:#16111b!important;background-image:none!important}
+html[data-theme=dark] .hs img,html[data-theme=dark] .cts img{filter:none}
+#thm{flex:none;display:grid;place-items:center;width:34px;height:34px;margin:0 8px 0 0;padding:0;border:1px solid #dce2d9;border-radius:50%;background:#fff;color:#102b25;cursor:pointer}
+#thm .ic{width:17px;height:17px}
+html[data-theme=dark] #thm{border-color:#2b2931;background:#1b1a20;color:#f4eff5}
+html[data-theme=dark] body{background:#1d1d1d}
+html[data-theme=dark] #dr{background:#1d1d1d}
+html[data-theme=dark] #dr button:hover,html[data-theme=dark] #dr summary:hover,html[data-theme=dark] #dr a:hover{background:#2b2b2b}
+html[data-theme=dark] #dr #dc{background:#2b2b2b}
+html[data-theme=dark] #dr details a{color:#d1d1d1}
+html[data-theme=dark] .lead{color:#c8c8c8}
+html[data-theme=dark] .lnk:hover{background:#2a2830}
+html[data-theme=dark] .more{background:#1d1d1d}
+html[data-theme=dark] .more:hover{background:#2a2830}
+html[data-theme=dark] .badge.f{background:#2a2830}
+html[data-theme=dark] .gp button{background:#303030}
+html[data-theme=dark] .gal button{background:#303030}
+html[data-theme=dark] .nw p{color:#d1d1d1}
+html[data-theme=dark] .sk{background:linear-gradient(90deg,#2e2e2e 30%,#232323 50%,#2e2e2e 70%)}
+html[data-theme=dark] footer p{color:#c8c8c8}
+html[data-theme=dark] .mb{background:#1d1d1d}
+html[data-theme=dark] .cx{background:#2d2d2d}
+html[data-theme=dark] .note{color:#c8c8c8}
+html[data-theme=dark] input,html[data-theme=dark] select,html[data-theme=dark] textarea{border:1.5px solid #555555;background:#1d1d1d}
+html[data-theme=dark] .box>.row:first-child{background:#2a2830}
+html[data-theme=dark] .box>.row:first-child .lnk{border-color:#383838}
+html[data-theme=dark] .box>.row:first-child .lnk:hover{background:#1d1d1d}
+html[data-theme=dark] .box input,html[data-theme=dark] .box select,html[data-theme=dark] .box textarea{background:#282828}
+html[data-theme=dark] .box input:focus,html[data-theme=dark] .box select:focus,html[data-theme=dark] .box textarea:focus{background:#1d1d1d}
+html[data-theme=dark] .al{background:#262626}
+html[data-theme=dark] .al button{background:#1d1d1d}
+html[data-theme=dark] .al button:hover{background:#2a2830}
+html[data-theme=dark] .al em.u{background:#373737;color:#bebebe}
+html[data-theme=dark] .al em.n{background:#313833;color:#bbd6c4}
+html[data-theme=dark] body{background-image:radial-gradient(ellipse at 92% 8%,rgba(255,216,107,.16),transparent 26%),radial-gradient(ellipse at 0% 36%,rgba(55,63,58,0.42),transparent 25%)}
+html[data-theme=dark] header{background:rgba(36,35,32,0.9);border:1px solid #56503e}
+html[data-theme=dark] #mb{background:#2a2830}
+html[data-theme=dark] #dr #dc{background:#2a2830}
+html[data-theme=dark] .hero:before{background:linear-gradient(145deg,#494741,#323833 75%)}
+html[data-theme=dark] .ey{background:#3f231e;border:1px solid #58423d}
+html[data-theme=dark] .lead{color:#b5bdb9}
+html[data-theme=dark] .lnk{border:1.5px solid #4d594f;background:#242320}
+html[data-theme=dark] .lnk:hover{background:#2a2830}
+html[data-theme=dark] .stk img{border:7px solid #454030}
+html[data-theme=dark] .sx h2 .ic{background:#3b211c}
+html[data-theme=dark] .sub{color:#a6afa9}
+html[data-theme=dark] .more{border:1px solid #485248;background:#1d1d1d}
+html[data-theme=dark] .more:hover{background:#2a2830}
+html[data-theme=dark] .card{background:#1d1d1d;border:1px solid #504f40}
+html[data-theme=dark] .card img{background:#323731}
+html[data-theme=dark] .card:hover{border-color:#45614e}
+html[data-theme=dark] .badge.f{background:#333934;color:#bcd7ca}
+html[data-theme=dark] .ban{background:#1d1d1d;border:1px solid #514f41}
+html[data-theme=dark] .im{background:#31342e}
+html[data-theme=dark] .tag{background:#3c211c}
+html[data-theme=dark] .gp button{background:#31342e}
+html[data-theme=dark] .gal button{background:#31342e}
+html[data-theme=dark] .ab section{border-top:1px solid #4d5144}
+html[data-theme=dark] .mi{border-top:1px solid #4d5144}
+html[data-theme=dark] .li{border-bottom:1px solid #494f43}
+html[data-theme=dark] footer{background:#2a2830}
+html[data-theme=dark] .mb{border:1px solid #56503e}
+html[data-theme=dark] .cx{background:#333731}
+html[data-theme=dark] input,html[data-theme=dark] select,html[data-theme=dark] textarea{border:1px solid #4a5246;background:#1d1d1d}
+html[data-theme=dark] .box>.row:first-child{background:#2a2830}
+html[data-theme=dark] .box input,html[data-theme=dark] .box select,html[data-theme=dark] .box textarea{background:#1d1d1d;border-color:#4a5246}
+html[data-theme=dark] #lf{background:#1d1d1d;border:1px solid #525242}
+html[data-theme=dark] .al{background:#1d1d1d;border:1px solid #4a4f41}
+html[data-theme=dark] .sk{background:linear-gradient(90deg,#31342e 30%,#2d2d28 50%,#31342e 70%)}
+html[data-theme=dark] .tag{background:#3f1e2e}
+html[data-theme=dark] .hero-placeholder{background:linear-gradient(135deg,#3f1e2e,#2d151f);border:1px dashed #6a4a59}
+html[data-theme=dark] .wc{color:#d1d1d1}
+html[data-theme=dark] .sb{background:#1d1d1d;border:1.5px solid #583d49}
+html[data-theme=dark] .favb{background:#1d1d1d}
+html[data-theme=dark] .chp button{border:1.5px solid #583d49;background:#1d1d1d}
+html[data-theme=dark] .fq{background:#1d1d1d;border:1px solid #504f40}
+html[data-theme=dark] .fq p{color:#c8c8c8}
+html[data-theme=dark] .ah small{color:#b5b5b5}
+html[data-theme=dark] .st{background:linear-gradient(135deg,#1d1d1d,#331825);border:1.5px solid #583d49}
+html[data-theme=dark] .st small{color:#b5b5b5}
+html[data-theme=dark] .atabs button{border:1.5px solid #583d49;background:#1d1d1d}
+html[data-theme=dark] .apd{background:#1d1d1d;border:1.5px solid #504f40}
+html[data-theme=dark] .apd[open]{border-color:#583d49}
+html[data-theme=dark] .ap .al{background:#1d1d1d;border:1px solid #4e4c3e}
+html[data-theme=dark] .al button{background:#1d1d1d}
+html[data-theme=dark] .al button[data-del],html[data-theme=dark] .al button[data-cdel]{color:#c19c98}
+html[data-theme=dark] #bn{background:rgba(36,35,32,0.95);border:1.5px solid #583d49}
+html[data-theme=dark] #bn button{color:#bebebe}
+html[data-theme=dark] #sh{background:#242320}
+html[data-theme=dark] #sh .gh{background:#4d4b44}
+html[data-theme=dark] #sh .mg button{border:1.5px solid #523944;background:#1d1d1d;color:#d4e5e2}
+html[data-theme=dark] #sh .mg button:active{background:#3f1e2e}
+html[data-theme=dark] #sh .mc b{color:#b5b5b5}
+html[data-theme=dark] #sh .mc a{background:#1d1d1d;border:1.5px solid #523944}
+html[data-theme=dark] #sh .adb{color:#acacac}
+html[data-theme=dark] .rvc{background:#1d1d1d;border:1px solid #504f40}
+html[data-theme=dark] .chc{background:#1d1d1d;border:1px solid #504f40}
+html[data-theme=dark] .chc:hover{border-color:#6a4a59}
+html[data-theme=dark] .chc img{background:#411f32}
+html[data-theme=dark] #sq{background:#2a2830}
+html[data-theme=dark] .sec>.sb{background:#31262c}
+html[data-theme=dark] .sx h2 .ic{background:#3f1e2e}
+html[data-theme=dark] .card b{color:#e0d7e7}
+html[data-theme=dark] .hs.hb .btn{background:#1d1d1d}
+html[data-theme=dark] .hd i{background:rgba(29,29,29,0.5)}
+html[data-theme=dark] .hd i.on{background:#1d1d1d}
+html[data-theme=dark] .qk button{color:#d1d1d1}
+html[data-theme=dark] .qk button .ic{background:#3f1e2e}
+html[data-theme=dark] .cc .cv{background:#472738}
+html[data-theme=dark] .cc b{color:#e0d7e7}
+html[data-theme=dark] .cc small{color:#b5b5b5}
+html[data-theme=dark] .av img{background:#1d1d1d}
+html[data-theme=dark] .av span{color:#dadada}
+html[data-theme=dark] .card .mt{color:#b0a9ae}
+html[data-theme=dark] #sh .mg button{background:#2f2329}
+html[data-theme=dark] #sh .mc a{background:#2f2329}
+html[data-theme=dark] #serp .sh h1{color:#e0d7e7}
+html[data-theme=dark] #serp .sh p{color:#b0a9ae}
+html[data-theme=dark] .ep{background:#1d1d1d;border:1px solid #4a3d44}
+html[data-theme=dark] .ep b{color:#e0d7e7}
+html[data-theme=dark] .ep small{color:#b0a9ae}
+html[data-theme=dark] .ep .pt{color:#b0a9ae}
+html[data-theme=dark] .seg{background:#31262c}
+html[data-theme=dark] .seg button{color:#b5b5b5}
+html[data-theme=dark] .seg button.on{background:#1d1d1d}
+html[data-theme=dark] .wr .ic{background:#3f1e2e}
+html[data-theme=dark] .wc{background:#2e1622}
+html[data-theme=dark] .wc b{color:#e0d7e7}
+html[data-theme=dark] footer.ft{background:#331825;color:#e0d7e7}
+html[data-theme=dark] footer.ft .fd{color:#beb7bf}
+html[data-theme=dark] footer.ft h4{color:#e0d7e7}
+html[data-theme=dark] footer.ft .fl button{color:#e0d7e7}
+html[data-theme=dark] footer.ft .fb{border-top:1.5px solid #523944;color:#beb7bf}
+html[data-theme=dark] footer.ft .fb a{color:#e0d7e7}
+html[data-theme=dark] .vc .mt2{color:#b0a9ae}
+html[data-theme=dark] .vc b{color:#e0d7e7}
+html[data-theme=dark] footer.ft .fb{border-top-color:rgba(56,56,56,0.14)}
+html[data-theme=dark] .art h1{color:#e0d7e7}
+html[data-theme=dark] .art .lead{color:#cec8d3}
+html[data-theme=dark] .art h2{color:#e0d7e7}
+html[data-theme=dark] .art p{color:#d6d1da}
+html[data-theme=dark] .art blockquote{background:#331825;color:#e0d7e7}
+html[data-theme=dark] .art .btn.ghost{background:#1d1d1d}
+html[data-theme=dark] .art .acard h3{color:#e0d7e7}
+html[data-theme=dark] #langToggle{border:1px solid #4a5246;background:#1d1d1d}
+html[data-theme=dark] .review-kicker{color:#c59eb1}
+html[data-theme=dark] .review-heading .ct{color:#e0d4e5}
+html[data-theme=dark] .review-lead{color:#b3adb5}
+html[data-theme=dark] .review-summary{border:1px solid #5a3f4b;background:linear-gradient(135deg,#321723,#1d1d1d 78%)}
+html[data-theme=dark] .review-score{color:#e1d3e5}
+html[data-theme=dark] .review-summary-copy{color:#b6abb3}
+html[data-theme=dark] .review-form{background:linear-gradient(145deg,#2d151f,#1d1d1d 58%);border:1px solid #563c47}
+html[data-theme=dark] .review-form-header h2{color:#ded3e4}
+html[data-theme=dark] .review-form-header p{color:#b1aab3}
+html[data-theme=dark] .review-label{color:#d5cada}
+html[data-theme=dark] .review-form select,html[data-theme=dark] .review-form input:not([name=website]),html[data-theme=dark] .review-form textarea{border:1px solid #4f444f;background:#1d1d1d;color:#ddd4e2}
+html[data-theme=dark] .review-rating{border:1px solid #553b47;background:#1d1d1d}
+html[data-theme=dark] .review-rating .rt button:hover{background:#321723}
+html[data-theme=dark] .review-social{color:#b3adb5}
+html[data-theme=dark] .review-social a{color:#c59eb1}
+html[data-theme=dark] .review-feedback{color:#c2afba}
+html[data-theme=dark] .review-list-head h2{color:#ded1e4}
+html[data-theme=dark] .review-count{background:#321823;color:#caa7b8}
+html[data-theme=dark] .rvc{border-color:#4b3d4b}
+html[data-theme=dark] .rvc:hover{border-color:#5f424f}
+html[data-theme=dark] .rv-avatar{background:linear-gradient(135deg,#502538,#381a27);color:#ccaabb}
+html[data-theme=dark] .rv-author-info b{color:#ded1e2}
+html[data-theme=dark] .rv-topic{color:#caa7b7 !important}
+html[data-theme=dark] .rvc p{color:#c6bfc8}
+html[data-theme=dark] .review-empty{border:1px dashed #5c404d;background:linear-gradient(145deg,#2d151f,#1d1d1d)}
+html[data-theme=dark] .review-empty h3{color:#dacdde}
+html[data-theme=dark] .review-empty p{color:#aea7b1}
+html[data-theme=dark] .vtag{background:#3f1e2e;color:#c59eb1}
+html[data-theme=dark] .nws{color:#c6bfc8}
+html[data-theme=dark] .rv-top h1.ct{color:#e0d7e7}
+html[data-theme=dark] .rv-sum-row b{color:#e0d7e7}
+html[data-theme=dark] .rv-write{border:1px solid #4d3b49;background:#1d1d1d}
+html[data-theme=dark] .rv-write>summary{color:#c59eb1}
+html[data-theme=dark] .rv-form select,html[data-theme=dark] .rv-form input:not([name=website]),html[data-theme=dark] .rv-form textarea{background:#2f232c;color:#e0d7e7}
+html[data-theme=dark] .rv-msg{color:#c2afba}
+html[data-theme=dark] .rv-card{border-bottom:1px solid #4b3c49}
+html[data-theme=dark] .rv-av{background:#3d1d2c;color:#caa6b8}
+html[data-theme=dark] .rv-meta b{color:#e0d7e7}
+html[data-theme=dark] .rv-card p{color:#c9c1cb}
+html[data-theme=dark] .rv-empty h3{color:#dacdde}
+html[data-theme=dark] .pc-ty{background:#31262c;color:#c2afba}
+html[data-theme=dark] .pc-how{background:#2b1e27;color:#c2afba}
+html[data-theme=dark] .pc-how li:before{background:#3d1d2c;color:#caa6b8}
+html[data-theme=dark] .pc-f input:not([type=radio]),html[data-theme=dark] .pc-code input{background:#2f232c;color:#e0d7e7}
+html[data-theme=dark] .pc-m span{background:#2f232c;color:#c9c1cb}
+html[data-theme=dark] .pc-m input:checked+span{background:#331825;color:#c59eb1}
+html[data-theme=dark] .pc-ok p{color:#c2afba}
+html[data-theme=dark] .lb-card{background:#1d1d1d;border:1px solid #4d3b49}
+html[data-theme=dark] .lb-th{background:#2f232c}
+html[data-theme=dark] .lb-k{background:#31262c;color:#c2afba}
+html[data-theme=dark] .lb-d.ok{background:#2d332f;color:#b7d3c2}
+html[data-theme=dark] .lb-d.warn{background:#33312e;color:#cfc4af}
+html[data-theme=dark] .lb-d.bad{background:#3b1c20;color:#c39aa0}
+html[data-theme=dark] .lb-d.end{background:#303030;color:#acacac}
+html[data-theme=dark] .lb-t{color:#e0d7e7}
+html[data-theme=dark] .lb-pg{background:#392a37}
+html[data-theme=dark] .cedit .cvr img{background:#2f232c}
+html[data-theme=dark] .cedit .cvl{color:#c2afba}
+html[data-theme=dark] .pc-top .favb{background:#331825}
+html[data-theme=dark] .chf button{border:1.5px solid #4d3b49;background:#1d1d1d;color:#c9c1cb}
+html[data-theme=dark] .chh span{background:#31262c;color:#c2afba}
+html[data-theme=dark] .chc{background:#411f32}
+html[data-theme=dark] .cd-img{background:#411f32}
+html[data-theme=dark] .cd-img .favb{background:#1d1d1d}
+html[data-theme=dark] .cd-ap{background:#2b1e27;color:#c9c1cb}
+html[data-theme=dark] .cd-ds{color:#c9c1cb}
+html[data-theme=dark] .wr2-ic{background:#3d1d2c}
+html[data-theme=dark] .wr2 h2{color:#e0d7e7}
+html[data-theme=dark] .wr2-l li{background:#2b1e27;color:#c9c1cb}
+html[data-theme=dark] .wr2-l li i{background:#1d1d1d}
+html[data-theme=dark] .gcn{background:#31262c;color:#c2afba}
+html[data-theme=dark] .gal button{background:#411f32}
+html[data-theme=dark] .gn{background:rgba(29,29,29,0.9);color:#e0d7e7}
+html[data-theme=dark] .cts{border:1px solid #4d3b49;background:#1d1d1d}
+html[data-theme=dark] .cts img,html[data-theme=dark] .cts .cts-i{background:#2f232c}
+html[data-theme=dark] .cts b{color:#e0d7e7}
+html[data-theme=dark] .ep.epv .epvt{background:#2f232c}
+
+/* Dark-mode surface consistency: keep page and shared UI near-black. */
+html[data-theme=dark]{
+ --dark-bg:#090909;
+ --dark-surface:#111111;
+ --dark-raised:#171717;
+ --dark-border:#292929;
+ --dark-text:#f2f2f2;
+ --dark-muted:#aaa;
+}
+html[data-theme=dark],
+html[data-theme=dark] body{
+ background:var(--dark-bg)!important;
+ background-image:none!important;
+ color:var(--dark-text);
+}
+html[data-theme=dark] header,
+html[data-theme=dark] #dr,
+html[data-theme=dark] #bn,
+html[data-theme=dark] #sh,
+html[data-theme=dark] .mb,
+html[data-theme=dark] .apd,
+html[data-theme=dark] .chc,
+html[data-theme=dark] .rvc,
+html[data-theme=dark] .ep,
+html[data-theme=dark] .fq,
+html[data-theme=dark] .cts,
+html[data-theme=dark] .review-form,
+html[data-theme=dark] .review-summary,
+html[data-theme=dark] .review-rating{
+ background:var(--dark-surface)!important;
+ border-color:var(--dark-border)!important;
+}
+html[data-theme=dark] footer,
+html[data-theme=dark] footer.ft{
+ background:var(--dark-bg)!important;
+ background-image:none!important;
+}
+html[data-theme=dark] #bn{
+ box-shadow:0 10px 30px -14px rgba(0,0,0,.8);
+}
+html[data-theme=dark] #sh .mg button,
+html[data-theme=dark] #sh .mc a,
+html[data-theme=dark] .seg,
+html[data-theme=dark] .sec>.sb,
+html[data-theme=dark] .sb,
+html[data-theme=dark] .ep.epv .epvt,
+html[data-theme=dark] .gp button,
+html[data-theme=dark] .gal button{
+ background:var(--dark-raised)!important;
+ border-color:var(--dark-border)!important;
+}
+html[data-theme=dark] input,
+html[data-theme=dark] select,
+html[data-theme=dark] textarea,
+html[data-theme=dark] .review-form select,
+html[data-theme=dark] .review-form input:not([name=website]),
+html[data-theme=dark] .review-form textarea{
+ background:var(--dark-raised)!important;
+ border-color:var(--dark-border)!important;
+ color:var(--dark-text)!important;
+}
+html[data-theme=dark] .vc{
+ background:var(--dark-raised)!important;
+ border:0!important;
+ border-radius:14px;
+ overflow:hidden;
+ padding:0 0 8px;
+}
+html[data-theme=dark] .vc .th{
+ background:#151515;
+ border-radius:14px 14px 0 0;
+}
+html[data-theme=dark] .vc .th img{filter:none}
+html[data-theme=dark] .vc b{color:var(--dark-text)}
+html[data-theme=dark] .vc .mt2{color:var(--dark-muted);padding:0 8px}
+html[data-theme=dark] .card{
+ background:transparent!important;
+ border-color:transparent!important;
+}
+html[data-theme=dark] .card b,
+html[data-theme=dark] .chc b,
+html[data-theme=dark] .ep b,
+html[data-theme=dark] .review-list-head h2,
+html[data-theme=dark] .review-form-header h2{
+ color:var(--dark-text);
+}
+html[data-theme=dark] .card .mt,
+html[data-theme=dark] .vc .mt2,
+html[data-theme=dark] .ep small,
+html[data-theme=dark] .sub,
+html[data-theme=dark] .review-lead{
+ color:var(--dark-muted);
+}
+html[data-theme=dark] .more,
+html[data-theme=dark] #thm,
+html[data-theme=dark] #langToggle{
+ background:var(--dark-surface);
+ border-color:var(--dark-border);
+ color:var(--dark-text);
+}
+html[data-theme=dark] .sb input{
+ background:transparent!important;
+ color:var(--dark-text)!important;
+}
+html[data-theme=dark] .im,
+html[data-theme=dark] .card img,
+html[data-theme=dark] .chc img{
+ background:#151515;
+}
+/* A clearer More dock item and a more useful navigation sheet. */
+#bn #bm{color:#ff007b}
+#bn #bm .ic{
+ box-sizing:border-box;
+ padding:4px;
+ border-radius:10px;
+ background:#ffe0ef;
+ color:#ff007b;
+ transition:background .2s,color .2s,transform .2s;
+}
+#bn #bm:active .ic{transform:scale(.92)}
+#bn #bm.on{background:rgba(255,0,123,.1);color:#ff007b}
+#bn #bm.on .ic{background:#ff007b;color:#fff}
+#sh .sh-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 16px}
+#sh .sh-head h2{margin:2px 0 0;color:#211526;font-size:21px;line-height:1.25}
+#sh #shx{display:grid;place-items:center;flex:none;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:#f6f2f4;color:#514552}
+#sh #shx .ic{width:18px;height:18px}
+#sh .mg{gap:10px}
+#sh .mg button{
+ min-height:84px;
+ border:1px solid #f0e8ed;
+ background:#fff;
+ box-shadow:0 8px 18px -18px rgba(26,19,32,.6);
+ transition:transform .18s,border-color .18s,background .18s,box-shadow .18s;
+}
+#sh .mg button:hover{transform:translateY(-2px);border-color:#ffc2de;background:#fff8fb}
+#sh .mg button .ic{width:25px;height:25px}
+html[data-theme=dark] #bn #bm{color:#ff8aba}
+html[data-theme=dark] #bn #bm .ic{background:#351826;color:#ff8aba}
+html[data-theme=dark] #bn #bm.on .ic{background:#ff007b;color:#fff}
+html[data-theme=dark] #sh .sh-head h2{color:var(--dark-text)}
+html[data-theme=dark] #sh #shx{background:var(--dark-raised);color:var(--dark-text)}
+html[data-theme=dark] #sh .mg button{
+ background:var(--dark-raised)!important;
+ border-color:var(--dark-border)!important;
+ color:var(--dark-text);
+}
+html[data-theme=dark] #sh .mg button:hover{background:#211c21!important;border-color:#543044!important}
 </style>
 </head>
 <body>
@@ -1000,6 +1412,9 @@ const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7
  const PAY_NOTE=''; // পেমেন্ট নির্দেশনা (যেমন বিকাশ নম্বর)
  let language='en';try{language=localStorage.akLang==='bn'?'bn':'en'}catch{}document.documentElement.lang=language;
  const LANG_EN=Object.freeze({
+  'ডার্ক মোড':'Dark mode','লাইট মোড':'Light mode',
+  'আকানো অরিজিনাল':'Akano Original','আকানো অরিজিনাল ভিডিও':'Akano Original Videos',
+  'পড়া চালিয়ে যান':'Continue reading','এখন জনপ্রিয়':'Popular now','ফিচারড':'Featured','পর্ব দেখুন':'View episodes','কিনুন':'Buy',
   'আকানো (আরডিবি স্টুডিও)':'Akano (RDB Studios)','ভিডিও খুঁজুন':'Search videos','ক্যারেক্টার খুঁজুন':'Search characters','আমার তালিকায় যোগ করুন':'Add to My List','আমার তালিকায় আছে':'In My List',
   'শীঘ্রই আসছে।':'Coming soon.','© আকানো-আরডিবি স্টুডিও':'© Akano · RDB Studios','পড়ার আগে নিয়মগুলো জেনে নিন':'Please read these rules before reading','আগেরটি':'Previous','পরেরটি':'Next',
   'ছবি বা লেখা কপি, সেভ বা ডাউনলোড করা যাবে না।':'Images and text cannot be copied, saved or downloaded.',
@@ -1048,7 +1463,7 @@ const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?
 const cache=async(k,f)=>{let c;try{c=JSON.parse(localStorage['ak_'+k])}catch{}if(c&&Date.now()-c.t<6e5)return c.d;try{const d=await f();try{localStorage['ak_'+k]=JSON.stringify({t:Date.now(),d})}catch{}return d}catch(e){if(c)return c.d;throw e}};
 const cacheSet=(k,d)=>{try{localStorage.setItem('ak_'+k,JSON.stringify({t:Date.now(),d}))}catch{}};
 const list=c=>cache(c,async()=>(await tmo(getDocs(collection(db,c)))).docs.map(d=>({id:d.id,...d.data()}))),byT=(a,b)=>(b.t||0)-(a.t||0);
-const I={shield:'<path d="M12 3l8 3v6c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V6z"/><path d="M12 8v5M12 16v.01"/>',noshot:'<path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/><path d="M3 3l18 18"/>',nocopy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/><path d="M3 3l18 18"/>',law:'<path d="M12 4v16M6 20h12M5 7h14M5 7l-2.5 6a3 3 0 005 0zM19 7l-2.5 6a3 3 0 005 0z"/>',bk10:'<path d="M12 5a8 8 0 11-8 8"/><path d="M12 1.5L8 5l4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',fw10:'<path d="M12 5a8 8 0 1 0 8 8"/><path d="M12 1.5L16 5l-4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',pt:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>',dl:'<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',tri:'<path d="M8 5.5v13l11-6.5z"/>',play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>',pause:'<path d="M8 5v14M16 5v14"/>',vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/>',mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',full:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',shelf:'<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="4" width="4" height="16" rx="1"/><path d="M15.2 5.6l3.5-1 3.2 14.6-3.5 1z"/>',panels:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v9M9 12v9"/>',bookmark:'<path d="M6 3h12v18l-6-4.5L6 21z"/>',face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01"/>',grid:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
+const I={moon:'<path d="M21 12.8A8.5 8.5 0 1111.2 3a6.7 6.7 0 009.8 9.8z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',shield:'<path d="M12 3l8 3v6c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V6z"/><path d="M12 8v5M12 16v.01"/>',noshot:'<path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/><path d="M3 3l18 18"/>',nocopy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/><path d="M3 3l18 18"/>',law:'<path d="M12 4v16M6 20h12M5 7h14M5 7l-2.5 6a3 3 0 005 0zM19 7l-2.5 6a3 3 0 005 0z"/>',bk10:'<path d="M12 5a8 8 0 11-8 8"/><path d="M12 1.5L8 5l4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',fw10:'<path d="M12 5a8 8 0 1 0 8 8"/><path d="M12 1.5L16 5l-4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',pt:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>',dl:'<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',tri:'<path d="M8 5.5v13l11-6.5z"/>',play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>',pause:'<path d="M8 5v14M16 5v14"/>',vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/>',mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',full:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',shelf:'<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="4" width="4" height="16" rx="1"/><path d="M15.2 5.6l3.5-1 3.2 14.6-3.5 1z"/>',panels:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v9M9 12v9"/>',bookmark:'<path d="M6 3h12v18l-6-4.5L6 21z"/>',face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01"/>',grid:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
 const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${I[n]}</svg>`;
 const textSources=new WeakMap(),attrSources=new WeakMap();
 function englishBase(s,n){
@@ -1060,6 +1475,8 @@ function englishBase(s,n){
  if(p?.classList.contains('mt'))return s.replace(/নতুন/g,'New').replace(/পর্ব\s*/g,'Episode ').replace(/ওয়ানশট/g,'One-shot').replace(/সিরিজ/g,'Series').replace(/ফ্রি/g,'Free').replace(/টাকা/g,'BDT').replace(/বার দেখা/g,'views');
  if(p?.classList.contains('mt2'))return s.replace(/বার দেখা/g,'views');
  if(p?.classList.contains('gcn'))return s.replace(/ছবি/g,'photos');
+ if(p?.closest('.cts'))return s.replace(/পেজ/g,'Page');
+ if(p?.closest('.hs'))return s.replace(/সিরিজ/g,'Series').replace(/পর্ব/g,'Episodes');
  if(p?.classList.contains('vpr')||p?.classList.contains('pc-pr'))return s.replace(/টাকা/g,'BDT');
  if(p?.matches('.ep .pt'))return s.replace(/ফ্রি/g,'Free').replace(/টাকা/g,'BDT').replace(/পর্ব\s*/g,'Episode ');
  if(p?.matches('.ep b'))return s.replace(/পর্ব\s*/g,'Episode ');
@@ -1117,8 +1534,8 @@ const label=(k,b)=>language==='en'?(NAV_EN[k]||LANG_EN[b]||b):b;
 function renderNavigation(){
  $('#bn').innerHTML=BN.map(([v,t,i])=>`<button data-go=${v} data-bn=${v}>${ic(i)}<span>${label(v,t)}</span></button>`).join('')+`<button id=bm data-bn=more>${ic('grid')}<span>${language==='en'?'More':'আরও'}</span></button>`;
  $('#bm').onclick=()=>tog(!dr.classList.contains('on'));
- dr.innerHTML=`<div class=gh id=gh></div><div class=mg>${MORE.map(([v,t,i])=>`<button data-go=${v}>${ic(i)}<span>${label(v,t)}</span></button>`).join('')}</div><div class=mc><b>${language==='en'?'Community & Contact':'কমিউনিটি ও যোগাযোগ'}</b><a href="https://www.facebook.com/share/1Dakj9PjWA/" target=_blank rel=noopener>${FBX}${language==='en'?'Facebook Page':'ফেসবুক পেজ'}</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>${FBX}${language==='en'?'Facebook Group':'ফেসবুক গ্রুপ'}</a><a href="mailto:helpsrdbstudios@gmail.com">${ic('mail')}${language==='en'?'Email':'ইমেইল'}</a></div>${pwaBtn()}<button class=adb id=ad>${ic('lock')}${language==='en'?'Admin Login':'অ্যাডমিন লগইন'}</button>`;
- $('#gh').onclick=sc.onclick=()=>tog(0);
+ dr.innerHTML=`<div class=gh id=gh></div><div class=sh-head><div><h2>${language==='en'?'Explore more':'আরও দেখুন'}</h2></div><button id=shx type=button aria-label="${language==='en'?'Close':'বন্ধ'}">${ic('x')}</button></div><div class=mg>${MORE.map(([v,t,i])=>`<button data-go=${v}>${ic(i)}<span>${label(v,t)}</span></button>`).join('')}</div><div class=mc><b>${language==='en'?'Community & Contact':'কমিউনিটি ও যোগাযোগ'}</b><a href="https://www.facebook.com/share/1Dakj9PjWA/" target=_blank rel=noopener>${FBX}${language==='en'?'Facebook Page':'ফেসবুক পেজ'}</a><a href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>${FBX}${language==='en'?'Facebook Group':'ফেসবুক গ্রুপ'}</a><a href="mailto:helpsrdbstudios@gmail.com">${ic('mail')}${language==='en'?'Email':'ইমেইল'}</a></div>${pwaBtn()}<button class=adb id=ad>${ic('lock')}${language==='en'?'Admin Login':'অ্যাডমিন লগইন'}</button>`;
+ $('#gh').onclick=sc.onclick=()=>tog(0);$('#shx').onclick=()=>tog(0);
  $('#ad').onclick=()=>openAdmin();
 }
 renderNavigation();
@@ -1171,9 +1588,10 @@ const favLbl=(t,id)=>fav[t].includes(id)?'আমার তালিকায় 
 const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on':''}" data-fav="${t}:${esc(id)}">${ic('bookmark')}<span>${favLbl(t,id)}</span></button>`;
 const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=>{const[t,id]=b.dataset.fav.split(':');toggleFav(b);b.querySelector('span').textContent=favLbl(t,id)});
 const isSer=c=>c.type==='series'&&c.series;
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"><img src="${esc(x.cover)}" loading=lazy alt=""><b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)}</span></button>`;
+const orB=x=>x.orig?'<span class=orb>আকানো অরিজিনাল</span>':'';
+const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><img src="${esc(x.cover)}" loading=lazy alt="">${orB(x)}<b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)}</span></button>`;
 function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.series])return;seen[c.series]=1;out.push({ser:c.series,top:c,eps:l.filter(x=>isSer(x)&&x.series===c.series)})}else out.push({one:c})});return out}
-const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"><img src="${esc(g.top.cover)}" loading=lazy alt=""><b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)}</span></button>`};
+const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${e.some(x=>x.orig)?orB({orig:1}):''}<b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)}</span></button>`};
 const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
@@ -1187,7 +1605,7 @@ const chCard=(x,g)=>`<button class=chc data-ch="${esc(x.id)}" data-s="${esc(x.se
 const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
 async function home(){
  const thisRoute=routeVersion;
- $('#app').innerHTML=`<div class=sec><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:210px;border-radius:14px;margin-top:22px"></div></div></div>`;
+ $('#app').innerHTML=`<div class=sec><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:300px;border-radius:22px;margin-top:14px"></div></div></div>`;
  let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
   if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
   $('#sv').hidden=true;
@@ -1204,20 +1622,25 @@ async function home(){
  const cs=ok(c);
  comics=Object.fromEntries(cs.map(x=>[x.id,x]));
  vds=vr.status==='fulfilled'?[...(vr.value.list||[])].sort(byT):[];
-  const mine=cs.filter(x=>fav.c.includes(x.id)),selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8);
-  try{vv={...vv,...await vviews(featuredVideos.map(x=>x.id))}}catch{}
+  const mine=cs.filter(x=>fav.c.includes(x.id)),selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8),origC=collapse(cs.filter(x=>x.orig)),origV=vds.filter(x=>x.orig).slice(0,8);
+  try{vv={...vv,...await vviews([...featuredVideos,...origV].map(x=>x.id))}}catch{}
   if(thisRoute!==routeVersion)return;
  const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class=rail>${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
- $('#sv').innerHTML=(mine.length?rs('আমার তালিকা','favs',rail(mine,10)):'')+rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):c.status==='rejected'?`<p class="ld emp e-error">${errMsg(c.reason)}<br><br><button class=btn data-go=home>আবার চেষ্টা করুন</button></p>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')
-  +rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
+ const cont=(()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];if(!a)return'';const cv=a.k==='f'?comics[a.ref]?.cover:lib[a.ref]?.cv;return `<button class=cts data-cont="${a.k}:${esc(a.ref)}">${cv?`<img src="${esc(cv)}" alt="">`:`<span class=cts-i>${ic('book')}</span>`}<div><small>পড়া চালিয়ে যান</small><b>${esc(a.t)}</b><div class=lb-pg><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%</i></div><small>পেজ ${bn(a.p+1)}/${bn(a.n)}</small></div><span class=cts-go>${ic('tri')}</span></button>`})(),
+  trend=collapse([...cs].filter(x=>+x.views>0).sort((a,b)=>(+b.views||0)-(+a.views||0))).slice(0,5);
+  $('#sv').innerHTML=cont+(mine.length?rs('আমার তালিকা','favs',rail(mine,10)):'')+(origC.length?rs('আকানো অরিজিনাল','comics',`<div class=rail>${origC.slice(0,10).map(cardOf).join('')}</div>`):'')+(trend.length>=3?rs('এখন জনপ্রিয়','',`<div class=rail>${trend.map((g,i)=>`<div class=tp><span class=tpn>${bn(i+1)}</span>${cardOf(g)}</div>`).join('')}</div>`):'')+rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):c.status==='rejected'?`<p class="ld emp e-error">${errMsg(c.reason)}<br><br><button class=btn data-go=home>আবার চেষ্টা করুন</button></p>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')
+  +(origV.length?rs('আকানো অরিজিনাল ভিডিও','videos',`<div class=rail>${origV.map(vCard).join('')}</div>`):'')+rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
  reveal()}
 async function openSeries(name){
  const thisRoute=++routeVersion;scrollTo(0,0);bnSet(lastShop);$('#app').innerHTML=SK;
- let l=[];try{l=(await list('comics')).filter(c=>isSer(c)&&c.series===name).sort((x,y)=>(+x.ep||0)-(+y.ep||0))}catch(e){if(thisRoute===routeVersion)$('#app').innerHTML=`<p class="ld emp e-error">${errMsg(e)}</p>`;return}
+ let l=[],vl=[],vdAll=[];try{const[cl,vd]=await Promise.all([list('comics'),cache('videos',async()=>(await dat('site','videos'))||{list:[]}).catch(()=>({list:[]}))]);l=cl.filter(c=>isSer(c)&&c.series===name);vdAll=[...((vd&&vd.list)||[])].sort(byT);vl=vdAll.filter(x=>x.series===name)}catch(e){if(thisRoute===routeVersion)$('#app').innerHTML=`<p class="ld emp e-error">${errMsg(e)}</p>`;return}
  if(thisRoute!==routeVersion)return;
- Object.assign(comics,Object.fromEntries(l.map(c=>[c.id,c])));
- const top=l[l.length-1],by=l.find(x=>x.creator)?.creator;
- $('#app').innerHTML=`<div class=sec id=serp><button class=back data-go=${lastShop}>${ic('arrow')}<span>পেছনে</span></button>${l.length?`<div class=sh><img src="${esc(top.cover)}" alt=""><div><h1>${esc(name)}</h1><p>${bn(l.length)} পর্ব${by?' · '+esc(by):''}</p></div></div><div class=eps>${l.map(c=>`<button class=ep data-open data-id="${c.id}"><img src="${esc(c.cover)}" loading=lazy alt=""><div><b>পর্ব ${bn(c.ep||1)}</b><small>${esc(c.title)}</small></div><span class="pt${c.free?' f':''}">${c.free?'ফ্রি':bn(c.price)+' টাকা'}</span></button>`).join('')}</div>`:'<p class="ld emp e-search">কোনো পর্ব পাওয়া যায়নি।</p>'}</div>`}
+ Object.assign(comics,Object.fromEntries(l.map(c=>[c.id,c])));vds=vdAll;
+ const items=[...l.map(x=>({k:'c',x,ep:+x.ep||0})),...vl.map(x=>({k:'v',x,ep:+x.ep||0}))].sort((a,b)=>a.ep-b.ep||(a.x.t||0)-(b.x.t||0)),
+  last=items[items.length-1],cover=last?(last.k==='c'?last.x.cover:last.x.thumb):'',by=l.find(x=>x.creator)?.creator,orig=items.some(i=>i.x.orig);
+ const row=i=>{const x=i.x;if(i.k==='c')return `<button class=ep data-open data-id="${x.id}"><img src="${esc(x.cover)}" loading=lazy alt=""><div><b>পর্ব ${bn(x.ep||1)}</b><small>${esc(x.title)}</small></div><span class="pt${x.free?' f':''}">${x.free?'ফ্রি':bn(x.price)+' টাকা'}</span></button>`;
+  const lk=vLk(x);return `<button class="ep epv" data-vid="${esc(x.id)}"><span class=epvt>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<i class="${lk?'lk':''}">${ic(lk?'lock':'tri')}</i></span><div><b>পর্ব ${bn(x.ep||1)}</b><span class=lb-k>▶ ভিডিও</span><small>${esc(x.title)}</small>${x.desc?`<em class=epd>${esc(x.desc)}</em>`:''}${x.dur?`<small>${vFmt(x.dur)}</small>`:''}</div><span class="pt${vPaid(x)?'':' f'}">${vPaid(x)?bn(x.price)+' টাকা':'ফ্রি'}</span></button>`};
+ $('#app').innerHTML=`<div class=sec id=serp><button class=back data-go=${lastShop}>${ic('arrow')}<span>পেছনে</span></button>${items.length?`<div class=sh>${cover?`<img src="${esc(cover)}" alt="">`:''}<div>${orig?'<span class=orb style="position:static;display:inline-block;margin-bottom:6px">আকানো অরিজিনাল</span>':''}<h1>${esc(name)}</h1><p>${bn(items.length)} পর্ব${by?' · '+esc(by):''}</p></div></div><div class=eps>${items.map(row).join('')}</div>`:'<p class="ld emp e-search">কোনো পর্ব পাওয়া যায়নি।</p>'}</div>`}
 async function shop(){
  const thisRoute=routeVersion;
  const l=(await list('comics')).sort(byT);
@@ -1225,8 +1648,8 @@ async function shop(){
  lastShop='comics';
  comics=Object.fromEntries(l.map(c=>[c.id,c]));
  const body=collapse(l).map(g=>g.ser?serCard(g):cardH(g.one,!!g.one.free)).join('');
- $('#app').innerHTML=`<div class=sec><h1 class=ct>কমিকস</h1><div class=sb>${ic('search')}<input id=q type=search placeholder="কমিকস বা সিরিজ খুঁজুন..." autocomplete=off aria-label="কমিকস খুঁজুন"></div><div class=chp id=chp><button class=on data-t="">সব</button><button data-t=oneshot>ওয়ানশট</button><button data-t=series>সিরিজ</button></div>${body?`<div class=grid>${body}</div>`:'<p class="ld emp e-soon">শীঘ্রই আসছে।</p>'}<p class="ld emp e-search" id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- let ty='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.grid .card').forEach(c=>{c.hidden=(ty&&c.dataset.ty!==ty)||!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.grid .card:not([hidden])')||!l.length};
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>কমিকস</h1><div class=sb>${ic('search')}<input id=q type=search placeholder="কমিকস বা সিরিজ খুঁজুন..." autocomplete=off aria-label="কমিকস খুঁজুন"></div><div class=chp id=chp><button class=on data-t="">সব</button><button data-t=oneshot>ওয়ানশট</button><button data-t=series>সিরিজ</button>${l.some(x=>x.orig)?'<button data-t=orig>আকানো অরিজিনাল</button>':''}</div>${body?`<div class=grid>${body}</div>`:'<p class="ld emp e-soon">শীঘ্রই আসছে।</p>'}<p class="ld emp e-search" id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
+ let ty='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.grid .card').forEach(c=>{c.hidden=(ty==='orig'?!c.dataset.o:(ty&&c.dataset.ty!==ty))||!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.grid .card:not([hidden])')||!l.length};
  $('#q').oninput=ap;$('#chp').onclick=e=>{const b=e.target.closest('button');if(!b)return;ty=b.dataset.t;[...$('#chp').children].forEach(x=>x.classList.toggle('on',x===b));ap()}}
 async function gallery(){
  const thisRoute=routeVersion;
@@ -1283,7 +1706,8 @@ const vOwnE=id=>Object.entries(lib).find(([c,o])=>o&&o.k==='v'&&o.vid===id&&o.e>
 function vSavePos(id,p,d){if(!id)return;const m=LS.get('akVpos',{});if(!d||p<3||p>d-8)delete m[id];else m[id]={p:Math.floor(p),d:Math.floor(d),at:Date.now()};LS.set('akVpos',m);vPgUpd(id)}
 function vPgUpd(id){const r=LS.get('akVpos',{})[id];document.querySelectorAll('.vc[data-vid="'+id+'"] .th').forEach(t=>{let b=t.querySelector('.vpg');if(!r){b?.remove();return}if(!b){b=document.createElement('i');b.className='vpg';t.appendChild(b)}b.style.width=Math.min(100,Math.round(r.p/r.d*100))+'%'})}
 const vPgH=x=>{const r=LS.get('akVpos',{})[x.id];return r?`<i class=vpg style="width:${Math.min(100,Math.round(r.p/r.d*100))}%"></i>`:''};
-const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')).toLowerCase())}"><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)}</span></button>`;
+const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-q="${esc((x.title+' '+(x.desc||'')+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${orB(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${ic('eye')}${bn(vv[x.id]||0)}</span></button>`;
+const vSerCard=g=>{const e=g.eps,t=e[0];return `<button class=vc data-series="${esc(g.ser)}" data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><div class=th>${t.thumb?`<img src="${esc(t.thumb)}" loading=lazy alt="">`:''}<span class=pl>${ic('tri')}</span>${e.some(x=>x.orig)?orB({orig:1}):''}</div><b>${esc(g.ser)}</b><span class=mt2>সিরিজ · ${bn(e.length)} পর্ব</span></button>`};
 const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
 async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
 const vdPub=x=>{if(!(+x.price>0))return x;const{vid,h,...r}=x;return r},
@@ -1299,8 +1723,11 @@ async function videos(){
  const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});
  if(thisRoute!==routeVersion)return;
  vds=[...(d.list||[])].sort(byT);try{vv=await vviews(vds.map(x=>x.id))}catch{}
- $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ভিডিও</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div>${vds.length?`<div class=vg>${vds.map(vCard).join('')}</div>`:'<p class="ld emp e-soon">শীঘ্রই আসছে।</p>'}<p class="ld emp e-search" id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- $('#q').oninput=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.vg .vc').forEach(c=>{c.hidden=!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.vg .vc:not([hidden])')||!vds.length}}
+ lastShop='videos';
+ const vg=[],seenS={};vds.forEach(x=>{if(x.series){if(seenS[x.series])return;seenS[x.series]=1;vg.push({ser:x.series,eps:vds.filter(y=>y.series===x.series)})}else vg.push({one:x})});
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ভিডিও</span></h1><div class=sb>${ic('search')}<input id=q type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div>${vds.some(x=>x.orig)?'<div class=chp id=chp><button class=on data-o="">সব</button><button data-o=1>আকানো অরিজিনাল</button></div>':''}${vds.length?`<div class=vg>${vg.map(g=>g.ser?vSerCard(g):vCard(g.one)).join('')}</div>`:'<p class="ld emp e-soon">শীঘ্রই আসছে।</p>'}<p class="ld emp e-search" id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
+ let of='';const ap=()=>{const v=$('#q').value.trim().toLowerCase();document.querySelectorAll('.vg .vc').forEach(c=>{c.hidden=(of&&!c.dataset.o)||!(c.dataset.q||'').includes(v)});$('#nf').hidden=!!document.querySelector('.vg .vc:not([hidden])')||!vds.length};
+ $('#q').oninput=ap;if($('#chp'))$('#chp').onclick=e=>{const b=e.target.closest('button');if(!b)return;of=b.dataset.o;[...$('#chp').children].forEach(x=>x.classList.toggle('on',x===b));ap()}}
 let vpl=null,vhide=0;
 const loadVimeo=()=>window.Vimeo?Promise.resolve():new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://player.vimeo.com/api/player.js';sc.onload=ok;sc.onerror=no;document.head.appendChild(sc)});
 var vSaver=null;
@@ -1430,9 +1857,9 @@ $('#app').addEventListener('input',e=>{const t=e.target;if(!t.classList?.contain
 
 // ---------- কেনা ও কোড ----------
 async function openFree(id){try{const[p,cm]=await Promise.all([dat('pages',id),comics[id]?Promise.resolve(comics[id]):dat('comics',id)]);if(p?.urls)read(p.urls,'AKANO',cm?.title||prog['f:'+id]?.t||'কমিকস',{k:'f',ref:id,cid:id,by:cm?.creator})}catch(e){alert(errMsg(e))}}
-function buy(id){const isV=String(id).startsWith('v_'),vx=isV?vds.find(y=>y.id===id.slice(2)):null,c=isV?(vx&&{title:vx.title,price:vx.price,cover:vx.thumb||''}):comics[id];if(!c)return;
+function buy(id){const isV=String(id).startsWith('v_'),vx=isV?vds.find(y=>y.id===id.slice(2)):null,c=isV?(vx&&{title:vx.title,price:vx.price,cover:vx.thumb||'',orig:vx.orig}):comics[id];if(!c)return;
  const chip=isV?'▶ ভিডিও':(isSer(c)?esc(c.series)+' · পর্ব '+bn(c.ep||1):'ওয়ানশট');
- modal(`<div class=pc-top><img${isV?' class=v':''} src="${esc(c.cover)}" alt=""><div><span class=pc-ty>${chip}</span><h2>${esc(c.title)}</h2><span class=pc-pr>${bn(c.price)} টাকা</span>${isV?'':favBtn('c',id).replace('<button ','<button aria-label="আমার তালিকা" ')}</div></div>
+ modal(`<div class=pc-top><img${isV?' class=v':''} src="${esc(c.cover)}" alt=""><div><span class=pc-ty>${chip}</span>${c.orig?'<span class="pc-ty or">আকানো অরিজিনাল</span>':''}<h2>${esc(c.title)}</h2><span class=pc-pr>${bn(c.price)} টাকা</span>${isV?'':favBtn('c',id).replace('<button ','<button aria-label="আমার তালিকা" ')}</div></div>
  <ol class=pc-how><li>অর্ডার পাঠান</li><li>পেমেন্ট করুন</li><li>কোড পান</li></ol>
  <div class=seg id=seg><button class=on data-p=ord>অর্ডার করুন</button><button data-p=cod>কোড আছে</button></div>
  <div id=pord>${PAY_NOTE?`<p class=pc-n>${esc(PAY_NOTE)}</p>`:''}
@@ -1556,13 +1983,13 @@ function panel(){
  $('#app').innerHTML=`<div class="box adm"><div class=ah><div><h2>স্বাগতম, ${esc(me.name)}</h2><small>অ্যাডমিন প্যানেল</small></div><div class=row><button class=lnk id=hm>সাইট</button><button class=btn id=lo>লগআউট</button></div></div>
 <div class=stats><div class=st><b id=as1>–</b><span>কমিকস</span><small id=as1b></small></div><div class=st><b id=as2>–</b><span>অর্ডার</span></div><div class=st><b id=as3>–</b><span>অব্যবহৃত কোড</span></div><div class=st><b id=as4>–</b><span>অপেক্ষমাণ রিভিউ</span></div><div class=st><b id=as5>–</b><span>ফ্রি কমিকসের ভিউ</span></div></div>
 <nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=video>ভিডিও</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=set>সেটিংস</button></nav>
- <section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label><label><input type=checkbox id=cfh style="width:auto"> হোম পেজে ফিচারড</label>
+ <section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label><label><input type=checkbox id=cfh style="width:auto"> হোম পেজে ফিচারড</label><label><input type=checkbox id=cor style="width:auto"> আকানো অরিজিনাল</label>
  <select id=cty><option value=oneshot>ওয়ানশট (একক কমিকস)</option><option value=series>সিরিজ (চলমান, পর্ব আছে)</option></select><input id=csr placeholder="সিরিজের নাম (সিরিজ হলে)"><input id=cep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><input id=ccr placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)">
  <label>কভার ছবি (না দিলে প্রথম পেজ কভার হবে)<input type=file id=cv accept="image/*"></label><label>কমিকসের PDF<input type=file id=cf accept="application/pdf"></label><button class=btn id=ca>আপলোড</button><p id=pr></p></details><div class=ahd><h3>কমিকস তালিকা</h3><input class=asr data-for=cl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=cl></div></section>
 <section class=ap data-tab=orders><div class=ahd><h3>অর্ডার</h3><input class=asr data-for=ol placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=ol></div><details class=apd><summary>কোড তৈরি করুন</summary><select id=cs></select><input id=ce type=email placeholder="ক্রেতার ইমেইল (ঐচ্ছিক)"><button class=btn id=cg>কোড তৈরি করুন</button></details><div class=ahd><h3>কোড তালিকা</h3><input class=asr data-for=kl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=kl></div></section>
 <section class=ap data-tab=chars><details class=apd><summary>নতুন ক্যারেক্টার যোগ করুন</summary><input id=chn placeholder="নাম"><input id=chs placeholder="কোন সিরিজ (যেমন: গর্ডেন্স)"><input id=cha placeholder="অ্যাপিয়ারেন্স (যেমন: প্রথম আবির্ভাব, সংখ্যা ১)"><textarea id=chd placeholder="বিবরণ (ঐচ্ছিক)"></textarea><label>ছবি<input type=file id=chi accept="image/*"></label><button class=btn id=chb>ক্যারেক্টার যোগ করুন</button><p id=chm></p></details><div class=ahd><h3>ক্যারেক্টার তালিকা</h3><input class=asr data-for=chl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=chl></div></section>
 <section class=ap data-tab=media><details class=apd><summary>নতুন ঘোষণা / কনটেস্ট</summary><select id=nt><option>ঘোষণা</option><option>কনটেস্ট</option></select><input id=nh placeholder="শিরোনাম (ব্যানারে নামসহ দেখাবে)"><textarea id=nb placeholder="বিস্তারিত লেখা (ঐচ্ছিক)"></textarea><label>ব্যানার ছবি<input type=file id=ni accept="image/*"></label><input id=nk placeholder="লিংক (ঐচ্ছিক, https://...)"><button class=btn id=na>প্রকাশ করুন</button></details><div class=ahd><h3>ঘোষণা / কনটেস্ট</h3></div><div id=nls></div><details class=apd><summary>গ্যালারিতে ছবি যোগ করুন</summary><input id=gc placeholder="ক্যাপশন (ঐচ্ছিক)"><input type=file id=gi accept="image/*" multiple><button class=btn id=ga>ছবি আপলোড</button><p id=gp></p></details><div class=ahd><h3>গ্যালারি</h3></div><div id=gl></div></section>
-<section class=ap data-tab=video><details class=apd><summary>নতুন ভিডিও যোগ করুন (Vimeo)</summary><input id=vl placeholder="Vimeo লিংক (যেমন: https://vimeo.com/123456789)"><input id=vt placeholder="শিরোনাম (না দিলে Vimeo থেকে নেওয়া হবে)"><textarea id=vd placeholder="বর্ণনা (ঐচ্ছিক)"></textarea><input id=vth placeholder="থাম্বনেইল URL (ঐচ্ছিক, না দিলে Vimeo থেকে আসবে)"><input id=vpr type=number min=0 placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vf style="width:auto"> হোম পেজে ফিচারড</label><button class=btn id=vb>ভিডিও যোগ করুন</button><p id=vm></p></details><div class=ahd><h3>ভিডিও তালিকা</h3><input class=asr data-for=vls placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=vls></div></section>
+<section class=ap data-tab=video><details class=apd><summary>নতুন ভিডিও যোগ করুন (Vimeo)</summary><input id=vl placeholder="Vimeo লিংক (যেমন: https://vimeo.com/123456789)"><input id=vt placeholder="শিরোনাম (না দিলে Vimeo থেকে নেওয়া হবে)"><textarea id=vd placeholder="বর্ণনা (ঐচ্ছিক)"></textarea><input id=vth placeholder="থাম্বনেইল URL (ঐচ্ছিক, না দিলে Vimeo থেকে আসবে)"><input id=vpr type=number min=0 placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><input id=vsr list=vsl placeholder="সিরিজের নাম (ঐচ্ছিক — কমিকস সিরিজের নামও দেওয়া যায়)"><datalist id=vsl></datalist><input id=vep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vor style="width:auto"> আকানো অরিজিনাল</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vf style="width:auto"> হোম পেজে ফিচারড</label><button class=btn id=vb>ভিডিও যোগ করুন</button><p id=vm></p></details><div class=ahd><h3>ভিডিও তালিকা</h3><input class=asr data-for=vls placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=vls></div></section>
 <section class=ap data-tab=rev><div class=ahd><h3>রিভিউ</h3><input class=asr data-for=rvl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=rvl></div></section>
 <section class=ap data-tab=set><details class=apd><summary>লোগো</summary><p class=note>হেডারে শুধু আপলোড করা লোগো দেখাবে। PNG, JPG, WebP বা GIF ছবি ব্যবহার করতে পারো। স্বচ্ছ ব্যাকগ্রাউন্ডের জন্য PNG/WebP ভালো।</p><input type=file id=lg accept="image/png,image/webp,image/jpeg,image/gif"><button class=btn id=logoUploadBtn>লোগো আপলোড / বদলান</button> <button class=lnk id=lgd>লোগো সরান</button></details><details class=apd><summary>হোম ব্যানার ছবি</summary><p class=note>“দেশি ফিকশন” লেখার নিচে সোজাভাবে দেখাবে। স্বচ্ছ ব্যাকগ্রাউন্ডের PNG/WebP সবচেয়ে ভালো।</p><input type=file id=hb accept="image/*"><button class=btn id=hbb>ব্যানার আপলোড / বদলান</button> <button class=lnk id=hbd>ব্যানার সরান</button></details><div class=ahd><h3>অ্যাডমিনগণ</h3></div><div id=al></div><details class=apd><summary>নতুন অ্যাডমিন যোগ করুন</summary><input id=an placeholder="নাম (যেমন: সাইফুল)"><input id=au placeholder="ইউজারনেম (ইংরেজি, ৩-২০ অক্ষর)"><input id=ap type=password placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="new-password"><button class=btn id=aa>অ্যাডমিন যোগ করুন</button></details><details class=apd><summary>আমার পাসওয়ার্ড</summary><button class=btn id=pw>পাসওয়ার্ড বদলান</button></details></section></div>`;
  refresh.first=true;
@@ -1577,7 +2004,7 @@ function panel(){
   $('#ca').onclick=async()=>{const t=$('#ct').value.trim(),f=$('#cf').files[0],p=$('#cp').value,fr=$('#fr').checked;if(!t||!f||(!p&&!fr))return alert('শিরোনাম, দাম (বা ফ্রি টিক) ও PDF দিন');
   const ty=$('#cty').value,sr=$('#csr').value.trim(),ep=+$('#cep').value||0;if(ty==='series'&&(!sr||!ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
    try{const urls=await pdfPages(f,(i,n)=>$('#pr').textContent=`পেজ ${bn(i)}/${bn(n)} আপলোড হচ্ছে...`),cf=$('#cv').files[0],cover=cf?(await ib(cf),ib.th):pdfPages.th,id=doc(collection(db,'comics')).id;
-    await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,feat:$('#cfh').checked,cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),t:Date.now(),ct:Date.now()});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
+    await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,feat:$('#cfh').checked,orig:$('#cor').checked,cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),t:Date.now(),ct:Date.now()});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
   catch(e){$('#pr').textContent='আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট, ImgBB API key ও Firestore Rules পরীক্ষা করুন')}};
  $('#na').onclick=async()=>{const h=$('#nh').value.trim(),f=$('#ni').files[0];if(!h||!f)return alert('শিরোনাম ও ব্যানার ছবি দিন');
   try{const img=await ib(f);await setDoc(doc(collection(db,'news')),{type:$('#nt').value,title:h,text:$('#nb').value.trim(),img,link:$('#nk').value.trim(),t:Date.now()});['nh','nb','nk','ni'].forEach(i=>$('#'+i).value='');refresh()}catch{alert('প্রকাশ করা যায়নি')}};
@@ -1586,8 +2013,8 @@ function panel(){
    $('#gp').textContent='আপলোড সম্পূর্ণ';$('#gc').value='';$('#gi').value='';refresh()}catch{$('#gp').textContent='আপলোড ব্যর্থ'}};
  $('#vb').onclick=async()=>{const u=$('#vl').value.trim(),pp=vmParse(u);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
   try{$('#vm').textContent='তথ্য আনা হচ্ছে...';const m=await vimeoMeta(u),l=await vdGet();
-   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:$('#vt').value.trim()||m.title||'ভিডিও',desc:$('#vd').value.trim(),vid:pp.vid,h:pp.h,thumb:$('#vth').value.trim()||m.thumb||'',dur:m.dur||0,price:Math.max(0,+$('#vpr').value||0),feat:$('#vf').checked,t:Date.now()});
-   await vdSave(l);['vl','vt','vd','vth','vpr'].forEach(i=>$('#'+i).value='');$('#vf').checked=false;$('#vm').textContent='ভিডিও যোগ হয়েছে';refresh()}
+   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:$('#vt').value.trim()||m.title||'ভিডিও',desc:$('#vd').value.trim(),vid:pp.vid,h:pp.h,thumb:$('#vth').value.trim()||m.thumb||'',dur:m.dur||0,price:Math.max(0,+$('#vpr').value||0),series:$('#vsr').value.trim(),ep:+$('#vep').value||0,orig:$('#vor').checked,feat:$('#vf').checked,t:Date.now()});
+   await vdSave(l);['vl','vt','vd','vth','vpr','vsr','vep'].forEach(i=>$('#'+i).value='');$('#vf').checked=false;$('#vor').checked=false;$('#vm').textContent='ভিডিও যোগ হয়েছে';refresh()}
   catch(e){$('#vm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট ও Firestore Rules পরীক্ষা করুন')}};
  $('#chb').onclick=async()=>{const n=$('#chn').value.trim(),f=$('#chi').files[0];if(!n||!f)return alert('নাম ও ছবি দিন');
   try{$('#chm').textContent='আপলোড হচ্ছে...';const img=await ib(f),th=ib.th,l=await chGet();
@@ -1630,23 +2057,23 @@ function panel(){
 
 function editComic(id,q){
  const d=document.createElement('dialog');d.className='cedit';
-  d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${q.feat?' checked':''}> হোম পেজে ফিচারড</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><div class=cvr><img src="${esc(q.cover||'')}" alt=""><label class=cvl>কভার বদলান (ঐচ্ছিক)<input type=file name=cvf accept="image/*"></label></div><input name=cover placeholder="অথবা নতুন কভারের URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
+  d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${q.feat?' checked':''}> হোম পেজে ফিচারড</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=orig style="width:auto"${q.orig?' checked':''}> আকানো অরিজিনাল</label><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><div class=cvr><img src="${esc(q.cover||'')}" alt=""><label class=cvl>কভার বদলান (ঐচ্ছিক)<input type=file name=cvf accept="image/*"></label></div><input name=cover placeholder="অথবা নতুন কভারের URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
  document.body.appendChild(d);d.showModal();
  const ty=d.querySelector('[name=type]'),fr=d.querySelector('[name=free]'),pi=d.querySelector('[name=price]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on;pi.hidden=fr.checked};tg();ty.onchange=tg;fr.onchange=tg;
  const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
  d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0,fr=!!f.free;
   if(!fr&&pr<=0)return alert('পেইড করতে দাম দিন (০ এর বেশি)');
   if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-   const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,feat:!!f.feat,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};let cvu=f.cover.trim();const cfl=d.querySelector('[name=cvf]').files[0];if(cfl){const sb=d.querySelector('form .btn');if(sb){sb.disabled=true;sb.textContent='আপলোড হচ্ছে...'}try{await ib(cfl);cvu=ib.th}catch{if(sb){sb.disabled=false;sb.textContent='সংরক্ষণ'}return alert('কভার আপলোড হয়নি—ইন্টারনেট ও ImgBB API key পরীক্ষা করুন')}}if(cvu)patch.cover=cvu;
+   const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,feat:!!f.feat,orig:!!f.orig,type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};let cvu=f.cover.trim();const cfl=d.querySelector('[name=cvf]').files[0];if(cfl){const sb=d.querySelector('form .btn');if(sb){sb.disabled=true;sb.textContent='আপলোড হচ্ছে...'}try{await ib(cfl);cvu=ib.th}catch{if(sb){sb.disabled=false;sb.textContent='সংরক্ষণ'}return alert('কভার আপলোড হয়নি—ইন্টারনেট ও ImgBB API key পরীক্ষা করুন')}}if(cvu)patch.cover=cvu;
   try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
 function editVideo(x,l){
  const d=document.createElement('dialog');d.className='cedit';
- d.innerHTML=`<form><h3>ভিডিও এডিট</h3><input name=title value="${esc(x.title)}" required><textarea name=desc placeholder="বর্ণনা">${esc(x.desc||'')}</textarea><input name=link value="https://vimeo.com/${esc(x.vid)}${x.h?'/'+esc(x.h):''}" placeholder="Vimeo লিংক"><div class=cvr><img class=v src="${esc(x.thumb||'')}" alt=""><label class=cvl>থাম্বনেইল বদলান (ঐচ্ছিক)<input type=file name=thf accept="image/*"></label></div><input name=thumb value="${esc(x.thumb||'')}" placeholder="অথবা থাম্বনেইল URL"><input name=price type=number min=0 value="${+x.price>0?+x.price:''}" placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${x.feat?' checked':''}> হোম পেজে ফিচারড</label><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=vcx>বাতিল</button></div></form>`;
+ d.innerHTML=`<form><h3>ভিডিও এডিট</h3><input name=title value="${esc(x.title)}" required><textarea name=desc placeholder="বর্ণনা">${esc(x.desc||'')}</textarea><input name=link value="https://vimeo.com/${esc(x.vid)}${x.h?'/'+esc(x.h):''}" placeholder="Vimeo লিংক"><div class=cvr><img class=v src="${esc(x.thumb||'')}" alt=""><label class=cvl>থাম্বনেইল বদলান (ঐচ্ছিক)<input type=file name=thf accept="image/*"></label></div><input name=thumb value="${esc(x.thumb||'')}" placeholder="অথবা থাম্বনেইল URL"><input name=price type=number min=0 value="${+x.price>0?+x.price:''}" placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><input name=series value="${esc(x.series||'')}" placeholder="সিরিজের নাম (ঐচ্ছিক)"><input name=ep type=number min=1 value="${x.ep||''}" placeholder="পর্ব নম্বর (সিরিজ হলে)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=orig style="width:auto"${x.orig?' checked':''}> আকানো অরিজিনাল</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${x.feat?' checked':''}> হোম পেজে ফিচারড</label><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=vcx>বাতিল</button></div></form>`;
  document.body.appendChild(d);d.showModal();
  const cl=()=>{d.close();d.remove()};d.querySelector('#vcx').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
  d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),pp=vmParse(f.link);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
   let th=f.thumb.trim();const tf=d.querySelector('[name=thf]').files[0];if(tf){const sb=d.querySelector('form .btn');if(sb){sb.disabled=true;sb.textContent='আপলোড হচ্ছে...'}try{await ib(tf);th=ib.th}catch{if(sb){sb.disabled=false;sb.textContent='সংরক্ষণ'}return alert('থাম্বনেইল আপলোড হয়নি—ইন্টারনেট ও ImgBB API key পরীক্ষা করুন')}}
-  Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:th,price:Math.max(0,+f.price||0),feat:!!f.feat});
+  Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:th,price:Math.max(0,+f.price||0),series:f.series.trim(),ep:+f.ep||0,orig:!!f.orig,feat:!!f.feat});
   try{await vdSave(l);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
 const ordEn=o=>o.lang==='en'||/\[কোড: English\]/.test(o.trx||'');
 async function mk(id,email,lang){if(!id)return alert('কমিকস বা ভিডিও বাছাই করুন');const isVd=String(id).startsWith('v_'),ttl=isVd?vds.find(y=>y.id===id.slice(2))?.title:comics[id]?.title;
@@ -1677,6 +2104,7 @@ async function refresh(){
  $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al><img src="${esc(x.th)}" width=48 alt=""><span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-cft="${c.id}">${c.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
  $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('')+vds.filter(x=>+x.price>0).map(x=>`<option value="v_${esc(x.id)}">[ভিডিও] ${esc(x.title)}</option>`).join('');
+  $('#vsl').innerHTML=[...new Set([...cs.filter(isSer).map(c=>c.series),...vds.map(x=>x.series).filter(Boolean)])].map(n=>`<option value="${esc(n)}">`).join('');
  $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | কোডের ভাষা: ${ordEn(x)?'English':'বাংলা ভাষা'} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}" data-ml="${ordEn(x)?'en':'bn'}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
  $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(String(x.comicId).startsWith('v_')?(vds.find(y=>y.id===String(x.comicId).slice(2))?.title?'[ভিডিও] '+vds.find(y=>y.id===String(x.comicId).slice(2)).title:'মুছে গেছে'):(comics[x.comicId]?.title||'মুছে গেছে'))} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${dateLabel(+String(x.device).split('_')[1]+20*864e5)}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
  adminStats(cs,o,k,rv,quiet);
@@ -1710,6 +2138,12 @@ function pwaBtn(){if(pwaStandalone()||!(window.__pwa||pwaIOS()))return'';return 
   alert(pwaIOS()?'Safari-র নিচের Share বাটনে চাপ দিয়ে “Add to Home Screen” বেছে নিন।':'ব্রাউজারের মেনু থেকে “Install app” বা “Add to Home screen” বেছে নিন।')});
  if(pwaStandalone())document.documentElement.classList.add('pwa');
 })();
+
+// ---------- ডার্ক / লাইট মোড ----------
+(()=>{const root=document.documentElement,b=document.createElement('button');b.id='thm';b.type='button';
+ const paint=()=>{const d=root.dataset.theme==='dark';b.innerHTML=ic(d?'sun':'moon');b.setAttribute('aria-label',d?'লাইট মোড':'ডার্ক মোড');document.querySelector('meta[name=theme-color]')?.setAttribute('content',d?'#0f0e12':'#ff007b')};
+ b.onclick=()=>{const d=root.dataset.theme==='dark';if(d)delete root.dataset.theme;else root.dataset.theme='dark';try{localStorage.akTheme=d?'light':'dark'}catch{}paint();try{applyLanguage(b)}catch{}};
+ const lt=$('#langToggle');if(lt)lt.after(b);else document.querySelector('header')?.appendChild(b);paint()})();
 </script>
 </body>
 </html>
