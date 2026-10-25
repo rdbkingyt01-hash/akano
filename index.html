@@ -1397,6 +1397,62 @@ html[data-theme=dark] #sh .mg button{
  color:var(--dark-text);
 }
 html[data-theme=dark] #sh .mg button:hover{background:#211c21!important;border-color:#543044!important}
+/* Keep text upright and match the two-column comic reference on mobile. */
+html[lang] body,
+html[lang] body *{
+ font-style:normal!important;
+}
+@media(max-width:620px){
+ .comic-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,clamp(118px,33vw,155px)));
+  justify-content:start;
+  gap:14px;
+  overflow:visible;
+  margin:0 -5%;
+  padding:4px 5% 18px;
+ }
+ .sec .grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px 12px;
+ }
+ .comic-list .card,
+ .sec .grid .card{
+  display:block;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  flex:none!important;
+  padding:0;
+  border:0!important;
+  border-radius:0;
+  background:transparent!important;
+ }
+ .comic-list .card img,
+ .sec .grid .card img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  border-radius:14px;
+ }
+ .comic-list .card b,
+ .comic-list .card .mt,
+ .sec .grid .card b,
+ .sec .grid .card .mt{
+  min-width:0;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+ }
+ .comic-list .card b,
+ .sec .grid .card b{margin:8px 2px 3px;font-size:15px}
+ .comic-list .card .mt,
+ .sec .grid .card .mt{display:block;margin:0 2px;line-height:1.45}
+ .comic-list .card .orb,
+ .sec .grid .card .orb{left:8px;right:auto;top:8px;max-width:70px;overflow:hidden}
+}
 </style>
 </head>
 <body>
@@ -1625,10 +1681,10 @@ async function home(){
   const mine=cs.filter(x=>fav.c.includes(x.id)),selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8),origC=collapse(cs.filter(x=>x.orig)),origV=vds.filter(x=>x.orig).slice(0,8);
   try{vv={...vv,...await vviews([...featuredVideos,...origV].map(x=>x.id))}}catch{}
   if(thisRoute!==routeVersion)return;
- const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class=rail>${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
+  const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class="rail comic-list">${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
  const cont=(()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];if(!a)return'';const cv=a.k==='f'?comics[a.ref]?.cover:lib[a.ref]?.cv;return `<button class=cts data-cont="${a.k}:${esc(a.ref)}">${cv?`<img src="${esc(cv)}" alt="">`:`<span class=cts-i>${ic('book')}</span>`}<div><small>পড়া চালিয়ে যান</small><b>${esc(a.t)}</b><div class=lb-pg><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%</i></div><small>পেজ ${bn(a.p+1)}/${bn(a.n)}</small></div><span class=cts-go>${ic('tri')}</span></button>`})(),
   trend=collapse([...cs].filter(x=>+x.views>0).sort((a,b)=>(+b.views||0)-(+a.views||0))).slice(0,5);
-  $('#sv').innerHTML=cont+(mine.length?rs('আমার তালিকা','favs',rail(mine,10)):'')+(origC.length?rs('আকানো অরিজিনাল','comics',`<div class=rail>${origC.slice(0,10).map(cardOf).join('')}</div>`):'')+(trend.length>=3?rs('এখন জনপ্রিয়','',`<div class=rail>${trend.map((g,i)=>`<div class=tp><span class=tpn>${bn(i+1)}</span>${cardOf(g)}</div>`).join('')}</div>`):'')+rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):c.status==='rejected'?`<p class="ld emp e-error">${errMsg(c.reason)}<br><br><button class=btn data-go=home>আবার চেষ্টা করুন</button></p>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')
+   $('#sv').innerHTML=cont+(mine.length?rs('আমার তালিকা','favs',rail(mine,10)):'')+(origC.length?rs('আকানো অরিজিনাল','comics',`<div class="rail comic-list">${origC.slice(0,10).map(cardOf).join('')}</div>`):'')+(trend.length>=3?rs('এখন জনপ্রিয়','',`<div class=rail>${trend.map((g,i)=>`<div class=tp><span class=tpn>${bn(i+1)}</span>${cardOf(g)}</div>`).join('')}</div>`):'')+rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):c.status==='rejected'?`<p class="ld emp e-error">${errMsg(c.reason)}<br><br><button class=btn data-go=home>আবার চেষ্টা করুন</button></p>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')
   +(origV.length?rs('আকানো অরিজিনাল ভিডিও','videos',`<div class=rail>${origV.map(vCard).join('')}</div>`):'')+rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
  reveal()}
 async function openSeries(name){
