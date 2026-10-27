@@ -1490,6 +1490,36 @@ html[data-theme=dark] .hf .vc{background:#1a161d!important;border-color:#2c2430!
 html[data-theme=dark] .hf .vc b{color:#f1e8f6}
 html[data-theme=dark] .hf .vc .th{border-color:#3a2a36}
 html[data-theme=dark] .hf .vc .mt2{color:#ff6fb1;padding:0}
+
+/* ===== no footer + translucent bottom nav ===== */
+footer,footer.ft{display:none!important}
+main#app{padding-bottom:120px!important}
+body #bn{background:rgba(255,255,255,.5)!important;-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,0,123,.16)!important;box-shadow:0 12px 30px -16px rgba(255,0,123,.45)!important}
+html[data-theme=dark] #bn{background:rgba(30,20,28,.5)!important;border:1px solid rgba(255,111,177,.2)!important;box-shadow:0 12px 30px -16px rgba(0,0,0,.8)!important}
+
+/* ===== polished Menu (More) sheet ===== */
+body #sh{background:linear-gradient(180deg,#ffe3f0 0,#fff7fb 150px,#fff 100%);font-family:'Hind Siliguri',sans-serif;border-radius:30px 30px 0 0;padding-top:12px;box-shadow:0 -20px 60px -24px rgba(255,0,123,.5)}
+body #sh button,body #sh a{font-family:'Hind Siliguri',sans-serif}
+body #sh .gh{background:#f3b6d2}
+body #sh .sh-head h2{font-size:20px;font-weight:600;color:#1a1320}
+body #sh #shx{background:#fff;color:#ff007b;box-shadow:0 6px 14px -8px rgba(255,0,123,.5)}
+body #sh .mg{grid-template-columns:repeat(3,1fr);gap:12px}
+body #sh .mg button{background:#fff!important;border:1px solid rgba(255,0,123,.1)!important;border-radius:22px;padding:16px 6px 14px;gap:9px;font-size:13.5px;font-weight:500;color:#1a1320;box-shadow:0 10px 24px -16px rgba(255,0,123,.55)}
+body #sh .mg button .ic{box-sizing:border-box;width:26px;height:26px;padding:0;border-radius:0;background:none!important;box-shadow:none;color:#ff007b!important;flex:none;overflow:visible}
+body #sh .mg button:hover{background:#fff8fb!important}
+body #sh .mc{margin:20px 0 6px;padding-top:16px;border-top:1px solid rgba(255,0,123,.12);gap:10px}
+body #sh .mc b{font-size:13px;font-weight:600;color:#a86a88}
+body #sh .mc a{background:#fff!important;border:1px solid rgba(255,0,123,.14)!important;font-size:14px;font-weight:500;box-shadow:0 8px 18px -14px rgba(255,0,123,.6)}
+body #sh .adb{color:#a86a88;font-size:13px}
+html[data-theme=dark] body #sh,html[data-theme=dark] #sh{background:linear-gradient(180deg,#3a0f27 0,#1a1220 150px,#141016 100%)!important;box-shadow:0 -20px 60px -24px rgba(0,0,0,.8)}
+html[data-theme=dark] #sh .gh{background:#5a3348}
+html[data-theme=dark] #sh .sh-head h2{color:#f4ecf8}
+html[data-theme=dark] #sh #shx{background:#2a1a24!important;color:#ff6fb1}
+html[data-theme=dark] #sh .mg button{background:#1f1822!important;border-color:#33262f!important;color:#f1e8f6;box-shadow:none}
+html[data-theme=dark] #sh .mg button .ic{color:#ff6fb1!important}
+html[data-theme=dark] #sh .mc{border-top-color:rgba(255,111,177,.18)}
+html[data-theme=dark] #sh .mc b,html[data-theme=dark] #sh .adb{color:#a98ba0}
+html[data-theme=dark] #sh .mc a{background:#1f1822!important;border-color:#33262f!important;color:#ff8aba}
 </style>
 </head>
 <body>
@@ -1621,7 +1651,7 @@ let tw;
 // ---------- মেনু ও মোডাল ----------
 const dr=$('#sh'),sc=$('#sc'),tog=o=>{dr.classList.toggle('on',o);sc.classList.toggle('on',o)};
 const FBX='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
-const BN=[['home','হোম','home'],['comics','কমিকস','panels'],['reviews','রিভিউ','msg'],['videos','ভিডিও','play']],MORE=NAV.filter(n=>!BN.some(b=>b[0]===n[0]));
+const BN=[['home','হোম','home'],['videos','ভিডিও','play'],['comics','কমিকস','panels'],['reviews','রিভিউ','msg']],MORE=NAV.filter(n=>!BN.some(b=>b[0]===n[0]));
 const bnSet=v=>document.querySelectorAll('#bn button').forEach(b=>b.classList.toggle('on',b.dataset.bn===(BN.some(x=>x[0]===v)?v:'more')));
 const label=(k,b)=>language==='en'?(NAV_EN[k]||LANG_EN[b]||b):b;
 function renderNavigation(){
