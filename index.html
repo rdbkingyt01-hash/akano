@@ -1454,6 +1454,42 @@ html[lang] body *{
  .comic-list .card .orb,
  .sec .grid .card .orb{left:8px;right:auto;top:8px;max-width:70px;overflow:hidden}
 }
+
+/* ===== Home feed (AniRDB-style post cards, pink vibe, views only) ===== */
+body{background:#fff linear-gradient(180deg,#ffd9ec 0,#fff2f8 340px,#fff 720px) no-repeat!important;background-attachment:scroll!important}
+body header{background:rgba(255,226,240,.78)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:none!important;border:0!important}
+body #sq,body #langToggle{background:#fff;color:#ff007b;border:0;border-radius:999px;box-shadow:0 6px 16px -8px rgba(255,0,123,.55)}
+body #sq{width:46px;height:46px;border-radius:50%}
+body #sq .ic{color:#ff007b}
+.hf{padding-top:18px}
+.hf .sb{width:100%;max-width:680px;margin:0 auto 14px;background:#fff;border:0;box-shadow:0 8px 24px -14px rgba(255,0,123,.55)}
+.hf .sb input{font-size:16px}
+.hf,.hf button,.hf input{font-family:'Hind Siliguri',sans-serif}
+.hft{display:flex;gap:22px;max-width:680px;margin:6px auto 12px;padding:0 6px}
+.hft button{position:relative;background:none;border:0;padding:6px 0 9px;font-family:'Hind Siliguri',sans-serif;font-size:15px;font-weight:500;letter-spacing:0;color:#b57a97;cursor:pointer}
+.hft button.on{color:#1a1320}
+.hft button.on{font-weight:600}
+.hft button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:#ff007b}
+.hf .hfl,.hf .vg{display:flex;flex-direction:column;gap:18px;max-width:680px;margin:0 auto;padding:4px 0 40px}
+.hf .vc{display:flex;flex-direction:column;width:100%;background:#fff;border:1px solid rgba(255,0,123,.08);border-radius:28px;padding:16px 16px 14px;box-shadow:0 14px 34px -18px rgba(255,0,123,.45);align-self:stretch}
+.hf .vc b{order:1;margin:2px 4px 12px;font-size:16px;font-weight:500;line-height:1.5;color:#1a1320}
+.hf .vc .th{order:2;border-radius:20px;border:1px solid #ffd0e6;background:linear-gradient(135deg,#ff007b,#ff8fc4)}
+.hf .vc .th::after{content:"VIDEO";position:absolute;left:10px;bottom:10px;z-index:2;background:rgba(26,19,32,.8);color:#fff;font-size:13px;font-weight:600;letter-spacing:.3px;padding:4px 12px;border-radius:10px 10px 10px 4px}
+html[lang=bn] .hf .vc .th::after{content:"ভিডিও";letter-spacing:0}
+.hf .vc .mt2{order:3;margin:12px 4px 0;gap:6px;font-size:14px;font-weight:500;color:#ff007b}
+.hf .vc .mt2 .ic{width:20px;height:20px}
+.hf .vc:active{transform:scale(.99)}
+html[data-theme=dark] body{background:#0f0d11 linear-gradient(180deg,#3a0f27 0,#17101a 340px,#0f0d11 720px) no-repeat!important}
+html[data-theme=dark] body header{background:rgba(40,16,30,.8)!important}
+html[data-theme=dark] body #sq,html[data-theme=dark] body #langToggle{background:#2a1a24;color:#ff6fb1}
+html[data-theme=dark] body #sq .ic{color:#ff6fb1}
+html[data-theme=dark] .hf .sb{background:#1b141a}
+html[data-theme=dark] .hft button{color:#8e6f80}
+html[data-theme=dark] .hft button.on{color:#fff}
+html[data-theme=dark] .hf .vc{background:#1a161d!important;border-color:#2c2430!important;box-shadow:none}
+html[data-theme=dark] .hf .vc b{color:#f1e8f6}
+html[data-theme=dark] .hf .vc .th{border-color:#3a2a36}
+html[data-theme=dark] .hf .vc .mt2{color:#ff6fb1;padding:0}
 </style>
 </head>
 <body>
@@ -1471,7 +1507,7 @@ const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7
  const LANG_EN=Object.freeze({
   'ডার্ক মোড':'Dark mode','লাইট মোড':'Light mode',
   'আকানো অরিজিনাল':'Akano Original','আকানো অরিজিনাল ভিডিও':'Akano Original Videos',
-  'পড়া চালিয়ে যান':'Continue reading','এখন জনপ্রিয়':'Popular now','ফিচারড':'Featured','পর্ব দেখুন':'View episodes','কিনুন':'Buy',
+  'পড়া চালিয়ে যান':'Continue reading','এখন জনপ্রিয়':'Popular now','ফিচারড':'Featured','প্রস্তাবিত':'Recommended','পর্ব দেখুন':'View episodes','কিনুন':'Buy',
   'আকানো (আরডিবি স্টুডিও)':'Akano (RDB Studios)','ভিডিও খুঁজুন':'Search videos','ক্যারেক্টার খুঁজুন':'Search characters','আমার তালিকায় যোগ করুন':'Add to My List','আমার তালিকায় আছে':'In My List',
   'শীঘ্রই আসছে।':'Coming soon.','© আকানো-আরডিবি স্টুডিও':'© Akano · RDB Studios','পড়ার আগে নিয়মগুলো জেনে নিন':'Please read these rules before reading','আগেরটি':'Previous','পরেরটি':'Next',
   'ছবি বা লেখা কপি, সেভ বা ডাউনলোড করা যাবে না।':'Images and text cannot be copied, saved or downloaded.',
@@ -1489,7 +1525,7 @@ const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7
   'কেনা':'Purchased','▶ ভিডিও':'▶ Video','এই কোড অন্য ভিডিওর':'This code belongs to another video','ভিডিওটি পাওয়া যায়নি':'Video not found','কোড দিয়ে কেনা কমিকস ও ভিডিও এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।':'Comics and videos purchased with a code are saved here for 20 days on this device.','এই ভিডিও কিনলে ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'This video will be saved in your Purchase Library for 20 days.',
   'হোম':'Home','কমিকস':'Comics','ফ্রি':'Free','রিভিউ':'Reviews','ভিডিও':'Videos','আরও':'More','ক্যারেক্টার':'Characters','পারচেজ লাইব্রেরি':'Purchase Library','আমার তালিকা':'My List','গ্যালারি':'Gallery','ঘোষণা ও কনটেস্ট':'News & Contests','প্রশ্নোত্তর':'FAQ',
   'কমিউনিটি ও যোগাযোগ':'Community & Contact','ফেসবুক পেজ':'Facebook Page','ফেসবুক গ্রুপ':'Facebook Group','ইমেইল':'Email','অ্যাডমিন লগইন':'Admin Login','খুঁজুন':'Search','ফিচারড কমিকস':'Featured Comics','ফিচারড ভিডিও':'Featured Videos','সব দেখুন':'See all','শীঘ্রই আসছে':'Coming soon',
-  'কমিকস বা ক্যারেক্টার খুঁজুন...':'Search comics or characters...','কমিকস বা সিরিজ খুঁজুন...':'Search comics or series...','ক্যারেক্টার খুঁজুন...':'Search characters...','কমিকস খুঁজুন':'Search comics','কিছু পাওয়া যায়নি।':'No results found.','এখনো কোনো ঘোষণা নেই।':'No announcements yet.','এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!':'No reviews yet. Be the first to leave one!','রিভিউ দেখানো যাচ্ছে না। ':'Reviews could not be loaded. ',
+   'কমিকস বা ক্যারেক্টার খুঁজুন...':'Search comics or characters...','কমিকস বা সিরিজ খুঁজুন...':'Search comics or series...','ভিডিও খুঁজুন...':'Search videos...','প্রস্তাবিত ভিডিও':'Recommended Videos','ক্যারেক্টার খুঁজুন...':'Search characters...','কমিকস খুঁজুন':'Search comics','কিছু পাওয়া যায়নি।':'No results found.','এখনো কোনো ঘোষণা নেই।':'No announcements yet.','এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!':'No reviews yet. Be the first to leave one!','রিভিউ দেখানো যাচ্ছে না। ':'Reviews could not be loaded. ',
   'সব':'All','ওয়ানশট':'One-shot','সিরিজ':'Series','বাংলায়':'In Bangla','পড় কমিকস':'Comics','পেছনে':'Back','পড়ুন':'Read','ফ্রি কমিকস':'Free comic','পেইড':'Paid','টাকা':'BDT','বার দেখা':'views','নতুন':'New',
   'পাঠকদের':'Readers’','রিভিউ':'Reviews','সাধারণ রিভিউ (আকানো সম্পর্কে)':'General review (about Akano)','আপনার নাম':'Your name','রেটিং':'Rating','আপনার মতামত লিখুন':'Write your review','রিভিউ জমা দিন':'Submit review','ফেসবুক গ্রুপেও রিভিউ দিতে পারেন':'You can also review us in the Facebook group','প্রথম রিভিউ আপনিই দিন!':'Be the first to leave a review!','নাম ও মতামত লিখুন':'Enter your name and review','তারা দিয়ে রেটিং দিন':'Choose a star rating','একটু পরে আবার চেষ্টা করুন':'Please try again shortly','জমা হচ্ছে...':'Submitting...','ধন্যবাদ! অ্যাডমিন অনুমোদনের পর আপনার রিভিউ এখানে দেখা যাবে।':'Thank you! Your review will appear here after admin approval.',
   'গ্যালারি':'Gallery','ঘোষণা':'Announcements','কনটেস্ট':'Contest','বিস্তারিত দেখুন':'View details','কোনো পর্ব পাওয়া যায়নি।':'No episodes found.','পর্ব ':'Episode ','কিছু পর্ব ফ্রি':'Some episodes free','থেকে':'from',
@@ -1662,32 +1698,35 @@ const chCard=(x,g)=>`<button class=chc data-ch="${esc(x.id)}" data-s="${esc(x.se
 const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
 async function home(){
  const thisRoute=routeVersion;
- $('#app').innerHTML=`<div class=sec><div class=sb>${ic('search')}<input id=hq type=search placeholder="কমিকস বা ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:300px;border-radius:22px;margin-top:14px"></div></div></div>`;
+  $('#app').innerHTML=`<div class="sec hf"><div class=sb>${ic('search')}<input id=hq type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div><div id=sr></div><div id=sv><div class=sk style="height:300px;border-radius:22px;margin-top:14px"></div></div></div>`;
  let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
   if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
   $('#sv').hidden=true;
-  try{if(!sd){const[cl,cr,vr]=await Promise.all([list('comics'),cache('chars',async()=>(await dat('site','characters'))||{list:[]}),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]);sd={cl:cl.sort(byT),ch:cr.list||[],vd:[...(vr.list||[])].sort(byT)};comics=Object.fromEntries(sd.cl.map(c=>[c.id,c]));chs=sd.ch;vds=sd.vd}}catch{$('#sr').innerHTML='<p class="ld emp e-error">লোড করা যায়নি।</p>';return}
+   try{if(!sd){const vr=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});sd=[...(vr.list||[])].sort(byT);vds=sd}}catch{$('#sr').innerHTML='<p class="ld emp e-error">লোড করা যায়নি।</p>';return}
   if($('#hq').value.trim().toLowerCase()!==v)return;
-   const a=sd.cl.filter(c=>String((c.title||'')+' '+(c.series||'')).toLowerCase().includes(v)),b=sd.ch.filter(x=>[x.name,x.series,x.app].join(' ').toLowerCase().includes(v)),vm=sd.vd.filter(x=>[x.title,x.desc].join(' ').toLowerCase().includes(v));
+    const vm=sd.filter(x=>[x.title,x.desc,x.series].join(' ').toLowerCase().includes(v));
    try{vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
    if($('#hq').value.trim().toLowerCase()!==v)return;
-  $('#sr').innerHTML=(a.length?`<div class=sx><div><h2>কমিকস</h2></div></div><div class=grid>${a.map(c=>cardH(c,!!c.free)).join('')}</div>`:'')+(b.length?`<div class=sx><div><h2>ক্যারেক্টার</h2></div></div><div class=chg>${b.map(x=>chCard(x)).join('')}</div>`:'')+(vm.length?`<div class=sx><div><h2>ভিডিও</h2></div></div><div class=vg>${vm.map(vCard).join('')}</div>`:'')||'<p class="ld emp e-search">কিছু পাওয়া যায়নি।</p>'};
- const[c,vr]=await Promise.allSettled([list('comics'),cache('videos',async()=>(await dat('site','videos'))||{list:[]})]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
+   $('#sr').innerHTML=vm.length?`<div class=sx><div><h2>ভিডিও</h2></div></div><div class="vg hfl">${vm.map(vCard).join('')}</div>`:'<p class="ld emp e-search">কিছু পাওয়া যায়নি।</p>'};
+  const c={status:'fulfilled',value:[]},[vr]=await Promise.allSettled([cache('videos',async()=>(await dat('site','videos'))||{list:[]})]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
  if(thisRoute!==routeVersion)return;
- if(c.status==='rejected'&&vr.status==='rejected')throw c.reason;
+  if(vr.status==='rejected')throw vr.reason;
  if(!$('#sv'))return;
  const cs=ok(c);
  comics=Object.fromEntries(cs.map(x=>[x.id,x]));
  vds=vr.status==='fulfilled'?[...(vr.value.list||[])].sort(byT):[];
-  const mine=cs.filter(x=>fav.c.includes(x.id)),selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),featuredVideos=vds.filter(x=>x.feat).slice(0,8),origC=collapse(cs.filter(x=>x.orig)),origV=vds.filter(x=>x.orig).slice(0,8);
-  try{vv={...vv,...await vviews([...featuredVideos,...origV].map(x=>x.id))}}catch{}
+   const mine=cs.filter(x=>fav.c.includes(x.id)),selected=cs.filter(x=>x.feat),featuredComics=(selected.length?selected:cs).slice(0,8),selectedVideos=vds.filter(x=>x.feat),featuredVideos=(selectedVideos.length?selectedVideos:vds.slice(0,6)).slice(0,12),featuredVideoIds=new Set(featuredVideos.map(x=>x.id)),recommendedVideos=vds.filter(x=>!x.feat&&!featuredVideoIds.has(x.id)).slice(0,12),origC=collapse(cs.filter(x=>x.orig)),origV=vds.filter(x=>x.orig).slice(0,8);
+   try{vv={...vv,...await vviews([...featuredVideos,...recommendedVideos].map(x=>x.id))}}catch{}
   if(thisRoute!==routeVersion)return;
   const rs=(t,v,body)=>`<div class=sx><div><h2>${t}</h2></div>${v?`<button class=more data-go=${v}>সব দেখুন</button>`:''}</div>${body}`,rail=(l,n=10)=>`<div class="rail comic-list">${collapse(l).slice(0,n).map(cardOf).join('')}</div>`;
  const cont=(()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];if(!a)return'';const cv=a.k==='f'?comics[a.ref]?.cover:lib[a.ref]?.cv;return `<button class=cts data-cont="${a.k}:${esc(a.ref)}">${cv?`<img src="${esc(cv)}" alt="">`:`<span class=cts-i>${ic('book')}</span>`}<div><small>পড়া চালিয়ে যান</small><b>${esc(a.t)}</b><div class=lb-pg><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%</i></div><small>পেজ ${bn(a.p+1)}/${bn(a.n)}</small></div><span class=cts-go>${ic('tri')}</span></button>`})(),
   trend=collapse([...cs].filter(x=>+x.views>0).sort((a,b)=>(+b.views||0)-(+a.views||0))).slice(0,5);
    $('#sv').innerHTML=cont+(mine.length?rs('আমার তালিকা','favs',rail(mine,10)):'')+(origC.length?rs('আকানো অরিজিনাল','comics',`<div class="rail comic-list">${origC.slice(0,10).map(cardOf).join('')}</div>`):'')+(trend.length>=3?rs('এখন জনপ্রিয়','',`<div class=rail>${trend.map((g,i)=>`<div class=tp><span class=tpn>${bn(i+1)}</span>${cardOf(g)}</div>`).join('')}</div>`):'')+rs('ফিচারড কমিকস','comics',featuredComics.length?rail(featuredComics,8):c.status==='rejected'?`<p class="ld emp e-error">${errMsg(c.reason)}<br><br><button class=btn data-go=home>আবার চেষ্টা করুন</button></p>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')
   +(origV.length?rs('আকানো অরিজিনাল ভিডিও','videos',`<div class=rail>${origV.map(vCard).join('')}</div>`):'')+rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
- reveal()}
+  const videoSection=(t,l)=>rs(t,'videos',l.length?`<div class=rail>${l.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
+  let ht='f';const hl={f:featuredVideos,r:recommendedVideos},drawFeed=()=>{const sv=$('#sv');if(!sv)return;sv.innerHTML=`<div class=hft><button type=button data-ht=f class="${ht==='f'?'on':''}">ফিচারড</button><button type=button data-ht=r class="${ht==='r'?'on':''}">প্রস্তাবিত</button></div><div class=hfl>${hl[ht].length?hl[ht].map(vCard).join(''):'<p class="soon emp e-soon">শীঘ্রই আসছে</p>'}</div>`;sv.querySelectorAll('[data-ht]').forEach(b=>b.onclick=()=>{ht=b.dataset.ht;drawFeed()})};
+  drawFeed();
+  reveal()}
 async function openSeries(name){
  const thisRoute=++routeVersion;scrollTo(0,0);bnSet(lastShop);$('#app').innerHTML=SK;
  let l=[],vl=[],vdAll=[];try{const[cl,vd]=await Promise.all([list('comics'),cache('videos',async()=>(await dat('site','videos'))||{list:[]}).catch(()=>({list:[]}))]);l=cl.filter(c=>isSer(c)&&c.series===name);vdAll=[...((vd&&vd.list)||[])].sort(byT);vl=vdAll.filter(x=>x.series===name)}catch(e){if(thisRoute===routeVersion)$('#app').innerHTML=`<p class="ld emp e-error">${errMsg(e)}</p>`;return}
