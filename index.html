@@ -1472,7 +1472,8 @@ input[type=search]::-webkit-search-decoration,input[type=search]::-webkit-search
 .hf .vc.big .mt2 .ow::before{color:rgba(255,255,255,.6)}
 
 /* English wordmark = Roboto (the YouTube font), no exclamation mark */
-.wm,html[lang=en] #fbt{font-family:Roboto,'Hind Siliguri',system-ui,sans-serif;font-weight:900;letter-spacing:-.3px}
+.akwm,html[lang=en] #fbt{font-family:Roboto,'Hind Siliguri',system-ui,sans-serif;font-weight:900;letter-spacing:-.3px}
+.st-card .akwm{display:block;position:static;font-size:19px;line-height:1.25;color:#111}
 </style>
 </head>
 <body>
@@ -1640,7 +1641,7 @@ async function settings(){
  const lnk=(i,t,h)=>`<a class=st-row href="${h}" target=_blank rel=noopener>${i}<span>${t}</span>${ic('chev')}</a>`;
  $('#app').innerHTML=`<div class="sec stg-page">
   <div class=st-top><button class=st-c data-go=home aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>${T('সেটিংস','Settings')}</h1><span class=st-c style="visibility:hidden"></span></div>
-  <div class="st-card">${lsrc?`<img src="${esc(lsrc)}" alt="">`:`<span class=st-av>${ic('face')}</span>`}<div><b class=wm>${T('আকানো','Akano')}</b><small>${T('আরডিবি স্টুডিওর অংশ','A part of RDB Studio')}</small></div></div>
+  <div class="st-card">${lsrc?`<img src="${esc(lsrc)}" alt="">`:`<span class=st-av>${ic('face')}</span>`}<div><b class=akwm>${T('আকানো','Akano')}</b><small>${T('আরডিবি স্টুডিওর অংশ','A part of RDB Studio')}</small></div></div>
   <a class=st-pro href="${FBG}" target=_blank rel=noopener>${ic('spark')}<div><b>${T('কমিউনিটিতে যোগ দিন','Join the community')}</b><small>${T('নতুন কমিকস, ভিডিও ও কনটেস্টের খবর সবার আগে পান।','Get news on new comics, videos and contests first.')}</small></div><span>${T('যোগ দিন','Join')}${ic('chev')}</span></a>
   <div class=st-g>
    <button class="st-row" id=stLang type=button>${ic('globe')}<span>${T('ইংরেজি ভাষা','English language')}</span><i class="st-sw${en?' on':''}" role=switch aria-checked="${en}"></i></button>
