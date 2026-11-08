@@ -1695,6 +1695,11 @@ body:has(.aiw) header{background:#faf6f5!important}
 @keyframes orbr{to{transform:rotate(360deg)}}
 .aiw.chat .ai-stage,.aiw.chat .ai-cards{display:none}
 .aiw .asl{flex:1;align-content:start;margin:16px 0 8px}
+.aiw .asm{scroll-margin-top:90px;scroll-margin-bottom:190px}
+.aiw .asl{padding-bottom:6px}
+/* Ask bar: bottom nav-এর মতো সবসময় নিচে স্থির; কীবোর্ড খুললে কীবোর্ডের ঠিক ওপরে */
+body .aiw #asf.ai-box{position:fixed;left:50%;right:auto;margin:0;transform:translateX(-50%);width:min(94%,560px);box-sizing:border-box;bottom:calc(14px + env(safe-area-inset-bottom,0px) + var(--kb,0px));z-index:30;transition:bottom .15s ease}
+html.nonav body .aiw{padding-bottom:calc(175px + env(safe-area-inset-bottom,0px))}
 .ai-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 10px}
 .ai-card{display:grid;gap:16px;align-content:space-between;min-height:92px;text-align:left;padding:14px;border:1.5px solid #ffe0dc;border-radius:20px;background:#fff;color:#111}
 .ai-card .ic{width:20px;height:20px;color:#777}.ai-card b{font-size:14.5px;font-weight:600}
@@ -2124,7 +2129,7 @@ function faq(){
  const upd=()=>{const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
  const send=()=>{const v=$('#asq').value;if(!v.trim())return;$('#asq').value='';upd();asAsk(v)};
  $('#asf').onsubmit=e=>{e.preventDefault();send()};
- $('#asq').oninput=upd;
+ $('#asq').oninput=upd;$('#asq').onfocus=()=>setTimeout(()=>{const l=$('#asl')&&$('#asl').lastElementChild;if(l)asScroll(l)},350);
  $('#aiSpk').onclick=()=>{if($('#asq').value.trim())send();else aiListen($('#aiSpk'),send)};
  $('#aiCardVoice').onclick=()=>aiListen($('#aiSpk'),send);
  const sheet=()=>modal(`<h2 class=ai-sh>${T('প্রশ্নোত্তর','FAQ')}</h2><div class=ai-fl>${Q.map(([c,q],i)=>`<button type=button class=ai-q data-fi=${i}><span>${esc(q)}</span>${ic('chev')}</button>`).join('')}</div>`);
@@ -2676,6 +2681,7 @@ const aDice=(a,b)=>{let i=0,n=0,m=0;a.forEach(v=>n+=v);b.forEach(v=>m+=v);if(!n|
 const lsRead=k=>{try{return JSON.parse(localStorage['ak_'+k]).d}catch{return null}};
 function kbData(){return [
  {c:'about',qb:'আকানো কী? আকানো সম্পর্কে বলুন',qe:'What is Akano? Tell me about Akano',k:'akano আকানো পরিচয় about global গ্লোবাল pop culture পপ কালচার entertainment বিনোদন brand ব্র্যান্ড frangowst ফ্রাঙ্গোস্ট company কোম্পানি rdb studio কারা মালিক owner',ab:'আকানো Frangowst-এর একটি পপ কালচার ও বিনোদন ব্র্যান্ড। আমরা গ্লোবাল কমিকস, ভিডিও ও অ্যানিমেটেড সিরিজ প্রকাশ করছি এবং শিল্প, সংস্কৃতি ও বিনোদনের একটি পূর্ণ জগৎ গড়তে চাই।',ae:'Akano is a pop culture and entertainment brand of Frangowst. We publish global comics, videos and animated series, and we want to build a complete world of art, culture and entertainment.',go:[['comics','কমিকস','Comics'],['videos','ভিডিও','Videos']]},
+ {c:'about',qb:'আকানো বা Frangowst-এর ফাউন্ডার কে?',qe:'Who is the founder of Akano or Frangowst?',k:'ফাউন্ডার founder প্রতিষ্ঠাতা ceo মালিক owner কে বানিয়েছে তৈরি করেছে কার করেছেন শুরু created creator started behind ahmad shoaib আকানো akano frangowst ফ্রাঙ্গোস্ট',ab:'আকানো ও Frangowst-এর ফাউন্ডার Ahmad Shoaib।',ae:'The founder of Akano and Frangowst is Ahmad Shoaib.'},
  {c:'about',qb:'আকানো কোন কোম্পানির? কোম্পানির নাম কী?',qe:'Which company owns Akano? What is the company name?',k:'কোম্পানি company frangowst ফ্রাঙ্গোস্ট মালিক owner প্রতিষ্ঠান',ab:'আকানো আমাদের কোম্পানি Frangowst-এর অধীনে একটি ব্র্যান্ড।',ae:'Akano is a brand under our company, Frangowst.'},
  {c:'about',qb:'আকানো-র লক্ষ্য বা স্বপ্ন কী?',qe:'What is the goal or dream of Akano?',k:'লক্ষ্য স্বপ্ন goal dream vision মার্ভেল',ab:'আমাদের লক্ষ্য বিশ্বের সবচেয়ে বড় পপ কালচার প্রতিষ্ঠানগুলোর একটি হয়ে ওঠা এবং বাংলার মাটি থেকেই বিশ্বমানের গল্পের জগৎ গড়া।',ae:'Our goal is to become one of the world\u2019s largest pop-culture studios and to build a world-class story universe from Bangladesh.'},
  {c:'help',qb:'আকানো-র সাথে যোগাযোগ করব কীভাবে?',qe:'How do I contact Akano?',k:'যোগাযোগ contact email ইমেইল সাহায্য help support জানাব',ab:'ইমেইল করুন help.akano@gmail.com ঠিকানায়, অথবা আমাদের ফেসবুক গ্রুপে জানান।',ae:'Email help.akano@gmail.com or tell us in our Facebook group.',go:[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']]},
@@ -2754,13 +2760,28 @@ async function asAnswer(q){
  try{const a=await aiAsk(q,ctx);if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
  const sg=sc.slice(0,3).filter(x=>x.sc>.1);
  return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('উইকিপিডিয়ায় খুঁজুন','Search Wikipedia')}</button></div>`)}
+/* Ask Akano: নতুন প্রশ্ন-উত্তর সবসময় Ask bar-এর ঠিক ওপরে দেখাবে (বারের নিচে ঢাকা পড়বে না) */
+function asScroll(el){
+ if(!el)return;
+ const bar=document.getElementById('asf'),hd=document.querySelector('header');
+ if(!bar)return;
+ let hh=0;if(hd){const cs=getComputedStyle(hd);if(cs.display!=='none'&&cs.position!=='static')hh=Math.max(0,hd.getBoundingClientRect().bottom)}
+ const vh=window.visualViewport?visualViewport.height:innerHeight;
+ const top=hh+10,bottom=Math.min(bar.getBoundingClientRect().top,vh)-14,r=el.getBoundingClientRect();
+ let d=0;
+ if(r.height>bottom-top)d=r.top-top;          // লম্বা উত্তর: প্রশ্নের মাথা থেকে পড়া শুরু
+ else if(r.bottom>bottom)d=r.bottom-bottom;   // ছোট উত্তর: বারের ঠিক ওপরে
+ else if(r.top<top)d=r.top-top;
+ if(Math.abs(d)>2)window.scrollBy({top:d,behavior:'smooth'})}
+const asGo=el=>requestAnimationFrame(()=>asScroll(el));
+(function(){const vv=window.visualViewport;if(!vv)return;const f=()=>{const kb=Math.max(0,Math.round(innerHeight-vv.height-vv.offsetTop));document.documentElement.style.setProperty('--kb',kb+'px')};vv.addEventListener('resize',f);vv.addEventListener('scroll',f)})();
 async function asAsk(q){
  q=String(q||'').trim().slice(0,200);const asl=$('#asl');if(!q||!asl)return;
  const id='as'+Date.now();
  asl.insertAdjacentHTML('beforeend',`<div class=asm id="${id}"><div class="asb u">${aEsc(q)}</div><div class="asb a" data-sayc><div class=as-dots><i></i><i></i><i></i></div></div></div>`);
- const box=document.querySelector('#'+id+' .asb.a');const aw=$('#aiw');if(aw)aw.classList.add('chat');if(box)box.scrollIntoView({block:'center',behavior:'smooth'});
+ const box=document.querySelector('#'+id+' .asb.a');const aw=$('#aiw');if(aw)aw.classList.add('chat');asGo(document.getElementById(id));
  let h;try{h=await asAnswer(q)}catch{h=aAns(T('কিছু সমস্যা হয়েছে, আবার চেষ্টা করুন।','Something went wrong, please try again.'))}
- if(box){box.innerHTML=h;box.scrollIntoView({block:'end',behavior:'smooth'})}}
+ if(box){box.innerHTML=h;asGo(document.getElementById(id))}}
 async function asWiki(btn){
  const box=btn.closest('.asb.a');if(!box)return;const q=btn.dataset.wk;
  box.innerHTML='<div class=as-dots><i></i><i></i><i></i></div>';
@@ -2772,7 +2793,7 @@ function asFaq(i){
  const m=$('#m');if(m)m.classList.remove('on');
  const aw=$('#aiw');if(aw)aw.classList.add('chat');
  asl.insertAdjacentHTML('beforeend',`<div class=asm><div class="asb u">${aEsc(it[1])}</div><div class="asb a"><div>${aEsc(it[2])}</div></div></div>`);
- asl.lastElementChild.scrollIntoView({block:'end',behavior:'smooth'})}
+ asGo(asl.lastElementChild)}
 function aiListen(btn,done){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR)return alert(T('এই ব্রাউজারে ভয়েস ইনপুট নেই।','Voice input is not supported in this browser.'));
