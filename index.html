@@ -1574,9 +1574,8 @@ html.adg-on{overflow:hidden}
 @media(min-width:900px){
  body header{padding:0 max(5%,calc((100% - 1180px)/2))}
  body #bn{top:7px;bottom:auto;width:auto;height:48px;padding:4px 6px;border-radius:26px;gap:2px;justify-content:center;z-index:80}
- #bn button{flex:none;flex-direction:row;max-width:none;width:auto;height:40px;margin:0;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:20px}
- #bn button::after{content:attr(aria-label);font-size:14px;font-weight:600;white-space:nowrap}
- #bn button .ic,#bn [data-go=videos] .ic{width:20px;height:20px}
+ #bn button{flex:none;flex-direction:row;max-width:none;width:auto;height:40px;margin:0;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;gap:0;border-radius:20px}
+ #bn button .ic,#bn [data-go=videos] .ic{width:22px;height:22px}
  #bn button:hover{color:#e10600}
  main#app{padding-bottom:60px!important}
  .sec,.hf{max-width:1180px}
@@ -1736,6 +1735,12 @@ html.nonav .aiw{min-height:100dvh;padding-top:env(safe-area-inset-top);padding-b
 html.nonav .ai-box{bottom:calc(14px + env(safe-area-inset-bottom))}
 html.nonav main#app{padding-bottom:0!important}
 .bdot.on i .ic{width:18px;height:18px;color:#fff}
+
+/* ===== FrangowstAi: fixed top bar (back + FAQ), like the ask bar ===== */
+body .aiw .ai-top{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(94%,560px);box-sizing:border-box;margin:0;padding:calc(10px + env(safe-area-inset-top,0px)) 0 16px;z-index:7;background:rgba(252,250,249,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+html.nonav body .aiw,body .aiw{padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body:has(#m.on) .aiw .ai-top{z-index:5}
+
 </style>
 </head>
 <body>
@@ -1898,7 +1903,7 @@ const bnSet=v=>document.querySelectorAll('#bn button').forEach(b=>b.classList.to
 const label=(k,b)=>language==='en'?(NAV_EN[k]||LANG_EN[b]||b):b;
 const T=(b,e)=>language==='en'?e:b;
 function renderNavigation(){
- $('#bn').innerHTML=BN.map(([v,t,i])=>`<button data-go=${v} data-bn=${v} aria-label="${v==='settings'?T('সেটিংস','Settings'):label(v,t)}">${icf(i)}</button>`).join('');
+ $('#bn').innerHTML=BN.map(([v,t,i])=>{const NL=v==='settings'?T('সেটিংস','Settings'):label(v,t);return `<button data-go=${v} data-bn=${v} aria-label="${NL}" title="${NL}">${icf(i)}</button>`}).join('');
  dr.innerHTML='<div class=gh id=gh></div>';
 }
 renderNavigation();
@@ -1932,7 +1937,7 @@ async function settings(){
   </div>
   <div class=st-g>
    ${row('mega',T('ঘোষণা ও কনটেস্ট','News & Contests'),'news')}
-   ${row('help',T('আকানো সহকারী','Ask Akano'),'faq')}
+   ${row('help','FrangowstAi','faq')}
   </div>
   <div class=st-g>
    ${lnk(FBX,T('ফেসবুক পেজ','Facebook Page'),'https://www.facebook.com/share/1Dakj9PjWA/')}
@@ -2120,7 +2125,7 @@ function faqData(L){const T=(b,e)=>L==='en'?e:b,X=t=>L==='en'?phraseTr(t,true):t
 function faq(){
  const Q=faqData(language),sug=T('কীভাবে কমিকস কিনব?','How do I buy a comic?');
  $('#app').innerHTML=`<div class="sec aiw" id=aiw>
-  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>${T('আকানো সহকারী','Ask Akano')}</span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
+  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>${'FrangowstAi'}</span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
   <div class=ai-stage><div class=ai-orb><i></i><i></i><i></i></div><h2>${T('আকানো সম্পর্কে যা জানতে চান, জিজ্ঞেস করুন','Ask anything about Akano')}</h2></div>
   <button type=button class=ai-new id=aiNew data-new>${T('নতুন চ্যাট','New chat')}</button>
    <div class=asl id=asl></div>
@@ -2130,7 +2135,7 @@ function faq(){
    <button type=button class=ai-card id=aiCardVoice>${ic('mic')}<b>${T('ভয়েস মোড','Voice Mode')}</b></button>
   </div>
   <form class=ai-box id=asf autocomplete=off>
-   <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('আকানোকে জিজ্ঞেস করুন...','Chat with Akano')}" aria-label="${T('প্রশ্ন','Question')}"></div>
+   <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('FrangowstAi-কে জিজ্ঞেস করুন...','Chat with FrangowstAi')}" aria-label="${T('প্রশ্ন','Question')}"></div>
    <div class=ai-r2><button type=button class=ai-chip id=aiChipFaq>${ic('help')}<span>${T('প্রশ্নোত্তর','FAQ')}</span></button><button type=button class=ai-spk id=aiSpk>${ic('mic')}<span>${T('বলুন','Speak')}</span></button></div>
   </form></div>`;
  const upd=()=>{const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
@@ -2682,7 +2687,8 @@ function pwaBtn(){if(pwaStandalone()||!(window.__pwa||pwaIOS()))return'';return 
 const SYN=[['কিনব','কিনি','কেনা','কিনতে','কিনুন','কিন','buy','purchase','order','অর্ডার','kinbo','kinte','kini','kena','kinun'],['কোড','code','pin'],['পেমেন্ট','payment','বিকাশ','নগদ','রকেট','bkash','nagad','rocket','টাকা','taka','price','দাম','মূল্য'],['ফ্রি','free','বিনামূল্যে'],['সিরিজ','series','পর্ব','episode','ep'],['ভিডিও','video','videos','অ্যানিমেটেড','animated','animation'],['কমিকস','comic','comics','কমিক'],['ক্যারেক্টার','character','characters','চরিত্র'],['রিভিউ','review','মতামত','feedback'],['যোগাযোগ','contact','email','ইমেইল','help','সাহায্য','মেইল','mail'],['ইনস্টল','install','অ্যাপ','app','ডাউনলোড'],['অফলাইন','offline'],['ভাষা','language','ইংরেজি','english','বাংলা','bangla','bengali'],['ব্যাজ','badge','badges','streak','স্ট্রিক'],['শেয়ার','share'],['বিজ্ঞাপন','ad','ads','advertisement'],['আকানো','akano','আকানো'],['ডেটা','data','saver','সেভার'],['লাইব্রেরি','library','পারচেজ','purchased'],['কীভাবে','কিভাবে','kivabe','kibhabe','how'],['লক','lock','locked','আনলক','unlock','spoiler','স্পয়লার']];
 const SYNX={0:['kinar','kenar','nibo','nite','kinbo'],1:['kod'],2:['dam','mulyo','koto','kotto','pay','dibo','bikas','nogod','tk'],3:['binamulle','frie'],4:['porbo','sirij'],5:['vidio','bhidio','vedio'],6:['komiks','komik','comix','kamiks'],7:['caractar','korektar','choritro','charektar'],8:['rivew','matamot','rating'],9:['jogajog','jogajug','sahajjo','sahajyo'],10:['inster','ap'],11:['offlain'],12:['bhasha','vasha'],13:['baj'],14:['sheyar','share'],15:['biggapon','bigyapon','bigapon'],18:['kibhabe','kemne','kmne','kibabe','kivabe'],19:['lok','anlok']};
 Object.keys(SYNX).forEach(i=>SYN[i].push(...SYNX[i]));
-const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti','korbo','korte','kore','hobe','jay','jai','e','te','amar','ami','apni','tumi']);
+SYN.push(['দিন','din','day','days','dine'],['মেয়াদ','meyad','moyad','expire','expiry','valid','validity']);
+const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti','korbo','korte','kore','hobe','jay','jai','e','না','na','te','amar','ami','apni','tumi']);
 const SUFX=['গুলোর','গুলো','গুলি','দের','েরা','ের','কে','তে','টির','টি','টা','র','য়','ে'];
 const aNorm=s=>String(s||'').toLowerCase().replace(/[\u200c\u200d]/g,'').replace(/[^\u0980-\u09FFa-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
 const aStem=w=>{if(/^[a-z0-9]+$/.test(w))return w.length>4?w.replace(/(ing|ed|es|s)$/,''):w;for(const x of SUFX){if(w.length>x.length+1&&w.endsWith(x))return w.slice(0,-x.length)}return w};
@@ -2711,22 +2717,26 @@ function kbData(){return [
  {c:'buy',qb:'কেনা কমিকস বা ভিডিও আবার কোথায় পাব? লাইব্রেরি',qe:'Where do I find purchased comics or videos? Library',k:'লাইব্রেরি library পারচেজ purchased কেনা মেয়াদ expire ২০ দিন',ab:'কেনা কমিকস সেটিংসের “পারচেজ লাইব্রেরি”-তে ২০ দিনের জন্য জমা থাকে (কোডের মেয়াদ অনুযায়ী)। সেখান থেকেই আবার পড়তে পারবেন।',ae:'Purchased comics are kept in \u201cLibrary\u201d under Settings for 20 days (as per the code validity). You can read them again from there.',go:[['lib','পারচেজ লাইব্রেরি','Library']]},
  {c:'buy',qb:'বিজ্ঞাপন কেন দেখায়?',qe:'Why do I see an ad?',k:'বিজ্ঞাপন ad ads advertisement vimeo',ab:'কিছু ফ্রি কমিকস বা ভিডিওর সাথে প্রতি ২০ মিনিট পর পর একটি ছোট বিজ্ঞাপন আসে। কিছুক্ষণ পর “বিজ্ঞাপন স্কিপ করুন” বাটন চাপা যায়। কেনা কনটেন্টে বিজ্ঞাপন থাকে না।',ae:'Some free comics or videos show a short ad every 20 minutes. After a few seconds you can tap \u201cSkip ad\u201d. Purchased content has no ads.'},
  {c:'help',qb:'আমার তথ্য কোথায় থাকে? প্রাইভেসি',qe:'Where is my data stored? Privacy',k:'প্রাইভেসি privacy তথ্য data অ্যাকাউন্ট account ফোন localstorage',ab:'আমরা আলাদা অ্যাকাউন্ট চাই না। আমার তালিকা, পড়ার অগ্রগতি, ব্যাজের মতো তথ্য আপনার ফোনেই থাকে।',ae:'We do not ask you to create an account. Your list, reading progress and badges stay on your phone.'},
- {c:'help',qb:'তুমি কি এআই? তুমি কে?',qe:'Are you an AI? Who are you?',k:'এআই ai বট bot সহকারী assistant তুমি কে who',ab:'আমি আকানো সহকারী। অ্যাপের তথ্য ও প্রশ্নোত্তর থেকে উত্তর খুঁজে দিই। সব প্রশ্নের উত্তর আমার কাছে নেই; না পারলে আপনাকে সঠিক জায়গায় পাঠাই।',ae:'I am the Akano assistant. I find answers from the app\u2019s information and FAQ. I do not know everything; when I cannot answer, I point you to the right place.'}
+ {c:'help',qb:'তুমি কি এআই? তুমি কে?',qe:'Are you an AI? Who are you?',k:'এআই ai বট bot সহকারী assistant তুমি কে who',ab:'আমি FrangowstAi। অ্যাপের তথ্য ও প্রশ্নোত্তর থেকে উত্তর খুঁজে দিই। সব প্রশ্নের উত্তর আমার কাছে নেই; না পারলে আপনাকে সঠিক জায়গায় পাঠাই।',ae:'I am FrangowstAi. I find answers from the app\u2019s information and FAQ. I do not know everything; when I cannot answer, I point you to the right place.'}
 ]}
 let KBX=null;
 function kbIndex(){
  if(KBX)return KBX;
  const SYNMAP={};SYN.forEach((g,i)=>g.forEach(w=>{SYNMAP[aStem(aNorm(w))]='g'+i}));
- const toks=s=>aNorm(s).split(' ').filter(w=>w&&!STOPW.has(w)).map(w=>{const t=aStem(w);return SYNMAP[t]||t});
+ const sk=t=>{const bnw=/[\u0980-\u09FF]/.test(t);if(SYNMAP[t]||t.length<(bnw?3:4))return '';const k=aSkel(t);return k.length>=3||(k.length===2&&t.length>=5)?'~'+k:''};
+ const toks=s=>{const o=[];aNorm(s).split(' ').forEach(w=>{if(!w||STOPW.has(w))return;const t=aStem(w),g=SYNMAP[t];o.push(g||t);const k=g?'':sk(t);if(k)o.push(k)});return o};
  const b=faqData('bn'),e=faqData('en');
  const docs=[...b.map(([c,q,a],i)=>({c,qb:q,ab:a,qe:e[i][1],ae:e[i][2],k:'',go:null})),...kbData()];
  docs.forEach(d=>{d.qt=new Set(toks(d.qb+' '+d.qe+' '+d.k));d.at=new Set(toks(d.ab+' '+d.ae));d.tri=aTri(aNorm(d.qb+' '+d.qe))});
  const df={};docs.forEach(d=>new Set([...d.qt,...d.at]).forEach(t=>df[t]=(df[t]||0)+1));
- return KBX={docs,toks,df,N:docs.length,SYNMAP}}
+ const vocab=Object.keys(df).filter(x=>x[0]!=='~'&&!/^g\d+$/.test(x)&&x.length>=3),syk=Object.keys(SYNMAP);
+ const fuzz=t=>{const mx=t.length>=7?2:1;let best=null,bd=9,bw=0;const tw=(w,res,wt)=>{if(Math.abs(w.length-t.length)>mx)return;const d=aLev(t,w,mx);if(d<=mx&&(d<bd||(d===bd&&wt>bw))){bd=d;best=res;bw=wt}};syk.forEach(w=>tw(w,{g:SYNMAP[w]},5));vocab.forEach(w=>tw(w,{t:w},df[w]||0));return best};
+ const words=q=>{const m=new Map();aNorm(q).split(' ').forEach(w=>{if(!w||STOPW.has(w))return;let t=aStem(w),g=SYNMAP[t],k='';if(!g){k=sk(t);if(!df[t]&&t.length>=4){const f=fuzz(t);if(f){if(f.g)g=f.g;else t=f.t}}}const key=g||t;if(!m.has(key))m.set(key,{t:key,k:g?'':k})});return[...m.values()]};
+ return KBX={docs,toks,df,N:docs.length,SYNMAP,words}}
 function kbScore(q){
- const X=kbIndex(),qt=new Set(X.toks(q)),nq=aNorm(q),tq=aTri(nq);
- return X.docs.map(d=>{let tot=0,hit=0;qt.forEach(t=>{const w=Math.log(1+X.N/(1+(X.df[t]||0)));tot+=w;if(d.qt.has(t))hit+=w;else if(d.at.has(t))hit+=w*.45});
-  const cov=tot?hit/tot:0,sc=qt.size?(.75*cov+.25*aDice(tq,d.tri)):0;return{d,sc}}).sort((a,b)=>b.sc-a.sc)}
+ const X=kbIndex(),W=X.words(q),nq=aNorm(q),tq=aTri(nq),wt=x=>Math.log(1+X.N/(1+(X.df[x]||0)));
+ return X.docs.map(d=>{const dw=d.qw||(d.qw=[...d.qt].reduce((a,x)=>a+wt(x),0));let tot=0,hit=0,hq=0;W.forEach(({t,k})=>{const w=Math.max(wt(t),k?wt(k)*.9:0);tot+=w;let h=0,qq=0;[[t,1],[k,.9]].forEach(([x,f])=>{if(!x)return;if(d.qt.has(x)){h=Math.max(h,wt(x)*f);qq=Math.max(qq,wt(x))}else if(d.at.has(x))h=Math.max(h,wt(x)*f*.45)});hit+=Math.min(h,w);hq+=qq});
+  const cov=tot?hit/tot:0,pr=dw?Math.sqrt(Math.min(1,hq/dw)):0,sc=W.length?(.65*cov+.2*pr+.15*aDice(tq,d.tri)):0;return{d,sc}}).sort((a,b)=>b.sc-a.sc)}
 function entityMatch(q){
  const X=kbIndex(),nq=aNorm(q),qs=new Set(nq.split(' ').filter(Boolean).map(aStem)),tq=aTri(nq),out=[];
  const seen=lsRead('x')||null;
@@ -2736,7 +2746,7 @@ function entityMatch(q){
  const sn=seenIds();((lsRead('chars')||{}).list||[]).forEach(x=>{if(x&&x.name&&(!x.unlock||sn[x.unlock]))push('char',x.id,x.name,x.series||'','chars')});
  return out.sort((a,b)=>b.sc-a.sc).slice(0,3)}
 const aEsc=esc;
-function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
+function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e,x])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com${x?'?subject='+encodeURIComponent('FrangowstAi')+'&body='+encodeURIComponent(x):''}">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
 const aSay=()=>`<button type=button class=say data-say aria-label="${T('শুনুন','Listen')}">${ic('vol')}<span>${T('শুনুন','Listen')}</span></button>`;
 const aAns=(text,go,extra)=>`<div data-sayt>${aEsc(text)}</div>${aLinks(go)}${extra||''}`;
 function catCtx(){
@@ -2755,50 +2765,204 @@ async function aiAsk(q,ctx){
  if(!r.ok)throw new Error('ai');const j=await r.json(),a=String(j.a||'').slice(0,900);
  if(a){ac[ck]=a;const ks=Object.keys(ac);if(ks.length>30)delete ac[ks[0]];LS.set('akAiC',ac)}return a}
 async function wikiAnswer(q){
- const key='akWk2:'+language+':'+aNorm(q);
- try{const c=sessionStorage.getItem(key);if(c)return JSON.parse(c)}catch{}
+ const key='akWk3:'+language+':'+aNorm(q);
+ try{const c=sessionStorage.getItem(key);if(c&&c!=='null')return JSON.parse(c)}catch{}
  const toks=aNorm(q).split(' ').filter(w=>w.length>=3&&!STOPW.has(w)).map(aStem);
+ const cut=t=>{let x=String(t||'').trim();if(x.length>=430){const k=Math.max(x.lastIndexOf('।'),x.lastIndexOf('. '));if(k>150)x=x.slice(0,k+1)}return x};
+ const okTxt=(title,ex)=>{if(!ex)return false;if(/may refer to|disambiguation|বোঝাতে পারে|নির্দেশ করতে পারে/i.test(String(ex).slice(0,200)))return false;if(toks.length&&!toks.some(t=>aNorm(title+' '+ex).includes(t)))return false;return true};
  let out=null;
  for(const lang of(language==='en'?['en']:['bn','en'])){
   try{const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=3&prop=extracts&exintro=1&explaintext=1&exchars=450&format=json&origin=*`;
-   const r=await fetch(u);if(!r.ok)continue;const j=await r.json(),ps=Object.values((j.query&&j.query.pages)||{}).sort((x,y)=>(x.index||9)-(y.index||9));
-   for(const p of ps){if(!p.extract)continue;const hay=aNorm(p.title+' '+p.extract);
-    if(/may refer to|disambiguation|বোঝাতে পারে|নির্দেশ করতে পারে/i.test(p.extract.slice(0,200)))continue;
-    if(toks.length&&!toks.some(t=>hay.includes(t)))continue;
-    let x=p.extract.trim();if(x.length>=430){const k=Math.max(x.lastIndexOf('।'),x.lastIndexOf('. '));if(k>150)x=x.slice(0,k+1)}out={x};break}
-   if(out)break}catch{}}
- try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}return out}
+   const r=await tmo(fetch(u),9000);if(r.ok){const j=await r.json(),ps=Object.values((j.query&&j.query.pages)||{}).sort((x,y)=>(x.index||9)-(y.index||9));
+    for(const p of ps){if(okTxt(p.title,p.extract)){out={x:cut(p.extract)};break}}}}catch{}
+  if(out)break;
+  try{const o=await tmo(fetch(`https://${lang}.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(q)}&limit=3&namespace=0&format=json&origin=*`),9000);
+   const j=o.ok?await o.json():[],ts=j[1]||[];
+   for(const ti of ts){const r=await tmo(fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(ti)}`),9000);if(!r.ok)continue;const p=await r.json();if(p.type==='disambiguation')continue;if(okTxt(ti,p.extract)){out={x:cut(p.extract)};break}}}catch{}
+  if(out)break}
+ if(out){try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}}
+ return out}
+// ================= FrangowstAi ব্রেইন (সব লোকাল, ০ Firebase রিড/রাইট) =================
+const BNUM='০১২৩৪৫৬৭৮৯';
+const aDig=s=>String(s).replace(/[০-৯]/g,c=>BNUM.indexOf(c));
+const SKM={'ক':'k','খ':'k','গ':'g','ঘ':'g','ঙ':'n','চ':'c','ছ':'c','জ':'j','ঝ':'j','ঞ':'n','ট':'t','ঠ':'t','ড':'d','ঢ':'d','ণ':'n','ত':'t','থ':'t','দ':'d','ধ':'d','ন':'n','প':'p','ফ':'p','ব':'b','ভ':'b','ম':'m','য':'j','র':'r','ল':'l','শ':'s','ষ':'s','স':'s','ৎ':'t','ং':'n'};
+/* বাংলা ও Banglish একই "ব্যঞ্জন কাঠামো"-তে নামিয়ে মেলানো: কিনব = kinbo = knb */
+function aSkel(w){
+ if(/[\u0980-\u09FF]/.test(w)){
+  w=w.replace(/\u09A1\u09BC|\u09DC/g,'র').replace(/\u09A2\u09BC|\u09DD/g,'র').replace(/\u09AF\u09BC|\u09DF/g,'').replace(/\u09BC/g,'');
+  let o='';for(const ch of w)if(SKM[ch])o+=SKM[ch];
+  return o.replace(/(.)\1+/g,'$1')}
+ w=w.toLowerCase().replace(/ph/g,'p').replace(/f/g,'p').replace(/bh/g,'b').replace(/dh/g,'d').replace(/th/g,'t').replace(/kh/g,'k').replace(/gh/g,'g').replace(/sh/g,'s').replace(/ch/g,'C').replace(/jh/g,'j').replace(/c/g,'k').replace(/C/g,'c').replace(/q/g,'k').replace(/x/g,'ks').replace(/z/g,'j').replace(/v/g,'b').replace(/w/g,'b');
+ return w.replace(/[aeiouyh0-9]/g,'').replace(/(.)\1+/g,'$1')}
+/* বানান ভুল ঠিক করতে: Damerau-Levenshtein (সর্বোচ্চ mx ভুল) */
+function aLev(a,b,mx){const n=a.length,m=b.length;if(Math.abs(n-m)>mx)return mx+1;let p2=null,p=Array.from({length:m+1},(_,j)=>j);
+ for(let i=1;i<=n;i++){const c=[i];let mn=i;for(let j=1;j<=m;j++){let v=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])v=Math.min(v,p2[j-2]+1);c[j]=v;if(v<mn)mn=v}
+  if(mn>mx)return mx+1;p2=p;p=c}return p[m]}
+/* নিরাপদ ক্যালকুলেটর (eval ছাড়া) */
+function aCalcEval(s){let i=0;const ws=()=>{while(s[i]===' ')i++};
+ const num=()=>{ws();let neg=1;while(s[i]==='-'||s[i]==='+'){if(s[i]==='-')neg=-neg;i++;ws()}
+  if(s[i]==='('){i++;const v=add();ws();if(s[i]!==')')throw 0;i++;return neg*v}
+  const m=/^\d+(\.\d+)?|^\.\d+/.exec(s.slice(i));if(!m)throw 0;i+=m[0].length;return neg*parseFloat(m[0])};
+ const mul=()=>{let v=num();for(;;){ws();const c=s[i];if(c==='*'){i++;v*=num()}else if(c==='/'){i++;v/=num()}else return v}};
+ const add=()=>{let v=mul();for(;;){ws();const c=s[i];if(c==='+'){i++;v+=mul()}else if(c==='-'){i++;v-=mul()}else return v}};
+ const r=add();ws();if(i<s.length)throw 0;return r}
+function aCalc(q){
+ let s=aDig(q).toLowerCase().replace(/,/g,'');
+ let m=s.match(/(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent)\s*(?:of|এর|er)?\s*(\d+(?:\.\d+)?)/);
+ let r=null,ex='';
+ const m2=s.match(/(\d+(?:\.\d+)?)\s*(?:এর|er|of)\s*(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent)/);
+ if(m){r=+m[1]/100*+m[2];ex=m[1]+'% × '+m[2]}
+ else if(m2){r=+m2[2]/100*+m2[1];ex=m2[2]+'% × '+m2[1]}
+ else{
+  s=s.replace(/(\d)\s*[x×]\s*(\d)/g,'$1*$2').replace(/÷/g,'/').replace(/(^| )(plus|যোগ|jog)( |$)/g,' + ').replace(/(^| )(minus|বিয়োগ|biyog)( |$)/g,' - ').replace(/(^| )(times|multiplied by|multiply|গুণ|gun|into)( |$)/g,' * ').replace(/(^| )(divided by|ভাগ|bhag|vag)( |$)/g,' / ');
+  const rest=s.replace(/[0-9+\-*/().\s=?]/g,'').replace(/(calculate|calc|what|is|equals|answer|result|কত|হবে|হিসাব|করো|কর|কী|কি|koto|hobe|ans|দেখাও)/g,'').trim();
+  if(rest)return null;
+  const e=s.replace(/[=?]/g,' ').replace(/(calculate|calc|what|is|equals|answer|result|কত|হবে|হিসাব|করো|কর|কী|কি|koto|hobe|ans|দেখাও)/g,' ').replace(/\s+/g,' ').trim();
+  if(!/\d/.test(e)||!/\d\s*[+\-*/]\s*[-+(]?\s*[\d.(]/.test(e))return null;
+  try{r=aCalcEval(e)}catch{return null}ex=e.replace(/\*/g,'×').replace(/\//g,'÷')}
+ if(r===null)return null;
+ if(!isFinite(r))return T('শূন্য দিয়ে ভাগ করা যায় না।','You cannot divide by zero.');
+ return ex+' = '+(Math.round(r*1e6)/1e6)}
+const aRx=(...w)=>new RegExp('(^| )('+w.join('|')+')');
+const RX={
+ price:aRx('দাম','মূল্য','প্রাইস','price','cost','dam','mulyo','koto taka','কত টাকা','how much','কত দাম'),
+ newest:aRx('নতুন','সর্বশেষ','latest','newest','recent','notun','natun','whats new','what s new','কী এসেছে','কি এসেছে','ki esece','ki eseche'),
+ pop:aRx('জনপ্রিয়','popular','trending','most viewed','বেশি দেখা','সেরা','sera','jonopriyo','top','best'),
+ rec:aRx('কী পড়ব','কি পড়ব','কী পড়বো','কি পড়বো','কী দেখব','কি দেখব','কী দেখবো','কি দেখবো','কোনটা পড়ব','কোনটা দেখব','suggest','recommend','রেকমেন্ড','সাজেস্ট','what should i','something to read','something to watch','ki porbo','ki dekhbo','konta porbo','konta dekhbo','bored','বোর','একঘেয়ে','মন খারাপ','mon kharap','sad','lonely'),
+ cheap:aRx('সস্তা','cheapest','cheap','কম দামে','কমদামি','shosta'),
+ exp:aRx('সবচেয়ে দামি','দামি','most expensive','expensive'),
+ free:aRx('ফ্রি','free','বিনামূল্যে','binamulle','frie'),
+ lst:aRx('কী কী','কি কি','কোন কোন','কোনগুলো','তালিকা','list','show','দেখাও','dekhao','which','what','ki ki'),
+ cnt:aRx('কতগুলো','কয়টি','কয়টা','কত টি','how many','count','total','koyta','koyti')
+};
+const AIC={q:'',ent:null,t:0};
+const aMem=(q,ent)=>{AIC.q=q||'';AIC.ent=ent||null;AIC.t=Date.now()};
+const aPick=a=>a[Math.floor(Math.random()*a.length)];
+const aChips=a=>`<div class=as-rel>${a.map(([b,e])=>`<button type=button class=as-chip data-ask="${aEsc(T(b,e))}">${aEsc(T(b,e))}</button>`).join('')}</div>`;
+const aKindL=()=>({comic:T('কমিকস','Comic'),video:T('ভিডিও','Video'),char:T('ক্যারেক্টার','Character'),series:T('সিরিজ','Series')});
+const aCardsH=a=>`<div class=as-cards>${a.map(x=>`<button type=button class=as-card data-find="${aEsc(x.title)}" data-to="${x.go}"><span>${aKindL()[x.kind]}</span><b>${aEsc(x.title)}</b><small>${aEsc(x.meta)}</small></button>`).join('')}</div>`;
+const aFree=x=>!!x.free||!(+x.price>0);
+const aPr=x=>aFree(x)?T('ফ্রি','Free'):bn(x.price)+' '+T('টাকা','BDT');
+function aCat(){const cs=(lsRead('comics')||[]).filter(x=>x&&x.title),vs=((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title),hs=((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name);return{cs,vs,hs}}
+const aMkC=c=>({kind:'comic',id:c.id,title:c.title,go:'comics',raw:c,meta:aPr(c)+(c.orig?' · '+T('অরিজিনাল','Original'):'')});
+const aMkV=v=>({kind:'video',id:v.id,title:v.title,go:'videos',raw:v,meta:aPr(v)+' · '+owner(v)});
+const aVN=id=>{try{return+JSON.parse(localStorage['ak_vvc_'+id]).n||0}catch{return 0}};
+const aDayHash=s=>{let h=0;const k=s+new Date().toDateString();for(let i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))|0;return Math.abs(h)%1000/1000};
+/* ক্যাটালগ থেকে এন্টিটি (কমিকস/ভিডিও/ক্যারেক্টার/সিরিজ) খোঁজা — ক্যাশ থেকে, নতুন রিড ছাড়া */
+function aEnt(q){
+ const nq=aNorm(q),qs=new Set(nq.split(' ').filter(Boolean).map(aStem)),tq=aTri(nq),out=[],{cs,vs,hs}=aCat();
+ const push=(kind,id,title,meta,go,raw)=>{const nt=aNorm(title);if(!nt)return;const tt=nt.split(' ').filter(Boolean).map(aStem);let h=0;tt.forEach(t=>{if(qs.has(t))h++});
+  const cov=tt.length?h/tt.length:0,dc=aDice(tq,aTri(nt)),sc=Math.max(cov*.9+(h?.1:0),dc*.85);if(sc>=.55&&(h>0||dc>=.6))out.push({kind,id,title,meta,go,raw,sc})};
+ cs.forEach(c=>{const x=aMkC(c);push('comic',x.id,x.title,x.meta,'comics',c)});
+ vs.forEach(v=>{const x=aMkV(v);push('video',x.id,x.title,x.meta,'videos',v)});
+ const sn=seenIds();hs.forEach(x=>{if(!x.unlock||sn[x.unlock])push('char',x.id,x.name,x.series||'','chars',x)});
+ const sm={};cs.forEach(c=>{if(c.series){const o=sm[c.series]=sm[c.series]||{n:0,go:'comics'};o.n++}});vs.forEach(v=>{if(v.series){const o=sm[v.series]=sm[v.series]||{n:0,go:'videos'};o.n++}});
+ Object.entries(sm).forEach(([n,o])=>push('series',n,n,bn(o.n)+' '+T('পর্ব','episodes'),o.go,{n:o.n}));
+ return out.sort((a,b)=>b.sc-a.sc).slice(0,3)}
+const aEntFact=e=>{const r=e.raw||{};
+ if(e.kind==='comic')return T(`“${e.title}” একটি ${r.orig?'অরিজিনাল ':''}কমিকস। দাম: ${aPr(r)}${aFree(r)?' — কোড লাগবে না':''}।`,`“${e.title}” is ${r.orig?'an Original ':'a '}comic. Price: ${aPr(r)}${aFree(r)?' — no code needed':''}.`);
+ if(e.kind==='video')return T(`“${e.title}” একটি ভিডিও। দাম: ${aPr(r)}${r.dur?' · সময়: '+vFmt(r.dur):''}।`,`“${e.title}” is a video. Price: ${aPr(r)}${r.dur?' · Length: '+vFmt(r.dur):''}.`);
+ if(e.kind==='char')return T(`${e.title}${r.series?' — সিরিজ: '+r.series:''}${r.desc?'। '+String(r.desc).slice(0,220):''}`,`${e.title}${r.series?' — series: '+r.series:''}${r.desc?'. '+String(r.desc).slice(0,220):''}`);
+ return T(`“${e.title}” সিরিজে এখন ${bn(r.n||0)}টি পর্ব আছে।`,`The series “${e.title}” currently has ${r.n||0} episodes.`)};
+/* ছোট কথাবার্তা + ইউটিলিটি (ক্যালকুলেটর, তারিখ, সময়) */
+function aSmall(q,nq,nw){
+ const cap=[['কী কী কমিকস আছে?','What comics are there?'],['নতুন কী এসেছে?','What is new?'],['কী পড়ব সাজেস্ট করো','Suggest what to read'],['আমার স্ট্রিক কত?','What is my streak?'],['১২ × ১৫ কত?','12 x 15 = ?']];
+ if(/^(hi+|hello|hey|hlw|helo|hola|salam|assalamualaikum|assalamu alaikum|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)( |$)/.test(nq)&&nw<=4||/(good morning|good afternoon|good evening|subho sokal|subho shokal|শুভ সকাল|সুপ্রভাত|শুভ সন্ধ্যা|শুভ অপরাহ্ন)/.test(nq)&&nw<=4){
+  const hr=new Date().getHours(),g=hr<12?T('শুভ সকাল','Good morning'):hr<17?T('শুভ অপরাহ্ন','Good afternoon'):T('শুভ সন্ধ্যা','Good evening');
+  return aAns(g+'! '+T('আমি FrangowstAi। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','I am FrangowstAi. Ask me about comics, videos, codes, payments or the app.'),null,aChips(cap.slice(0,3)))}
+ if(/(good night|শুভ রাত্রি|শুভ রাত্রি|subho ratri)/.test(nq)&&nw<=4)return aAns(T('শুভ রাত্রি! ভালো ঘুম হোক। কাল আবার দেখা হবে।','Good night! Sleep well. See you tomorrow.'));
+ if(nw<=6){
+  if(/(^| )(ধন্যবাদ|থ্যাঙ্কস|থ্যাংক|thanks|thank you|thx|dhonnobad|dhonyobad|shukriya)( |$)/.test(nq))return aAns(aPick([T('আপনাকেও ধন্যবাদ! আর কিছু জানতে চাইলে জিজ্ঞেস করুন।','Thank you too! Ask me anything else you would like to know.'),T('সানন্দে! আর কিছু লাগলে বলুন।','Happy to help! Tell me if you need anything else.')]));
+  if(/(^| )(বিদায়|বাই|bye|goodbye|খোদা হাফেজ|allah hafez|tata)( |$)/.test(nq))return aAns(T('ধন্যবাদ! আবার দেখা হবে। কমিকস পড়ুন, ভালো থাকুন।','Thanks! See you again. Enjoy the comics and take care.'));
+  if(/(কেমন আছ|how are you|kemon acho|kemon achen|kemon aso|kemon asen)/.test(nq))return aAns(T('আমি ভালো আছি, ধন্যবাদ! আপনি আকানো নিয়ে কী জানতে চান?','I am doing well, thanks! What would you like to know about Akano?'));
+  if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe|hmm|hm)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'));
+  if(/(তোমার নাম|আপনার নাম|your name|apnar nam|tomar nam|tumi ke|apni ke|who are you|what are you)/.test(nq))return aAns(T('আমি FrangowstAi, আকানোর সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট ও অ্যাপ নিয়ে আপনাকে সাহায্য করি।','I am FrangowstAi, Akano\u2019s assistant. I help with comics, videos, codes, payments and the app.'),null,aChips(cap.slice(0,3)));
+  if(/(কে বানিয়েছে|কে তৈরি করেছে|তোমাকে কে|who made you|who created you|who built you|tomake ke baniyeche|tomake ke)/.test(nq))return aAns(T('আমি Frangowst-এর আকানো অ্যাপের জন্য তৈরি সহকারী FrangowstAi।','I am FrangowstAi, the assistant built for Frangowst\u2019s Akano app.'));
+  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস/ভিডিওর দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell prices and lists of comics/videos, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date and look up general questions online.'),null,aChips(cap))
+  if(/^(wow|nice|great|awesome|good job|well done|darun|দারুণ|অসাধারণ|সুন্দর|ভালো|valo|bhalo|osadharon|perfect|cool|smart|জিনিয়াস|genius)( |$)/.test(nq)&&nw<=4)return aAns(aPick([T('ধন্যবাদ! আপনার ভালো লাগলে আমারও ভালো লাগে।','Thank you! I am glad you liked it.'),T('অনেক ধন্যবাদ! আর কিছু জানতে চাইলে বলুন।','Thanks a lot! Ask me if you want to know more.')]));
+  if(/(বোকা|stupid|idiot|useless|dumb|ফালতু|faltu|বাজে)/.test(nq)&&nw<=5)return aAns(T('দুঃখিত, ভালো উত্তর দিতে পারিনি। প্রশ্নটা অন্যভাবে লিখে দেখবেন? আমি চেষ্টা করব।','Sorry I could not answer well. Could you rephrase it? I will try again.'),null,aChips(cap.slice(0,3)));
+  if(/(i love you|ভালোবাসি|valobashi|love you)/.test(nq))return aAns(T('ধন্যবাদ! আমি একটি এআই, তবে কমিকস পড়ার সঙ্গী হতে পারি।','Thank you! I am an AI, but I can be your companion for comics.'));
+  if(/(জোক|joke|মজার|funny|hasao|হাসাও)/.test(nq))return aAns(aPick([T('শিক্ষক: কমিকস পড়লে কী হয়? ছাত্র: স্যার, পেজ শেষ হয়, কিন্তু মন ভরে না!','Teacher: what happens when you read comics? Student: the pages end, but I never get enough!'),T('আমি কমিকসের চরিত্র হতে চেয়েছিলাম, কিন্তু প্যানেলে জায়গা পাইনি!','I wanted to be a comic character, but there was no room in the panel!'),T('ভালো গল্পের মতো ভালো শ্রোতাও দুর্লভ।','A good listener is as rare as a good story.')]))}
+ const c=aCalc(q);if(c)return aAns(c);
+ if(/(তারিখ|date|tarikh|taarikh)/.test(nq)&&/(আজ|আজকে|today|aj|ajke|এখন|now|current|কত|what|koto)/.test(nq)){let d;try{d=new Date(nowT()).toLocaleDateString(language==='en'?'en-GB':'bn-BD',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch{d=new Date().toDateString()}return aAns(T('আজ ','Today is ')+d+T('।','.'))}
+ if(/(কয়টা বাজে|কটা বাজে|সময় কত|what time|current time|time now|koyta baje|kota baje|somoy koto)/.test(nq)){let t;try{t=new Date(nowT()).toLocaleTimeString(language==='en'?'en-US':'bn-BD',{hour:'2-digit',minute:'2-digit'})}catch{t=new Date().toLocaleTimeString()}return aAns(T('এখন সময় ','The time now is ')+t+T('।','.'))}
+ return null}
+/* আপনার নিজের তথ্য (শুধু ফোনের লোকাল ডেটা থেকে) */
+function aPersonal(nq,qt,K){
+ const mine=/(আমার|amar|^আমি| my |^my |^ami )/.test(' '+nq);
+ if(/(স্ট্রিক|streak|strik)/.test(nq)&&(mine||/(কত|koto|how|current|বর্তমান)/.test(nq))){const s=stGet(),c=curStreak(s),b=Math.max(s.best||0,c);
+  return aAns(T(`আপনার বর্তমান স্ট্রিক ${bn(c)} দিন${b>c?`, সর্বোচ্চ ${bn(b)} দিন`:''}। এ পর্যন্ত ${bn(Object.keys(s.read).length)}টি কমিকস পড়েছেন ও ${bn(Object.keys(s.watch).length)}টি ভিডিও দেখেছেন।`,`Your current streak is ${c} day${c===1?'':'s'}${b>c?`, best ${b}`:''}. You have read ${Object.keys(s.read).length} comics and watched ${Object.keys(s.watch).length} videos so far.`),[['badges','ব্যাজ দেখুন','See badges']])}
+ if(mine&&/(লাইব্রেরি|library|কেনা|purchased|মেয়াদ|expire|বাকি|baki|kena)/.test(nq)){const nw=nowT(),act=Object.values(lib).filter(o=>o&&o.e>nw).sort((a,b)=>a.e-b.e);
+  if(!act.length)return aAns(T('আপনার লাইব্রেরিতে এখন কোনো চালু কমিকস বা ভিডিও নেই।','You have no active comics or videos in your library right now.'),[['lib','লাইব্রেরি','Library']]);
+  return aAns(T('আপনার লাইব্রেরি: ','Your library: ')+act.slice(0,5).map(o=>`${o.t} — ${bn(Math.ceil((o.e-nw)/864e5))} ${T('দিন বাকি','days left')}`).join(' | '),[['lib','লাইব্রেরি খুলুন','Open library']])}
+ if(mine&&/(তালিকা|list|ফেভারিট|favou?rite|bookmark|বুকমার্ক|প্রিয়)/.test(nq)){return aAns(T(`আপনার তালিকায় ${bn(fav.c.length)}টি কমিকস ও ${bn(fav.h.length)}টি ক্যারেক্টার আছে।`,`Your list has ${fav.c.length} comics and ${fav.h.length} characters.`),[['favs','আমার তালিকা','My List']])}
+ if(/(কোথায় ছিলাম|কোথায় থেমেছিলাম|শেষ কোথায়|চালিয়ে যা|continue reading|where did i stop|last read|kothay chilam)/.test(nq)){const nw=nowT(),a=Object.values(prog).filter(x=>x&&x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];
+  if(!a)return aAns(T('চালিয়ে যাওয়ার মতো কোনো অসমাপ্ত কমিকস পাইনি।','I did not find an unfinished comic to continue.'));
+  return aAns(T(`আপনি “${a.t}”-এর ${bn(a.p+1)}/${bn(a.n)} পেজে ছিলেন।`,`You stopped “${a.t}” at page ${a.p+1}/${a.n}.`),null,`<div class=as-act><button type=button class=as-a data-cont="${a.k}:${aEsc(a.ref)}">${T('পড়া চালিয়ে যান','Continue reading')}${ic('chev')}</button></div>`)}
+ return null}
+/* ক্যাটালগ বুদ্ধি: দাম, নতুন, জনপ্রিয়, ফ্রি, সস্তা/দামি, সাজেশন */
+function aCatalog(q,nq,qt,K,ent,nw,E){
+ const {cs,vs}=aCat(),both=!K.c&&!K.v;
+ if(E&&E.sc>=.6&&E.kind==='series'&&(RX.cnt.test(nq)||/(পর্ব|episode|part)/.test(nq)))return aAns(aEntFact(E),null,aCardsH([E]));
+ if(E&&E.sc>=.6&&RX.price.test(nq)){const r=E.raw||{};
+  return aAns(E.kind==='series'?aEntFact(E):E.kind==='char'?aEntFact(E):T(`“${E.title}”-এর দাম: ${aPr(r)}${aFree(r)?' — কোড ছাড়াই পড়া/দেখা যায়':''}।`,`Price of “${E.title}”: ${aPr(r)}${aFree(r)?' — no code needed':''}.`),null,aCardsH([E]))}
+ let popArr=null;
+ if(RX.pop.test(nq)&&(!both||nw<=4)){popArr=[...(K.v&&!K.c?[]:cs.map(c=>({...aMkC(c),n:+c.views||0}))),...(K.c&&!K.v?[]:vs.map(v=>({...aMkV(v),n:aVN(v.id)})))].filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,3);
+  if(popArr.length)return aAns(T('এখন সবচেয়ে বেশি দেখা:','Most viewed right now:'),null,aCardsH(popArr.map(x=>({...x,meta:bn(x.n)+' '+T('ভিউ','views')+' · '+x.meta}))))}
+ if((RX.rec.test(nq)||(popArr&&!popArr.length))&&(nw<=7)){
+  const seen=seenIds(),st=stGet(),readSeries=new Set(cs.filter(c=>seen[c.id]&&c.series).map(c=>c.series));
+  const sc=c=>(seen[c.id]?-3:0)+(c.orig?1:0)+(aFree(c)?.6:0)+(readSeries.has(c.series)?1.5:0)+(fav.c.includes(c.id)?-1:0)+aDayHash(c.title)*.9;
+  const pc=[...cs].sort((a,b)=>sc(b)-sc(a)).slice(0,K.v&&!K.c?0:3).map(c=>({...aMkC(c),meta:aMkC(c).meta+(readSeries.has(c.series)&&!seen[c.id]?' · '+T('আপনার পড়া সিরিজের','From a series you read'):'')}));
+  const pv=[...vs].filter(v=>!st.watch[v.id]).sort((a,b)=>aDayHash(b.title)-aDayHash(a.title)).slice(0,K.c&&!K.v?0:2).map(aMkV);
+  const all=[...pc,...pv];if(!all.length)return null;
+  const pre=/(বোর|bored|একঘেয়ে|মন খারাপ|mon kharap|sad|lonely)/.test(nq)?T('মন ভালো করতে একটু গল্প হয়ে যাক! ','Let us lift the mood with a story! '):'';
+  return aAns(pre+T('আপনার জন্য কিছু পছন্দ:','Some picks for you:'),null,aCardsH(all)+aChips([['আরও সাজেস্ট করো','Suggest more'],['ফ্রি কী কী আছে?','What is free?']]))}
+ if(RX.cheap.test(nq)||RX.exp.test(nq)){const ex=RX.exp.test(nq)&&!RX.cheap.test(nq);
+  const arr=[...(K.v&&!K.c?[]:cs.filter(c=>!aFree(c)).map(aMkC)),...(K.c&&!K.v?[]:vs.filter(v=>!aFree(v)).map(aMkV))].sort((a,b)=>ex?(+b.raw.price-+a.raw.price):(+a.raw.price-+b.raw.price));
+  if(arr.length)return aAns(ex?T('সবচেয়ে দামিগুলো:','Most expensive:'):T('সবচেয়ে কম দামিগুলো (পেইড):','Cheapest (paid):'),null,aCardsH(arr.slice(0,3)))}
+ if(RX.newest.test(nq)&&(!both||nw<=5)){
+  const arr=[...(K.v&&!K.c?[]:cs.map(aMkC)),...(K.c&&!K.v?[]:vs.map(aMkV))].sort((a,b)=>(+(b.raw.t||b.raw.ct||0))-(+(a.raw.t||a.raw.ct||0))).slice(0,4);
+  if(arr.length)return aAns(T('একদম নতুনগুলো:','Newest arrivals:'),null,aCardsH(arr))}
+ if(RX.free.test(nq)&&(K.c||K.v||nw<=4)&&!qt.has('g1')&&(RX.lst.test(nq)||nw<=3)){
+  const arr=[...(K.v&&!K.c?[]:cs.filter(aFree).map(aMkC)),...(K.c&&!K.v?[]:vs.filter(aFree).map(aMkV))];
+  if(arr.length)return aAns(T(`ফ্রিতে আছে ${bn(arr.length)}টি:`,`${arr.length} free item${arr.length===1?'':'s'}:`),null,aCardsH(arr.slice(0,5)))}
+ const cnt=RX.cnt.test(nq);
+ if(cnt){const w=[];if(K.c&&cs.length)w.push(T(`${bn(cs.length)}টি কমিকস`,`${cs.length} comics`));if(K.v&&vs.length)w.push(T(`${bn(vs.length)}টি ভিডিও`,`${vs.length} videos`));const hc=aCat().hs.length;if(K.h&&hc)w.push(T(`${bn(hc)}টি ক্যারেক্টার`,`${hc} characters`));
+  if(w.length)return aAns(T('এখন অ্যাপে আছে: ','Right now the app has: ')+w.join(', ')+T('।','.'))}
+ if(!cnt&&RX.lst.test(nq)&&!qt.has('g0')&&!qt.has('g18')&&(K.c||K.v||K.h)){
+  const en=language==='en',L=(a,n)=>a.length?(n+': '+a.slice(0,10).join(', ')+(a.length>10?(en?' and more':' ও আরও'):'')):'',w=[],{hs}=aCat();
+  if(K.c)w.push(L(cs.map(x=>x.title),T('কমিকস','Comics')));if(K.v)w.push(L(vs.map(x=>x.title),T('ভিডিও','Videos')));if(K.h)w.push(L(hs.map(x=>x.name),T('ক্যারেক্টার','Characters')));
+  const ww=w.filter(Boolean);if(ww.length)return aAns(ww.join(' | '),[[K.c?'comics':K.v?'videos':'chars','সবগুলো দেখুন','See all']])}
+ return null}
 async function asAnswer(q){
- const nq=aNorm(q);
- if(/^(hi|hello|hey|hlw|salam|assalamualaikum|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)(\s|$)/.test(nq)&&nq.split(' ').length<=3)return aAns(T('হ্যালো! আমি আকানো সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','Hello! I am the Akano assistant. Ask me about comics, videos, codes, payments or the app.'));
- if(nq.split(' ').length<=5){
-   if(/(^| )(ধন্যবাদ|থ্যাঙ্কস|থ্যাংক|thanks|thank you|thx|dhonnobad|dhonyobad|shukriya)( |$)/.test(nq))return aAns(T('আপনাকেও ধন্যবাদ! আর কিছু জানতে চাইলে জিজ্ঞেস করুন।','Thank you too! Ask me anything else you would like to know.'));
-   if(/(^| )(বিদায়|বাই|bye|goodbye|খোদা হাফেজ|allah hafez|tata)( |$)/.test(nq))return aAns(T('ধন্যবাদ! আবার দেখা হবে। কমিকস পড়ুন, ভালো থাকুন।','Thanks! See you again. Enjoy the comics and take care.'));
-   if(/(কেমন আছ|কেমন আছেন|কেমন আছো|how are you|kemon acho|kemon achen|kemon aso)/.test(nq))return aAns(T('আমি ভালো আছি, ধন্যবাদ! আপনি আকানো নিয়ে কী জানতে চান?','I am doing well, thanks! What would you like to know about Akano?'));
-   if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'))}
+ const nq=aNorm(q),nw=nq.split(' ').filter(Boolean).length;
+ let h=aSmall(q,nq,nw);if(h){aMem('',null);return h}
  const X=kbIndex(),qt=new Set(X.toks(q));
- const cnt=/(কতগুলো|কয়টি|কয়টা|কত টি|how many|count|total)/.test(nq);
- if(cnt){const cm=(lsRead('comics')||[]).length,vd=((lsRead('videos')||{}).list||[]).length,ch=((lsRead('chars')||{}).list||[]).length,w=[];
-  if(qt.has('g6')&&cm)w.push(T(`${bn(cm)}টি কমিকস`,`${cm} comics`));if(qt.has('g5')&&vd)w.push(T(`${bn(vd)}টি ভিডিও`,`${vd} videos`));if(qt.has('g7')&&ch)w.push(T(`${bn(ch)}টি ক্যারেক্টার`,`${ch} characters`));
-  if(w.length)return aAns(T('এখন অ্যাপে আছে: ','Right now the app has: ')+w.join(', ')+'.')}
- if(!cnt&&/(কী কী|কি কি|কোন কোন|কোনগুলো|তালিকা|list|which|what)/.test(nq)&&!qt.has('g0')&&!qt.has('g18')){
-  const en=language==='en',L=(a,n)=>a.length?(n+': '+a.slice(0,10).join(', ')+(a.length>10?(en?' and more':' ও আরও'):'')):'',w=[];
-  if(qt.has('g6'))w.push(L((lsRead('comics')||[]).filter(x=>x&&x.title).map(x=>x.title),T('কমিকস','Comics')));
-  if(qt.has('g5'))w.push(L(((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title).map(x=>x.title),T('ভিডিও','Videos')));
-  if(qt.has('g7'))w.push(L(((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name).map(x=>x.name),T('ক্যারেক্টার','Characters')));
-  const ww=w.filter(Boolean);if(ww.length)return aAns(ww.join(' | '),[[qt.has('g6')?'comics':qt.has('g5')?'videos':'chars','সবগুলো দেখুন','See all']])}
- const ent=entityMatch(q);
- const sc=kbScore(q),top=sc[0],best=top&&top.sc>=.42?top:null;
+ const K={c:/(কমিক|comic|komik)/.test(nq)||qt.has('g6'),v:/(ভিডিও|video|vidio|অ্যানিমেটেড|animated|পর্ব|episode|সিরিজ|series)/.test(nq)||qt.has('g5')||qt.has('g4'),h:/(ক্যারেক্টার|character|চরিত্র|caractar)/.test(nq)||qt.has('g7')};
+ h=aPersonal(nq,qt,K);if(h){aMem('',null);return h}
+ const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(nw<=4||/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
+ let E=ent[0]||null;if(!E&&follow&&AIC.ent&&(RX.price.test(nq)||nw<=3))E=AIC.ent;
+ h=aCatalog(q,nq,qt,K,ent,nw,E);if(h){aMem('',E&&E.sc>=.6?E:null);return h}
+ let sc=kbScore(q),top=sc[0];
+ if((!top||top.sc<.42)&&follow&&AIC.q){const s2=kbScore(AIC.q+' '+q);if(s2[0]&&s2[0].sc>=.5&&s2[0].sc>(top?top.sc:0)+.1){sc=s2;top=s2[0]}}
+ const best=top&&top.sc>=.42?top:null;
  if(ent.length&&(!best||ent[0].sc>=best.sc+.15)){
-  const kindL={comic:T('কমিকস','Comic'),video:T('ভিডিও','Video'),char:T('ক্যারেক্টার','Character')};
-  return `<div data-sayt>${aEsc(T('এগুলো পেয়েছি:','I found these:'))}</div><div class=as-cards>${ent.map(x=>`<button type=button class=as-card data-find="${aEsc(x.title)}" data-to="${x.go}"><span>${kindL[x.kind]}</span><b>${aEsc(x.title)}</b><small>${aEsc(x.meta)}</small></button>`).join('')}</div>`}
+  const e0=ent[0];aMem('',e0);
+  return `<div data-sayt>${aEsc(e0.sc>=.75?aEntFact(e0):T('এগুলো পেয়েছি:','I found these:'))}</div>${aCardsH(ent)}`}
  if(best){
   const d=best.d,en=language==='en',more=sc.slice(1,3).filter(x=>x.sc>=.3&&x.d!==d);
-  return aAns(en?d.ae:d.ab,d.go,more.length?`<div class=as-rel><small>${T('এগুলোও দেখতে পারেন:','You may also like:')}</small>${more.map(x=>`<button type=button class=as-chip data-ask="${aEsc(en?x.d.qe:x.d.qb)}">${aEsc(en?x.d.qe:x.d.qb)}</button>`).join('')}</div>`:'')}
+  let txt=en?d.ae:d.ab;
+  if(/কোডের মেয়াদ|code valid/i.test(d.qb+' '+d.qe)&&/(কবে|পর্যন্ত|until|till|when|expire|শেষ|kobe|porjonto)/.test(nq)){let ds;try{ds=new Date(nowT()+20*864e5).toLocaleDateString(en?'en-GB':'bn-BD',{day:'numeric',month:'long',year:'numeric'})}catch{ds=''}if(ds)txt+=T(' আজ ব্যবহার শুরু করলে ',' If you start today it works until ')+ds+T(' পর্যন্ত চলবে।','.')}
+  aMem(en?d.qe:d.qb,null);
+  const hint=best.sc<.6?`<small class=as-ai>${T('আপনার প্রশ্ন যেন: ','Closest question: ')}${aEsc(en?d.qe:d.qb)}</small>`:'';
+  return aAns(txt,d.go,hint+(more.length?`<div class=as-rel><small>${T('এগুলোও দেখতে পারেন:','You may also like:')}</small>${more.map(x=>`<button type=button class=as-chip data-ask="${aEsc(en?x.d.qe:x.d.qb)}">${aEsc(en?x.d.qe:x.d.qb)}</button>`).join('')}</div>`:''))}
  const ctx=sc.slice(0,3).filter(x=>x.sc>.12).map(x=>(language==='en'?x.d.qe+' — '+x.d.ae:x.d.qb+' — '+x.d.ab));
  try{const a=await aiAsk(q,ctx);if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
+ /* অ্যাপের বাইরের সাধারণ প্রশ্ন: নিজে থেকেই উইকিপিডিয়ায় খুঁজি (Firebase খরচ ০) */
+ const appish=[...qt].some(t=>/^g\d+$/.test(t));
+ if(!appish&&nq.length>=3&&navigator.onLine!==false){try{const r=await wikiAnswer(q);if(r&&r.x){aMem('',null);return aAns(r.x,null,`<small class=as-ai>${T('উইকিপিডিয়া থেকে — ভুল থাকতে পারে','From Wikipedia — may contain mistakes')}</small>`)}}catch{}}
  const sg=sc.slice(0,3).filter(x=>x.sc>.1);
- return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('ইন্টারনেটে খুঁজুন','Search the internet')}</button></div>`)}
+ return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us',q],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('ইন্টারনেটে খুঁজুন','Search the internet')}</button></div>`)}
 /* Ask Akano: নতুন প্রশ্ন-উত্তর সবসময় Ask bar-এর ঠিক ওপরে দেখাবে (বারের নিচে ঢাকা পড়বে না) */
 function asScroll(el){
  if(!el)return;
