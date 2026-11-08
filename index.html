@@ -1699,7 +1699,8 @@ body:has(.aiw) header{background:#faf6f5!important}
 .aiw .asm{scroll-margin-top:90px;scroll-margin-bottom:190px}
 .aiw .asl{padding-bottom:6px}
 /* Ask bar: bottom nav-এর মতো সবসময় নিচে স্থির; কীবোর্ড খুললে কীবোর্ডের ঠিক ওপরে */
-body .aiw #asf.ai-box{position:fixed;left:50%;right:auto;margin:0;transform:translateX(-50%);width:min(94%,560px);box-sizing:border-box;bottom:calc(14px + env(safe-area-inset-bottom,0px) + var(--kb,0px));z-index:30;transition:bottom .15s ease}
+body .aiw #asf.ai-box{position:fixed;left:50%;right:auto;margin:0;transform:translateX(-50%);width:min(94%,560px);box-sizing:border-box;bottom:calc(14px + env(safe-area-inset-bottom,0px) + var(--kb,0px));z-index:7;transition:bottom .15s ease}
+body:has(#m.on) .aiw #asf.ai-box{display:none!important}
 html.nonav body .aiw{padding-bottom:calc(175px + env(safe-area-inset-bottom,0px))}
 .ai-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 10px}
 .ai-card{display:grid;gap:16px;align-content:space-between;min-height:92px;text-align:left;padding:14px;border:1.5px solid #ffe0dc;border-radius:20px;background:#fff;color:#111}
@@ -2746,11 +2747,14 @@ async function aiAsk(q,ctx){
  if(!r.ok)throw new Error('ai');const j=await r.json(),a=String(j.a||'').slice(0,900);
  if(a){ac[ck]=a;const ks=Object.keys(ac);if(ks.length>30)delete ac[ks[0]];LS.set('akAiC',ac)}return a}
 async function wikiAnswer(q){
- const lang=language==='en'?'en':'bn',key='akWk:'+lang+':'+aNorm(q);
+ const key='akWk:'+language+':'+aNorm(q);
  try{const c=sessionStorage.getItem(key);if(c)return JSON.parse(c)}catch{}
- const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=1&prop=extracts%7Cinfo&exintro=1&explaintext=1&exchars=450&inprop=url&format=json&origin=*`;
- const r=await fetch(u);if(!r.ok)throw new Error('wiki');const j=await r.json(),p=j.query&&Object.values(j.query.pages||{})[0];
- const out=p&&p.extract?{t:p.title,x:p.extract,u:p.fullurl}:null;try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}return out}
+ let out=null;
+ for(const lang of(language==='en'?['en']:['bn','en'])){
+  try{const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&exchars=450&format=json&origin=*`;
+   const r=await fetch(u);if(!r.ok)continue;const j=await r.json(),p=j.query&&Object.values(j.query.pages||{})[0];
+   if(p&&p.extract){let x=p.extract.trim();if(x.length>=430){const k=Math.max(x.lastIndexOf('।'),x.lastIndexOf('. '));if(k>150)x=x.slice(0,k+1)}out={x};break}}catch{}}
+ try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}return out}
 async function asAnswer(q){
  const nq=aNorm(q);
  if(/^(hi|hello|hey|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)(\s|$)/.test(nq)&&nq.split(' ').length<=3)return aAns(T('হ্যালো! আমি আকানো সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','Hello! I am the Akano assistant. Ask me about comics, videos, codes, payments or the app.'));
@@ -2776,7 +2780,7 @@ async function asAnswer(q){
  const ctx=sc.slice(0,3).filter(x=>x.sc>.12).map(x=>(language==='en'?x.d.qe+' — '+x.d.ae:x.d.qb+' — '+x.d.ab));
  try{const a=await aiAsk(q,ctx);if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
  const sg=sc.slice(0,3).filter(x=>x.sc>.1);
- return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<a class="as-chip wk" href="https://www.google.com/search?q=${encodeURIComponent(q)}" target=_blank rel=noopener>${T('ইন্টারনেটে খুঁজুন','Search the internet')}</a></div>`)}
+ return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('ইন্টারনেটে খুঁজুন','Search the internet')}</button></div>`)}
 /* Ask Akano: নতুন প্রশ্ন-উত্তর সবসময় Ask bar-এর ঠিক ওপরে দেখাবে (বারের নিচে ঢাকা পড়বে না) */
 function asScroll(el){
  if(!el)return;
@@ -2802,8 +2806,9 @@ async function asAsk(q){
 async function asWiki(btn){
  const box=btn.closest('.asb.a');if(!box)return;const q=btn.dataset.wk;
  box.innerHTML='<div class=as-dots><i></i><i></i><i></i></div>';
- try{const r=await wikiAnswer(q);box.innerHTML=r?`<div data-sayt>${aEsc(r.x)}</div><div class=as-act><a class=as-a href="${aEsc(r.u)}" target=_blank rel=noopener>${T('উইকিপিডিয়া: ','Wikipedia: ')}${aEsc(r.t)}${ic('arrow')}</a></div>`:aAns(T('উইকিপিডিয়ায় কিছু পাওয়া যায়নি।','Nothing found on Wikipedia.'))}
- catch{box.innerHTML=aAns(T('উইকিপিডিয়া এখন খোলা যাচ্ছে না।','Wikipedia is not reachable right now.'))}}
+ try{const r=await wikiAnswer(q);box.innerHTML=r&&r.x?aAns(r.x):aAns(T('এ বিষয়ে ইন্টারনেটেও কিছু পাওয়া যায়নি। অন্যভাবে লিখে চেষ্টা করুন।','I could not find anything about that online. Try rephrasing it.'),[['mail','ইমেইল করুন','Email us']])}
+ catch{box.innerHTML=aAns(T('ইন্টারনেটে এখন খোঁজা যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।','I cannot search online right now. Please try again shortly.'))}
+ asGo(box.closest('.asm'))}
 
 function asFaq(i){
  const it=faqData(language)[i],asl=$('#asl');if(!it||!asl)return;
