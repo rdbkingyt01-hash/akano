@@ -1613,6 +1613,10 @@ html.adg-on{overflow:hidden}
 .as-chip{padding:9px 14px;border:0;border-radius:999px;background:#f2f2f2;color:#111;font-size:13.5px;font-weight:500;text-align:left}
 .as-chip.wk{background:#111;color:#fff}
 a.as-chip{display:inline-block;text-decoration:none}
+.as-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.asb.a.typing>*:not([data-sayt]){display:none}
+.ai-new{display:none;align-self:flex-end;margin:10px 0 0;padding:7px 14px;border:0;border-radius:999px;background:#f4f1f0;color:#333;font-size:13px;font-weight:600}
+.aiw.chat .ai-new{display:block}
 .asl{display:grid;gap:14px;margin:0 0 8px}
 .asm{display:grid;gap:8px}
 .asb{max-width:92%;padding:13px 16px;border-radius:22px;line-height:1.75;font-size:15px;overflow-wrap:anywhere}
@@ -2118,7 +2122,8 @@ function faq(){
  $('#app').innerHTML=`<div class="sec aiw" id=aiw>
   <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>${T('আকানো সহকারী','Ask Akano')}</span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
   <div class=ai-stage><div class=ai-orb><i></i><i></i><i></i></div><h2>${T('আকানো সম্পর্কে যা জানতে চান, জিজ্ঞেস করুন','Ask anything about Akano')}</h2></div>
-  <div class=asl id=asl></div>
+  <button type=button class=ai-new id=aiNew data-new>${T('নতুন চ্যাট','New chat')}</button>
+   <div class=asl id=asl></div>
   <div class=ai-cards>
    <button type=button class=ai-card id=aiCardFaq>${ic('help')}<b>${T('প্রশ্নোত্তর','FAQ')}</b></button>
    <button type=button class=ai-card data-ask="${esc(sug)}">${ic('shelf')}<b>${T('কেনার নিয়ম','How to buy')}</b></button>
@@ -2130,6 +2135,7 @@ function faq(){
   </form></div>`;
  const upd=()=>{const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
  const send=()=>{const v=$('#asq').value;if(!v.trim())return;$('#asq').value='';upd();asAsk(v)};
+ asRestore();
  $('#asf').onsubmit=e=>{e.preventDefault();send()};
  $('#asq').oninput=upd;$('#asq').onfocus=()=>setTimeout(()=>{const l=$('#asl')&&$('#asl').lastElementChild;if(l)asScroll(l)},350);
  $('#aiSpk').onclick=()=>{if($('#asq').value.trim())send();else aiListen($('#aiSpk'),send)};
@@ -2674,7 +2680,9 @@ function pwaBtn(){if(pwaStandalone()||!(window.__pwa||pwaIOS()))return'';return 
 
 // ================= আকানো সহকারী (লোকাল, ০ রিড/রাইট) =================
 const SYN=[['কিনব','কিনি','কেনা','কিনতে','কিনুন','কিন','buy','purchase','order','অর্ডার','kinbo','kinte','kini','kena','kinun'],['কোড','code','pin'],['পেমেন্ট','payment','বিকাশ','নগদ','রকেট','bkash','nagad','rocket','টাকা','taka','price','দাম','মূল্য'],['ফ্রি','free','বিনামূল্যে'],['সিরিজ','series','পর্ব','episode','ep'],['ভিডিও','video','videos','অ্যানিমেটেড','animated','animation'],['কমিকস','comic','comics','কমিক'],['ক্যারেক্টার','character','characters','চরিত্র'],['রিভিউ','review','মতামত','feedback'],['যোগাযোগ','contact','email','ইমেইল','help','সাহায্য','মেইল','mail'],['ইনস্টল','install','অ্যাপ','app','ডাউনলোড'],['অফলাইন','offline'],['ভাষা','language','ইংরেজি','english','বাংলা','bangla','bengali'],['ব্যাজ','badge','badges','streak','স্ট্রিক'],['শেয়ার','share'],['বিজ্ঞাপন','ad','ads','advertisement'],['আকানো','akano','আকানো'],['ডেটা','data','saver','সেভার'],['লাইব্রেরি','library','পারচেজ','purchased'],['কীভাবে','কিভাবে','kivabe','kibhabe','how'],['লক','lock','locked','আনলক','unlock','spoiler','স্পয়লার']];
-const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti']);
+const SYNX={0:['kinar','kenar','nibo','nite','kinbo'],1:['kod'],2:['dam','mulyo','koto','kotto','pay','dibo','bikas','nogod','tk'],3:['binamulle','frie'],4:['porbo','sirij'],5:['vidio','bhidio','vedio'],6:['komiks','komik','comix','kamiks'],7:['caractar','korektar','choritro','charektar'],8:['rivew','matamot','rating'],9:['jogajog','jogajug','sahajjo','sahajyo'],10:['inster','ap'],11:['offlain'],12:['bhasha','vasha'],13:['baj'],14:['sheyar','share'],15:['biggapon','bigyapon','bigapon'],18:['kibhabe','kemne','kmne','kibabe','kivabe'],19:['lok','anlok']};
+Object.keys(SYNX).forEach(i=>SYN[i].push(...SYNX[i]));
+const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti','korbo','korte','kore','hobe','jay','jai','e','te','amar','ami','apni','tumi']);
 const SUFX=['গুলোর','গুলো','গুলি','দের','েরা','ের','কে','তে','টির','টি','টা','র','য়','ে'];
 const aNorm=s=>String(s||'').toLowerCase().replace(/[\u200c\u200d]/g,'').replace(/[^\u0980-\u09FFa-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
 const aStem=w=>{if(/^[a-z0-9]+$/.test(w))return w.length>4?w.replace(/(ing|ed|es|s)$/,''):w;for(const x of SUFX){if(w.length>x.length+1&&w.endsWith(x))return w.slice(0,-x.length)}return w};
@@ -2683,8 +2691,8 @@ const aDice=(a,b)=>{let i=0,n=0,m=0;a.forEach(v=>n+=v);b.forEach(v=>m+=v);if(!n|
 const lsRead=k=>{try{return JSON.parse(localStorage['ak_'+k]).d}catch{return null}};
 function kbData(){return [
  {c:'about',qb:'আকানো কী? আকানো সম্পর্কে বলুন',qe:'What is Akano? Tell me about Akano',k:'akano আকানো পরিচয় about global গ্লোবাল pop culture পপ কালচার entertainment বিনোদন brand ব্র্যান্ড frangowst ফ্রাঙ্গোস্ট company কোম্পানি rdb studio কারা মালিক owner',ab:'আকানো Frangowst-এর একটি পপ কালচার ও বিনোদন ব্র্যান্ড। আমরা গ্লোবাল কমিকস, ভিডিও ও অ্যানিমেটেড সিরিজ প্রকাশ করছি এবং শিল্প, সংস্কৃতি ও বিনোদনের একটি পূর্ণ জগৎ গড়তে চাই।',ae:'Akano is a pop culture and entertainment brand of Frangowst. We publish global comics, videos and animated series, and we want to build a complete world of art, culture and entertainment.',go:[['comics','কমিকস','Comics'],['videos','ভিডিও','Videos']]},
- {c:'about',qb:'আকানো বা Frangowst-এর ফাউন্ডার কে?',qe:'Who is the founder of Akano or Frangowst?',k:'ফাউন্ডার founder প্রতিষ্ঠাতা ceo মালিক owner কে বানিয়েছে তৈরি করেছে কার করেছেন শুরু created creator started behind ahmad shoaib আকানো akano frangowst ফ্রাঙ্গোস্ট',ab:'আকানো ও Frangowst-এর ফাউন্ডার Ahmad Shoaib।',ae:'The founder of Akano and Frangowst is Ahmad Shoaib.'},
- {c:'about',qb:'আকানো-র প্যানেল মেম্বার বা টিমে কারা আছেন?',qe:'Who are the panel members or team of Akano?',k:'প্যানেল panel মেম্বার member সদস্য টিম team স্টাফ staff কারা আছে who ক্রিয়েটর কর্মী পরিচালক director omor faruk ওমর ফারুক abrarul maruf আবরারুল মারুফ',ab:'আকানো-র প্যানেল মেম্বারদের মধ্যে আছেন: Omor Faruk — Chief Visual Director ও Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management ইত্যাদি। ফাউন্ডার Ahmad Shoaib।',ae:'Akano panel members include: Omor Faruk — Chief Visual Director and Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management and more. The founder is Ahmad Shoaib.'},
+ {c:'about',qb:'আকানো বা Frangowst-এর ফাউন্ডার কে?',qe:'Who is the founder of Akano or Frangowst?',k:'protishthata prothisthata malik ফাউন্ডার founder প্রতিষ্ঠাতা ceo মালিক owner কে বানিয়েছে তৈরি করেছে কার করেছেন শুরু created creator started behind ahmad shoaib আকানো akano frangowst ফ্রাঙ্গোস্ট',ab:'আকানো ও Frangowst-এর ফাউন্ডার Ahmad Shoaib।',ae:'The founder of Akano and Frangowst is Ahmad Shoaib.'},
+ {c:'about',qb:'আকানো-র প্যানেল মেম্বার বা টিমে কারা আছেন?',qe:'Who are the panel members or team of Akano?',k:'sodosso shodosso team ke kara প্যানেল panel মেম্বার member সদস্য টিম team স্টাফ staff কারা আছে who ক্রিয়েটর কর্মী পরিচালক director omor faruk ওমর ফারুক abrarul maruf আবরারুল মারুফ',ab:'আকানো-র প্যানেল মেম্বারদের মধ্যে আছেন: Omor Faruk — Chief Visual Director ও Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management ইত্যাদি। ফাউন্ডার Ahmad Shoaib।',ae:'Akano panel members include: Omor Faruk — Chief Visual Director and Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management and more. The founder is Ahmad Shoaib.'},
  {c:'about',qb:'ওমর ফারুক কে? Omor Faruk কে?',qe:'Who is Omor Faruk?',k:'ওমর omor omar ফারুক faruk farooq chief visual director সিনিয়র senior artist আর্টিস্ট শিল্পী ডিরেক্টর ভিজ্যুয়াল visual',ab:'Omor Faruk আকানো-র প্যানেল মেম্বার; তিনি Chief Visual Director ও Senior Artist।',ae:'Omor Faruk is a panel member of Akano; he is the Chief Visual Director and Senior Artist.'},
  {c:'about',qb:'আবরারুল হক মারুফ কে? Abrarul Haque Maruf কে?',qe:'Who is Abrarul Haque Maruf?',k:'আবরারুল abrarul haque haq হক মারুফ maruf marouf event coordinator ইভেন্ট কোঅর্ডিনেটর head budget management বাজেট ম্যানেজমেন্ট',ab:'Abrarul Haque Maruf আকানো-র প্যানেল মেম্বার; তিনি Event Coordinator, Head of Budget Management ইত্যাদি দায়িত্বে আছেন।',ae:'Abrarul Haque Maruf is a panel member of Akano; he serves as Event Coordinator, Head of Budget Management and more.'},
  {c:'about',qb:'আকানো-র অ্যালাই বা ইনিশিয়েটিভ কী? Blue Oak Studio কী?',qe:'What is Akano\u2019s ally or initiative? What is Blue Oak Studio?',k:'অ্যালাই ally allies ইনিশিয়েটিভ initiative উদ্যোগ পার্টনার partner সহযোগী blue oak studio ব্লু ওক ওয়াক স্টুডিও',ab:'আকানো-র অ্যালাই বা ইনিশিয়েটিভ হলো Blue Oak Studio (ব্লু ওক স্টুডিও)।',ae:'Akano\u2019s ally or initiative is Blue Oak Studio.'},
@@ -2747,17 +2755,27 @@ async function aiAsk(q,ctx){
  if(!r.ok)throw new Error('ai');const j=await r.json(),a=String(j.a||'').slice(0,900);
  if(a){ac[ck]=a;const ks=Object.keys(ac);if(ks.length>30)delete ac[ks[0]];LS.set('akAiC',ac)}return a}
 async function wikiAnswer(q){
- const key='akWk:'+language+':'+aNorm(q);
+ const key='akWk2:'+language+':'+aNorm(q);
  try{const c=sessionStorage.getItem(key);if(c)return JSON.parse(c)}catch{}
+ const toks=aNorm(q).split(' ').filter(w=>w.length>=3&&!STOPW.has(w)).map(aStem);
  let out=null;
  for(const lang of(language==='en'?['en']:['bn','en'])){
-  try{const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&exchars=450&format=json&origin=*`;
-   const r=await fetch(u);if(!r.ok)continue;const j=await r.json(),p=j.query&&Object.values(j.query.pages||{})[0];
-   if(p&&p.extract){let x=p.extract.trim();if(x.length>=430){const k=Math.max(x.lastIndexOf('।'),x.lastIndexOf('. '));if(k>150)x=x.slice(0,k+1)}out={x};break}}catch{}}
+  try{const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=3&prop=extracts&exintro=1&explaintext=1&exchars=450&format=json&origin=*`;
+   const r=await fetch(u);if(!r.ok)continue;const j=await r.json(),ps=Object.values((j.query&&j.query.pages)||{}).sort((x,y)=>(x.index||9)-(y.index||9));
+   for(const p of ps){if(!p.extract)continue;const hay=aNorm(p.title+' '+p.extract);
+    if(/may refer to|disambiguation|বোঝাতে পারে|নির্দেশ করতে পারে/i.test(p.extract.slice(0,200)))continue;
+    if(toks.length&&!toks.some(t=>hay.includes(t)))continue;
+    let x=p.extract.trim();if(x.length>=430){const k=Math.max(x.lastIndexOf('।'),x.lastIndexOf('. '));if(k>150)x=x.slice(0,k+1)}out={x};break}
+   if(out)break}catch{}}
  try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}return out}
 async function asAnswer(q){
  const nq=aNorm(q);
- if(/^(hi|hello|hey|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)(\s|$)/.test(nq)&&nq.split(' ').length<=3)return aAns(T('হ্যালো! আমি আকানো সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','Hello! I am the Akano assistant. Ask me about comics, videos, codes, payments or the app.'));
+ if(/^(hi|hello|hey|hlw|salam|assalamualaikum|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)(\s|$)/.test(nq)&&nq.split(' ').length<=3)return aAns(T('হ্যালো! আমি আকানো সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','Hello! I am the Akano assistant. Ask me about comics, videos, codes, payments or the app.'));
+ if(nq.split(' ').length<=5){
+   if(/(^| )(ধন্যবাদ|থ্যাঙ্কস|থ্যাংক|thanks|thank you|thx|dhonnobad|dhonyobad|shukriya)( |$)/.test(nq))return aAns(T('আপনাকেও ধন্যবাদ! আর কিছু জানতে চাইলে জিজ্ঞেস করুন।','Thank you too! Ask me anything else you would like to know.'));
+   if(/(^| )(বিদায়|বাই|bye|goodbye|খোদা হাফেজ|allah hafez|tata)( |$)/.test(nq))return aAns(T('ধন্যবাদ! আবার দেখা হবে। কমিকস পড়ুন, ভালো থাকুন।','Thanks! See you again. Enjoy the comics and take care.'));
+   if(/(কেমন আছ|কেমন আছেন|কেমন আছো|how are you|kemon acho|kemon achen|kemon aso)/.test(nq))return aAns(T('আমি ভালো আছি, ধন্যবাদ! আপনি আকানো নিয়ে কী জানতে চান?','I am doing well, thanks! What would you like to know about Akano?'));
+   if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'))}
  const X=kbIndex(),qt=new Set(X.toks(q));
  const cnt=/(কতগুলো|কয়টি|কয়টা|কত টি|how many|count|total)/.test(nq);
  if(cnt){const cm=(lsRead('comics')||[]).length,vd=((lsRead('videos')||{}).list||[]).length,ch=((lsRead('chars')||{}).list||[]).length,w=[];
@@ -2796,26 +2814,52 @@ function asScroll(el){
  if(Math.abs(d)>2)window.scrollBy({top:d,behavior:'smooth'})}
 const asGo=el=>requestAnimationFrame(()=>asScroll(el));
 (function(){const vv=window.visualViewport;if(!vv)return;const f=()=>{const kb=Math.max(0,Math.round(innerHeight-vv.height-vv.offsetTop));document.documentElement.style.setProperty('--kb',kb+'px')};vv.addEventListener('resize',f);vv.addEventListener('scroll',f)})();
+const CHAT_K='akChat';
+function asSave(){
+ try{const asl=$('#asl');if(!asl)return;const m=[...asl.querySelectorAll('.asm')].filter(x=>!x.querySelector('.as-dots,.typing')).slice(-20).map(x=>{const a=x.querySelector('.asb.a');return{u:x.querySelector('.asb.u').textContent,a:a?a.innerHTML:''}});
+  let j=JSON.stringify({t:Date.now(),m});while(j.length>60000&&m.length>1){m.shift();j=JSON.stringify({t:Date.now(),m})}localStorage[CHAT_K]=j}catch{}}
+function asRestore(){
+ try{const d=JSON.parse(localStorage[CHAT_K]||'null');if(!d||!d.m||!d.m.length||Date.now()-d.t>864e5*3)return false;
+  const asl=$('#asl');if(!asl)return false;
+  asl.innerHTML=d.m.map(x=>`<div class=asm><div class="asb u">${aEsc(x.u)}</div><div class="asb a" data-sayc>${x.a}</div></div>`).join('');
+  const aw=$('#aiw');if(aw)aw.classList.add('chat');
+  requestAnimationFrame(()=>{window.scrollTo(0,document.documentElement.scrollHeight);asScroll(asl.lastElementChild)});return true}catch{return false}}
+function asNew(){try{localStorage.removeItem(CHAT_K)}catch{}sayStop();const asl=$('#asl');if(asl)asl.innerHTML='';const aw=$('#aiw');if(aw)aw.classList.remove('chat');window.scrollTo(0,0)}
+function asTools(box){
+ if(!box||!box.querySelector('[data-sayt]')||box.querySelector('.as-tools'))return;
+ box.insertAdjacentHTML('beforeend',`<div class=as-tools>${aSay()}<button type=button class=say data-copy><span>${T('কপি','Copy')}</span></button></div>`)}
+function asCopy(btn){
+ const t=btn.closest('.asb.a')?.querySelector('[data-sayt]');if(!t)return;const x=t.textContent.trim();
+ const done=()=>{const sp=btn.querySelector('span');if(sp){const o=sp.textContent;sp.textContent=T('কপি হয়েছে','Copied');setTimeout(()=>sp.textContent=o,1500)}};
+ try{navigator.clipboard.writeText(x).then(done,()=>{})}catch{const ta=document.createElement('textarea');ta.value=x;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch{}ta.remove()}}
+function asReveal(box,msg){
+ const fin=()=>{box.classList.remove('typing');asTools(box);asGo(msg);asSave()};
+ const t=box.querySelector('[data-sayt]');
+ if(!t||matchMedia('(prefers-reduced-motion: reduce)').matches){fin();return}
+ const full=t.textContent;if(full.length<8){fin();return}
+ t.textContent='';box.classList.add('typing');
+ const step=Math.max(1,Math.ceil(full.length/70));let i=0;
+ const id=setInterval(()=>{if(!box.isConnected){clearInterval(id);return}i=Math.min(full.length,i+step);t.textContent=full.slice(0,i);if(i%(step*6)===0)asScroll(msg);if(i>=full.length){clearInterval(id);fin()}},18)}
 async function asAsk(q){
  q=String(q||'').trim().slice(0,200);const asl=$('#asl');if(!q||!asl)return;
  const id='as'+Date.now();
  asl.insertAdjacentHTML('beforeend',`<div class=asm id="${id}"><div class="asb u">${aEsc(q)}</div><div class="asb a" data-sayc><div class=as-dots><i></i><i></i><i></i></div></div></div>`);
- const box=document.querySelector('#'+id+' .asb.a');const aw=$('#aiw');if(aw)aw.classList.add('chat');asGo(document.getElementById(id));
+ const msg=document.getElementById(id),box=msg.querySelector('.asb.a');const aw=$('#aiw');if(aw)aw.classList.add('chat');asGo(msg);
  let h;try{h=await asAnswer(q)}catch{h=aAns(T('কিছু সমস্যা হয়েছে, আবার চেষ্টা করুন।','Something went wrong, please try again.'))}
- if(box){box.innerHTML=h;asGo(document.getElementById(id))}}
+ if(box){box.innerHTML=h;asReveal(box,msg)}}
 async function asWiki(btn){
- const box=btn.closest('.asb.a');if(!box)return;const q=btn.dataset.wk;
+ const box=btn.closest('.asb.a');if(!box)return;const msg=box.closest('.asm'),q=btn.dataset.wk;
  box.innerHTML='<div class=as-dots><i></i><i></i><i></i></div>';
- try{const r=await wikiAnswer(q);box.innerHTML=r&&r.x?aAns(r.x):aAns(T('এ বিষয়ে ইন্টারনেটেও কিছু পাওয়া যায়নি। অন্যভাবে লিখে চেষ্টা করুন।','I could not find anything about that online. Try rephrasing it.'),[['mail','ইমেইল করুন','Email us']])}
- catch{box.innerHTML=aAns(T('ইন্টারনেটে এখন খোঁজা যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।','I cannot search online right now. Please try again shortly.'))}
- asGo(box.closest('.asm'))}
+ let h;try{const r=await wikiAnswer(q);h=r&&r.x?aAns(r.x):aAns(T('এ বিষয়ে ইন্টারনেটেও মিলিয়ে কিছু পাওয়া যায়নি। অন্যভাবে লিখে চেষ্টা করুন।','I could not find a matching answer online. Try rephrasing it.'),[['mail','ইমেইল করুন','Email us']])}
+ catch{h=aAns(T('ইন্টারনেটে এখন খোঁজা যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।','I cannot search online right now. Please try again shortly.'))}
+ box.innerHTML=h;asReveal(box,msg)}
 
 function asFaq(i){
  const it=faqData(language)[i],asl=$('#asl');if(!it||!asl)return;
  const m=$('#m');if(m)m.classList.remove('on');
  const aw=$('#aiw');if(aw)aw.classList.add('chat');
- asl.insertAdjacentHTML('beforeend',`<div class=asm><div class="asb u">${aEsc(it[1])}</div><div class="asb a"><div>${aEsc(it[2])}</div></div></div>`);
- asGo(asl.lastElementChild)}
+ asl.insertAdjacentHTML('beforeend',`<div class=asm><div class="asb u">${aEsc(it[1])}</div><div class="asb a" data-sayc><div data-sayt>${aEsc(it[2])}</div></div></div>`);
+ const msg=asl.lastElementChild;asTools(msg.querySelector('.asb.a'));asGo(msg);asSave()}
 function aiListen(btn,done){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR)return alert(T('এই ব্রাউজারে ভয়েস ইনপুট নেই।','Voice input is not supported in this browser.'));
@@ -2907,6 +2951,8 @@ async function resolveUnlock(v){v=String(v||'').trim();if(!v)return null;const c
 document.addEventListener('click',e=>{
  const sh=e.target.closest('.shr');if(sh){e.preventDefault();shareCard({title:sh.dataset.t,sub:sh.dataset.s,img:sh.dataset.i});return}
  const sy=e.target.closest('[data-say]');if(sy){e.preventDefault();sayText(sy);return}
+ const cp=e.target.closest('[data-copy]');if(cp){e.preventDefault();asCopy(cp);return}
+ const nw=e.target.closest('[data-new]');if(nw){asNew();return}
  const ak=e.target.closest('[data-ask]');if(ak){asAsk(ak.dataset.ask);return}
  const wk=e.target.closest('[data-wk]');if(wk){asWiki(wk);return}
  const fi=e.target.closest('[data-fi]');if(fi){asFaq(+fi.dataset.fi);return}
