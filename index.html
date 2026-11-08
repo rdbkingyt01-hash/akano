@@ -1612,6 +1612,7 @@ html.adg-on{overflow:hidden}
 .as-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
 .as-chip{padding:9px 14px;border:0;border-radius:999px;background:#f2f2f2;color:#111;font-size:13.5px;font-weight:500;text-align:left}
 .as-chip.wk{background:#111;color:#fff}
+a.as-chip{display:inline-block;text-decoration:none}
 .asl{display:grid;gap:14px;margin:0 0 8px}
 .asm{display:grid;gap:8px}
 .asb{max-width:92%;padding:13px 16px;border-radius:22px;line-height:1.75;font-size:15px;overflow-wrap:anywhere}
@@ -2672,7 +2673,7 @@ function pwaBtn(){if(pwaStandalone()||!(window.__pwa||pwaIOS()))return'';return 
 
 // ================= আকানো সহকারী (লোকাল, ০ রিড/রাইট) =================
 const SYN=[['কিনব','কিনি','কেনা','কিনতে','কিনুন','কিন','buy','purchase','order','অর্ডার','kinbo','kinte','kini','kena','kinun'],['কোড','code','pin'],['পেমেন্ট','payment','বিকাশ','নগদ','রকেট','bkash','nagad','rocket','টাকা','taka','price','দাম','মূল্য'],['ফ্রি','free','বিনামূল্যে'],['সিরিজ','series','পর্ব','episode','ep'],['ভিডিও','video','videos','অ্যানিমেটেড','animated','animation'],['কমিকস','comic','comics','কমিক'],['ক্যারেক্টার','character','characters','চরিত্র'],['রিভিউ','review','মতামত','feedback'],['যোগাযোগ','contact','email','ইমেইল','help','সাহায্য','মেইল','mail'],['ইনস্টল','install','অ্যাপ','app','ডাউনলোড'],['অফলাইন','offline'],['ভাষা','language','ইংরেজি','english','বাংলা','bangla','bengali'],['ব্যাজ','badge','badges','streak','স্ট্রিক'],['শেয়ার','share'],['বিজ্ঞাপন','ad','ads','advertisement'],['আকানো','akano','আকানো'],['ডেটা','data','saver','সেভার'],['লাইব্রেরি','library','পারচেজ','purchased'],['কীভাবে','কিভাবে','kivabe','kibhabe','how'],['লক','lock','locked','আনলক','unlock','spoiler','স্পয়লার']];
-const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন']);
+const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti']);
 const SUFX=['গুলোর','গুলো','গুলি','দের','েরা','ের','কে','তে','টির','টি','টা','র','য়','ে'];
 const aNorm=s=>String(s||'').toLowerCase().replace(/[\u200c\u200d]/g,'').replace(/[^\u0980-\u09FFa-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
 const aStem=w=>{if(/^[a-z0-9]+$/.test(w))return w.length>4?w.replace(/(ing|ed|es|s)$/,''):w;for(const x of SUFX){if(w.length>x.length+1&&w.endsWith(x))return w.slice(0,-x.length)}return w};
@@ -2682,6 +2683,10 @@ const lsRead=k=>{try{return JSON.parse(localStorage['ak_'+k]).d}catch{return nul
 function kbData(){return [
  {c:'about',qb:'আকানো কী? আকানো সম্পর্কে বলুন',qe:'What is Akano? Tell me about Akano',k:'akano আকানো পরিচয় about global গ্লোবাল pop culture পপ কালচার entertainment বিনোদন brand ব্র্যান্ড frangowst ফ্রাঙ্গোস্ট company কোম্পানি rdb studio কারা মালিক owner',ab:'আকানো Frangowst-এর একটি পপ কালচার ও বিনোদন ব্র্যান্ড। আমরা গ্লোবাল কমিকস, ভিডিও ও অ্যানিমেটেড সিরিজ প্রকাশ করছি এবং শিল্প, সংস্কৃতি ও বিনোদনের একটি পূর্ণ জগৎ গড়তে চাই।',ae:'Akano is a pop culture and entertainment brand of Frangowst. We publish global comics, videos and animated series, and we want to build a complete world of art, culture and entertainment.',go:[['comics','কমিকস','Comics'],['videos','ভিডিও','Videos']]},
  {c:'about',qb:'আকানো বা Frangowst-এর ফাউন্ডার কে?',qe:'Who is the founder of Akano or Frangowst?',k:'ফাউন্ডার founder প্রতিষ্ঠাতা ceo মালিক owner কে বানিয়েছে তৈরি করেছে কার করেছেন শুরু created creator started behind ahmad shoaib আকানো akano frangowst ফ্রাঙ্গোস্ট',ab:'আকানো ও Frangowst-এর ফাউন্ডার Ahmad Shoaib।',ae:'The founder of Akano and Frangowst is Ahmad Shoaib.'},
+ {c:'about',qb:'আকানো-র প্যানেল মেম্বার বা টিমে কারা আছেন?',qe:'Who are the panel members or team of Akano?',k:'প্যানেল panel মেম্বার member সদস্য টিম team স্টাফ staff কারা আছে who ক্রিয়েটর কর্মী পরিচালক director omor faruk ওমর ফারুক abrarul maruf আবরারুল মারুফ',ab:'আকানো-র প্যানেল মেম্বারদের মধ্যে আছেন: Omor Faruk — Chief Visual Director ও Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management ইত্যাদি। ফাউন্ডার Ahmad Shoaib।',ae:'Akano panel members include: Omor Faruk — Chief Visual Director and Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management and more. The founder is Ahmad Shoaib.'},
+ {c:'about',qb:'ওমর ফারুক কে? Omor Faruk কে?',qe:'Who is Omor Faruk?',k:'ওমর omor omar ফারুক faruk farooq chief visual director সিনিয়র senior artist আর্টিস্ট শিল্পী ডিরেক্টর ভিজ্যুয়াল visual',ab:'Omor Faruk আকানো-র প্যানেল মেম্বার; তিনি Chief Visual Director ও Senior Artist।',ae:'Omor Faruk is a panel member of Akano; he is the Chief Visual Director and Senior Artist.'},
+ {c:'about',qb:'আবরারুল হক মারুফ কে? Abrarul Haque Maruf কে?',qe:'Who is Abrarul Haque Maruf?',k:'আবরারুল abrarul haque haq হক মারুফ maruf marouf event coordinator ইভেন্ট কোঅর্ডিনেটর head budget management বাজেট ম্যানেজমেন্ট',ab:'Abrarul Haque Maruf আকানো-র প্যানেল মেম্বার; তিনি Event Coordinator, Head of Budget Management ইত্যাদি দায়িত্বে আছেন।',ae:'Abrarul Haque Maruf is a panel member of Akano; he serves as Event Coordinator, Head of Budget Management and more.'},
+ {c:'about',qb:'আকানো-র অ্যালাই বা ইনিশিয়েটিভ কী? Blue Oak Studio কী?',qe:'What is Akano\u2019s ally or initiative? What is Blue Oak Studio?',k:'অ্যালাই ally allies ইনিশিয়েটিভ initiative উদ্যোগ পার্টনার partner সহযোগী blue oak studio ব্লু ওক ওয়াক স্টুডিও',ab:'আকানো-র অ্যালাই বা ইনিশিয়েটিভ হলো Blue Oak Studio (ব্লু ওক স্টুডিও)।',ae:'Akano\u2019s ally or initiative is Blue Oak Studio.'},
  {c:'about',qb:'আকানো কোন কোম্পানির? কোম্পানির নাম কী?',qe:'Which company owns Akano? What is the company name?',k:'কোম্পানি company frangowst ফ্রাঙ্গোস্ট মালিক owner প্রতিষ্ঠান',ab:'আকানো আমাদের কোম্পানি Frangowst-এর অধীনে একটি ব্র্যান্ড।',ae:'Akano is a brand under our company, Frangowst.'},
  {c:'about',qb:'আকানো-র লক্ষ্য বা স্বপ্ন কী?',qe:'What is the goal or dream of Akano?',k:'লক্ষ্য স্বপ্ন goal dream vision মার্ভেল',ab:'আমাদের লক্ষ্য বিশ্বের সবচেয়ে বড় পপ কালচার প্রতিষ্ঠানগুলোর একটি হয়ে ওঠা এবং বাংলার মাটি থেকেই বিশ্বমানের গল্পের জগৎ গড়া।',ae:'Our goal is to become one of the world\u2019s largest pop-culture studios and to build a world-class story universe from Bangladesh.'},
  {c:'help',qb:'আকানো-র সাথে যোগাযোগ করব কীভাবে?',qe:'How do I contact Akano?',k:'যোগাযোগ contact email ইমেইল সাহায্য help support জানাব',ab:'ইমেইল করুন help.akano@gmail.com ঠিকানায়, অথবা আমাদের ফেসবুক গ্রুপে জানান।',ae:'Email help.akano@gmail.com or tell us in our Facebook group.',go:[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']]},
@@ -2725,13 +2730,19 @@ const aEsc=esc;
 function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
 const aSay=()=>`<button type=button class=say data-say aria-label="${T('শুনুন','Listen')}">${ic('vol')}<span>${T('শুনুন','Listen')}</span></button>`;
 const aAns=(text,go,extra)=>`<div data-sayt>${aEsc(text)}</div>${aLinks(go)}${extra||''}`;
+function catCtx(){
+ try{const en=language==='en',pr=(f,p)=>f||!(+p>0)?(en?'Free':'ফ্রি'):p+(en?' BDT':' টাকা');
+  const c=(lsRead('comics')||[]).filter(x=>x&&x.title).map(x=>x.title+' ('+pr(x.free,x.price)+(x.orig?(en?', Original':', অরিজিনাল'):'')+')');
+  const v=((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title).map(x=>x.title+' ('+pr(0,x.price)+')');
+  const h=((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name).map(x=>x.name);
+  return ('COMICS: '+(c.join('; ')||'-')+'\nVIDEOS: '+(v.join('; ')||'-')+'\nCHARACTERS: '+(h.join('; ')||'-')).slice(0,1800)}catch{return ''}}
 async function aiAsk(q,ctx){
  if(!AI_ENDPOINT)return null;
  const dayK=new Date().toISOString().slice(0,10),st=LS.get('akAiN',{d:dayK,n:0});if(st.d!==dayK){st.d=dayK;st.n=0}
  const ck=aNorm(q),ac=LS.get('akAiC',{});if(ac[ck])return ac[ck];
  if(st.n>=10)return{limit:true};
  st.n++;LS.set('akAiN',st);
- const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q.slice(0,300),ctx:ctx.slice(0,3),lang:language})});
+ const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q.slice(0,300),ctx:ctx.slice(0,3),cat:catCtx(),lang:language})});
  if(!r.ok)throw new Error('ai');const j=await r.json(),a=String(j.a||'').slice(0,900);
  if(a){ac[ck]=a;const ks=Object.keys(ac);if(ks.length>30)delete ac[ks[0]];LS.set('akAiC',ac)}return a}
 async function wikiAnswer(q){
@@ -2748,6 +2759,12 @@ async function asAnswer(q){
  if(cnt){const cm=(lsRead('comics')||[]).length,vd=((lsRead('videos')||{}).list||[]).length,ch=((lsRead('chars')||{}).list||[]).length,w=[];
   if(qt.has('g6')&&cm)w.push(T(`${bn(cm)}টি কমিকস`,`${cm} comics`));if(qt.has('g5')&&vd)w.push(T(`${bn(vd)}টি ভিডিও`,`${vd} videos`));if(qt.has('g7')&&ch)w.push(T(`${bn(ch)}টি ক্যারেক্টার`,`${ch} characters`));
   if(w.length)return aAns(T('এখন অ্যাপে আছে: ','Right now the app has: ')+w.join(', ')+'.')}
+ if(!cnt&&/(কী কী|কি কি|কোন কোন|কোনগুলো|তালিকা|list|which|what)/.test(nq)&&!qt.has('g0')&&!qt.has('g18')){
+  const en=language==='en',L=(a,n)=>a.length?(n+': '+a.slice(0,10).join(', ')+(a.length>10?(en?' and more':' ও আরও'):'')):'',w=[];
+  if(qt.has('g6'))w.push(L((lsRead('comics')||[]).filter(x=>x&&x.title).map(x=>x.title),T('কমিকস','Comics')));
+  if(qt.has('g5'))w.push(L(((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title).map(x=>x.title),T('ভিডিও','Videos')));
+  if(qt.has('g7'))w.push(L(((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name).map(x=>x.name),T('ক্যারেক্টার','Characters')));
+  const ww=w.filter(Boolean);if(ww.length)return aAns(ww.join(' | '),[[qt.has('g6')?'comics':qt.has('g5')?'videos':'chars','সবগুলো দেখুন','See all']])}
  const ent=entityMatch(q);
  const sc=kbScore(q),top=sc[0],best=top&&top.sc>=.42?top:null;
  if(ent.length&&(!best||ent[0].sc>=best.sc+.15)){
@@ -2759,7 +2776,7 @@ async function asAnswer(q){
  const ctx=sc.slice(0,3).filter(x=>x.sc>.12).map(x=>(language==='en'?x.d.qe+' — '+x.d.ae:x.d.qb+' — '+x.d.ab));
  try{const a=await aiAsk(q,ctx);if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
  const sg=sc.slice(0,3).filter(x=>x.sc>.1);
- return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('উইকিপিডিয়ায় খুঁজুন','Search Wikipedia')}</button></div>`)}
+ return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us'],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<a class="as-chip wk" href="https://www.google.com/search?q=${encodeURIComponent(q)}" target=_blank rel=noopener>${T('ইন্টারনেটে খুঁজুন','Search the internet')}</a></div>`)}
 /* Ask Akano: নতুন প্রশ্ন-উত্তর সবসময় Ask bar-এর ঠিক ওপরে দেখাবে (বারের নিচে ঢাকা পড়বে না) */
 function asScroll(el){
  if(!el)return;
