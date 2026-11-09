@@ -1801,7 +1801,7 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
-body .aiw .ai-note{margin:8px 0 0;text-align:center;font-size:12px;line-height:1.4;color:#8a7d7b}
+body .aiw .ai-note{position:relative;margin:0;padding:9px 0 4px;text-align:center;font-size:12px;line-height:1.4;color:#8a7d7b;background:#fcfaf9;box-shadow:0 0 0 100vmax #fcfaf9;clip-path:inset(0 -100vmax -100vmax -100vmax)}
 #okw,#m #okw.btn{background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important}
 #sv[hidden]{display:none!important}
 /* Fragiks ask bar: clearly different from page background */
@@ -3067,7 +3067,7 @@ function aSmall(q,nq,nw){
   if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe|hmm|hm)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'));
   if(/(তোমার নাম|আপনার নাম|your name|apnar nam|tomar nam|tumi ke|apni ke|who are you|what are you)/.test(nq))return aAns(T('আমি Fragiks, Frangowst-এর তৈরি একটি এআই (কৃত্রিম বুদ্ধিমত্তা) সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট ও অ্যাপ নিয়ে আপনাকে সাহায্য করি।','I am Fragiks, an AI (Artificial Intelligence) assistant developed by Frangowst. I help with comics, videos, codes, payments and the app.'),null,aChips(cap.slice(0,3)));
   if(/(কে বানিয়েছে|কে তৈরি করেছে|তোমাকে কে|who made you|who created you|who built you|tomake ke baniyeche|tomake ke)/.test(nq))return aAns(T('আমি Frangowst-এর আকানো অ্যাপের জন্য তৈরি সহকারী Fragiks।','I am Fragiks, the assistant built for Frangowst\u2019s Akano app.'));
-  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস/ভিডিওর দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা আবহাওয়া, মুদ্রার রেট, নামাজের সময়, দেশের তথ্য এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell prices and lists of comics/videos, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date weather, currency rates, prayer times, country facts and look up general questions online.'),null,aChips(cap))
+  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|তোমার কাজ কী|তোমার কাজ কি|আপনার কাজ কী|আপনার কাজ কি|তুমি কী কর|তুমি কি কর|tomar kaj ki|apnar kaj ki|tumi ki koro|tumi ki kaj koro|tumi ki kaj|what do you do|what is your job|whats your job|your job|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস, ভিডিও ও ক্যারেক্টারের তথ্য, দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা আবহাওয়া, মুদ্রার রেট, নামাজের সময়, দেশের তথ্য এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell details, prices and lists of comics, videos and characters, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date weather, currency rates, prayer times, country facts and look up general questions online.'),null,aChips(cap))
   if(/^(wow|nice|great|awesome|good job|well done|darun|দারুণ|অসাধারণ|সুন্দর|ভালো|valo|bhalo|osadharon|perfect|cool|smart|জিনিয়াস|genius)( |$)/.test(nq)&&nw<=4)return aAns(aPick([T('ধন্যবাদ! আপনার ভালো লাগলে আমারও ভালো লাগে।','Thank you! I am glad you liked it.'),T('অনেক ধন্যবাদ! আর কিছু জানতে চাইলে বলুন।','Thanks a lot! Ask me if you want to know more.')]));
   if(/(বোকা|stupid|idiot|useless|dumb|ফালতু|faltu|বাজে)/.test(nq)&&nw<=5)return aAns(T('দুঃখিত, ভালো উত্তর দিতে পারিনি। প্রশ্নটা অন্যভাবে লিখে দেখবেন? আমি চেষ্টা করব।','Sorry I could not answer well. Could you rephrase it? I will try again.'),null,aChips(cap.slice(0,3)));
   if(/(i love you|ভালোবাসি|valobashi|love you)/.test(nq))return aAns(T('ধন্যবাদ! আমি একটি এআই, তবে কমিকস পড়ার সঙ্গী হতে পারি।','Thank you! I am an AI, but I can be your companion for comics.'));
@@ -3464,9 +3464,12 @@ async function aLive(q,nq){
  }catch{if(hit)return aAns(T('এখন লাইভ তথ্য আনা যাচ্ছে না। ইন্টারনেট চালু আছে কি না দেখে আবার চেষ্টা করুন।','I cannot fetch live data right now. Please check your internet and try again.'))}
  return null}
 
+let AI_PRE=0;
+async function aPre(){if(AI_PRE)return;AI_PRE=1;try{const t=[];if(!lsRead('chars'))t.push(cache('chars',async()=>(await dat('site','characters'))||{list:[]}));if(!lsRead('videos'))t.push(cache('videos',async()=>(await dat('site','videos'))||{list:[]}));if(!lsRead('comics'))t.push(list('comics'));if(t.length)await tmo(Promise.allSettled(t),7000)}catch{}}
 async function asAnswerCore(q){
  const nq=aNorm(q),nw=nq.split(' ').filter(Boolean).length;
  let h=aSmall(q,nq,nw);if(h){aMem('',null);return h}
+  await aPre();
  if(aRevIntent(nq)){const hr=await aReviews(q,nq,aEnt(q)[0]||null);if(hr){aMem('',null);return hr}}
  h=aMath(q);if(h){aMem('',null);return h}
  h=await aLive(q,nq);if(h){aMem('',null);return h}
@@ -3525,7 +3528,7 @@ function asRestore(){
 function asNew(){try{localStorage.removeItem(CHAT_K)}catch{}sayStop();const asl=$('#asl');if(asl)asl.innerHTML='';const aw=$('#aiw');if(aw)aw.classList.remove('chat');window.scrollTo(0,0)}
 function asTools(box){
  if(!box||!box.querySelector('[data-sayt]')||box.querySelector('.as-tools'))return;
- box.insertAdjacentHTML('beforeend',`<div class=as-tools>${aSay()}<button type=button class=say data-copy><span>${T('কপি','Copy')}</span></button></div>`)}
+ box.insertAdjacentHTML('beforeend',`<div class=as-tools>${aSay()}<button type=button class=say data-copy><span>${T('কপি','Copy')}</span></button><button type=button class=say data-newchat><span>${T('নতুন চ্যাট','New chat')}</span></button></div>`)}
 function asCopy(btn){
  const t=btn.closest('.asb.a')?.querySelector('[data-sayt]');if(!t)return;const x=t.textContent.trim();
  const done=()=>{const sp=btn.querySelector('span');if(sp){const o=sp.textContent;sp.textContent=T('কপি হয়েছে','Copied');setTimeout(()=>sp.textContent=o,1500)}};
@@ -3650,6 +3653,7 @@ document.addEventListener('click',e=>{
  const sh=e.target.closest('.shr');if(sh){e.preventDefault();shareCard({title:sh.dataset.t,sub:sh.dataset.s,img:sh.dataset.i});return}
  const sy=e.target.closest('[data-say]');if(sy){e.preventDefault();sayText(sy);return}
  const cp=e.target.closest('[data-copy]');if(cp){e.preventDefault();asCopy(cp);return}
+  const ncb=e.target.closest('[data-newchat]');if(ncb){e.preventDefault();asNew();return}
  const nw=e.target.closest('[data-new]');if(nw){asNew();return}
  const ak=e.target.closest('[data-ask]');if(ak){asAsk(ak.dataset.ask);return}
  const wk=e.target.closest('[data-wk]');if(wk){asWiki(wk);return}
