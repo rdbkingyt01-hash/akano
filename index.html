@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com https://player.vimeo.com https://www.google.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://api.imgbb.com https://*.ibb.co https://images.weserv.nl https://vimeo.com https://*.vimeo.com https://*.wikipedia.org https://*.workers.dev; frame-src https://player.vimeo.com https://www.google.com https://www.recaptcha.net; worker-src 'self' blob: https://cdnjs.cloudflare.com; manifest-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com https://player.vimeo.com https://www.google.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://api.imgbb.com https://*.ibb.co https://images.weserv.nl https://vimeo.com https://*.vimeo.com https://*.wikipedia.org https://*.workers.dev https://api.open-meteo.com https://geocoding-api.open-meteo.com https://open.er-api.com https://api.aladhan.com https://restcountries.com; frame-src https://player.vimeo.com https://www.google.com https://www.recaptcha.net; worker-src 'self' blob: https://cdnjs.cloudflare.com; manifest-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>if(window.top!==window.self){try{window.top.location=window.self.location}catch(e){document.documentElement.style.display="none"}}</script>
 <title>Akano</title>
@@ -1736,11 +1736,103 @@ html.nonav .ai-box{bottom:calc(14px + env(safe-area-inset-bottom))}
 html.nonav main#app{padding-bottom:0!important}
 .bdot.on i .ic{width:18px;height:18px;color:#fff}
 
-/* ===== FrangowstAi: fixed top bar (back + FAQ), like the ask bar ===== */
+/* ===== Fragiks: fixed top bar (back + FAQ), like the ask bar ===== */
 body .aiw .ai-top{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(94%,560px);box-sizing:border-box;margin:0;padding:calc(10px + env(safe-area-inset-top,0px)) 0 16px;z-index:7;background:rgba(252,250,249,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
 html.nonav body .aiw,body .aiw{padding-top:calc(76px + env(safe-area-inset-top,0px))}
 body:has(#m.on) .aiw .ai-top{z-index:5}
 
+
+/* ===== Fragiks UI (reference design) ===== */
+body .aiw #asf.ai-box{background:none;box-shadow:none;padding:0;border-radius:0}
+body .aiw .ai-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 10px}
+body .aiw.chat .ai-cards{display:none}
+body .aiw .ai-card{display:grid;gap:18px;align-content:space-between;min-height:94px;text-align:left;padding:14px 14px 13px;border:1.5px solid #cdeefa;border-radius:20px;background:#fff;color:#1d2433;box-shadow:0 10px 26px -18px rgba(88,196,238,.65);transition:transform .15s,box-shadow .15s,border-color .15s}
+body .aiw .ai-card:active{transform:scale(.97)}
+body .aiw .ai-card .ic{width:20px;height:20px;color:#7b8494}
+body .aiw .ai-card b{font-size:14.5px;font-weight:600;line-height:1.25}
+body .aiw .ai-card.on{border-color:#6fd3f5;box-shadow:0 0 0 4px rgba(111,211,245,.22)}
+body .aiw .ai-in{padding:14px 14px 12px;border-radius:22px;background:#f4f6f9;box-shadow:0 14px 30px -26px rgba(52,80,130,.55)}
+body .aiw .ai-r2{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+body .aiw .ai-l{display:flex;gap:8px;align-items:center}
+body .aiw .ai-plus,body .aiw .ai-model,body .aiw .ai-spk{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:40px;border:0;border-radius:999px;background:#fff;color:#2a3140;font-size:14px;font-weight:600;box-shadow:0 0 0 1px #e9edf3}
+body .aiw .ai-plus{width:40px;padding:0}.ai-plus .ic{width:18px;height:18px}
+body .aiw .ai-model{padding:0 14px}
+body .aiw .ai-model .ic{width:14px;height:14px;transform:rotate(90deg);color:#7b8494}
+body .aiw .ai-spk{padding:0 16px}
+body .aiw .ai-spk.send{background:#111;color:#fff;box-shadow:none}
+body .aiw .ai-spk.on{background:#e10600;color:#fff;box-shadow:none}
+.ai-orb i:nth-child(1){background:radial-gradient(circle at 50% 18%,#c4f0ff 0,transparent 60%)}
+.ai-orb i:nth-child(2){background:radial-gradient(circle at 78% 62%,#cfd0ff 0,transparent 58%)}
+.ai-orb i:nth-child(3){background:radial-gradient(circle at 26% 74%,#ffd0e4 0,transparent 56%)}
+.ai-mini{background:radial-gradient(circle at 30% 30%,#d3f3ff,#d9d3ff 60%,#ffd5e6)}
+.ai-dot{background:#12b0f5}
+html.nonav body .aiw:not(.chat){padding-bottom:calc(250px + env(safe-area-inset-bottom,0px))}
+.as-steps{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;color:#555;font-size:13.5px;line-height:1.75;overflow-wrap:anywhere}
+.as-h2{margin:12px 0 2px;font-weight:700;font-size:13.5px;color:#333}
+.as-rvs{display:grid;gap:8px;margin-top:8px}
+.as-rv{padding:11px 13px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #e8e8e8}
+.as-rvh{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.as-rvh span{color:#f5a300;letter-spacing:1px;font-size:13px}
+.as-rv small{color:#e10600;font-weight:600;font-size:11.5px}
+.as-rv p{margin:4px 0 0;font-size:14px;line-height:1.6;color:#333}
+/* offline / error: monochrome vector */
+.ld.off{display:grid;justify-items:center;gap:14px}
+.ld.off .ic{width:64px;height:64px;color:#b8b8b8;stroke-width:1.5}
+.ld.off p{margin:0}
+#off.on{display:flex;align-items:center;justify-content:center;gap:8px}
+#off .ic{width:16px;height:16px;flex:none}
+img.imgfb{object-fit:cover;background:#f1f1f1}
+
+/* Fragiks: red theme */
+body .aiw .ai-card{border-color:#ffd9d6;box-shadow:0 10px 26px -18px rgba(225,6,0,.45)}
+body .aiw .ai-card.on{border-color:#ff8a84;box-shadow:0 0 0 4px rgba(225,6,0,.12)}
+.ai-orb i:nth-child(1){background:radial-gradient(circle at 35% 25%,#ffd9d4 0,transparent 62%)}
+.ai-orb i:nth-child(2){background:radial-gradient(circle at 70% 65%,#ff8f99 0,transparent 58%)}
+.ai-orb i:nth-child(3){background:radial-gradient(circle at 30% 80%,#ffc2a0 0,transparent 55%)}
+.ai-mini{background:radial-gradient(circle at 30% 30%,#ffd9d4,#ff8f99 70%,#ffc2a0)}
+.ai-dot{background:#e10600}
+body .aiw .ai-in{background:#f7f2f1;box-shadow:0 14px 30px -26px rgba(225,6,0,.4)}
+body .aiw .ai-model,body .aiw .ai-spk{box-shadow:0 0 0 1px #f1e3e1}
+body .aiw .ai-model{cursor:default}
+
+/* Fragiks: ask bar stands out from background */
+body .aiw .ai-in{background:#fff;border:1.5px solid #ffd2cf;box-shadow:0 16px 34px -22px rgba(225,6,0,.55)}
+body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
+body .aiw .ai-spk.send{background:#111;color:#fff}
+body .aiw .ai-spk.on{background:#e10600;color:#fff}
+.hf .sb[hidden]{display:none!important}
+#okw,#m #okw.btn{background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important}
+#sv[hidden]{display:none!important}
+/* Fragiks ask bar: clearly different from page background */
+body .aiw .ai-in{background:#f1ebea!important;border:0!important;outline:0!important;box-shadow:0 10px 28px -18px rgba(60,30,28,.35)!important}
+body .aiw .ai-in input,body .aiw .ai-in textarea{background:transparent!important;color:#2b1210!important}
+body .aiw .ai-in input::placeholder,body .aiw .ai-in textarea::placeholder{color:#8a7d7b!important;opacity:1}
+body .aiw .ai-in input,body .aiw .ai-in textarea,body .aiw .ai-in input:focus,body .aiw .ai-in textarea:focus{border:0!important;outline:0!important;box-shadow:none!important}
+body .aiw .ai-plus,body .aiw .ai-model,body .aiw .ai-spk{background:#fff!important;border:0!important;box-shadow:none!important;color:#2a3140}
+body .aiw .ai-spk.send{background:#e10600!important;color:#fff!important;box-shadow:none!important}
+body .aiw .ai-spk.on{background:#111!important;color:#fff!important;box-shadow:none!important}
+/* ===== full-screen search page ===== */
+html.spo,html.spo body{overflow:hidden}
+#sp{position:fixed;inset:0;z-index:9;background:#fff;display:flex;flex-direction:column}
+#sp[hidden]{display:none}
+.sp-top{display:flex;align-items:center;gap:6px;padding:calc(8px + env(safe-area-inset-top,0px)) 10px 8px;flex:none}
+#spb,#spm{flex:none;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#111;display:grid;place-items:center;padding:0;cursor:pointer}
+#spm{background:#f2f2f2}#spm.on{background:#e10600;color:#fff}
+#spb .ic,#spm .ic{width:22px;height:22px}
+.sp-in{flex:1;min-width:0;display:flex;align-items:center;background:#f2f2f2;border-radius:999px;padding:0 6px 0 18px;height:46px}
+#spq{flex:1;min-width:0;width:100%;border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;font-size:16px;margin:0;padding:0;height:100%;color:#111}
+#spx{flex:none;border:0;background:transparent;width:36px;height:36px;display:grid;place-items:center;color:#555;padding:0}
+#spx[hidden]{display:none}#spx .ic{width:18px;height:18px}
+#spl{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:4px 14px calc(24px + var(--kb,0px))}
+.sp-r{display:flex;align-items:center}
+.sp-rm{flex:1;min-width:0;display:flex;align-items:center;gap:16px;text-align:left;border:0;background:transparent;padding:12px 4px;font-size:16px;color:#111;cursor:pointer}
+.sp-rm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sp-rm .ic,.sp-rf .ic{width:22px;height:22px;flex:none;color:#555}
+.sp-rf{flex:none;border:0;background:transparent;width:44px;height:44px;display:grid;place-items:center;padding:0;cursor:pointer}
+.sp-h{display:flex;justify-content:space-between;align-items:center;margin:12px 4px 2px;color:#666;font-size:13px}
+.sp-h button{border:0;background:transparent;color:#e10600;font-weight:600;font-size:13px;cursor:pointer}
+.sp-card{background:#fff4f3;border:1.5px solid #ffd2cf;border-radius:18px;padding:14px 16px;margin:10px 0 6px;line-height:1.65;font-size:15px;color:#2b1210}
+.sp-ld,.sp-no{text-align:center;color:#777;padding:28px 0;margin:0}
 </style>
 </head>
 <body>
@@ -1802,18 +1894,22 @@ const cfg=({apiKey:"AIzaSyAZiYTwpHYNJOMNsKfpXAusSsAkz0lWbO8",authDomain:"hallo-7
    'কোড দিলে কমিকসটি মেনুর "পারচেজ লাইব্রেরি"-তে ২০ দিনের জন্য জমা থাকবে।':'The comic will be saved in your Library for 20 days after you enter the code.','কোনো ক্যারেক্টার পাওয়া যায়নি।':'No characters found.','সাইটে ফিরুন':'Back to site','লগইন':'Sign in','পাসওয়ার্ড বদলান':'Change password','অর্ডার ও কোড':'Orders & Codes','নতুন কমিকস যোগ করুন':'Add a comic','কমিকস তালিকা':'Comic list','ভিডিও তালিকা':'Video list','আমার':'My','তালিকা':'List',
     'ফর্মে যে মাধ্যমে (বিকাশ, নগদ, রকেট বা অন্যান্য) টাকা পাঠাতে চান সেটি বেছে নিন। সেই মাধ্যম অনুযায়ী আমরা যোগাযোগ করে পেমেন্টের নম্বর জানাব।':'Choose a payment method in the form (bKash, Nagad, Rocket, or another option). We will contact you with the payment number.','কমিকসের কার্ডে ট্যাপ করে নিচের “কোড আছে?” অংশে কোড লিখে “পড়ুন” চাপুন।':'Tap a comic card, enter your code under “Have a code?”, then tap “Read”.','ওয়ানশট হলো এক পর্বে সম্পূর্ণ কমিকস। সিরিজ হলো চলমান কমিকস, যার সব পর্ব এক জায়গায় পর্ব নম্বর অনুযায়ী সাজানো থাকে।':'A one-shot is a complete comic in one episode. A series has multiple episodes, listed together by episode number.','দিন বাকি':'days left','মেয়াদ:':'Expires:','মেয়াদ শেষ':'Expired','ডিভাইস রিসেট':'Reset device','অন্যান্য':'Other','এখনো কোনো ঘোষণা নেই।':'No announcements yet.',
     'আপনার অভিজ্ঞতা শেয়ার করুন—আপনার মতামত আমাদের গল্প ও কমিকস আরও ভালো করতে সাহায্য করে।':'Share your experience—your feedback helps us make our stories and comics better.','আপনার সৎ মতামত অন্য পাঠকদেরও সঠিক কমিকস বেছে নিতে সাহায্য করবে।':'Your honest feedback can help other readers choose the right comic.','আপনার রিভিউ লিখুন':'Write your review','রিভিউ কিসের জন্য?':'What are you reviewing?','আপনার রেটিং':'Your rating','১ থেকে ৫ তারা বেছে নিন':'Choose from 1 to 5 stars','এখনো কোনো রিভিউ নেই।':'No reviews yet.','প্রথম রিভিউ দিয়ে কমিউনিটির সঙ্গে আপনার অভিজ্ঞতা ভাগ করে নিন।':'Be the first to share your experience with the community.','কমিউনিটির রিভিউ':'Community reviews','কমিউনিটির রেটিং':'Community rating'
- });
+ ,
+ 'আবার চেষ্টা করুন':'Try again','লোড হচ্ছে...':'Loading...','তথ্য আনা হচ্ছে...':'Loading...','তথ্য পাওয়া যায়নি':'No data found','একটি রিভিউ দিন':'Write a review','একটি শেয়ার কার্ড বানান':'Make a share card','ব্যাজ':'Badges','আমার ব্যাজ':'My Badges','সবগুলো দেখুন':'See all','জমা দিন':'Submit','কোড পাঠান':'Send code','সবচেয়ে কী ভালো লেগেছে?':'What did you like most?','আকানো ভক্ত':'Akano Fan','আকানো লিজেন্ড':'Akano Legend','ভিডিওপ্রেমী':'Video Lover','সাপ্তাহিক যোদ্ধা':'Weekly Warrior','প্রথম পাঠ':'First Read','টানা ৩ দিন আসুন':'Visit 3 days in a row','টানা ৭ দিন আসুন':'Visit 7 days in a row','টানা ৩০ দিন আসুন':'Visit 30 days in a row','১০টি ভিডিও দেখুন':'Watch 10 videos','৫টি কমিকস পড়ুন':'Read 5 comics','১৫টি কমিকস পড়ুন':'Read 15 comics','একটি ভিডিও ২৫% দেখুন':'Watch 25% of a video','প্রথম কমিকস পড়ুন':'Read your first comic','এই নামে কোনো কমিকস পাওয়া যায়নি':'No comic found with this name','কিছু নেই':'Nothing here','ভাষা':'Language','পেছনে':'Back','সংযোগে সমস্যা, আবার চেষ্টা করুন (':'Connection problem, please try again (','সংযোগে সমস্যা (':'Connection problem (','একটু পরে আবার চেষ্টা করুন':'Please try again in a moment','রিভিউ জমা দেওয়া যায়নি':'Could not submit the review','বন্ধ':'Close'
+});
  const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),bn=n=>{const d=language==='bn'?'০১২৩৪৫৬৭৮৯':'0123456789';return String(n).replace(/\d/g,x=>d[+x])},dateLabel=t=>new Date(t).toLocaleDateString(language==='en'?'en-GB':'bn-BD');
 const tmo=(p,ms=20000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))]);
 const errMsg=e=>{const m=errMsg0(e);return language==='en'?phraseTr(m,true):m},errMsg0=e=>e?.code==='permission-denied'?'ডাটাবেসের অনুমতি (Firestore Rules) ঠিক করা নেই':(e?.code==='timeout'||e?.code==='unavailable')?'ইন্টারনেট সংযোগ নেই বা খুব ধীর':'লোড করা যায়নি';
 {const _al=window.alert.bind(window),_cf=window.confirm.bind(window),tr=m=>language==='en'?phraseTr(String(m),true):m;window.alert=m=>_al(tr(m));window.confirm=m=>_cf(tr(m))}
-const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?x.data():null};
+const dat=async(c,i)=>{const x=await tmo(getDoc(doc(db,c,i)));return x.exists()?x.data():null
+};
 // কম রিড: ১০ মিনিট ক্যাশ
 const cache=async(k,f,ttl=18e5)=>{let c,A=false;try{c=JSON.parse(localStorage['ak_'+k])}catch{}try{A=adm===true}catch{}if(c&&!A&&Date.now()-c.t<ttl)return c.d;if(c&&navigator.onLine===false)return c.d;try{const d=await f();try{localStorage['ak_'+k]=JSON.stringify({t:Date.now(),d})}catch{}return d}catch(e){if(c)return c.d;throw e}};
 const cacheSet=(k,d)=>{try{localStorage.setItem('ak_'+k,JSON.stringify({t:Date.now(),d}))}catch{}};
 const list=c=>cache(c,async()=>(await tmo(getDocs(collection(db,c)))).docs.map(d=>({id:d.id,...d.data()}))),byT=(a,b)=>(b.t||0)-(a.t||0);
 const I={flame:'<path d="M12 3c.8 3.4 5 5.2 5 10a5 5 0 01-10 0c0-2 .9-3.3 2-4.2.1 1.7.9 2.6 2 2.8-.6-3.4-.5-6.2 1-8.6z"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>',menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>',chev:'<path d="M9 6l6 6-6 6"/>',spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',moon:'<path d="M21 12.8A8.5 8.5 0 1111.2 3a6.7 6.7 0 009.8 9.8z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',shield:'<path d="M12 3l8 3v6c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V6z"/><path d="M12 8v5M12 16v.01"/>',noshot:'<path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/><path d="M3 3l18 18"/>',nocopy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/><path d="M3 3l18 18"/>',law:'<path d="M12 4v16M6 20h12M5 7h14M5 7l-2.5 6a3 3 0 005 0zM19 7l-2.5 6a3 3 0 005 0z"/>',bk10:'<path d="M12 5a8 8 0 11-8 8"/><path d="M12 1.5L8 5l4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',fw10:'<path d="M12 5a8 8 0 1 0 8 8"/><path d="M12 1.5L16 5l-4 3.5"/><text x="12" y="16" text-anchor="middle" font-size="7.5" fill="currentColor" stroke="none">10</text>',pt:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>',dl:'<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',tri:'<path d="M8 5.5v13l11-6.5z"/>',play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>',pause:'<path d="M8 5v14M16 5v14"/>',vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/>',mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',full:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',shelf:'<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="4" width="4" height="16" rx="1"/><path d="M15.2 5.6l3.5-1 3.2 14.6-3.5 1z"/>',panels:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v9M9 12v9"/>',bookmark:'<path d="M6 3h12v18l-6-4.5L6 21z"/>',face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01"/>',grid:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',heart:'<path d="M12 21C7 17 2.5 13.2 2.5 8.9A5.4 5.4 0 0112 6.2a5.4 5.4 0 019.5 2.7C21.5 13.2 17 17 12 21z"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4M12 17.5h.01"/>',msg:'<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/>',gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1-3 1-5 0z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',mega:'<path d="M3 10v4h4l8 5V5L7 10z"/><path d="M18 9a4 4 0 010 6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c3 0 4 2 4 5"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',mark:'<path d="M6 3h12v18l-6-4-6 4z"/>',link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',x:'<path d="M5 5l14 14M19 5L5 19"/>',arrow:'<path d="M4 12h16M14 6l6 6-6 6"/>',lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'};
 const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${I[n]}</svg>`;
+Object.assign(I,{plus:I.plus||'<path d="M12 5v14M5 12h14"/>',wifioff:'<path d="M2 8.8a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16.1a5 5 0 017 0"/><circle cx="12" cy="19.5" r=".9"/><path d="M3 3l18 18"/>',imgph:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 5"/>'});
 const DEFAULT_LOGO='data:image/png;base64,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';
 const setLT=()=>{const b=document.getElementById('langToggle');if(b)b.innerHTML=ic('globe');const t=language==='en'?'বাংলা ভাষায় দেখুন':'View in English';b.setAttribute('aria-label',t);b.title=t};
 const IX_SHARE='<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>';
@@ -1896,6 +1992,7 @@ Object.keys(lib).forEach(k=>{if(typeof lib[k]==='string')lib[k]={t:lib[k],e:Date
 let tw;
 
 // ---------- মেনু ও মোডাল ----------
+{const _al=window.alert.bind(window);window.alert=m=>_al(language==='en'&&typeof m==='string'?phraseTr(m,true):m)}
 const dr=$('#sh'),sc=$('#sc'),tog=o=>{dr.classList.toggle('on',o);sc.classList.toggle('on',o)};
 const FBX='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
 const BN=[['home','হোম','home'],['videos','ভিডিও','play'],['comics','কমিকস','panels'],['reviews','রিভিউ','msg'],['settings','সেটিংস','gear']],MORE=NAV.filter(n=>!BN.some(b=>b[0]===n[0]));
@@ -1909,7 +2006,59 @@ function renderNavigation(){
 renderNavigation();
 langObserver.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']});
 applyLanguage(document.body);
-$('#sq').innerHTML=ic('search');$('#sq').onclick=()=>{const q=$('#hq');if(q){scrollTo({top:0,behavior:'smooth'});q.focus()}else go('home').then(()=>$('#hq')?.focus())};
+$('#sq').innerHTML=ic('search');const openHs=()=>{const q=$('#hq');if(!q)return false;const b=q.closest('.sb');if(b)b.hidden=false;if(!q._hb){q._hb=1;q.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==q&&!q.value.trim()&&b)b.hidden=true},400));q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();q.dispatchEvent(new Event('input'));q.blur()}})}window.scrollTo(0,0);setTimeout(()=>q.focus(),30);return true};
+/* ===== Full-screen search page (YouTube style) ===== */
+const SPH={get(){try{return JSON.parse(localStorage.akSh||'[]').filter(x=>typeof x==='string')}catch{return[]}},set(a){try{localStorage.akSh=JSON.stringify(a.slice(0,12))}catch{}},add(q){q=String(q||'').trim();if(!q)return;this.set([q,...this.get().filter(x=>x.toLowerCase()!==q.toLowerCase())])}};
+let spOn=false,spTok=0,spD=0,spSd=null;
+const SPI={clock:'<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round><circle cx=12 cy=12 r=9></circle><path d="M12 7v5l3 2"></path></svg>',nw:'<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round><path d="M17 17L7 7M7 15V7h8"></path></svg>',bk:'<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>'};
+function spBuild(){if($('#sp'))return;const d=document.createElement('div');d.id='sp';d.hidden=true;
+ d.innerHTML=`<div class=sp-top><button type=button id=spb aria-label="Back">${SPI.bk}</button><div class=sp-in><input id=spq type=search enterkeyhint=search autocomplete=off autocapitalize=off spellcheck=false placeholder="${T('কমিকস বা ভিডিও খুঁজুন','Search comics or videos')}"><button type=button id=spx hidden aria-label="Clear">${ic('x')}</button></div><button type=button id=spm aria-label="Voice">${ic('mic')}</button></div><div id=spl></div>`;
+ document.body.appendChild(d);
+ const q=$('#spq');
+ $('#spb').onclick=()=>spClose();
+ $('#spx').onclick=()=>{q.value='';$('#spx').hidden=true;q.focus();spRender()};
+ q.addEventListener('input',()=>{$('#spx').hidden=!q.value;clearTimeout(spD);spD=setTimeout(()=>spRender(),q.value.trim()?260:0)});
+ q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();clearTimeout(spD);spRender(true);q.blur()}});
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition,m=$('#spm');
+ if(!SR)m.hidden=true;else m.onclick=()=>{try{const r=new SR();r.lang=language==='en'?'en-US':'bn-BD';r.interimResults=false;r.maxAlternatives=1;r.onresult=e=>{const t=e.results&&e.results[0]&&e.results[0][0]&&e.results[0][0].transcript;if(t){q.value=t;$('#spx').hidden=false;spRender(true)}};r.onerror=r.onend=()=>m.classList.remove('on');m.classList.add('on');r.start()}catch{m.classList.remove('on')}};
+ $('#spl').addEventListener('click',e=>{
+  const rm=e.target.closest('[data-sph]');if(rm){q.value=rm.dataset.sph;$('#spx').hidden=false;spRender(true);q.blur();return}
+  const rf=e.target.closest('[data-spf]');if(rf){q.value=rf.dataset.spf;$('#spx').hidden=false;spRender();q.focus();return}
+  if(e.target.closest('[data-spclr]')){SPH.set([]);spHome();return}
+  try{siteClick(e)}catch{}
+  if(e.target.closest('[data-vid],.card,[data-open],[data-series],[data-go],[data-cont],[data-lib],[data-ch],[data-gi]')){SPH.add(q.value);setTimeout(()=>spClose(),0)}
+ });
+ window.addEventListener('popstate',()=>{if(spOn)spClose(true)})}
+function spRow(t,fill){return `<div class=sp-r><button type=button class=sp-rm data-sph="${esc(t)}">${SPI.clock}<span>${esc(t)}</span></button><button type=button class=sp-rf data-spf="${esc(t)}" aria-label="Use">${SPI.nw}</button></div>`}
+function spHome(){const L=$('#spl');if(!L)return;const h=SPH.get();L.innerHTML=h.length?`<div class=sp-h><b>${T('সাম্প্রতিক','Recent')}</b><button type=button data-spclr>${T('সব মুছুন','Clear all')}</button></div>${h.map(spRow).join('')}`:''}
+async function spRender(commit){const q=$('#spq'),L=$('#spl');if(!q||!L)return;const raw=q.value.trim(),v=raw.toLowerCase(),tok=++spTok;
+ if(commit&&raw)SPH.add(raw);
+ if(!raw){spHome();return}
+ const cur=()=>tok===spTok&&$('#spq');
+ L.innerHTML='<div id=spLive></div><div id=spRes><div class=sp-ld>'+T('খুঁজছি...','Searching...')+'</div></div>';
+ const toks=v.split(/\s+/).filter(Boolean),hit=h=>{h=String(h||'').toLowerCase();return toks.every(t=>h.includes(t))};
+ const live=Promise.resolve(false);
+ const cont=(async()=>{
+  let vm=[],cm=[],bad=0;
+  try{if(!spSd){const vr=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});spSd=[...(vr.list||[])].sort(byT)}vds=spSd}catch{bad++}
+  try{if(!comics||!Object.keys(comics).length){const cl=await list('comics');comics=Object.fromEntries(cl.map(x=>[x.id,x]))}}catch{bad++}
+  if(!cur())return 0;
+  try{vm=(spSd||[]).filter(x=>hit([x.title,x.desc,x.series].join(' ')))}catch{}
+  try{cm=Object.values(comics||{}).filter(x=>x&&hit([x.title,x.name,x.series,x.desc,x.author].join(' ')))}catch{}
+  try{if(vm.length)vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
+  if(!cur())return 0;
+  let out='';
+  if(cm.length){try{out+=`<div class=sx><div><h2>${T('কমিকস','Comics')}</h2></div></div><div class="rail comic-list">${collapse(cm).slice(0,12).map(cardOf).join('')}</div>`}catch{}}
+  if(vm.length)out+=`<div class=sx><div><h2>${T('ভিডিও','Videos')}</h2></div></div><div class="vg hfl">${vm.map(vCard).join('')}</div>`;
+  if($('#spRes'))$('#spRes').innerHTML=out;
+  return out?1:bad?-1:0})();
+ const [lv,ct]=await Promise.all([live,cont]);
+ if(!cur())return;
+ if(!ct&&!lv&&$('#spRes'))$('#spRes').innerHTML=ct<0?`<p class="sp-no">${T('লোড করা যায়নি।','Could not load.')}</p>`:`<p class="sp-no">${T('কিছু পাওয়া যায়নি।','Nothing found.')}</p>`}
+function spOpen(){spBuild();const d=$('#sp'),q=$('#spq');if(!d)return;d.hidden=false;spOn=true;document.documentElement.classList.add('spo');try{history.pushState({sp:1},'')}catch{}q.value='';$('#spx').hidden=true;spHome();setTimeout(()=>q.focus(),60)}
+function spClose(pop){const d=$('#sp');if(!d||!spOn)return;spOn=false;spTok++;d.hidden=true;document.documentElement.classList.remove('spo');if(!pop){try{if(history.state&&history.state.sp)history.back()}catch{}}}
+$('#sq').onclick=()=>spOpen();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&spOn)spClose()});
 $('#gh').onclick=sc.onclick=()=>tog(0);$('#lgb').onclick=()=>go('home');
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#m').classList.remove('on');tog(0)}});
@@ -1937,7 +2086,7 @@ async function settings(){
   </div>
   <div class=st-g>
    ${row('mega',T('ঘোষণা ও কনটেস্ট','News & Contests'),'news')}
-   ${row('help','FrangowstAi','faq')}
+   ${row('help','Fragiks','faq')}
   </div>
   <div class=st-g>
    ${lnk(FBX,T('ফেসবুক পেজ','Facebook Page'),'https://www.facebook.com/share/1Dakj9PjWA/')}
@@ -1988,7 +2137,7 @@ async function go(v){
  }catch(e){
   clearTimeout(skT);
   if(thisRoute!==routeVersion)return;
-  app.innerHTML=`<p class=ld>${errMsg(e)}<br><br><button class=btn data-go=${v}>আবার চেষ্টা করুন</button></p>`;
+  app.innerHTML=`<div class="ld off">${ic((navigator.onLine===false||e?.code==='timeout'||e?.code==='unavailable')?'wifioff':'help')}<p>${errMsg(e)}</p><button class=btn data-go=${v}>${T('আবার চেষ্টা করুন','Try again')}</button></div>`;
  }finally{
   setTimeout(()=>{if(thisRoute===routeVersion)app.dataset.dir='x'},700);
  }
@@ -2031,16 +2180,22 @@ const chCard=(x,g)=>{const lk=chLocked(x);return `<button class="chc${lk?' lk':'
 const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
 async function home(){
  const thisRoute=routeVersion;
-  $('#app').innerHTML=`<div class="sec hf"><div class=hh><small>${T('স্বাগতম','Welcome')}</small><h1>${T('আজ কী দেখবেন?','What to watch today?')}</h1></div><div class=sb>${ic('search')}<input id=hq type=search placeholder="ভিডিও খুঁজুন..." autocomplete=off aria-label="ভিডিও খুঁজুন"></div><div id=sr></div><div id=sv><div class="sk skhero" style="margin-top:6px"></div>${skVid()}</div></div>`;
- let sd;$('#hq').oninput=async()=>{const v=$('#hq').value.trim().toLowerCase();
-  if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
-  $('#sv').hidden=true;
-   try{if(!sd){const vr=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});sd=[...(vr.list||[])].sort(byT);vds=sd}}catch{$('#sr').innerHTML='<p class="ld emp e-error">লোড করা যায়নি।</p>';return}
-  if($('#hq').value.trim().toLowerCase()!==v)return;
-    const vm=sd.filter(x=>[x.title,x.desc,x.series].join(' ').toLowerCase().includes(v));
-   try{vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
-   if($('#hq').value.trim().toLowerCase()!==v)return;
-   $('#sr').innerHTML=vm.length?`<div class=sx><div><h2>ভিডিও</h2></div></div><div class="vg hfl">${vm.map(vCard).join('')}</div>`:'<p class="ld emp e-search">কিছু পাওয়া যায়নি।</p>'};
+  $('#app').innerHTML=`<div class="sec hf"><div class=hh><small>${T('স্বাগতম','Welcome')}</small><h1>${T('আজ কী দেখবেন?','What to watch today?')}</h1></div><div class=sb id=hsb hidden>${ic('search')}<input id=hq type=search placeholder="${T('ভিডিও খুঁজুন...','Search videos...')}" autocomplete=off aria-label="${T('ভিডিও খুঁজুন','Search videos')}"></div><div id=sr></div><div id=sv><div class="sk skhero" style="margin-top:6px"></div>${skVid()}</div></div>`;
+  let sd;if($('#hq'))$('#hq').oninput=async()=>{const hq=$('#hq');if(!hq)return;const v=hq.value.trim().toLowerCase();
+   if(!v){$('#sr').innerHTML='';$('#sv').hidden=false;return}
+   $('#sv').hidden=true;
+   const cur=()=>$('#hq')&&$('#hq').value.trim().toLowerCase()===v,toks=v.split(/\s+/).filter(Boolean),hit=h=>{h=String(h||'').toLowerCase();return toks.every(t=>h.includes(t))};
+   let vm=[],cm=[],bad=0;
+   try{if(!sd){const vr=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});sd=[...(vr.list||[])].sort(byT);vds=sd}}catch{bad++}
+   if(!cur())return;
+   try{vm=(sd||[]).filter(x=>hit([x.title,x.desc,x.series].join(' ')))}catch{}
+   try{cm=Object.values(comics||{}).filter(x=>x&&hit([x.title,x.name,x.series,x.desc,x.author].join(' ')))}catch{}
+   try{if(vm.length)vv={...vv,...await vviews(vm.map(x=>x.id))}}catch{}
+   if(!cur())return;
+   let out='';
+   if(cm.length){try{out+=`<div class=sx><div><h2>কমিকস</h2></div></div><div class="rail comic-list">${collapse(cm).slice(0,12).map(cardOf).join('')}</div>`}catch{}}
+   if(vm.length)out+=`<div class=sx><div><h2>ভিডিও</h2></div></div><div class="vg hfl">${vm.map(vCard).join('')}</div>`;
+   $('#sr').innerHTML=out||(bad&&!cm.length?'<p class="ld emp e-error">লোড করা যায়নি।</p>':'<p class="ld emp e-search">কিছু পাওয়া যায়নি।</p>')};
   const c={status:'fulfilled',value:[]},[vr]=await Promise.allSettled([cache('videos',async()=>(await dat('site','videos'))||{list:[]})]),ok=r=>r.status==='fulfilled'?[...r.value].sort(byT):[];
  if(thisRoute!==routeVersion)return;
   if(vr.status==='rejected')throw vr.reason;
@@ -2122,31 +2277,54 @@ function faqData(L){const T=(b,e)=>L==='en'?e:b,X=t=>L==='en'?phraseTr(t,true):t
   ['video',T('ভিডিও ঠিকমতো চলছে না, কী করব?','The video is not playing properly. What should I do?'),T('ইন্টারনেট সংযোগ ঠিক আছে কিনা দেখুন, পেজ রিফ্রেশ করুন এবং ব্রাউজার আপডেট রাখুন। তারপরও না চললে ইমেইল বা ফেসবুক গ্রুপে জানান।','Check your internet connection, refresh the page and keep your browser updated. If it still does not play, tell us by email or in our Facebook group.')],
   ['other',X('সমস্যা হলে কোথায় জানাব?'),X('help.akano@gmail.com এ ইমেইল করুন অথবা আমাদের ফেসবুক গ্রুপে জানান।')],
  ]}
+const VM={on:false,busy:false,r:null,idle:0};
+const vmUI=()=>{try{window.__vmUI&&window.__vmUI()}catch{}};
+function vmStop(){VM.on=false;VM.busy=false;VM.idle=0;try{VM.r&&VM.r.abort()}catch{}VM.r=null;try{speechSynthesis.cancel()}catch{}vmUI()}
+function vmStart(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return alert(T('এই ব্রাউজারে ভয়েস ইনপুট নেই।','Voice input is not supported in this browser.'));VM.on=true;VM.busy=false;VM.idle=0;vmUI();vmListen()}
+function vmListen(){
+ if(!VM.on)return;if(!document.getElementById('aiw')){vmStop();return}
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){vmStop();return}
+ const r=new SR();VM.r=r;r.lang=language==='en'?'en-US':'bn-BD';r.interimResults=false;r.maxAlternatives=1;let got=false;
+ r.onresult=e=>{const t=(e.results[0]&&e.results[0][0]&&e.results[0][0].transcript||'').trim();if(!t||!VM.on)return;got=true;VM.busy=true;VM.idle=0;asAsk(t)};
+ r.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'){vmStop();alert(T('মাইক্রোফোনের অনুমতি দিন।','Please allow microphone access.'))}};
+ r.onend=()=>{if(!VM.on||got)return;VM.idle++;if(VM.idle>=3){vmStop();return}setTimeout(vmListen,500)};
+ try{r.start()}catch{setTimeout(()=>{if(VM.on)vmListen()},800)}}
+function vmAfter(){if(!VM.on)return;VM.busy=false;setTimeout(vmListen,600)}
+function vmSpeak(box){
+ const t=box&&box.querySelector('[data-sayt]');if(!t||!('speechSynthesis' in window)){vmAfter();return}
+ const u=new SpeechSynthesisUtterance(t.textContent.trim()),lang=/[\u0980-\u09FF]/.test(u.text)?'bn-BD':'en-US';u.lang=lang;
+ const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang.replace('_','-').toLowerCase()===lang.toLowerCase())||vs.find(x=>x.lang.toLowerCase().startsWith(lang.slice(0,2)));
+ if(!v&&lang==='bn-BD'&&vs.length){vmAfter();return}
+ if(v)u.voice=v;u.onend=u.onerror=()=>vmAfter();try{speechSynthesis.cancel();speechSynthesis.speak(u)}catch{vmAfter()}}
 function faq(){
+ vmStop();
  const Q=faqData(language),sug=T('কীভাবে কমিকস কিনব?','How do I buy a comic?');
  $('#app').innerHTML=`<div class="sec aiw" id=aiw>
-  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>${'FrangowstAi'}</span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
+  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>Fragiks</span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
   <div class=ai-stage><div class=ai-orb><i></i><i></i><i></i></div><h2>${T('আকানো সম্পর্কে যা জানতে চান, জিজ্ঞেস করুন','Ask anything about Akano')}</h2></div>
   <button type=button class=ai-new id=aiNew data-new>${T('নতুন চ্যাট','New chat')}</button>
-   <div class=asl id=asl></div>
-  <div class=ai-cards>
-   <button type=button class=ai-card id=aiCardFaq>${ic('help')}<b>${T('প্রশ্নোত্তর','FAQ')}</b></button>
-   <button type=button class=ai-card data-ask="${esc(sug)}">${ic('shelf')}<b>${T('কেনার নিয়ম','How to buy')}</b></button>
-   <button type=button class=ai-card id=aiCardVoice>${ic('mic')}<b>${T('ভয়েস মোড','Voice Mode')}</b></button>
-  </div>
+  <div class=asl id=asl></div>
   <form class=ai-box id=asf autocomplete=off>
-   <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('FrangowstAi-কে জিজ্ঞেস করুন...','Chat with FrangowstAi')}" aria-label="${T('প্রশ্ন','Question')}"></div>
-   <div class=ai-r2><button type=button class=ai-chip id=aiChipFaq>${ic('help')}<span>${T('প্রশ্নোত্তর','FAQ')}</span></button><button type=button class=ai-spk id=aiSpk>${ic('mic')}<span>${T('বলুন','Speak')}</span></button></div>
+   <div class=ai-cards>
+    <button type=button class=ai-card id=aiCardFaq>${ic('help')}<b>${T('প্রশ্নোত্তর','FAQ')}</b></button>
+    <button type=button class=ai-card id=aiCardVoice>${ic('mic')}<b>${T('ভয়েস মোড','Voice Mode')}</b></button>
+    <button type=button class=ai-card data-ask="${esc(sug)}">${ic('shelf')}<b>${T('কেনার নিয়ম','How to buy')}</b></button>
+   </div>
+   <div class=ai-in>
+    <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('Fragiks-কে জিজ্ঞেস করুন...','Chat with Fragiks')}" aria-label="${T('প্রশ্ন','Question')}"></div>
+    <div class=ai-r2><div class=ai-l><button type=button class=ai-model id=aiModel><span>Fragiks beta</span>${ic('chev')}</button></div><button type=button class=ai-spk id=aiSpk>${ic('mic')}<span>${T('বলুন','Speak')}</span></button></div>
+   </div>
   </form></div>`;
- const upd=()=>{const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
+ const upd=()=>{if(VM.on)return;const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
+ window.__vmUI=()=>{const b=$('#aiSpk'),c=$('#aiCardVoice');if(c){c.classList.toggle('on',VM.on);const bb=c.querySelector('b');if(bb)bb.textContent=VM.on?T('শুনছি…','Listening…'):T('ভয়েস মোড','Voice Mode')}if(b){if(VM.on){b.classList.add('on');b.innerHTML=ic('mic')+'<span>'+T('থামুন','Stop')+'</span>'}else{b.classList.remove('on');upd()}}};
  const send=()=>{const v=$('#asq').value;if(!v.trim())return;$('#asq').value='';upd();asAsk(v)};
  asRestore();
  $('#asf').onsubmit=e=>{e.preventDefault();send()};
  $('#asq').oninput=upd;$('#asq').onfocus=()=>setTimeout(()=>{const l=$('#asl')&&$('#asl').lastElementChild;if(l)asScroll(l)},350);
- $('#aiSpk').onclick=()=>{if($('#asq').value.trim())send();else aiListen($('#aiSpk'),send)};
- $('#aiCardVoice').onclick=()=>aiListen($('#aiSpk'),send);
+ $('#aiSpk').onclick=()=>{if(VM.on){vmStop();return}if($('#asq').value.trim())send();else aiListen($('#aiSpk'),send)};
+ $('#aiCardVoice').onclick=()=>{VM.on?vmStop():vmStart()};
  const sheet=()=>modal(`<h2 class=ai-sh>${T('প্রশ্নোত্তর','FAQ')}</h2><div class=ai-fl>${Q.map(([c,q],i)=>`<button type=button class=ai-q data-fi=${i}><span>${esc(q)}</span>${ic('chev')}</button>`).join('')}</div>`);
- $('#aiMenu').onclick=sheet;$('#aiCardFaq').onclick=sheet;$('#aiChipFaq').onclick=sheet}
+ $('#aiMenu').onclick=sheet;$('#aiCardFaq').onclick=sheet}
 let vds=[],vv={};
 async function vviews(ids){
  const keys=Array.isArray(ids)?[...new Set(ids.filter(Boolean))]:[...new Set(vds.map(x=>x.id).filter(Boolean))],out={},need=[],stale={};
@@ -2661,14 +2839,17 @@ if(location.hash==='#admin')openAdmin();else go('home');
 
 // ---------- PWA: install করা যায় এমন অ্যাপ ----------
 (()=>{
+ const IMG_FB='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120"><rect width="160" height="120" fill="#f1f1f1"/><g fill="none" stroke="#b4b4b4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="46" y="34" width="68" height="52" rx="8"/><circle cx="66" cy="54" r="6"/><path d="M46 78l20-18 14 12 12-10 22 16"/></g></svg>');
+ document.addEventListener('error',e=>{const i=e.target;if(!i||i.tagName!=='IMG'||i.dataset.fb||i.closest('#logo,header'))return;if(i.onerror)return;i.dataset.fb=1;i.dataset.ofb=i.currentSrc||i.src||'';i.src=IMG_FB;i.classList.add('imgfb')},true);
+ addEventListener('online',()=>document.querySelectorAll('img.imgfb').forEach(i=>{const o=i.dataset.ofb;if(o){delete i.dataset.fb;i.classList.remove('imgfb');i.src=o}}));
  const PROXY=true,OK=/^https?:\/\/(?:i\.)?ibb\.co\//i;
- const wOf=i=>i.closest('.vc.big,.pst-i,.nw')?900:i.closest('.th')?720:i.closest('.card,.ep,.cts,.lb-card,.chc')?420:600;
+ const DPR=Math.min(3,Math.max(1,window.devicePixelRatio||1)),wOf=i=>Math.min(1800,Math.round((i.closest('.vc.big,.pst-i,.nw')?1000:i.closest('.th')?760:i.closest('.card,.ep,.cts,.lb-card,.chc')?520:700)*DPR));
  const opt=i=>{if(i.dataset.fx)return;i.dataset.fx=1;
   if(i.closest('#v,.pages,.gv,#vp,header'))return;
   i.decoding='async';
   if(i.closest('.vc.big')&&!DS()){i.loading='eager';i.fetchPriority='high'}else if(!i.getAttribute('loading'))i.loading='lazy';
   const src=i.getAttribute('src')||'';
-  if(PROXY&&OK.test(src)){i.dataset.o=src;i.onerror=()=>{i.onerror=null;i.src=i.dataset.o};i.src='https://images.weserv.nl/?url='+encodeURIComponent(src.replace(/^https?:\/\//,''))+'&w='+Math.round(wOf(i)*(DS()?.6:1))+'&q='+(DS()?50:72)+'&output=webp'}
+  if(PROXY&&OK.test(src)){i.dataset.o=src;i.onerror=()=>{i.onerror=null;i.src=i.dataset.o};i.src='https://images.weserv.nl/?url='+encodeURIComponent(src.replace(/^https?:\/\//,''))+'&w='+Math.round(wOf(i)*(DS()?.6:1))+'&q='+(DS()?55:88)+'&output=webp'}
   i.classList.add('fx');
   const done=()=>i.classList.add('ok');
   if(i.complete&&i.naturalWidth)done();else{i.addEventListener('load',done,{once:true});i.addEventListener('error',done,{once:true})}};
@@ -2676,7 +2857,7 @@ if(location.hash==='#admin')openAdmin();else go('home');
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(scan))).observe(document.body,{childList:true,subtree:true});
  document.querySelectorAll('img').forEach(opt)})();
 (()=>{const b=document.createElement('div');b.id='off';b.setAttribute('role','status');document.body.appendChild(b);
- const u=()=>{const off=navigator.onLine===false;b.textContent=language==='en'?'You are offline — showing saved content':'ইন্টারনেট নেই — সেভ করা তথ্য দেখানো হচ্ছে';b.classList.toggle('on',off)};
+ const u=()=>{const off=navigator.onLine===false;b.innerHTML=ic('wifioff')+'<span>'+(language==='en'?'You are offline — showing saved content':'ইন্টারনেট নেই — সেভ করা তথ্য দেখানো হচ্ছে')+'</span>';b.classList.toggle('on',off)};
  addEventListener('online',u);addEventListener('offline',u);u();
  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})})();
 function pwaStandalone(){return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}
@@ -2687,8 +2868,8 @@ function pwaBtn(){if(pwaStandalone()||!(window.__pwa||pwaIOS()))return'';return 
 const SYN=[['কিনব','কিনি','কেনা','কিনতে','কিনুন','কিন','buy','purchase','order','অর্ডার','kinbo','kinte','kini','kena','kinun'],['কোড','code','pin'],['পেমেন্ট','payment','বিকাশ','নগদ','রকেট','bkash','nagad','rocket','টাকা','taka','price','দাম','মূল্য'],['ফ্রি','free','বিনামূল্যে'],['সিরিজ','series','পর্ব','episode','ep'],['ভিডিও','video','videos','অ্যানিমেটেড','animated','animation'],['কমিকস','comic','comics','কমিক'],['ক্যারেক্টার','character','characters','চরিত্র'],['রিভিউ','review','মতামত','feedback'],['যোগাযোগ','contact','email','ইমেইল','help','সাহায্য','মেইল','mail'],['ইনস্টল','install','অ্যাপ','app','ডাউনলোড'],['অফলাইন','offline'],['ভাষা','language','ইংরেজি','english','বাংলা','bangla','bengali'],['ব্যাজ','badge','badges','streak','স্ট্রিক'],['শেয়ার','share'],['বিজ্ঞাপন','ad','ads','advertisement'],['আকানো','akano','আকানো'],['ডেটা','data','saver','সেভার'],['লাইব্রেরি','library','পারচেজ','purchased'],['কীভাবে','কিভাবে','kivabe','kibhabe','how'],['লক','lock','locked','আনলক','unlock','spoiler','স্পয়লার']];
 const SYNX={0:['kinar','kenar','nibo','nite','kinbo'],1:['kod'],2:['dam','mulyo','koto','kotto','pay','dibo','bikas','nogod','tk'],3:['binamulle','frie'],4:['porbo','sirij'],5:['vidio','bhidio','vedio'],6:['komiks','komik','comix','kamiks'],7:['caractar','korektar','choritro','charektar'],8:['rivew','matamot','rating'],9:['jogajog','jogajug','sahajjo','sahajyo'],10:['inster','ap'],11:['offlain'],12:['bhasha','vasha'],13:['baj'],14:['sheyar','share'],15:['biggapon','bigyapon','bigapon'],18:['kibhabe','kemne','kmne','kibabe','kivabe'],19:['lok','anlok']};
 Object.keys(SYNX).forEach(i=>SYN[i].push(...SYNX[i]));
-SYN.push(['দিন','din','day','days','dine'],['মেয়াদ','meyad','moyad','expire','expiry','valid','validity']);
-const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti','korbo','korte','kore','hobe','jay','jai','e','না','na','te','amar','ami','apni','tumi']);
+SYN.push(['দিন','din','day','days','dine','kotodin','koydin'],['মেয়াদ','meyad','moyad','expire','expiry','valid','validity']);
+const STOPW=new Set(['কী','কি','কেন','কোথায়','আমি','আপনি','আমার','করব','করে','করুন','যায়','হয়','থাকে','কোন','কোনো','এই','এটা','ওই','জন্য','the','is','are','a','an','i','to','my','can','what','where','does','do','of','in','on','and','you','me','it','for','how','kivabe','কীভাবে','কিভাবে','আছে','নাকি','তুমি','বলো','বলুন','ke','ki','er','kara','ache','achhe','ar','ta','ti','korbo','korte','kore','hobe','jay','jai','e','না','na','jabe','neya','nite','pabo','pabe','chai','cai','kothay','kothaye','kono','kichu','amar','ami','apni','tumi','amake','tomra','sathe','chao','amra','amader','korte','pari','parbo','te','amar','ami','apni','tumi']);
 const SUFX=['গুলোর','গুলো','গুলি','দের','েরা','ের','কে','তে','টির','টি','টা','র','য়','ে'];
 const aNorm=s=>String(s||'').toLowerCase().replace(/[\u200c\u200d]/g,'').replace(/[^\u0980-\u09FFa-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
 const aStem=w=>{if(/^[a-z0-9]+$/.test(w))return w.length>4?w.replace(/(ing|ed|es|s)$/,''):w;for(const x of SUFX){if(w.length>x.length+1&&w.endsWith(x))return w.slice(0,-x.length)}return w};
@@ -2696,6 +2877,12 @@ const aTri=s=>{s=' '+s+' ';const m=new Map();for(let i=0;i<s.length-2;i++){const
 const aDice=(a,b)=>{let i=0,n=0,m=0;a.forEach(v=>n+=v);b.forEach(v=>m+=v);if(!n||!m)return 0;a.forEach((v,k)=>{if(b.has(k))i+=Math.min(v,b.get(k))});return 2*i/(n+m)};
 const lsRead=k=>{try{return JSON.parse(localStorage['ak_'+k]).d}catch{return null}};
 function kbData(){return [
+  {c:'about',qb:'আকানোর লক্ষ্য কী?',qe:'What is Akano\u2019s goal?',k:'লক্ষ্য goal vision স্বপ্ন mission উদ্দেশ্য ভবিষ্যৎ future ambition target',ab:'আকানো Frangowst-এর একটি উদ্যোগ। আমাদের লক্ষ্য বিনোদনের সব ক্ষেত্রে কাজ করা এবং ওয়াল্ট ডিজনি, নেটফ্লিক্স ও বান্দাই নামকোর মতো বিশ্বের বড় প্রতিষ্ঠানগুলোর সঙ্গে প্রতিযোগিতা করা। সিনেমা, গেমিং ও অ্যানিমেশন, তিন খাতেই আমরা নেতৃত্ব দিতে চাই।',ae:'Akano is an initiative of Frangowst. Our goal is to work across every part of entertainment and compete with global giants like Walt Disney, Netflix and Bandai Namco. We want to lead in movies, gaming and animation.'},
+  {c:'about',qb:'আকানো কোন কোন খাতে কাজ করতে চায়?',qe:'Which sectors does Akano want to work in?',k:'sector খাত ক্ষেত্র movie সিনেমা চলচ্চিত্র gaming গেম গেমিং animation অ্যানিমেশন entertainment বিনোদন dominate',ab:'আমরা বিনোদনের সব ক্ষেত্রেই কাজ করতে চাই: সিনেমা, গেমিং ও অ্যানিমেশন। শুরুটা কমিকস ও অ্যানিমেটেড ভিডিও দিয়ে, লক্ষ্য এই সব খাতেই শক্ত অবস্থান গড়া।',ae:'We want to work across all of entertainment: movies, gaming and animation. We started with comics and animated videos, and our aim is to build a strong position in every one of these sectors.'},
+  {c:'about',qb:'আকানো কাদের সঙ্গে প্রতিযোগিতা করতে চায়?',qe:'Who does Akano want to compete with?',k:'competitor প্রতিযোগী প্রতিযোগিতা compete disney ডিজনি netflix নেটফ্লিক্স bandai namco বান্দাই নামকো giant জায়ান্ট walt',ab:'আমরা ওয়াল্ট ডিজনি, নেটফ্লিক্স ও বান্দাই নামকোর মতো বিশ্বের বড় বিনোদন প্রতিষ্ঠানগুলোর সঙ্গে প্রতিযোগিতা করার স্বপ্ন দেখি। বড় স্বপ্ন দেখাই আমাদের শক্তি।',ae:'We dream of competing with the world\u2019s biggest entertainment companies such as Walt Disney, Netflix and Bandai Namco. Dreaming big is our strength.'},
+  {c:'about',qb:'ভবিষ্যতে আকানোতে সিনেমা, গেম ও অ্যানিমেশন আসবে?',qe:'Will Akano bring movies, games and animation in the future?',k:'future ভবিষ্যৎ আসছে coming plan পরিকল্পনা movie সিনেমা game গেম animation অ্যানিমেশন upcoming',ab:'হ্যাঁ, এটাই আমাদের পরিকল্পনা। এখন কমিকস ও অ্যানিমেটেড ভিডিও আছে, ধাপে ধাপে সিনেমা, গেমিং ও অ্যানিমেশনেও আমরা আসতে চাই। নতুন কিছু এলে ঘোষণা পাতায় জানানো হবে।',ae:'Yes, that is our plan. Right now there are comics and animated videos; step by step we want to move into movies, gaming and animation too. New releases will be announced on the News page.',go:[['news','ঘোষণা দেখুন','See news']]},
+  {c:'app',qb:'Fragiks কী?',qe:'What is Fragiks?',k:'fragiks ফ্র্যাজিক্স ai এআই assistant সহকারী beta বেটা bot model মডেল',ab:'Fragiks হলো Frangowst-এর তৈরি একটি এআই (কৃত্রিম বুদ্ধিমত্তা) সহকারী।',ae:'Fragiks is an AI (Artificial Intelligence) assistant developed by Frangowst.'},
+
  {c:'about',qb:'আকানো কী? আকানো সম্পর্কে বলুন',qe:'What is Akano? Tell me about Akano',k:'akano আকানো পরিচয় about global গ্লোবাল pop culture পপ কালচার entertainment বিনোদন brand ব্র্যান্ড frangowst ফ্রাঙ্গোস্ট company কোম্পানি rdb studio কারা মালিক owner',ab:'আকানো Frangowst-এর একটি পপ কালচার ও বিনোদন ব্র্যান্ড। আমরা গ্লোবাল কমিকস, ভিডিও ও অ্যানিমেটেড সিরিজ প্রকাশ করছি এবং শিল্প, সংস্কৃতি ও বিনোদনের একটি পূর্ণ জগৎ গড়তে চাই।',ae:'Akano is a pop culture and entertainment brand of Frangowst. We publish global comics, videos and animated series, and we want to build a complete world of art, culture and entertainment.',go:[['comics','কমিকস','Comics'],['videos','ভিডিও','Videos']]},
  {c:'about',qb:'আকানো বা Frangowst-এর ফাউন্ডার কে?',qe:'Who is the founder of Akano or Frangowst?',k:'protishthata prothisthata malik ফাউন্ডার founder প্রতিষ্ঠাতা ceo মালিক owner কে বানিয়েছে তৈরি করেছে কার করেছেন শুরু created creator started behind ahmad shoaib আকানো akano frangowst ফ্রাঙ্গোস্ট',ab:'আকানো ও Frangowst-এর ফাউন্ডার Ahmad Shoaib।',ae:'The founder of Akano and Frangowst is Ahmad Shoaib.'},
  {c:'about',qb:'আকানো-র প্যানেল মেম্বার বা টিমে কারা আছেন?',qe:'Who are the panel members or team of Akano?',k:'sodosso shodosso team ke kara প্যানেল panel মেম্বার member সদস্য টিম team স্টাফ staff কারা আছে who ক্রিয়েটর কর্মী পরিচালক director omor faruk ওমর ফারুক abrarul maruf আবরারুল মারুফ',ab:'আকানো-র প্যানেল মেম্বারদের মধ্যে আছেন: Omor Faruk — Chief Visual Director ও Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management ইত্যাদি। ফাউন্ডার Ahmad Shoaib।',ae:'Akano panel members include: Omor Faruk — Chief Visual Director and Senior Artist; Abrarul Haque Maruf — Event Coordinator, Head of Budget Management and more. The founder is Ahmad Shoaib.'},
@@ -2717,7 +2904,7 @@ function kbData(){return [
  {c:'buy',qb:'কেনা কমিকস বা ভিডিও আবার কোথায় পাব? লাইব্রেরি',qe:'Where do I find purchased comics or videos? Library',k:'লাইব্রেরি library পারচেজ purchased কেনা মেয়াদ expire ২০ দিন',ab:'কেনা কমিকস সেটিংসের “পারচেজ লাইব্রেরি”-তে ২০ দিনের জন্য জমা থাকে (কোডের মেয়াদ অনুযায়ী)। সেখান থেকেই আবার পড়তে পারবেন।',ae:'Purchased comics are kept in \u201cLibrary\u201d under Settings for 20 days (as per the code validity). You can read them again from there.',go:[['lib','পারচেজ লাইব্রেরি','Library']]},
  {c:'buy',qb:'বিজ্ঞাপন কেন দেখায়?',qe:'Why do I see an ad?',k:'বিজ্ঞাপন ad ads advertisement vimeo',ab:'কিছু ফ্রি কমিকস বা ভিডিওর সাথে প্রতি ২০ মিনিট পর পর একটি ছোট বিজ্ঞাপন আসে। কিছুক্ষণ পর “বিজ্ঞাপন স্কিপ করুন” বাটন চাপা যায়। কেনা কনটেন্টে বিজ্ঞাপন থাকে না।',ae:'Some free comics or videos show a short ad every 20 minutes. After a few seconds you can tap \u201cSkip ad\u201d. Purchased content has no ads.'},
  {c:'help',qb:'আমার তথ্য কোথায় থাকে? প্রাইভেসি',qe:'Where is my data stored? Privacy',k:'প্রাইভেসি privacy তথ্য data অ্যাকাউন্ট account ফোন localstorage',ab:'আমরা আলাদা অ্যাকাউন্ট চাই না। আমার তালিকা, পড়ার অগ্রগতি, ব্যাজের মতো তথ্য আপনার ফোনেই থাকে।',ae:'We do not ask you to create an account. Your list, reading progress and badges stay on your phone.'},
- {c:'help',qb:'তুমি কি এআই? তুমি কে?',qe:'Are you an AI? Who are you?',k:'এআই ai বট bot সহকারী assistant তুমি কে who',ab:'আমি FrangowstAi। অ্যাপের তথ্য ও প্রশ্নোত্তর থেকে উত্তর খুঁজে দিই। সব প্রশ্নের উত্তর আমার কাছে নেই; না পারলে আপনাকে সঠিক জায়গায় পাঠাই।',ae:'I am FrangowstAi. I find answers from the app\u2019s information and FAQ. I do not know everything; when I cannot answer, I point you to the right place.'}
+ {c:'help',qb:'তুমি কি এআই? তুমি কে?',qe:'Are you an AI? Who are you?',k:'এআই ai বট bot সহকারী assistant তুমি কে who',ab:'আমি Fragiks। অ্যাপের তথ্য ও প্রশ্নোত্তর থেকে উত্তর খুঁজে দিই। সব প্রশ্নের উত্তর আমার কাছে নেই; না পারলে আপনাকে সঠিক জায়গায় পাঠাই।',ae:'I am Fragiks. I find answers from the app\u2019s information and FAQ. I do not know everything; when I cannot answer, I point you to the right place.'}
 ]}
 let KBX=null;
 function kbIndex(){
@@ -2735,7 +2922,7 @@ function kbIndex(){
  return KBX={docs,toks,df,N:docs.length,SYNMAP,words}}
 function kbScore(q){
  const X=kbIndex(),W=X.words(q),nq=aNorm(q),tq=aTri(nq),wt=x=>Math.log(1+X.N/(1+(X.df[x]||0)));
- return X.docs.map(d=>{const dw=d.qw||(d.qw=[...d.qt].reduce((a,x)=>a+wt(x),0));let tot=0,hit=0,hq=0;W.forEach(({t,k})=>{const w=Math.max(wt(t),k?wt(k)*.9:0);tot+=w;let h=0,qq=0;[[t,1],[k,.9]].forEach(([x,f])=>{if(!x)return;if(d.qt.has(x)){h=Math.max(h,wt(x)*f);qq=Math.max(qq,wt(x))}else if(d.at.has(x))h=Math.max(h,wt(x)*f*.45)});hit+=Math.min(h,w);hq+=qq});
+ return X.docs.map(d=>{const dw=d.qw||(d.qw=[...d.qt].reduce((a,x)=>a+wt(x),0));let tot=0,hit=0,hq=0;W.forEach(({t,k})=>{const kn=/^g\d+$/.test(t)||X.df[t]||(k&&X.df[k]),w=(kn?1:.5)*Math.max(wt(t),k?wt(k)*.9:0);tot+=w;let h=0,qq=0;[[t,1],[k,.9]].forEach(([x,f])=>{if(!x)return;if(d.qt.has(x)){h=Math.max(h,wt(x)*f);qq=Math.max(qq,wt(x))}else if(d.at.has(x))h=Math.max(h,wt(x)*f*.45)});hit+=Math.min(h,w);hq+=qq});
   const cov=tot?hit/tot:0,pr=dw?Math.sqrt(Math.min(1,hq/dw)):0,sc=W.length?(.65*cov+.2*pr+.15*aDice(tq,d.tri)):0;return{d,sc}}).sort((a,b)=>b.sc-a.sc)}
 function entityMatch(q){
  const X=kbIndex(),nq=aNorm(q),qs=new Set(nq.split(' ').filter(Boolean).map(aStem)),tq=aTri(nq),out=[];
@@ -2746,7 +2933,7 @@ function entityMatch(q){
  const sn=seenIds();((lsRead('chars')||{}).list||[]).forEach(x=>{if(x&&x.name&&(!x.unlock||sn[x.unlock]))push('char',x.id,x.name,x.series||'','chars')});
  return out.sort((a,b)=>b.sc-a.sc).slice(0,3)}
 const aEsc=esc;
-function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e,x])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com${x?'?subject='+encodeURIComponent('FrangowstAi')+'&body='+encodeURIComponent(x):''}">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
+function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e,x])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com${x?'?subject='+encodeURIComponent('Fragiks')+'&body='+encodeURIComponent(x):''}">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
 const aSay=()=>`<button type=button class=say data-say aria-label="${T('শুনুন','Listen')}">${ic('vol')}<span>${T('শুনুন','Listen')}</span></button>`;
 const aAns=(text,go,extra)=>`<div data-sayt>${aEsc(text)}</div>${aLinks(go)}${extra||''}`;
 function catCtx(){
@@ -2782,7 +2969,7 @@ async function wikiAnswer(q){
   if(out)break}
  if(out){try{sessionStorage.setItem(key,JSON.stringify(out))}catch{}}
  return out}
-// ================= FrangowstAi ব্রেইন (সব লোকাল, ০ Firebase রিড/রাইট) =================
+// ================= Fragiks ব্রেইন (সব লোকাল, ০ Firebase রিড/রাইট) =================
 const BNUM='০১২৩৪৫৬৭৮৯';
 const aDig=s=>String(s).replace(/[০-৯]/g,c=>BNUM.indexOf(c));
 const SKM={'ক':'k','খ':'k','গ':'g','ঘ':'g','ঙ':'n','চ':'c','ছ':'c','জ':'j','ঝ':'j','ঞ':'n','ট':'t','ঠ':'t','ড':'d','ঢ':'d','ণ':'n','ত':'t','থ':'t','দ':'d','ধ':'d','ন':'n','প':'p','ফ':'p','ব':'b','ভ':'b','ম':'m','য':'j','র':'r','ল':'l','শ':'s','ষ':'s','স':'s','ৎ':'t','ং':'n'};
@@ -2866,25 +3053,25 @@ const aEntFact=e=>{const r=e.raw||{};
  return T(`“${e.title}” সিরিজে এখন ${bn(r.n||0)}টি পর্ব আছে।`,`The series “${e.title}” currently has ${r.n||0} episodes.`)};
 /* ছোট কথাবার্তা + ইউটিলিটি (ক্যালকুলেটর, তারিখ, সময়) */
 function aSmall(q,nq,nw){
- const cap=[['কী কী কমিকস আছে?','What comics are there?'],['নতুন কী এসেছে?','What is new?'],['কী পড়ব সাজেস্ট করো','Suggest what to read'],['আমার স্ট্রিক কত?','What is my streak?'],['১২ × ১৫ কত?','12 x 15 = ?']];
+ if(aAbuse(nq))return aAns(T('দুঃখিত, আমি এ বিষয়ে সাহায্য করতে পারব না। ভদ্রভাবে প্রশ্ন করলে আমি খুশি মনে উত্তর দেব।','I can\u2019t help with that. Ask me politely and I will gladly help.'));
+ const cap=[['কী কী কমিকস আছে?','What comics are there?'],['নতুন কী এসেছে?','What is new?'],['কী পড়ব সাজেস্ট করো','Suggest what to read'],['আমার স্ট্রিক কত?','What is my streak?'],['১২ × ১৫ কত?','12 x 15 = ?'],['ঢাকার আবহাওয়া কেমন?','Weather in Dhaka'],['১০০ ডলার কত টাকা?','100 dollars in taka']];
  if(/^(hi+|hello|hey|hlw|helo|hola|salam|assalamualaikum|assalamu alaikum|হাই|হ্যালো|সালাম|আসসালামু|নমস্কার)( |$)/.test(nq)&&nw<=4||/(good morning|good afternoon|good evening|subho sokal|subho shokal|শুভ সকাল|সুপ্রভাত|শুভ সন্ধ্যা|শুভ অপরাহ্ন)/.test(nq)&&nw<=4){
   const hr=new Date().getHours(),g=hr<12?T('শুভ সকাল','Good morning'):hr<17?T('শুভ অপরাহ্ন','Good afternoon'):T('শুভ সন্ধ্যা','Good evening');
-  return aAns(g+'! '+T('আমি FrangowstAi। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','I am FrangowstAi. Ask me about comics, videos, codes, payments or the app.'),null,aChips(cap.slice(0,3)))}
+  return aAns(g+'! '+T('আমি Fragiks। কমিকস, ভিডিও, কোড, পেমেন্ট বা অ্যাপ নিয়ে জিজ্ঞেস করুন।','I am Fragiks. Ask me about comics, videos, codes, payments or the app.'),null,aChips(cap.slice(0,3)))}
  if(/(good night|শুভ রাত্রি|শুভ রাত্রি|subho ratri)/.test(nq)&&nw<=4)return aAns(T('শুভ রাত্রি! ভালো ঘুম হোক। কাল আবার দেখা হবে।','Good night! Sleep well. See you tomorrow.'));
  if(nw<=6){
   if(/(^| )(ধন্যবাদ|থ্যাঙ্কস|থ্যাংক|thanks|thank you|thx|dhonnobad|dhonyobad|shukriya)( |$)/.test(nq))return aAns(aPick([T('আপনাকেও ধন্যবাদ! আর কিছু জানতে চাইলে জিজ্ঞেস করুন।','Thank you too! Ask me anything else you would like to know.'),T('সানন্দে! আর কিছু লাগলে বলুন।','Happy to help! Tell me if you need anything else.')]));
   if(/(^| )(বিদায়|বাই|bye|goodbye|খোদা হাফেজ|allah hafez|tata)( |$)/.test(nq))return aAns(T('ধন্যবাদ! আবার দেখা হবে। কমিকস পড়ুন, ভালো থাকুন।','Thanks! See you again. Enjoy the comics and take care.'));
   if(/(কেমন আছ|how are you|kemon acho|kemon achen|kemon aso|kemon asen)/.test(nq))return aAns(T('আমি ভালো আছি, ধন্যবাদ! আপনি আকানো নিয়ে কী জানতে চান?','I am doing well, thanks! What would you like to know about Akano?'));
   if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe|hmm|hm)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'));
-  if(/(তোমার নাম|আপনার নাম|your name|apnar nam|tomar nam|tumi ke|apni ke|who are you|what are you)/.test(nq))return aAns(T('আমি FrangowstAi, আকানোর সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট ও অ্যাপ নিয়ে আপনাকে সাহায্য করি।','I am FrangowstAi, Akano\u2019s assistant. I help with comics, videos, codes, payments and the app.'),null,aChips(cap.slice(0,3)));
-  if(/(কে বানিয়েছে|কে তৈরি করেছে|তোমাকে কে|who made you|who created you|who built you|tomake ke baniyeche|tomake ke)/.test(nq))return aAns(T('আমি Frangowst-এর আকানো অ্যাপের জন্য তৈরি সহকারী FrangowstAi।','I am FrangowstAi, the assistant built for Frangowst\u2019s Akano app.'));
-  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস/ভিডিওর দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell prices and lists of comics/videos, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date and look up general questions online.'),null,aChips(cap))
+  if(/(তোমার নাম|আপনার নাম|your name|apnar nam|tomar nam|tumi ke|apni ke|who are you|what are you)/.test(nq))return aAns(T('আমি Fragiks, Frangowst-এর তৈরি একটি এআই (কৃত্রিম বুদ্ধিমত্তা) সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট ও অ্যাপ নিয়ে আপনাকে সাহায্য করি।','I am Fragiks, an AI (Artificial Intelligence) assistant developed by Frangowst. I help with comics, videos, codes, payments and the app.'),null,aChips(cap.slice(0,3)));
+  if(/(কে বানিয়েছে|কে তৈরি করেছে|তোমাকে কে|who made you|who created you|who built you|tomake ke baniyeche|tomake ke)/.test(nq))return aAns(T('আমি Frangowst-এর আকানো অ্যাপের জন্য তৈরি সহকারী Fragiks।','I am Fragiks, the assistant built for Frangowst\u2019s Akano app.'));
+  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস/ভিডিওর দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা আবহাওয়া, মুদ্রার রেট, নামাজের সময়, দেশের তথ্য এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell prices and lists of comics/videos, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date weather, currency rates, prayer times, country facts and look up general questions online.'),null,aChips(cap))
   if(/^(wow|nice|great|awesome|good job|well done|darun|দারুণ|অসাধারণ|সুন্দর|ভালো|valo|bhalo|osadharon|perfect|cool|smart|জিনিয়াস|genius)( |$)/.test(nq)&&nw<=4)return aAns(aPick([T('ধন্যবাদ! আপনার ভালো লাগলে আমারও ভালো লাগে।','Thank you! I am glad you liked it.'),T('অনেক ধন্যবাদ! আর কিছু জানতে চাইলে বলুন।','Thanks a lot! Ask me if you want to know more.')]));
   if(/(বোকা|stupid|idiot|useless|dumb|ফালতু|faltu|বাজে)/.test(nq)&&nw<=5)return aAns(T('দুঃখিত, ভালো উত্তর দিতে পারিনি। প্রশ্নটা অন্যভাবে লিখে দেখবেন? আমি চেষ্টা করব।','Sorry I could not answer well. Could you rephrase it? I will try again.'),null,aChips(cap.slice(0,3)));
   if(/(i love you|ভালোবাসি|valobashi|love you)/.test(nq))return aAns(T('ধন্যবাদ! আমি একটি এআই, তবে কমিকস পড়ার সঙ্গী হতে পারি।','Thank you! I am an AI, but I can be your companion for comics.'));
   if(/(জোক|joke|মজার|funny|hasao|হাসাও)/.test(nq))return aAns(aPick([T('শিক্ষক: কমিকস পড়লে কী হয়? ছাত্র: স্যার, পেজ শেষ হয়, কিন্তু মন ভরে না!','Teacher: what happens when you read comics? Student: the pages end, but I never get enough!'),T('আমি কমিকসের চরিত্র হতে চেয়েছিলাম, কিন্তু প্যানেলে জায়গা পাইনি!','I wanted to be a comic character, but there was no room in the panel!'),T('ভালো গল্পের মতো ভালো শ্রোতাও দুর্লভ।','A good listener is as rare as a good story.')]))}
- const c=aCalc(q);if(c)return aAns(c);
- if(/(তারিখ|date|tarikh|taarikh)/.test(nq)&&/(আজ|আজকে|today|aj|ajke|এখন|now|current|কত|what|koto)/.test(nq)){let d;try{d=new Date(nowT()).toLocaleDateString(language==='en'?'en-GB':'bn-BD',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch{d=new Date().toDateString()}return aAns(T('আজ ','Today is ')+d+T('।','.'))}
+ if((/(^| )(তারিখ|date|tarikh|taarikh|বার|bar|day)( |$)/.test(nq)&&/(^| )(আজ|আজকে|আজকের|today|aj|ajke|ajker|এখন|now|current)( |$)/.test(nq))||/(what is the date|what s the date|what day is it|which day is it|ki bar aj|আজ কী বার|আজ কি বার)/.test(nq)){let d;try{d=new Date(nowT()).toLocaleDateString(language==='en'?'en-GB':'bn-BD',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch{d=new Date().toDateString()}return aAns(T('আজ ','Today is ')+d+T('।','.'))}
  if(/(কয়টা বাজে|কটা বাজে|সময় কত|what time|current time|time now|koyta baje|kota baje|somoy koto)/.test(nq)){let t;try{t=new Date(nowT()).toLocaleTimeString(language==='en'?'en-US':'bn-BD',{hour:'2-digit',minute:'2-digit'})}catch{t=new Date().toLocaleTimeString()}return aAns(T('এখন সময় ','The time now is ')+t+T('।','.'))}
  return null}
 /* আপনার নিজের তথ্য (শুধু ফোনের লোকাল ডেটা থেকে) */
@@ -2907,7 +3094,7 @@ function aCatalog(q,nq,qt,K,ent,nw,E){
  if(E&&E.sc>=.6&&RX.price.test(nq)){const r=E.raw||{};
   return aAns(E.kind==='series'?aEntFact(E):E.kind==='char'?aEntFact(E):T(`“${E.title}”-এর দাম: ${aPr(r)}${aFree(r)?' — কোড ছাড়াই পড়া/দেখা যায়':''}।`,`Price of “${E.title}”: ${aPr(r)}${aFree(r)?' — no code needed':''}.`),null,aCardsH([E]))}
  let popArr=null;
- if(RX.pop.test(nq)&&(!both||nw<=4)){popArr=[...(K.v&&!K.c?[]:cs.map(c=>({...aMkC(c),n:+c.views||0}))),...(K.c&&!K.v?[]:vs.map(v=>({...aMkV(v),n:aVN(v.id)})))].filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,3);
+ if((aRx('জনপ্রিয়','popular','trending','most viewed','বেশি দেখা','jonopriyo').test(nq)||(RX.pop.test(nq)&&(K.c||K.v)))&&(!both||nw<=4)){popArr=[...(K.v&&!K.c?[]:cs.map(c=>({...aMkC(c),n:+c.views||0}))),...(K.c&&!K.v?[]:vs.map(v=>({...aMkV(v),n:aVN(v.id)})))].filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,3);
   if(popArr.length)return aAns(T('এখন সবচেয়ে বেশি দেখা:','Most viewed right now:'),null,aCardsH(popArr.map(x=>({...x,meta:bn(x.n)+' '+T('ভিউ','views')+' · '+x.meta}))))}
  if((RX.rec.test(nq)||(popArr&&!popArr.length))&&(nw<=7)){
   const seen=seenIds(),st=stGet(),readSeries=new Set(cs.filter(c=>seen[c.id]&&c.series).map(c=>c.series));
@@ -2934,18 +3121,363 @@ function aCatalog(q,nq,qt,K,ent,nw,E){
   if(K.c)w.push(L(cs.map(x=>x.title),T('কমিকস','Comics')));if(K.v)w.push(L(vs.map(x=>x.title),T('ভিডিও','Videos')));if(K.h)w.push(L(hs.map(x=>x.name),T('ক্যারেক্টার','Characters')));
   const ww=w.filter(Boolean);if(ww.length)return aAns(ww.join(' | '),[[K.c?'comics':K.v?'videos':'chars','সবগুলো দেখুন','See all']])}
  return null}
-async function asAnswer(q){
+// ================= Frago গণিত ইঞ্জিন (লোকাল, ০ Firebase খরচ) =================
+const MB=BigInt;
+const mg=(a,b)=>{a=a<0n?-a:a;b=b<0n?-b:b;while(b){[a,b]=[b,a%b]}return a};
+const mR=(n,d=1n)=>{if(d===0n)throw'div0';if(d<0n){n=-n;d=-d}const g=mg(n,d)||1n;return{n:n/g,d:d/g}};
+const mIsR=v=>v.f===undefined;
+const mF=v=>{if(v.f!==undefined)return v.f;const an=Number(v.n),ad=Number(v.d);if(isFinite(an)&&isFinite(ad))return an/ad;const sh=MB(Math.max(0,Math.max(v.n.toString().length,v.d.toString().length)-300));return Number(v.n/(10n**sh))/Number(v.d/(10n**sh))};
+const mAdd=(a,b)=>mIsR(a)&&mIsR(b)?mR(a.n*b.d+b.n*a.d,a.d*b.d):{f:mF(a)+mF(b)};
+const mSub=(a,b)=>mIsR(a)&&mIsR(b)?mR(a.n*b.d-b.n*a.d,a.d*b.d):{f:mF(a)-mF(b)};
+const mMul=(a,b)=>mIsR(a)&&mIsR(b)?mR(a.n*b.n,a.d*b.d):{f:mF(a)*mF(b)};
+const mDiv=(a,b)=>{if(mIsR(b)?b.n===0n:mF(b)===0)throw'div0';return mIsR(a)&&mIsR(b)?mR(a.n*b.d,a.d*b.n):{f:mF(a)/mF(b)}};
+const mNeg=a=>mIsR(a)?{n:-a.n,d:a.d}:{f:-a.f};
+const mInt=n=>({n:MB(n),d:1n});
+const mNum=t=>{const m=/^(\d*)\.?(\d*)$/.exec(t);if(!m||(!m[1]&&!m[2]))throw'num';const fp=m[2]||'';return mR(MB((m[1]||'0')+fp),10n**MB(fp.length))};
+const mPow=(a,b)=>{
+ if(mIsR(a)&&mIsR(b)&&b.d===1n){let e=b.n;const neg=e<0n;if(neg)e=-e;
+  if(e<=3000n){const dig=(a.n<0n?-a.n:a.n).toString().length+a.d.toString().length;if(dig*Number(e)<=4000){let r={n:a.n**e,d:a.d**e};if(neg){if(r.n===0n)throw'div0';r=mR(r.d,r.n)}return r}}}
+ const r=Math.pow(mF(a),mF(b));if(!isFinite(r)||Number.isNaN(r))throw'domain';return{f:r}};
+const mIsq=n=>{if(n<0n)return null;if(n<2n)return n;let x=n,y=(x+1n)/2n;while(y<x){x=y;y=(x+n/x)/2n}return x*x===n?x:null};
+const mIcr=n=>{const neg=n<0n,a=neg?-n:n;const x=MB(Math.round(Math.cbrt(Number(a))));for(const t of[x-1n,x,x+1n])if(t>=0n&&t*t*t===a)return neg?-t:t;return null};
+const mFact=v=>{if(!mIsR(v)||v.d!==1n||v.n<0n||v.n>170n)throw'domain';let r=1n;for(let i=2n;i<=v.n;i++)r*=i;return{n:r,d:1n}};
+const mRad=x=>x*Math.PI/180,mDeg=x=>x*180/Math.PI;
+const mClean=x=>{const r=Math.round(x*1e12)/1e12;return Math.abs(x-r)<1e-11?r:x};
+const mFn={
+ sqrt:v=>{if(mIsR(v)){if(v.n<0n)throw'domain';const a=mIsq(v.n),b=mIsq(v.d);if(a!==null&&b!==null)return mR(a,b)}const x=mF(v);if(x<0)throw'domain';return{f:Math.sqrt(x)}},
+ cbrt:v=>{if(mIsR(v)){const a=mIcr(v.n),b=mIcr(v.d);if(a!==null&&b!==null)return mR(a,b)}return{f:Math.cbrt(mF(v))}},
+ abs:v=>mIsR(v)?{n:v.n<0n?-v.n:v.n,d:v.d}:{f:Math.abs(v.f)},
+ sin:v=>({f:mClean(Math.sin(mRad(mF(v))))}),cos:v=>({f:mClean(Math.cos(mRad(mF(v))))}),
+ tan:v=>{const x=mF(v);if(Math.abs(Math.cos(mRad(x)))<1e-12)throw'undef';return{f:mClean(Math.tan(mRad(x)))}},
+ asin:v=>{const x=mF(v);if(Math.abs(x)>1)throw'domain';return{f:mClean(mDeg(Math.asin(x)))}},
+ acos:v=>{const x=mF(v);if(Math.abs(x)>1)throw'domain';return{f:mClean(mDeg(Math.acos(x)))}},
+ atan:v=>({f:mClean(mDeg(Math.atan(mF(v))))}),
+ log:v=>{const x=mF(v);if(x<=0)throw'domain';return{f:mClean(Math.log10(x))}},
+ ln:v=>{const x=mF(v);if(x<=0)throw'domain';return{f:mClean(Math.log(x))}},
+ exp:v=>{const r=Math.exp(mF(v));if(!isFinite(r))throw'domain';return{f:r}},
+ floor:v=>({f:Math.floor(mF(v))}),ceil:v=>({f:Math.ceil(mF(v))}),round:v=>({f:Math.round(mF(v))})};
+function mParse(src,vars){
+ const s=src;let i=0;
+ const ws=()=>{while(i<s.length&&s[i]===' ')i++};
+ const eat=c=>{ws();if(s[i]===c){i++;return true}return false};
+ function expr(){let v=term();for(;;){ws();if(s[i]==='+'){i++;v=mAdd(v,term())}else if(s[i]==='-'){i++;v=mSub(v,term())}else return v}}
+ function term(){let v=unary();for(;;){ws();if(s[i]==='*'){i++;v=mMul(v,unary())}else if(s[i]==='/'){i++;v=mDiv(v,unary())}else return v}}
+ function unary(){ws();if(s[i]==='-'){i++;return mNeg(unary())}if(s[i]==='+'){i++;return unary()}return power()}
+ function power(){const b=postfix();ws();if(s[i]==='^'){i++;return mPow(b,unary())}return b}
+ function postfix(){let v=primary();for(;;){ws();if(s[i]==='!'){i++;v=mFact(v)}else if(s[i]==='%'){i++;v=mDiv(v,mInt(100))}else return v}}
+ function primary(){ws();
+  if(s[i]==='('){i++;const v=expr();if(!eat(')'))throw'paren';return v}
+  const rest=s.slice(i),m=/^\d+(?:\.\d+)?|^\.\d+/.exec(rest);
+  if(m){i+=m[0].length;return mNum(m[0])}
+  const w=/^[a-z]+/.exec(rest);
+  if(w){const id=w[0];i+=id.length;
+   if(id==='pi')return{f:Math.PI};if(id==='e')return{f:Math.E};
+   if(vars&&Object.prototype.hasOwnProperty.call(vars,id))return vars[id];
+   const fn=mFn[id];if(!fn)throw'id';ws();let a;
+   if(s[i]==='('){i++;a=expr();if(!eat(')'))throw'paren'}else{ws();if(s[i]==='-'){i++;a=mNeg(postfix())}else a=postfix()}
+   return fn(a)}
+  throw'syntax'}
+ const r=expr();ws();if(i<s.length)throw'trail';return r}
+const mPrep=e=>e.replace(/(\d|\)|!|%)\s*(?=[a-z(])/g,'$1*').replace(/\b(x|pi)\s*(?=\()/g,'$1*').replace(/\)\s*(?=[\d.])/g,')*');
+/* ফরম্যাট */
+const mBig=n=>{const neg=n<0n,a=(neg?-n:n).toString();if(a.length<=22)return(neg?'-':'')+a;return(neg?'-':'')+a[0]+'.'+a.slice(1,10)+'×10^'+(a.length-1)+' ('+a.length+' digits)'};
+function mDec(v){ // সসীম হলে সঠিক দশমিক, নইলে ৬ ঘর পর্যন্ত
+ let n=v.n<0n?-v.n:v.n;const d=v.d,ip=n/d;let r=n%d,fr='',seen=0;
+ while(r!==0n&&seen<12){r*=10n;fr+=(r/d).toString();r%=d;seen++}
+ if(r===0n)return{s:(v.n<0n?'-':'')+ip+(fr?'.'+fr:''),exact:true};
+ const x=mF(v);return{s:String(parseFloat(x.toFixed(6))),exact:false}}
+function mFloat(x){if(!isFinite(x))throw'domain';if(Number.isInteger(x)&&Math.abs(x)<1e15)return String(x);const a=Math.abs(x);
+ if(a>=1e15||a<1e-6)return x.toExponential(8).replace(/\.?0+e/,'e').replace('e+','×10^').replace('e','×10^');return String(parseFloat(x.toPrecision(10)))}
+function mShow(v){
+ if(mIsR(v)){if(v.d===1n)return{t:mBig(v.n),approx:false};const dd=mDec(v);return{t:mBig(v.n)+'/'+v.d+(dd.exact?' = '+dd.s:' ≈ '+dd.s),approx:false}}
+ const t=mFloat(v.f);return{t,approx:!Number.isInteger(v.f)}}
+const mSup=n=>String(n).replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+function mFactor(n){const f=[];let x=n;for(let p=2;p*p<=x&&p<=2e6;p++){let c=0;while(x%p===0){x/=p;c++}if(c)f.push([p,c])}if(x>1)f.push([x,1]);return f}
+const mFStr=f=>f.map(([p,c])=>c>1?p+mSup(c):String(p)).join(' × ');
+function mRadical(n){let k=1,m=n;for(let p=2;p*p<=m;p++){while(m%(p*p)===0){m/=p*p;k*=p}}return[k,m]}
+const mGcd=(a,b)=>{while(b){[a,b]=[b,a%b]}return a};
+
+const MFILL=/(calculate|calc|what is|what's|whats|what|equals|equal|answer|result|কত হবে|কত|হবে|হিসাব করো|হিসাব|করো|কর|কী|কি|koto hobe|koto|hobe|ans|দেখাও|find|evaluate|compute|solve|simplify|value of|এর মান|মান|বের করো|বের কর|বলো|bolo|please|pls|plz|দাও|dao)/g;
+const MFN=new Set(['sqrt','cbrt','sin','cos','tan','asin','acos','atan','log','ln','exp','abs','floor','ceil','round','pi','e']);
+function aMNorm(raw,keepX){
+ let s=aDig(raw).toLowerCase();
+ s=s.replace(/(\d),(\d{3})(?!\d)/g,'$1$2').replace(/[,;]/g,' ');
+ s=s.replace(/[×·⋅✕]/g,'*').replace(/÷/g,'/').replace(/[−–—]/g,'-').replace(/π/g,'pi').replace(/²/g,'^2').replace(/³/g,'^3').replace(/√\s*\(/g,'sqrt(').replace(/√\s*([\d.]+)/g,'sqrt($1)');
+ const N='(\\d+(?:\\.\\d+)?)';
+ s=s.replace(new RegExp('(?:cube root(?:\\s*of)?|cbrt|ঘনমূল(?:\\s*এর)?)\\s*'+N,'g'),'cbrt($1)').replace(new RegExp(N+'\\s*(?:এর\\s*)?(?:ঘনমূল|cube root)','g'),'cbrt($1)');
+ s=s.replace(new RegExp('(?:square root(?:\\s*of)?|sqrt|root|বর্গমূল(?:\\s*এর)?)\\s*'+N,'g'),'sqrt($1)').replace(new RegExp(N+'\\s*(?:এর\\s*)?(?:বর্গমূল|square root)','g'),'sqrt($1)');
+ s=s.replace(new RegExp('(?:square of)\\s*'+N,'g'),'$1^2').replace(new RegExp('(?:cube of)\\s*'+N,'g'),'$1^3');
+ s=s.replace(new RegExp(N+'\\s*(?:এর\\s*)?(?:squared|বর্গ(?!মূল))','g'),'$1^2').replace(new RegExp(N+'\\s*(?:এর\\s*)?(?:cubed|ঘন(?!মূল))','g'),'$1^3');
+ s=s.replace(new RegExp(N+'\\s*(?:to the power of|to the power|raised to the power of|raised to|power)\\s*(-?\\d+(?:\\.\\d+)?)','g'),'$1^$2').replace(new RegExp(N+'\\s*এর\\s*(-?\\d+(?:\\.\\d+)?)\\s*(?:ঘাত|পাওয়ার)','g'),'$1^$2');
+ s=s.replace(/(\d+)\s*(?:এর\s*)?(?:factorial|ফ্যাক্টরিয়াল|ফ্যাক্টোরিয়াল|ফ্যাক্টরিয়েল)/g,'$1!').replace(/(?:factorial(?:\s*of)?|ফ্যাক্টরিয়াল)\s*(\d+)/g,'$1!');
+ s=s.replace(/(^|\s)(plus|যোগ|jog)(?=\s|$)/g,' + ').replace(/(^|\s)(minus|বিয়োগ|biyog)(?=\s|$)/g,' - ').replace(/(^|\s)(times|multiplied by|গুণ|gun|into)(?=\s|$)/g,' * ').replace(/(^|\s)(divided by|ভাগ|bhag|vag)(?=\s|$)/g,' / ');
+ if(!keepX)s=s.replace(/(\d|\))\s*x\s*(\d|\()/g,'$1*$2');
+ s=s.replace(MFILL,' ').replace(/[=?]/g,' ').replace(/\s+/g,' ').trim();
+ return s}
+function aMVal(e,vars){return mParse(mPrep(e),vars)}
+const aMDisp=e=>e.replace(/sqrt\(/g,'√(').replace(/cbrt\(/g,'∛(').replace(/\*/g,'×').replace(/\bpi\b/g,'π');
+const aMErr=()=>aAns(T('এই হিসাবটি করা যাচ্ছে না (শূন্য দিয়ে ভাগ বা অসংজ্ঞায়িত মান)।','This cannot be calculated (division by zero or undefined value).'));
+function aMSolve(raw){
+ let s=aDig(raw).toLowerCase();if(!/=/.test(s))return null;
+ s=s.replace(/(?:x\s*এর\s*মান(?:\s*কত)?|value of x|find x|solve for x|solve|হলে|তাহলে|then|\bif\b|x\s*কত|x\s*কি|x\s*কী|সমাধান\s*করো|সমাধান|বের\s*করো)/g,' ');
+ s=aMNorm(s,true);if(/y/.test(s)&&!/x/.test(s))s=s.replace(/y/g,'x');
+ const parts=s.split(/\s*=\s*/);
+ // '=' was stripped by aMNorm — redo split on original
+ return null}
+function aMSolve2(raw){
+ let s=aDig(raw).toLowerCase();if((s.match(/=/g)||[]).length!==1)return null;
+ s=s.replace(/(?:x\s*এর\s*মান(?:\s*কত)?|value of x|find x|solve for x|solve|হলে|তাহলে|then|\bif\b|x\s*কত|x\s*কি|x\s*কী|সমাধান\s*করো|সমাধান|বের\s*করো)/g,' ');
+ const sides=s.split('=').map(t=>aMNorm(t,true));
+ if(sides.some(t=>!t))return null;
+ let[l,r]=sides;if(/y/.test(l+r)&&!/x/.test(l+r)){l=l.replace(/y/g,'x');r=r.replace(/y/g,'x')}
+ if(!/x/.test(l+r))return null;
+ const bad=(l+' '+r).match(/[a-z\u0980-\u09FF]+/g)||[];if(bad.some(w=>w!=='x'&&!MFN.has(w)))return null;
+ const f=v=>mSub(aMVal(l,{x:v}),aMVal(r,{x:v}));
+ let f0,f1,fm,f2,f3;try{f0=f(mInt(0));f1=f(mInt(1));fm=f(mInt(-1));f2=f(mInt(2));f3=f(mInt(3))}catch{return null}
+ if(![f0,f1,fm,f2,f3].every(mIsR))return null;
+ const z=v=>v.n===0n,eq=(a,b)=>z(mSub(a,b));
+ const two=mInt(2);
+ const c=f0,a2=mSub(mDiv(mAdd(f1,fm),two),c),b2=mDiv(mSub(f1,fm),two);
+ const chk=eq(f2,mAdd(mAdd(mMul(a2,mInt(4)),mMul(b2,two)),c))&&eq(f3,mAdd(mAdd(mMul(a2,mInt(9)),mMul(b2,mInt(3))),c));
+ if(!chk)return null;
+ const S=v=>mShow(v).t.replace(/ = .*$/,'').replace(/ ≈ .*$/,''),co=v=>{const t=S(v);return t==='1'?'':t==='-1'?'−':t.includes('/')?'('+t+')':t};
+ const out=(t,st)=>aAns(bn(t),null,st&&st.length?`<div class=as-steps>${st.map(x=>`<div>${aEsc(bn(x))}</div>`).join('')}</div>`:'');
+ if(z(a2)){ // linear
+  const a=b2,b=c;
+  if(z(a))return aAns(z(b)?T('এই সমীকরণের অসংখ্য সমাধান আছে (সব মানের জন্য সত্য)।','This equation has infinitely many solutions (true for every value).'):T('এই সমীকরণের কোনো সমাধান নেই।','This equation has no solution.'));
+  const x=mDiv(mNeg(b),a),sh=mShow(x);
+  return out('x = '+sh.t,[T('সরল রূপ: ','Simplified: ')+co(a)+'x '+(b.n<0n?'− '+S(mNeg(b)):'+ '+S(b))+' = 0','x = '+S(mNeg(b))+' ÷ '+S(a)+' = '+S(x)])}
+ // quadratic
+ const a=a2,b=b2,D=mSub(mMul(b,b),mMul(mInt(4),mMul(a,c))),twoA=mMul(two,a);
+ const head=[T('সমীকরণ: ','Equation: ')+co(a)+'x² '+(b.n<0n?'− '+S(mNeg(b)):'+ '+S(b))+'x '+(c.n<0n?'− '+S(mNeg(c)):'+ '+S(c))+' = 0','a = '+S(a)+', b = '+S(b)+', c = '+S(c),'D = b² − 4ac = '+S(D)];
+ if(D.n<0n)return out(T('এর কোনো বাস্তব মূল নেই (D < 0)।','It has no real roots (D < 0).'),head);
+ const sq=mFn.sqrt(D);
+ if(mIsR(sq)){const x1=mDiv(mAdd(mNeg(b),sq),twoA),x2=mDiv(mSub(mNeg(b),sq),twoA);
+  if(z(D))return out('x = '+mShow(x1).t,head.concat([T('D = 0 হওয়ায় দুটি মূল সমান।','Since D = 0, both roots are equal.')]));
+  return out('x = '+mShow(x1).t+T('  অথবা  ','  or  ')+'x = '+mShow(x2).t,head)}
+ const df=mF(D),r1=(-mF(b)+Math.sqrt(df))/mF(twoA),r2=(-mF(b)-Math.sqrt(df))/mF(twoA);
+ let rad='√'+S(D);if(D.d===1n&&D.n<=1000000000000n){const[k,m]=mRadical(Number(D.n));rad=(k>1?k:'')+'√'+m}
+ return out('x ≈ '+mFloat(parseFloat(r1.toPrecision(8)))+T('  অথবা  ','  or  ')+'x ≈ '+mFloat(parseFloat(r2.toPrecision(8))),head.concat(['x = (−b ± √D) / 2a = (−('+S(b)+') ± '+rad+') / '+S(twoA)]))}
+/* ধারণা/সূত্র (theory) */
+const MTH=[
+ [/(pythagor|পিথাগোরা|পিথাগরাস|অতিভুজ.*(সূত্র|উপপাদ্য)|(সূত্র|উপপাদ্য).*অতিভুজ)/,'পিথাগোরাসের উপপাদ্য: সমকোণী ত্রিভুজে অতিভুজের বর্গ = লম্বের বর্গ + ভূমির বর্গ, অর্থাৎ c² = a² + b²। উদাহরণ: লম্ব ৩ ও ভূমি ৪ হলে অতিভুজ = √(9 + 16) = ৫।','Pythagorean theorem: in a right triangle the square of the hypotenuse equals the sum of the squares of the other two sides, c² = a² + b². Example: sides 3 and 4 give hypotenuse √(9 + 16) = 5.',['অতিভুজ ৩ ৪','hypotenuse 3 4']],
+ [/(quadratic|দ্বিঘাত|শ্রীধর|sridhar)/,'দ্বিঘাত সমীকরণ ax² + bx + c = 0 এর সমাধান: x = (−b ± √(b² − 4ac)) / 2a। নিশ্চায়ক D = b² − 4ac; D > 0 হলে দুটি ভিন্ন বাস্তব মূল, D = 0 হলে দুটি সমান মূল, D < 0 হলে বাস্তব মূল নেই।','Quadratic equation ax² + bx + c = 0 has solutions x = (−b ± √(b² − 4ac)) / 2a. The discriminant D = b² − 4ac: D > 0 gives two real roots, D = 0 one repeated root, D < 0 no real roots.',['x² - 5x + 6 = 0','x^2 - 5x + 6 = 0']],
+ [/(ভগ্নাংশ|fraction)/,'ভগ্নাংশ হলো কোনো পূর্ণের অংশ, যা a/b আকারে লেখা হয় (a = লব, b = হর)। যোগ-বিয়োগে হর সমান করতে হয়: 1/2 + 1/3 = 3/6 + 2/6 = 5/6। গুণে লব×লব ও হর×হর, ভাগে দ্বিতীয়টি উল্টে গুণ করতে হয়।','A fraction is a part of a whole written as a/b (a = numerator, b = denominator). To add or subtract, make denominators equal: 1/2 + 1/3 = 3/6 + 2/6 = 5/6. To multiply, multiply tops and bottoms; to divide, flip the second fraction and multiply.',['1/2 + 1/3','1/2 + 1/3']],
+ [/(বর্গমূল|square root|\broot\b|মূল কাকে|surd)/,'কোনো সংখ্যার বর্গমূল হলো সেই সংখ্যা, যাকে নিজের সাথে গুণ করলে মূল সংখ্যাটি পাওয়া যায়। যেমন √25 = 5, কারণ 5 × 5 = 25। ঘনমূল ∛27 = 3, কারণ 3³ = 27। সব সংখ্যার বর্গমূল পূর্ণসংখ্যা হয় না: √12 = 2√3 ≈ 3.4641।','The square root of a number is the value that multiplies by itself to give the number: √25 = 5 because 5 × 5 = 25. The cube root ∛27 = 3 because 3³ = 27. Not every root is an integer: √12 = 2√3 ≈ 3.4641.',['√72','sqrt of 72']],
+ [/(মৌলিক সংখ্যা|prime number|prime numbers)/,'মৌলিক সংখ্যা হলো ১ এর চেয়ে বড় এমন সংখ্যা, যার শুধু দুটি উৎপাদক আছে: ১ ও নিজে। যেমন ২, ৩, ৫, ৭, ১১, ১৩। ২ একমাত্র জোড় মৌলিক সংখ্যা।','A prime number is greater than 1 and has exactly two factors: 1 and itself, e.g. 2, 3, 5, 7, 11, 13. Two is the only even prime.',['৯৭ কি মৌলিক সংখ্যা','is 97 prime']],
+ [/(গসাগু|লসাগু|গ\.?\s?সা\.?\s?গু|ল\.?\s?সা\.?\s?গু|hcf|gcd|lcm).*(কী|কি|কাকে|what|formula|সূত্র|meaning)|(কী|কি|কাকে|what).*(গসাগু|লসাগু|hcf|lcm|gcd)/,'গসাগু (HCF) হলো সংখ্যাগুলোর সাধারণ উৎপাদকগুলোর মধ্যে বৃহত্তম, আর লসাগু (LCM) হলো সাধারণ গুণিতকগুলোর মধ্যে ক্ষুদ্রতম। দুটি সংখ্যার ক্ষেত্রে: a × b = গসাগু × লসাগু।','HCF (GCD) is the largest common factor of the numbers and LCM is the smallest common multiple. For two numbers: a × b = HCF × LCM.',['12 ও 18 এর গসাগু লসাগু','gcd of 12 and 18']],
+ [/(বীজগণিতীয় সূত্র|algebraic identit|\(a\s*\+\s*b\)|\(a\s*-\s*b\)|a\^2\s*-\s*b\^2)/,'গুরুত্বপূর্ণ সূত্র: (a + b)² = a² + 2ab + b²; (a − b)² = a² − 2ab + b²; a² − b² = (a + b)(a − b); (a + b)³ = a³ + 3a²b + 3ab² + b³।','Key identities: (a + b)² = a² + 2ab + b²; (a − b)² = a² − 2ab + b²; a² − b² = (a + b)(a − b); (a + b)³ = a³ + 3a²b + 3ab² + b³.',null],
+ [/(শতকরা|percent|percentage|শতাংশ).*(কী|কাকে|formula|সূত্র|what)|(কী|কাকে|formula|সূত্র|what).*(শতকরা|percent|শতাংশ)/,'শতকরা মানে প্রতি ১০০-তে কত। a এর p% = a × p / 100। কত শতাংশ = (অংশ ÷ মোট) × 100। উদাহরণ: ২০০ এর ১৫% = ৩০।','Percent means "per hundred". p% of a = a × p / 100. Percentage = (part ÷ whole) × 100. Example: 15% of 200 = 30.',['200 এর 15%','15% of 200']],
+ [/(বৃত্ত|circle).*(সূত্র|formula)|(সূত্র|formula).*(বৃত্ত|circle)/,'বৃত্তের ক্ষেত্রফল = πr² এবং পরিধি = 2πr (r = ব্যাসার্ধ, π ≈ 3.14159)।','Area of a circle = πr² and circumference = 2πr (r = radius, π ≈ 3.14159).',['বৃত্তের ক্ষেত্রফল ব্যাসার্ধ 7','area of circle radius 7']],
+ [/(ক্ষেত্রফল|area).*(সূত্র|formula)|(সূত্র|formula).*(ক্ষেত্রফল|area)/,'ক্ষেত্রফলের সূত্র: আয়তক্ষেত্র = দৈর্ঘ্য × প্রস্থ; বর্গক্ষেত্র = বাহু²; ত্রিভুজ = ½ × ভূমি × উচ্চতা; বৃত্ত = πr²।','Area formulas: rectangle = length × width; square = side²; triangle = ½ × base × height; circle = πr².',['ত্রিভুজের ক্ষেত্রফল ভূমি 6 উচ্চতা 4','area of triangle base 6 height 4']],
+ [/(ত্রিকোণমিতি|trigonometr|সাইন|কসাইন|ট্যানজেন্ট|sine|cosine|tangent)/,'সমকোণী ত্রিভুজে: sinθ = লম্ব/অতিভুজ, cosθ = ভূমি/অতিভুজ, tanθ = লম্ব/ভূমি। মূল সম্পর্ক: sin²θ + cos²θ = 1। যেমন sin 30° = 0.5, cos 60° = 0.5, tan 45° = 1।','In a right triangle: sinθ = opposite/hypotenuse, cosθ = adjacent/hypotenuse, tanθ = opposite/adjacent. Key identity: sin²θ + cos²θ = 1. For example sin 30° = 0.5, cos 60° = 0.5, tan 45° = 1.',['sin 30','sin 30']],
+ [/(value of pi|pi value|what is pi|what's pi|whats pi|পাই এর মান|পাই কত|π কত|π এর মান|pi এর মান)/,'পাই (π) হলো যেকোনো বৃত্তের পরিধি ও ব্যাসের অনুপাত। এর মান প্রায় 3.14159265… (অমূলদ সংখ্যা)।','Pi (π) is the ratio of a circle\u2019s circumference to its diameter, about 3.14159265… (an irrational number).',null],
+ [/((গড়|মধ্যক|প্রচুরক|median)|(mean.*(median|mode))|((mode|median).*mean)).*(কী|কাকে|পার্থক্য|difference|what|define|meaning)/,'গড় = সংখ্যাগুলোর যোগফল ÷ সংখ্যা। মধ্যক = ক্রমানুসারে সাজালে মাঝের মান। প্রচুরক = যে মান সবচেয়ে বেশিবার আছে।','Mean = sum ÷ count. Median = the middle value when sorted. Mode = the value that appears most often.',['গড় 4 8 15 16','average of 4 8 15 16']],
+ [/(সূচক|index law|exponent|ঘাতের নিয়ম|power rule|laws of exponent)/,'সূচকের নিয়ম: aᵐ × aⁿ = aᵐ⁺ⁿ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ; a⁰ = 1; a⁻ⁿ = 1/aⁿ।','Laws of exponents: aᵐ × aⁿ = aᵐ⁺ⁿ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ; a⁰ = 1; a⁻ⁿ = 1/aⁿ.',['2^10','2^10']],
+ [/(লগারিদম|logarithm|\blog\b.*(কী|কাকে|what|rule|নিয়ম))/,'log_a(x) = y মানে aʸ = x। নিয়ম: log(xy) = log x + log y; log(x/y) = log x − log y; log(xⁿ) = n·log x। যেমন log 100 = 2, ln e = 1।','log_a(x) = y means aʸ = x. Rules: log(xy) = log x + log y; log(x/y) = log x − log y; log(xⁿ) = n·log x. For example log 100 = 2, ln e = 1.',['log 100','log 100']],
+ [/(সরল সুদ|simple interest|চক্রবৃদ্ধি|compound interest).*(সূত্র|formula|কী|what)/,'সরল সুদ I = P × r × t / 100; মোট A = P + I। চক্রবৃদ্ধি মোট A = P(1 + r/100)ᵗ। (P = আসল, r = হার, t = সময়)','Simple interest I = P × r × t / 100, amount A = P + I. Compound amount A = P(1 + r/100)ᵗ. (P = principal, r = rate, t = time)',['সরল সুদ 1000 5 2','simple interest 1000 5 2']],
+ [/(সম্ভাবনা|probability)/,'সম্ভাবনা = অনুকূল ফলাফল ÷ মোট সম্ভাব্য ফলাফল। যেমন একটি ছক্কায় ৬ ওঠার সম্ভাবনা = 1/6।','Probability = favourable outcomes ÷ total outcomes. For example the chance of a 6 on a die is 1/6.',['1/6 + 1/6','1/6 + 1/6']],
+ [/(সমান্তর|arithmetic (progression|sequence)|\bap\b.*সূত্র)/,'সমান্তর ধারার n-তম পদ = a + (n − 1)d এবং n পদের যোগফল = n/2 × (2a + (n − 1)d)।','In an arithmetic progression the n-th term = a + (n − 1)d and the sum of n terms = n/2 × (2a + (n − 1)d).',null]
+];
+function aTheory(raw){const s=aDig(raw).toLowerCase();
+ if(!/(কী|কি|কাকে|what|define|definition|meaning|সূত্র|formula|theorem|উপপাদ্য|theory|rule|নিয়ম|বুঝিয়ে|ব্যাখ্যা|explain|সংজ্ঞা|পার্থক্য|difference|বলো|বল|কত|মান|value)/.test(s)&&!/(pythagor|পিথাগোরা|quadratic|দ্বিঘাত|ত্রিকোণমিতি)/.test(s))return null;
+ for(const[re,b,e,ch]of MTH)if(re.test(s))return aAns(T(b,e),null,ch?aChips([ch]):'');return null}
+function aMathIntent(raw){
+ const s0=aDig(raw).toLowerCase().replace(/(\d),(\d{3})(?!\d)/g,'$1$2'),ns=(s0.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number),has=r=>r.test(s0);
+ const out=(t,st)=>aAns(bn(t),null,st&&st.length?`<div class=as-steps>${st.map(x=>`<div>${aEsc(bn(x))}</div>`).join('')}</div>`:'');
+ const rd=(x,k=4)=>String(parseFloat(x.toFixed(k)));
+ const posInt=n=>Number.isInteger(n)&&n>0&&n<=1e12;
+ const isG=has(/(gcd|hcf|highest common factor|greatest common (divisor|factor)|গসাগু|গ\.?\s?সা\.?\s?গু)/),isL=has(/(lcm|least common multiple|lowest common multiple|লসাগু|ল\.?\s?সা\.?\s?গু)/);
+ if((isG||isL)&&ns.length>=2&&ns.length<=6&&ns.every(posInt)){
+  const g=ns.reduce(mGcd),l=ns.reduce((a,b)=>a/mGcd(a,b)*b),st=[];
+  if(ns.every(n=>n<=1e9))ns.forEach(n=>st.push(n+' = '+mFStr(mFactor(n))));
+  const t=[];if(isG)t.push(T('গসাগু','HCF')+'('+ns.join(', ')+') = '+g);if(isL)t.push(T('লসাগু','LCM')+'('+ns.join(', ')+') = '+(Number.isSafeInteger(l)?l:'> 9×10^15'));
+  if(isG&&isL&&ns.length===2)st.push(T('যাচাই: ','Check: ')+ns[0]+' × '+ns[1]+' = '+ns[0]*ns[1]+' = '+g+' × '+l);
+  return out(t.join(',  '),st)}
+ const fact=has(/factorial|ফ্যাক্টরিয়াল|ফ্যাক্টোরিয়াল/);
+ if(!fact&&ns.length===1&&posInt(ns[0])&&Number.isInteger(ns[0])){
+  const n=ns[0];
+  if(has(/(prime factor|prime factorization|factorize|factorise|factors? of|উৎপাদক)/)){const f=mFactor(n),dv=[];if(n<=1e7){for(let i=1;i*i<=n;i++)if(n%i===0){dv.push(i);if(i*i!==n)dv.push(n/i)}dv.sort((a,b)=>a-b)}
+   return out(n+' = '+(n===1?'1':mFStr(f)),dv.length?[T('সব উৎপাদক: ','All factors: ')+dv.slice(0,40).join(', ')+(dv.length>40?' …':''),T('মোট উৎপাদক সংখ্যা: ','Number of factors: ')+dv.length]:[])}
+  if(has(/(prime|মৌলিক)/)&&!has(/(prime number|মৌলিক সংখ্যা কী|মৌলিক সংখ্যা কাকে)/)){const f=mFactor(n),p=n>1&&f.length===1&&f[0][1]===1;
+   return out(p?T(n+' একটি মৌলিক সংখ্যা।',n+' is a prime number.'):n<2?T(n+' মৌলিক সংখ্যা নয়।',n+' is not a prime number.'):T(n+' মৌলিক সংখ্যা নয়; '+n+' = '+mFStr(f),n+' is not prime; '+n+' = '+mFStr(f)))}}
+ if(has(/(binary|বাইনারি|hexadecimal|\bhex\b|হেক্স|octal|অক্টাল)/)&&ns.length>=1){
+  const isB=has(/(binary|বাইনারি)/),isH=has(/(hex|হেক্স)/),base=isB?2:isH?16:8,nm=isB?T('বাইনারি','binary'):isH?T('হেক্সাডেসিমাল','hexadecimal'):T('অক্টাল','octal');
+  const n=ns[0];
+  if(has(/(to decimal|দশমিক|decimal|থেকে)/)&&isB&&/^[01]+$/.test(String(n))&&!has(/(of|এর)\s*\d/))return out(String(n)+'₂ = '+parseInt(String(n),2)+T(' (দশমিক)',' (decimal)'));
+  if(Number.isInteger(n)&&n>=0&&n<=1e15)return out(n+T(' এর ',' in ')+nm+' = '+n.toString(base).toUpperCase())}
+ const pc=s0.match(/(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent|পার্সেন্ট)\s*(?:of|এর)?\s*(\d+(?:\.\d+)?)/),pc2=s0.match(/(\d+(?:\.\d+)?)\s*(?:of|এর)\s*(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent|পার্সেন্ট)/);
+ const pw=s0.match(/(\d+(?:\.\d+)?)\s*(?:is\s*)?what\s*percent(?:age)?\s*(?:of|is)\s*(\d+(?:\.\d+)?)/)||s0.match(/(\d+(?:\.\d+)?)\s*কত\s*(?:শতাংশ|পার্সেন্ট)\s*(\d+(?:\.\d+)?)/);
+ const dc=s0.match(/(\d+(?:\.\d+)?)\s*%\s*(?:discount|off|ছাড়)\s*(?:on|of)?\s*(\d+(?:\.\d+)?)/)||s0.match(/(\d+(?:\.\d+)?)\s*(?:টাকায়?|taka|tk)?\s*(\d+(?:\.\d+)?)\s*%\s*(?:discount|off|ছাড়)/);
+ if(dc&&/(discount|off|ছাড়)/.test(s0)){const rate=+(/%\s*(?:discount|off|ছাড়)/.test(s0)&&s0.indexOf('%')<s0.search(/(discount|off|ছাড়)/)&&dc[0].indexOf('%')<dc[0].search(/\d+(?:\.\d+)?$/)&&/^\d+(?:\.\d+)?\s*%/.test(dc[0])?dc[1]:dc[2]),price=+(/^\d+(?:\.\d+)?\s*%/.test(dc[0])?dc[2]:dc[1]),off=price*rate/100;
+  return out(T('ছাড়ের পর দাম = ','Price after discount = ')+rd(price-off,2),[T('ছাড় = ','Discount = ')+rd(off,2)+' ('+rate+'%)'])}
+ if(pw&&/(percent|শতাংশ|পার্সেন্ট)/.test(s0)&&+pw[2]!==0)return out(T(pw[2]+' এর '+pw[1]+' হলো '+rd(+pw[1]/+pw[2]*100)+'%',pw[1]+' is '+rd(+pw[1]/+pw[2]*100)+'% of '+pw[2]))
+ if((pc||pc2)&&/(%|শতাংশ|percent|persent|পার্সেন্ট)/.test(s0)&&ns.length===2&&!/[+*/^]/.test(s0.replace(/%/g,''))){const p=pc?+pc[1]:+pc2[2],a=pc?+pc[2]:+pc2[1];return out(a+T(' এর ',' × ')+p+'% = '+rd(a*p/100),[a+' × '+p+' ÷ 100 = '+rd(a*p/100)])}
+ if(has(/(fraction|ভগ্নাংশ)/)&&ns.length===1&&/\d\.\d/.test(s0)&&!has(/(কী|কাকে|what is a)/)){const m=s0.match(/\d*\.\d+/);const v=mNum(m[0]);return out(m[0]+' = '+v.n+(v.d===1n?'':'/'+v.d))}
+ const fd=s0.match(/(\d+)\s*\/\s*(\d+)/);if(fd&&has(/(decimal|দশমিক)/)&&!has(/(to decimal|থেকে দশমিক)/)&&+fd[2]!==0){const v=mR(MB(fd[1]),MB(fd[2])),dd=mDec(v);return out(fd[1]+'/'+fd[2]+(dd.exact?' = ':' ≈ ')+dd.s)}
+ const nth=s0.match(/(\d+)\s*(?:st|nd|rd|th)\s*root\s*(?:of)?\s*(\d+(?:\.\d+)?)/)||s0.match(/(\d+(?:\.\d+)?)\s*এর\s*(\d+)\s*(?:ম|তম)?\s*মূল/);
+ if(nth){const isEn=/root/.test(nth[0]),n=+(isEn?nth[1]:nth[2]),x=+(isEn?nth[2]:nth[1]);if(n>=2&&n<=64&&x>=0){const r=Math.pow(x,1/n),rr=Math.round(r);return out(Math.abs(r-rr)<1e-9&&Math.pow(rr,n)===x?n+T('-তম মূল ','-th root of ')+x+' = '+rr:n+T('-তম মূল ','-th root of ')+x+' ≈ '+rd(r,6))}}
+ if(has(/(সরল সুদ|simple interest|সুদ|interest)/)&&!has(/(চক্রবৃদ্ধি|compound)/)&&ns.length>=3&&ns.every(n=>n>=0)){const[P,r,t]=ns,I=P*r*t/100;return out(T('সরল সুদ = ','Simple interest = ')+rd(I,2)+T(', মোট = ',', total = ')+rd(P+I,2),['I = P × r × t ÷ 100 = '+P+' × '+r+' × '+t+' ÷ 100'])}
+ if(has(/(চক্রবৃদ্ধি|compound)/)&&ns.length>=3&&ns.every(n=>n>=0)){const[P,r,t]=ns,A=P*Math.pow(1+r/100,t);return out(T('চক্রবৃদ্ধি মোট = ','Compound amount = ')+rd(A,2)+T(', সুদ = ',', interest = ')+rd(A-P,2),['A = P(1 + r/100)ᵗ = '+P+' × (1 + '+r+'/100)^'+t])}
+ if(has(/(hypotenuse|অতিভুজ)/)&&ns.length>=2&&ns[0]>0&&ns[1]>0&&!has(/(সূত্র|উপপাদ্য|theorem)/)){const c2=ns[0]*ns[0]+ns[1]*ns[1],c=Math.sqrt(c2),rr=Math.round(c);return out(T('অতিভুজ = ','Hypotenuse = ')+(Math.abs(c-rr)<1e-9?rr:'√'+c2+' ≈ '+rd(c)),['c = √(a² + b²) = √('+ns[0]+'² + '+ns[1]+'²) = √'+c2])}
+ const isAr=has(/(area|ক্ষেত্রফল)/),isPm=has(/(perimeter|circumference|পরিধি)/),isVol=has(/(volume|আয়তন)/);
+ if(has(/(circle|বৃত্ত)/)&&ns.length>=1&&ns[0]>0&&(isAr||isPm||(!isVol))){const dia=has(/(diameter|ব্যাস(?!ার্ধ))/);const r=dia?ns[0]/2:ns[0],A=Math.PI*r*r,C=2*Math.PI*r,t=[];if(isAr||!isPm)t.push(T('ক্ষেত্রফল = ','Area = ')+rd(A));if(isPm||!isAr)t.push(T('পরিধি = ','Circumference = ')+rd(C));return out(t.join(',  '),['r = '+r].concat((isAr||!isPm)?['A = πr² = π × '+r+'²']:[],(isPm||!isAr)?['C = 2πr = 2 × π × '+r]:[]))}
+ if(has(/(rectangle|আয়তক্ষেত্র|আয়তাকার)/)&&ns.length>=2){const[l,w]=ns,t=[];if(isAr||!isPm)t.push(T('ক্ষেত্রফল = ','Area = ')+rd(l*w));if(isPm||!isAr)t.push(T('পরিসীমা = ','Perimeter = ')+rd(2*(l+w)));return out(t.join(',  '),['A = l × w = '+l+' × '+w,'P = 2(l + w)'])}
+ if(has(/(triangle|ত্রিভুজ)/)&&isAr&&ns.length>=2)return out(T('ক্ষেত্রফল = ','Area = ')+rd(ns[0]*ns[1]/2),['A = ½ × ভূমি × উচ্চতা = ½ × '+ns[0]+' × '+ns[1]])
+ if(has(/(square|বর্গক্ষেত্র)/)&&!has(/(root|মূল)/)&&ns.length>=1&&(isAr||isPm)){const a=ns[0],t=[];if(isAr||!isPm)t.push(T('ক্ষেত্রফল = ','Area = ')+rd(a*a));if(isPm||!isAr)t.push(T('পরিসীমা = ','Perimeter = ')+rd(4*a));return out(t.join(',  '),['A = a² = '+a+'²','P = 4a'])}
+ if(has(/(sphere|গোলক)/)&&ns.length>=1){const r=ns[0];return out(T('আয়তন = ','Volume = ')+rd(4/3*Math.PI*r**3)+T(', পৃষ্ঠতল = ',', surface area = ')+rd(4*Math.PI*r*r),['V = (4/3)πr³','S = 4πr²'])}
+ if(has(/(cylinder|সিলিন্ডার|বেলন)/)&&ns.length>=2){const[r,h]=ns;return out(T('আয়তন = ','Volume = ')+rd(Math.PI*r*r*h)+T(', বক্রতলের ক্ষেত্রফল = ',', curved area = ')+rd(2*Math.PI*r*h),['V = πr²h','CSA = 2πrh'])}
+ const cb=has(/(combination|\bncr\b|choose|সমাবেশ|কম্বিনেশন)/)||/^\s*\d+\s*c\s*\d+\s*$/.test(s0),pm=has(/(permutation|\bnpr\b|বিন্যাস|পারমুটেশন)/)||/^\s*\d+\s*p\s*\d+\s*$/.test(s0);
+ if((cb||pm)&&ns.length===2&&Number.isInteger(ns[0])&&Number.isInteger(ns[1])&&ns[0]>=ns[1]&&ns[1]>=0&&ns[0]<=200){const n=MB(ns[0]),r=MB(ns[1]);let P=1n;for(let i=0n;i<r;i++)P*=(n-i);let rf=1n;for(let i=2n;i<=r;i++)rf*=i;
+  return out(pm?'P('+ns[0]+', '+ns[1]+') = '+mBig(P):'C('+ns[0]+', '+ns[1]+') = '+mBig(P/rf),pm?['nPr = n! ÷ (n − r)!']:['nCr = n! ÷ (r! × (n − r)!)'])}
+ if(has(/(average|mean|median|mode|গড়|মধ্যক|প্রচুরক|sum of|total of|যোগফল|range of|পরিসর)/)&&ns.length>=2&&ns.length<=60&&!/[*^]/.test(s0)){
+  const a=[...ns].sort((x,y)=>x-y),sum=ns.reduce((x,y)=>x+y,0),mean=sum/ns.length,mid=a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const cnt={};ns.forEach(x=>cnt[x]=(cnt[x]||0)+1);const mx=Math.max(...Object.values(cnt)),modes=Object.keys(cnt).filter(k=>cnt[k]===mx);
+  const wantMed=has(/(median|মধ্যক)/),wantMode=has(/(mode|প্রচুরক)/),wantSum=has(/(sum of|total of|যোগফল)/)&&!has(/(average|mean|গড়)/),wantRange=has(/(range of|পরিসর)/)&&!has(/(average|mean|গড়)/);
+  const head=wantMed?T('মধ্যক = ','Median = ')+rd(mid):wantMode?T('প্রচুরক = ','Mode = ')+(mx===1?T('নেই (সব একবার)','none (all appear once)'):modes.join(', ')):wantSum?T('যোগফল = ','Sum = ')+rd(sum):wantRange?T('পরিসর = ','Range = ')+rd(a[a.length-1]-a[0]):T('গড় = ','Mean = ')+rd(mean);
+  return out(head,[T('সংখ্যা: ','Numbers: ')+ns.join(', '),T('যোগফল = ','Sum = ')+rd(sum)+T(', গড় = ',', mean = ')+rd(mean)+T(', মধ্যক = ',', median = ')+rd(mid),T('সর্বনিম্ন = ','Min = ')+a[0]+T(', সর্বোচ্চ = ',', max = ')+a[a.length-1]])}
+ return null}
+function aMath(raw){
+ const s0=aDig(raw).toLowerCase();
+ if(!/\d|π|√|factorial|ফ্যাক্টরিয়াল/.test(s0)&&!aTheoryProbe(s0))return null;
+ let h=null;
+ try{h=aMSolve2(raw)}catch{}if(h)return h;
+ try{h=aMathIntent(raw)}catch{}if(h)return h;
+ if(/\d+\s*[-/.]\s*\d+\s*[-/.]\s*\d{2,4}/.test(s0))return null;
+ const e=aMNorm(raw);
+ if(e&&/\d|pi/.test(e)&&/[+\-*/^!%]|sqrt|cbrt|sin|cos|tan|asin|acos|atan|log|ln|exp|abs|floor|ceil|round|pi/.test(e)&&/\d/.test(e.replace(/pi/g,''))||/^pi$/.test(e)){
+  const words=e.match(/[a-z\u0980-\u09FF]+/g)||[];
+  if(!words.some(w=>!MFN.has(w))&&!/(^|\s)\d+\s+\d+(\s|$)/.test(e)&&!/^[-+]?\d+(\.\d+)?$/.test(e)){
+   try{const v=aMVal(e),sh=mShow(v);let ex=[];
+    const rm=/^sqrt\((\d+)\)$/.exec(e);if(rm&&mIsR(v)===false){const n=+rm[1];if(n<=1e12){const[k,m]=mRadical(n);if(k>1)ex.push('√'+n+' = '+k+'√'+m+' ≈ '+mFloat(v.f))}}
+    return aAns(bn(aMDisp(e)+(sh.approx?' ≈ ':' = ')+sh.t),null,ex.length?`<div class=as-steps>${ex.map(x=>`<div>${aEsc(bn(x))}</div>`).join('')}</div>`:'')}catch(er){return(er==='div0'||er==='domain'||er==='undef')?aMErr():null}}}
+ return aTheory(raw)}
+const aTheoryProbe=s=>/(value of pi|what is pi|what's pi|whats pi|পাই এর মান|পাই কত|pythagor|পিথাগোরা|পিথাগরাস|quadratic|দ্বিঘাত|শ্রীধর|ভগ্নাংশ|fraction|বর্গমূল|square root|মৌলিক|prime|গসাগু|লসাগু|hcf|lcm|বীজগণিত|শতকরা|percent|বৃত্ত|circle|ক্ষেত্রফল|area|ত্রিকোণমিতি|trigonometr|সাইন|sine|গড়|median|সূচক|exponent|লগারিদম|logarithm|সুদ|interest|সম্ভাবনা|probability|সমান্তর|arithmetic)/.test(s);
+
+/* ===== ভাষা শনাক্ত: যে ভাষায় লিখবেন, সেই ভাষায় উত্তর ===== */
+let AL_PREV=null;
+const BNW=new Set(['kivabe','kibhabe','kemon','kothay','kothaye','koto','kon','ki','keno','ache','achhe','achi','nai','nei','hobe','hoy','hoi','jabe','jay','jai','pabo','pabe','dibo','nibo','korbo','korte','kore','koro','dekhbo','dekhte','porbo','porte','amar','amake','tomar','apnar','ami','tumi','apni','er','ta','ti','na','ekta','ekti','bolo','bolun','dao','den','chai','lagbe','lage','kintu','ar','ebong','jodi','tahole','tobe','thik','valo','bhalo','kharap','bhai','vai','nam','kobe','kokhon','kar','kake','eta','ota','seta','ekhane','okhane','kina','naki','shob','sob','onek','khub','ektu','taka','dam','meyad','kinbo','kinte','kini','kena','vidio','komik','komiks','golpo','notun','natun','porjonto','moddhe','pathabo','pathai','khujchi','shuru','shesh','bondho','chalu','cholche','cholbe','hocche','hochhe','hoyni','paini','pai','pacchi','dicche','dichhe','ke','kara','kemone','kotodin','tomra','amra','amader','ajker','ajkal','aj','ajke','tarikh','kobe','koyta','baje']);
+const ENW=new Set(['the','is','are','was','were','a','an','and','or','of','to','in','on','for','with','my','your','what','how','where','when','why','who','which','do','does','did','can','could','would','should','will','i','you','it','this','that','these','those','me','we','they','buy','free','comic','comics','video','videos','code','price','cost','read','watch','show','tell','give','find','best','top','new','latest','review','reviews','rating','help','please','thanks','thank','hello','hi','about','from','have','has','not','no','yes','app','install','language','change','much','many','there','here','get','make','use','using','want','need','like','know','any','some','more','than','then','also','just','only','very','really','good','bad','today','date','time','day','goal','plan','plans','company','akano']);
+function aLangOf(q){
+ if(/[\u0980-\u09FF]/.test(q))return 'bn';
+ let b=0,e=0;aNorm(q).split(' ').filter(Boolean).forEach(x=>{if(BNW.has(x))b++;if(ENW.has(x))e++});
+ return b>e?'bn':e>b?'en':language}
+async function aAwait(p){const cur=language;if(AL_PREV!==null)language=AL_PREV;try{return await p}finally{language=cur}}
+async function asAnswer(q){const L=aLangOf(q),prev=language;AL_PREV=prev;language=L;try{return await asAnswerCore(q)}finally{language=prev;AL_PREV=null}}
+window.__asLive=async q=>{const nq=aNorm(q);if(!(RXW.test(nq)||RXP.test(nq)||RXC.test(nq)||aFxParse(q,nq)))return null;const L=aLangOf(q),prev=language;AL_PREV=prev;language=L;try{return await aLive(q,nq)}finally{language=prev;AL_PREV=null}};
+/* গালি/অশালীন ভাষা শনাক্ত → ভদ্রভাবে না বলা */
+const ABUSE=/(^| )(fuck|fucking|fucker|motherfucker|shit|bitch|asshole|bastard|cunt|whore|slut|dick|pussy|chudi|chudbo|chod|choda|chodna|madarchod|bhenchod|behenchod|bokachoda|magi|khanki|haramj\w*|harami|gandu|kutta|kuttar|shuor|bhoda|চুদ\S*|চোদ\S*|মাগি|মাগী|খানকি|হারামি|হারামজাদা|বেজন্মা|কুত্তা|শুয়োর|শুওর|ভোদা|গান্ডু|গাণ্ডু|বাল|মাদারচোদ|বোকাচোদা)( |$)/;
+const aAbuse=nq=>ABUSE.test(nq);
+/* রিভিউ বুদ্ধি: অ্যাপের ক্যাশ ব্যবহার করে, নতুন করে অতিরিক্ত রিড কম */
+async function aRevLoad(){try{const rv=await aAwait(cache('reviews',async()=>(await tmo(getDocs(query(collection(db,'reviews'),where('approved','==',true))))).docs.map(d=>({id:d.id,...d.data()}))));return Array.isArray(rv)?rv.filter(r=>r&&r.approved!==false):[]}catch{return null}}
+const aRevParse=t=>{const m=/^\[([^\]]{1,80})\]\s*/.exec(t||'');return m?{tags:m[1].split(',').map(x=>x.trim()).filter(Boolean),text:t.slice(m[0].length)}:{tags:[],text:t||''}};
+const aStars=n=>{n=Math.max(0,Math.min(5,Math.round(n)));return '★'.repeat(n)+'☆'.repeat(5-n)};
+const RVIEW=/(রিভিউ|review|reviews|রেটিং|rating|ratings|মতামত|feedback|কেমন বলছে|কী বলছে|কি বলছে|কেমন লাগছে|ki bolche|ki bolse|what do people say|what are people saying|what people say|what people think|কে কী|ke ki)/;
+const RVHOW=/(কীভাবে|কিভাবে|kivabe|kibhabe|how (do|to|can|may|should)|দেব|দিব|dibo|দিতে|dite|submit|লিখব|লিখবো|likhbo)/;
+const aRevIntent=nq=>RVIEW.test(nq)&&!RVHOW.test(nq);
+async function aReviews(q,nq,E){
+ const rv=await aRevLoad(),link=[['reviews','সব রিভিউ দেখুন','See all reviews']];
+ if(rv===null)return aAns(T('এখন রিভিউ আনা যাচ্ছে না। ইন্টারনেট চালু করে আবার চেষ্টা করুন।','I cannot load the reviews right now. Please check your internet and try again.'),link);
+ if(!rv.length)return aAns(T('এখনো কোনো রিভিউ জমা পড়েনি। আপনিই প্রথম রিভিউ দিতে পারেন!','There are no reviews yet. You can be the first to write one!'),link);
+ let list=rv,note='';
+ const ent=E&&E.sc>=.6&&(E.kind==='comic'||E.kind==='video'||E.kind==='series')?E:null;
+ if(ent){const nt=aNorm(ent.title),f=rv.filter(r=>aNorm(r.comic||'').includes(nt)||aNorm(r.text||'').includes(nt));if(f.length)list=f;else note=T(`“${ent.title}” নিয়ে আলাদা রিভিউ এখনো নেই; সব রিভিউ মিলিয়ে: `,`No separate reviews for “${ent.title}” yet; overall: `)}
+ const n=list.length,avg=list.reduce((a,r)=>a+(+r.rating||0),0)/n,pos=Math.round(list.filter(r=>(+r.rating||0)>=4).length/n*100);
+ const dist=[5,4,3,2,1].map(k=>list.filter(r=>Math.round(+r.rating||0)===k).length);
+ const tg={};list.forEach(r=>aRevParse(r.text).tags.forEach(t=>tg[t]=(tg[t]||0)+1));
+ const tops=Object.entries(tg).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([t,c])=>`${t} (${bn(c)})`).join(', ');
+ const byT=(a,b)=>(b.t||0)-(a.t||0),best=/(best|top|highest|সেরা|সবচেয়ে ভালো|positive|ভালো রিভিউ)/.test(nq),low=/(bad|low|worst|negative|critic|খারাপ|কম রেটিং|সমালোচনা|complain|অভিযোগ)/.test(nq);
+ let show=[...list].sort(byT),head=T('সর্বশেষ রিভিউ:','Latest reviews:');
+ if(best){show=[...list].sort((a,b)=>(+b.rating||0)-(+a.rating||0)||byT(a,b));head=T('সবচেয়ে ভালো রিভিউ:','Top reviews:')}
+ else if(low){const l=list.filter(r=>(+r.rating||0)<=3).sort((a,b)=>(+a.rating||0)-(+b.rating||0)||byT(a,b));if(l.length){show=l;head=T('সমালোচনামূলক রিভিউ:','Critical reviews:')}else head=T('কম রেটিংয়ের রিভিউ নেই। সর্বশেষ রিভিউ:','No low-rated reviews. Latest reviews:')}
+ const card=r=>{const p=aRevParse(r.text);return `<div class=as-rv><div class=as-rvh><b>${aEsc(r.name||'?')}</b><span>${aStars(+r.rating||0)}</span></div>${r.comic?`<small>${aEsc(r.comic)}</small>`:''}<p>${aEsc(p.text.slice(0,170))}${p.text.length>170?'…':''}</p></div>`};
+ const txt=note+T(`মোট ${bn(n)}টি রিভিউ, গড় রেটিং ${bn(avg.toFixed(1))}/৫। ${bn(pos)}% দর্শক ৪ বা ৫ তারা দিয়েছেন।`,`${n} review${n===1?'':'s'}, average rating ${avg.toFixed(1)}/5. ${pos}% of viewers gave 4 or 5 stars.`)+(tops?T(' সবচেয়ে বেশি পছন্দ: ',' Most liked: ')+tops+'.':'');
+ return aAns(txt,link,`<div class=as-steps><div>${[5,4,3,2,1].map((k,i)=>`${bn(k)}★ ${bn(dist[i])}`).join(' · ')}</div></div><div class=as-h2>${aEsc(head)}</div><div class=as-rvs>${show.slice(0,3).map(card).join('')}</div>`+aChips([['সবচেয়ে ভালো রিভিউ','Top reviews'],['সমালোচনা কী আছে?','Any criticism?']]))}
+
+/* ===== লাইভ ফ্রি এপিআই: আবহাওয়া, মুদ্রা, নামাজের সময়, দেশের তথ্য (কী ছাড়া, Firebase খরচ ০) ===== */
+const aJ=async(u,ms=9000)=>{const r=await aAwait(tmo(fetch(u),ms));if(!r.ok)throw 0;return r.json()};
+const CITYM={'ঢাকা':'Dhaka','dhaka':'Dhaka','চট্টগ্রাম':'Chittagong','chittagong':'Chittagong','chattogram':'Chittagong','ctg':'Chittagong','সিলেট':'Sylhet','sylhet':'Sylhet','রাজশাহী':'Rajshahi','rajshahi':'Rajshahi','খুলনা':'Khulna','khulna':'Khulna','বরিশাল':'Barisal','barisal':'Barisal','রংপুর':'Rangpur','rangpur':'Rangpur','ময়মনসিংহ':'Mymensingh','mymensingh':'Mymensingh','কক্সবাজার':"Cox's Bazar",'কুমিল্লা':'Comilla','comilla':'Comilla','গাজীপুর':'Gazipur','নারায়ণগঞ্জ':'Narayanganj','বগুড়া':'Bogra','যশোর':'Jessore','দিনাজপুর':'Dinajpur','কলকাতা':'Kolkata','দিল্লি':'Delhi','মুম্বাই':'Mumbai','লন্ডন':'London','টোকিও':'Tokyo','দুবাই':'Dubai','মক্কা':'Mecca','মদিনা':'Medina','রিয়াদ':'Riyadh','সিঙ্গাপুর':'Singapore','কুয়ালালামপুর':'Kuala Lumpur'};
+const BDC=new Set(['Dhaka','Chittagong','Sylhet','Rajshahi','Khulna','Barisal','Rangpur','Mymensingh',"Cox's Bazar",'Comilla','Gazipur','Narayanganj','Bogra','Jessore','Dinajpur']);
+const aCityOf=(q,nq,fill)=>{const lq=q.toLowerCase();for(const[k,v]of Object.entries(CITYM))if(lq.includes(k))return{name:v,guess:false};
+ const re=new RegExp('^(?:'+fill.source+')$'),ex=/^(te|e|ke|r|ta|ti|ki|kemon|hobe|hoy|ache|achhe|bolo|bol|ajk|ajke|ajker|aj|kal|ekhon|ekhn|koto|na|ar|and|for|me|show|tell|please|pls|temp|hot|cold|garom|gorom|thanda|brishti|bristi|megh|tapmatra|tapomatra|bd|bangladesh|বাংলাদেশ|আবহাওয়া|namazer|namajer|iftarer|sehrir|shomoy|somoy|wakto|waqt|time|times|সেহরির|ইফতারের|নামাজের|সময়|কটায়|কখন|কয়টায়|koyta|kokhon|kotota)$/;
+ let t=nq.split(' ').filter(w=>w&&!re.test(w)&&!ex.test(w)).join(' ').trim().replace(/(র|এ|তে|য়)$/,'');return t&&t.length>=3&&t.length<=30?{name:t,guess:false}:{name:'Dhaka',guess:true}};
+const WXFILL=/(আবহাওয়া|আবহাওয়ার|abhawa|abohawa|aboshta|obostha|weather|forecast|temperature|তাপমাত্রা|বৃষ্টি|rainy|rain|আজকের|আজকে|আজ|আগামীকাল|কাল|কেমন|কী|কি|কত|এখন|now|today|tomorrow|in|of|the|at|what|whats|what s|how|is|like|বলো|বল|হবে|er|এর|ajker|ajke|aj|kemon|ache|kal|bolo|জানাও|জানো|তো|will|it|be)/g;
+const wxd=c=>c===0?['পরিষ্কার আকাশ','Clear sky']:c<=2?['আংশিক মেঘলা','Partly cloudy']:c===3?['মেঘলা','Overcast']:c<=48?['কুয়াশা','Fog']:c<=57?['গুঁড়ি গুঁড়ি বৃষ্টি','Drizzle']:c<=67?['বৃষ্টি','Rain']:c<=77?['তুষারপাত','Snow']:c<=82?['থেমে থেমে বৃষ্টি','Rain showers']:c<=86?['তুষারঝড়','Snow showers']:['বজ্রসহ বৃষ্টি','Thunderstorm'];
+const RXW=/(আবহাওয়া|bristi hobe|brishti hobe|tapmatra|tapomatra|gorom ki|thanda ki|abhawa|abohawa|aboshta|obostha|weather|forecast|তাপমাত্রা|temperature|বৃষ্টি হবে|will it rain|rain today)/;
+const RXP=/(নামাজ|নামাযের|সালাত|namaz|namaj|prayer time|prayer times|আজান|azan|ইফতার|iftar|সেহরি|sehri|সাহরি|fajr|ফজর|মাগরিব|maghrib)/;
+const RXC=/(capital of|রাজধানী|population of|জনসংখ্যা|currency of|মুদ্রা কী|মুদ্রা কি)/;
+const CUR={'ডলার':'USD','dollar':'USD','dollars':'USD','usd':'USD','টাকা':'BDT','taka':'BDT','bdt':'BDT','tk':'BDT','ইউরো':'EUR','euro':'EUR','eur':'EUR','পাউন্ড':'GBP','pound':'GBP','gbp':'GBP','রুপি':'INR','rupee':'INR','inr':'INR','রিয়াল':'SAR','riyal':'SAR','sar':'SAR','দিরহাম':'AED','dirham':'AED','aed':'AED','ইয়েন':'JPY','yen':'JPY','jpy':'JPY','রিঙ্গিত':'MYR','ringgit':'MYR','myr':'MYR','ইউয়ান':'CNY','yuan':'CNY','cny':'CNY'};
+const COUNTRYM={'বাংলাদেশ':'Bangladesh','ভারত':'India','পাকিস্তান':'Pakistan','জাপান':'Japan','চীন':'China','আমেরিকা':'United States','যুক্তরাষ্ট্র':'United States','যুক্তরাজ্য':'United Kingdom','সৌদি আরব':'Saudi Arabia','ফ্রান্স':'France','জার্মানি':'Germany','ইতালি':'Italy','কানাডা':'Canada','অস্ট্রেলিয়া':'Australia','রাশিয়া':'Russia','তুরস্ক':'Turkey','মালয়েশিয়া':'Malaysia','সিঙ্গাপুর':'Singapore','নেপাল':'Nepal','শ্রীলঙ্কা':'Sri Lanka','ভুটান':'Bhutan','মিয়ানমার':'Myanmar','ইন্দোনেশিয়া':'Indonesia','দক্ষিণ কোরিয়া':'South Korea','মিশর':'Egypt','ব্রাজিল':'Brazil'};
+async function aGeo(nm,lg){const g=await aJ('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(nm)+'&count=5&language='+lg+'&format=json'),r=(g&&g.results)||[];return r.find(x=>x.country_code==='BD')||r[0]||null}
+async function aWeather(q,nq){
+ const c=aCityOf(q,nq,WXFILL),lg=language==='en'?'en':'bn';
+  const nmz=[c.name,...String(c.name).split(' ')].filter((x,i,ar)=>x&&x.length>=3&&ar.indexOf(x)===i);let p=null,gerr=null;
+  for(const nm of nmz){try{p=await aGeo(nm,lg);if(p)break}catch(e){gerr=e}}
+  if(!p&&gerr)throw gerr;
+ if(!p)return aAns(T(`“${c.name}” নামে কোনো জায়গা পাইনি। অন্য নামে চেষ্টা করুন।`,`I could not find a place called “${c.name}”.`));
+ const w=await aJ(`https://api.open-meteo.com/v1/forecast?latitude=${p.latitude}&longitude=${p.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=auto&forecast_days=3`);
+ const u=w.current,d=w.daily,r=x=>Math.round(x),ds=wxd(u.weather_code);
+ const txt=T(`${p.name}-এ এখন ${bn(r(u.temperature_2m))}°C (অনুভূত ${bn(r(u.apparent_temperature))}°C), ${ds[0]}। আর্দ্রতা ${bn(u.relative_humidity_2m)}%, বাতাস ${bn(r(u.wind_speed_10m))} কিমি/ঘণ্টা।`,`In ${p.name} it is ${r(u.temperature_2m)}°C now (feels like ${r(u.apparent_temperature)}°C), ${ds[1]}. Humidity ${u.relative_humidity_2m}%, wind ${r(u.wind_speed_10m)} km/h.`);
+ const names=[T('আজ','Today'),T('কাল','Tomorrow'),T('পরশু','Day after')],st=d.time.map((_,i)=>{const x=wxd(d.weather_code[i]);return `<div>${aEsc(names[i]+': '+bn(r(d.temperature_2m_min[i]))+'°–'+bn(r(d.temperature_2m_max[i]))+'°C, '+x[language==='en'?1:0]+T(', বৃষ্টির সম্ভাবনা ',', rain chance ')+bn(d.precipitation_probability_max[i]==null?0:d.precipitation_probability_max[i])+'%')}</div>`}).join('');
+ return aAns(txt,null,`<div class=as-steps>${c.guess?`<div>${aEsc(T('শহরের নাম বলেননি, তাই ঢাকা দেখালাম। অন্য শহরের নাম লিখতে পারেন।','You did not name a city, so I showed Dhaka. You can type another city.'))}</div>`:''}${st}</div>`)}
+function aFxParse(q,nq){
+ const s=aDig(q).toLowerCase(),found=[];
+ for(const[k,v]of Object.entries(CUR)){const i=s.indexOf(k);if(i>=0&&!found.some(f=>f.c===v))found.push({c:v,i})}
+ found.sort((a,b)=>a.i-b.i);
+ const nm=s.match(/\d+(?:\.\d+)?/),amt=nm?+nm[0]:1,rate=/(rate|রেট|exchange|এক্সচেঞ্জ|convert|কনভার্ট|দর|কত টাকা|koto taka|dam koto)/.test(s);
+ if(found.length>=2)return{from:found[0].c,to:found[1].c,amt};
+ if(found.length===1&&found[0].c!=='BDT'&&(rate||nm))return{from:found[0].c,to:'BDT',amt};
+ return null}
+async function aFx(f){
+ let d=null;try{const c=JSON.parse(localStorage.akFx);if(c&&Date.now()-c.t<216e5)d=c.r}catch{}
+ if(!d){const j=await aJ('https://open.er-api.com/v6/latest/USD');if(!j.rates)throw 0;d=j.rates;try{localStorage.akFx=JSON.stringify({t:Date.now(),r:d})}catch{}}
+ if(!d[f.from]||!d[f.to])return aAns(T('এই মুদ্রার রেট পাইনি।','I could not find the rate for this currency.'));
+ const v=f.amt*d[f.to]/d[f.from],fmt=x=>bn((Math.round(x*100)/100).toLocaleString('en-US'));
+ return aAns(`${fmt(f.amt)} ${f.from} ≈ ${fmt(v)} ${f.to}`,null,`<div class=as-steps><div>${aEsc(`1 ${f.from} ≈ ${bn((Math.round(d[f.to]/d[f.from]*10000)/10000))} ${f.to}`)}</div><div>${aEsc(T('রেট দিনে একবার হালনাগাদ হয়; ব্যাংকের রেট আলাদা হতে পারে।','Rates update about once a day; bank rates may differ.'))}</div></div>`)}
+async function aPrayer(q,nq){
+ const c=aCityOf(q,nq,/(নামাজ|নামাযের|সালাতের|সালাত|namaz|namaj|prayer times|prayer time|prayer|আজান|azan|ইফতার|iftar|সেহরি|sehri|সাহরি|সময়|সময়সূচি|কখন|কয়টায়|koyta|kokhon|er|এর|আজ|আজকের|today|aj|ajker|কত|what|is|the|of|in|time|times|fajr|ফজর|মাগরিব|maghrib|namazer|namajer|iftarer|sehrir|shomoy|somoy|wakto|waqt|ইমসাক|imsak|আসর|asr|যোহর|zuhr|dhuhr|johor|এশা|isha|esha|সেহরির|ইফতারের|নামাজের)/g),lg=language==='en'?'en':'bn';
+ const nm=c.guess?'Dhaka':c.name;let p=null;
+ for(const n of [nm,...nm.split(' ')].filter((x,i,ar)=>x&&x.length>=3&&ar.indexOf(x)===i)){try{p=await aGeo(n,lg);if(p)break}catch{}}
+ if(!p)return aAns(T(`“${nm}” নামে কোনো জায়গা পাইনি। অন্য নামে চেষ্টা করুন।`,`I could not find a place called “${nm}”.`));
+ const d=new Date(),dd=String(d.getDate()).padStart(2,'0')+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear();
+ const j=await aJ(`https://api.aladhan.com/v1/timings/${dd}?latitude=${p.latitude}&longitude=${p.longitude}&method=1&school=0`),t=j.data&&j.data.timings;if(!t)throw 0;
+ const f12=x=>{const[h,m]=String(x).split(' ')[0].split(':').map(Number);return bn(((h+11)%12+1)+':'+String(m).padStart(2,'0')+' '+(h>=12?T('PM','PM'):T('AM','AM')))};
+ const rows=[['ফজর (সেহরির শেষ)','Fajr (Sehri ends)',t.Fajr],['সূর্যোদয়','Sunrise',t.Sunrise],['যোহর','Dhuhr',t.Dhuhr],['আসর','Asr',t.Asr],['মাগরিব (ইফতার)','Maghrib (Iftar)',t.Maghrib],['এশা','Isha',t.Isha]];
+ const ask=/(ইফতার|iftar|মাগরিব|maghrib)/.test(nq)?['মাগরিব (ইফতার)','Maghrib (Iftar)',t.Maghrib]:/(সেহরি|সাহরি|sehri|ইমসাক|imsak|fajr|ফজর)/.test(nq)?['ফজর (সেহরির শেষ)','Fajr (Sehri ends)',t.Fajr]:/(আসর|\basr\b)/.test(nq)?['আসর','Asr',t.Asr]:/(যোহর|zuhr|dhuhr|johor)/.test(nq)?['যোহর','Dhuhr',t.Dhuhr]:/(এশা|isha|esha)/.test(nq)?['এশা','Isha',t.Isha]:null;
+ const pn=p.name||nm,head=ask?T(`${pn}-এ ${ask[0]}-এর সময় ${f12(ask[2])}।`,`${ask[1]} time in ${pn}: ${f12(ask[2])}.`):T(`${pn}-এ আজকের নামাজের সময়:`,`Today\u2019s prayer times in ${pn}:`);
+ return aAns(head,null,`<div class=as-steps>${rows.map(r=>`<div>${aEsc(T(r[0],r[1])+': '+f12(r[2]))}</div>`).join('')}<div>${aEsc(T('আহলে হাদীসের মত অনুযায়ী (আসর: ছায়া নিজের সমান হলে); স্থানীয় মসজিদের সময় একটু আলাদা হতে পারে।','Ahle Hadith method (Asr when shadow equals the object); your local mosque may differ slightly.'))}</div></div>`)}
+async function aCountry(q,nq){
+ let name=null;for(const[k,v]of Object.entries(COUNTRYM))if(q.includes(k)){name=v;break}
+ if(!name){const m=nq.match(/(?:capital|population|currency) of (?:the )?([a-z ]{3,30})/);name=m?m[1].trim():null}
+ if(!name)return null;
+ const j=await aJ('https://restcountries.com/v3.1/name/'+encodeURIComponent(name)+'?fields=name,capital,population,region,currencies'),x=j&&j[0];if(!x)return aAns(T('এই দেশের তথ্য পাইনি।','I could not find this country.'));
+ const cur=Object.values(x.currencies||{}).map(c=>c.name+(c.symbol?' ('+c.symbol+')':'')).join(', ');
+ return aAns(T(`${x.name.common}: রাজধানী ${(x.capital||['—'])[0]}, জনসংখ্যা প্রায় ${bn(x.population.toLocaleString('en-US'))}, অঞ্চল ${x.region}, মুদ্রা ${cur||'—'}।`,`${x.name.common}: capital ${(x.capital||['—'])[0]}, population about ${x.population.toLocaleString('en-US')}, region ${x.region}, currency ${cur||'—'}.`))}
+async function aLive(q,nq){
+ let hit=false;
+ try{
+  if(RXW.test(nq)&&!/(কোড|code|অর্ডার)/.test(nq)){hit=true;return await aWeather(q,nq)}
+  const fx=aFxParse(q,nq);if(fx){hit=true;return await aFx(fx)}
+  if(RXP.test(nq)){hit=true;return await aPrayer(q,nq)}
+  if(RXC.test(nq)){hit=true;return await aCountry(q,nq)}
+ }catch{if(hit)return aAns(T('এখন লাইভ তথ্য আনা যাচ্ছে না। ইন্টারনেট চালু আছে কি না দেখে আবার চেষ্টা করুন।','I cannot fetch live data right now. Please check your internet and try again.'))}
+ return null}
+
+async function asAnswerCore(q){
  const nq=aNorm(q),nw=nq.split(' ').filter(Boolean).length;
  let h=aSmall(q,nq,nw);if(h){aMem('',null);return h}
+ if(aRevIntent(nq)){const hr=await aReviews(q,nq,aEnt(q)[0]||null);if(hr){aMem('',null);return hr}}
+ h=aMath(q);if(h){aMem('',null);return h}
+ h=await aLive(q,nq);if(h){aMem('',null);return h}
  const X=kbIndex(),qt=new Set(X.toks(q));
  const K={c:/(কমিক|comic|komik)/.test(nq)||qt.has('g6'),v:/(ভিডিও|video|vidio|অ্যানিমেটেড|animated|পর্ব|episode|সিরিজ|series)/.test(nq)||qt.has('g5')||qt.has('g4'),h:/(ক্যারেক্টার|character|চরিত্র|caractar)/.test(nq)||qt.has('g7')};
  h=aPersonal(nq,qt,K);if(h){aMem('',null);return h}
- const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(nw<=4||/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
+ const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(X.words(q).length<=2||/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
  let E=ent[0]||null;if(!E&&follow&&AIC.ent&&(RX.price.test(nq)||nw<=3))E=AIC.ent;
  h=aCatalog(q,nq,qt,K,ent,nw,E);if(h){aMem('',E&&E.sc>=.6?E:null);return h}
  let sc=kbScore(q),top=sc[0];
  if((!top||top.sc<.42)&&follow&&AIC.q){const s2=kbScore(AIC.q+' '+q);if(s2[0]&&s2[0].sc>=.5&&s2[0].sc>(top?top.sc:0)+.1){sc=s2;top=s2[0]}}
- const best=top&&top.sc>=.42?top:null;
+ const best=top&&(top.sc>=.42||(top.sc>=.33&&(!sc[1]||top.sc-sc[1].sc>=.07)))?top:null;
  if(ent.length&&(!best||ent[0].sc>=best.sc+.15)){
   const e0=ent[0];aMem('',e0);
   return `<div data-sayt>${aEsc(e0.sc>=.75?aEntFact(e0):T('এগুলো পেয়েছি:','I found these:'))}</div>${aCardsH(ent)}`}
@@ -2957,10 +3489,10 @@ async function asAnswer(q){
   const hint=best.sc<.6?`<small class=as-ai>${T('আপনার প্রশ্ন যেন: ','Closest question: ')}${aEsc(en?d.qe:d.qb)}</small>`:'';
   return aAns(txt,d.go,hint+(more.length?`<div class=as-rel><small>${T('এগুলোও দেখতে পারেন:','You may also like:')}</small>${more.map(x=>`<button type=button class=as-chip data-ask="${aEsc(en?x.d.qe:x.d.qb)}">${aEsc(en?x.d.qe:x.d.qb)}</button>`).join('')}</div>`:''))}
  const ctx=sc.slice(0,3).filter(x=>x.sc>.12).map(x=>(language==='en'?x.d.qe+' — '+x.d.ae:x.d.qb+' — '+x.d.ab));
- try{const a=await aiAsk(q,ctx);if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
+ try{const a=await aAwait(aiAsk(q,ctx));if(a&&a.limit)return aAns(T('আজকের জন্য এআই-এর সীমা শেষ। কাল আবার চেষ্টা করুন বা আমাদের জানান।','Today\u2019s AI limit is reached. Try again tomorrow or contact us.'),[['mail','ইমেইল করুন','Email us']]);if(a)return aAns(a,null,`<small class=as-ai>${T('এআই-এর উত্তর — ভুল হতে পারে','AI answer — may contain mistakes')}</small>`)}catch{}
  /* অ্যাপের বাইরের সাধারণ প্রশ্ন: নিজে থেকেই উইকিপিডিয়ায় খুঁজি (Firebase খরচ ০) */
  const appish=[...qt].some(t=>/^g\d+$/.test(t));
- if(!appish&&nq.length>=3&&navigator.onLine!==false){try{const r=await wikiAnswer(q);if(r&&r.x){aMem('',null);return aAns(r.x,null,`<small class=as-ai>${T('উইকিপিডিয়া থেকে — ভুল থাকতে পারে','From Wikipedia — may contain mistakes')}</small>`)}}catch{}}
+ if(!appish&&nq.length>=3&&navigator.onLine!==false){try{const r=await aAwait(wikiAnswer(q));if(r&&r.x){aMem('',null);return aAns(r.x,null,`<small class=as-ai>${T('উইকিপিডিয়া থেকে — ভুল থাকতে পারে','From Wikipedia — may contain mistakes')}</small>`)}}catch{}}
  const sg=sc.slice(0,3).filter(x=>x.sc>.1);
  return aAns(T('এ বিষয়ে আমার কাছে নির্দিষ্ট তথ্য নেই। নিচের প্রশ্নগুলো চেষ্টা করুন বা আমাদের জানান।','I do not have specific information on that. Try these questions or contact us.'),[['mail','ইমেইল করুন','Email us',q],['fb','ফেসবুক গ্রুপ','Facebook group']],`<div class=as-rel>${sg.map(x=>`<button type=button class=as-chip data-ask="${aEsc(language==='en'?x.d.qe:x.d.qb)}">${aEsc(language==='en'?x.d.qe:x.d.qb)}</button>`).join('')}<button type=button class="as-chip wk" data-wk="${aEsc(q)}">${T('ইন্টারনেটে খুঁজুন','Search the internet')}</button></div>`)}
 /* Ask Akano: নতুন প্রশ্ন-উত্তর সবসময় Ask bar-এর ঠিক ওপরে দেখাবে (বারের নিচে ঢাকা পড়বে না) */
@@ -2997,7 +3529,7 @@ function asCopy(btn){
  const done=()=>{const sp=btn.querySelector('span');if(sp){const o=sp.textContent;sp.textContent=T('কপি হয়েছে','Copied');setTimeout(()=>sp.textContent=o,1500)}};
  try{navigator.clipboard.writeText(x).then(done,()=>{})}catch{const ta=document.createElement('textarea');ta.value=x;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch{}ta.remove()}}
 function asReveal(box,msg){
- const fin=()=>{box.classList.remove('typing');asTools(box);asGo(msg);asSave()};
+ const fin=()=>{box.classList.remove('typing');asTools(box);asGo(msg);asSave();if(VM.on&&VM.busy)vmSpeak(box)};
  const t=box.querySelector('[data-sayt]');
  if(!t||matchMedia('(prefers-reduced-motion: reduce)').matches){fin();return}
  const full=t.textContent;if(full.length<8){fin();return}
