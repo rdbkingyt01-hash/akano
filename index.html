@@ -1801,6 +1801,7 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
+body .aiw .ai-note{margin:8px 0 0;text-align:center;font-size:12px;line-height:1.4;color:#8a7d7b}
 #okw,#m #okw.btn{background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important}
 #sv[hidden]{display:none!important}
 /* Fragiks ask bar: clearly different from page background */
@@ -2314,7 +2315,7 @@ function faq(){
     <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('Fragiks-কে জিজ্ঞেস করুন...','Chat with Fragiks')}" aria-label="${T('প্রশ্ন','Question')}"></div>
     <div class=ai-r2><div class=ai-l><button type=button class=ai-model id=aiModel><span>Fragiks beta</span>${ic('chev')}</button></div><button type=button class=ai-spk id=aiSpk>${ic('mic')}<span>${T('বলুন','Speak')}</span></button></div>
    </div>
-  </form></div>`;
+  <p class=ai-note>${T('Fragiks ভুল করতে পারে। গুরুত্বপূর্ণ তথ্য যাচাই করে নিন।','Fragiks can make mistakes. Check important info.')}</p></form></div>`;
  const upd=()=>{if(VM.on)return;const has=!!$('#asq').value.trim(),b=$('#aiSpk');b.classList.toggle('send',has);b.innerHTML=has?ic('arrow')+'<span>'+T('পাঠান','Send')+'</span>':ic('mic')+'<span>'+T('বলুন','Speak')+'</span>'};
  window.__vmUI=()=>{const b=$('#aiSpk'),c=$('#aiCardVoice');if(c){c.classList.toggle('on',VM.on);const bb=c.querySelector('b');if(bb)bb.textContent=VM.on?T('শুনছি…','Listening…'):T('ভয়েস মোড','Voice Mode')}if(b){if(VM.on){b.classList.add('on');b.innerHTML=ic('mic')+'<span>'+T('থামুন','Stop')+'</span>'}else{b.classList.remove('on');upd()}}};
  const send=()=>{const v=$('#asq').value;if(!v.trim())return;$('#asq').value='';upd();asAsk(v)};
@@ -3469,15 +3470,16 @@ async function asAnswerCore(q){
  if(aRevIntent(nq)){const hr=await aReviews(q,nq,aEnt(q)[0]||null);if(hr){aMem('',null);return hr}}
  h=aMath(q);if(h){aMem('',null);return h}
  h=await aLive(q,nq);if(h){aMem('',null);return h}
- const X=kbIndex(),qt=new Set(X.toks(q));
+ if(nw<=6&&/(^| )(gmail|jimail|email|e mail|mail|ইমেইল|ইমেল|জিমেইল|জিমেল|মেইল)( |$)/.test(nq)&&!/(কোড|code|পেমেন্ট|payment|বিকাশ|bkash|নগদ|nagad|অর্ডার|order|পাসওয়ার্ড|password|লগইন|login)/.test(nq)){aMem('',null);return aAns(T('আকানোর ইমেইল: help.akano@gmail.com। কোনো সমস্যা বা প্রশ্ন থাকলে এখানে লিখতে পারেন।','Akano\u2019s email: help.akano@gmail.com. You can write to us here for any problem or question.'),[['mail','ইমেইল করুন','Email us']])}
+  const X=kbIndex(),qt=new Set(X.toks(q));
  const K={c:/(কমিক|comic|komik)/.test(nq)||qt.has('g6'),v:/(ভিডিও|video|vidio|অ্যানিমেটেড|animated|পর্ব|episode|সিরিজ|series)/.test(nq)||qt.has('g5')||qt.has('g4'),h:/(ক্যারেক্টার|character|চরিত্র|caractar)/.test(nq)||qt.has('g7')};
  h=aPersonal(nq,qt,K);if(h){aMem('',null);return h}
- const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(X.words(q).length<=2||/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
+ const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
  let E=ent[0]||null;if(!E&&follow&&AIC.ent&&(RX.price.test(nq)||nw<=3))E=AIC.ent;
  h=aCatalog(q,nq,qt,K,ent,nw,E);if(h){aMem('',E&&E.sc>=.6?E:null);return h}
  let sc=kbScore(q),top=sc[0];
- if((!top||top.sc<.42)&&follow&&AIC.q){const s2=kbScore(AIC.q+' '+q);if(s2[0]&&s2[0].sc>=.5&&s2[0].sc>(top?top.sc:0)+.1){sc=s2;top=s2[0]}}
- const best=top&&(top.sc>=.42||(top.sc>=.33&&(!sc[1]||top.sc-sc[1].sc>=.07)))?top:null;
+ if((!top||top.sc<.5)&&follow&&AIC.q){const s2=kbScore(AIC.q+' '+q);if(s2[0]&&s2[0].sc>=.5&&s2[0].sc>(top?top.sc:0)+.1){sc=s2;top=s2[0]}}
+ const best=top&&(top.sc>=.5||(top.sc>=.4&&(!sc[1]||top.sc-sc[1].sc>=.1)))?top:null;
  if(ent.length&&(!best||ent[0].sc>=best.sc+.15)){
   const e0=ent[0];aMem('',e0);
   return `<div data-sayt>${aEsc(e0.sc>=.75?aEntFact(e0):T('এগুলো পেয়েছি:','I found these:'))}</div>${aCardsH(ent)}`}
