@@ -1802,11 +1802,10 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
+body .aiw .ai-card,body .aiw .ai-card.on{border:0!important;box-shadow:none!important;background:#f1ebea!important;color:#2b1f1e!important;outline:0!important}
+body .aiw .ai-card:active,body .aiw .ai-card.on{background:#e8dedc!important}
 .vc.big .vact,.vc.big .vact k-n.cmn,.vc.big .vact .ic{color:#fff!important}
-/* dark mode: black background, white text */
-html.dk{filter:invert(1) hue-rotate(180deg);background:#fff}
-html.dk img,html.dk video,html.dk iframe,html.dk canvas,html.dk picture,html.dk #bn,html.dk .vc.big,html.dk .adg,html.dk #v,html.dk #vp{filter:invert(1) hue-rotate(180deg)}
-html.dk :is(#bn,.vc.big,.adg,#v,#vp) :is(img,video,iframe,canvas,picture){filter:none}
+
 .hy .hy-cic .ic{width:30px;height:30px;color:#fff;fill:currentColor}
 k-n.cmn{display:inline-block!important;position:static!important;margin:0 0 0 5px!important;font-size:inherit;font-weight:600;line-height:1;color:inherit;font-style:normal;overflow:visible!important;-webkit-line-clamp:unset!important;order:0!important}
 k-n.cmn:empty{display:none!important}
@@ -1899,6 +1898,12 @@ html.spo,html.spo body{overflow:hidden}
 .sp-h button{border:0;background:transparent;color:#e10600;font-weight:600;font-size:13px;cursor:pointer}
 .sp-card{background:#fff4f3;border:1.5px solid #ffd2cf;border-radius:18px;padding:14px 16px;margin:10px 0 6px;line-height:1.65;font-size:15px;color:#2b1210}
 .sp-ld,.sp-no{text-align:center;color:#777;padding:28px 0;margin:0}
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -2073,8 +2078,6 @@ function renderNavigation(){
 renderNavigation();
 langObserver.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']});
 applyLanguage(document.body);
-const akTheme=on=>{const m=document.querySelector('meta[name=theme-color]');if(m){if(!m.dataset.o)m.dataset.o=m.content;m.content=on?'#000000':m.dataset.o}};
-try{if(localStorage.akDk==='1'){document.documentElement.classList.add('dk');akTheme(true)}}catch{}
 $('#sq').innerHTML=ic('search');const openHs=()=>{const q=$('#hq');if(!q)return false;const b=q.closest('.sb');if(b)b.hidden=false;if(!q._hb){q._hb=1;q.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==q&&!q.value.trim()&&b)b.hidden=true},400));q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();q.dispatchEvent(new Event('input'));q.blur()}})}window.scrollTo(0,0);setTimeout(()=>q.focus(),30);return true};
 /* ===== Full-screen search page (YouTube style) ===== */
 const SPH={get(){try{return JSON.parse(localStorage.akSh||'[]').filter(x=>typeof x==='string')}catch{return[]}},set(a){try{localStorage.akSh=JSON.stringify(a.slice(0,12))}catch{}},add(q){q=String(q||'').trim();if(!q)return;this.set([q,...this.get().filter(x=>x.toLowerCase()!==q.toLowerCase())])}};
@@ -2197,7 +2200,6 @@ async function settings(){
    ${row('face',T('ক্যারেক্টার','Characters'),'chars')}
    ${row('flame',T('আমার ব্যাজ','My Badges'),'badges')}
    ${row('eye',T('দেখা ও পড়ার ইতিহাস','Watch & read history'),'history')}
-   <button type=button class=st-row data-dk>${ic(document.documentElement.classList.contains('dk')?'sun':'moon')}<span>${T('ডার্ক মোড','Dark mode')}</span><em>${document.documentElement.classList.contains('dk')?T('চালু','On'):T('বন্ধ','Off')}</em>${ic('chev')}</button>
    <button class="st-row" id=stDs type=button>${ic('dl')}<span>${T('ডেটা সেভার','Data saver')}</span><i class="st-sw${DS()?' on':''}" role=switch aria-checked="${DS()}"></i></button>
   </div>
   <div class=st-g>
@@ -2441,7 +2443,7 @@ function faq(){
    <div class=ai-cards>
     <button type=button class=ai-card id=aiCardFaq>${ic('help')}<b>${T('প্রশ্নোত্তর','FAQ')}</b></button>
     <button type=button class=ai-card id=aiCardVoice>${ic('mic')}<b>${T('ভয়েস মোড','Voice Mode')}</b></button>
-    <button type=button class=ai-card data-ask="${esc(sug)}">${ic('shelf')}<b>${T('কেনার নিয়ম','How to buy')}</b></button>
+    <button type=button class=ai-card data-ask="${esc(sug)}"><svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M6 8h12l1.2 12H4.8L6 8z"/><path d="M9 8V7a3 3 0 016 0v1"/></svg><b>${T('কেনার নিয়ম','How to buy')}</b></button>
    </div>
    <div class=ai-in>
     <div class=ai-r1><i class=ai-mini></i><input id=asq maxlength=200 placeholder="${T('Fragiks-কে জিজ্ঞেস করুন...','Chat with Fragiks')}" aria-label="${T('প্রশ্ন','Question')}"></div>
@@ -2710,7 +2712,6 @@ function library(){
 function toggleFav(el){const[t,id]=el.dataset.fav.split(':'),a=fav[t],i=a.indexOf(id);i<0?a.push(id):a.splice(i,1);LS.set('akFav',fav);document.querySelectorAll('[data-fav="'+el.dataset.fav+'"]').forEach(x=>x.classList.toggle('on',i<0));if($('#favp'))favs()}
 const siteClick=e=>{
  const fv=e.target.closest('[data-fav]');if(fv){toggleFav(fv);return}
- const dkb=e.target.closest('[data-dk]');if(dkb){e.preventDefault();const on=document.documentElement.classList.toggle('dk');try{localStorage.akDk=on?'1':'0'}catch{}akTheme(on);const em=dkb.querySelector('em');if(em)em.textContent=on?T('চালু','On'):T('বন্ধ','Off');const sv=dkb.querySelector('svg');if(sv)sv.outerHTML=ic(on?'sun':'moon');return}
  const vsh=e.target.closest('[data-vsh]');if(vsh){e.preventDefault();const x=vds.find(y=>y.id===vsh.dataset.vsh);if(x)shareCard({title:x.title,sub:owner(x),img:x.thumb});return}
  const vcm=e.target.closest('[data-vcm]');if(vcm){e.preventDefault();openComments('v',vcm.dataset.vcm);return}
  const ccm=e.target.closest('[data-ccm]');if(ccm){e.preventDefault();const[ck,...cr]=(ccm.dataset.ccm||'').split(':');openComments(ck,cr.join(':'));return}
