@@ -1802,6 +1802,12 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
+.vc .mt2 .vact,.card .mt .vact{width:auto;min-width:30px;padding:0 6px;border-radius:16px}
+.cmn{font-size:12px;font-weight:600;margin-left:3px;font-style:normal}.cmn:empty{display:none}
+html:has(#m.on),html:has(#m.on) body{overflow:hidden!important}
+#m.on,.mb.cmx{overscroll-behavior:contain}
+.mb.cmx{overflow:hidden!important}
+.cmx .cm-l{flex:1 1 0;min-height:36vh;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 .mb.cmx{background:#fff!important;color:#111!important;box-shadow:none!important;filter:none!important;border:0!important;display:flex!important;flex-direction:column;min-height:74vh;max-height:92vh;width:min(94vw,560px)}
 .mb.cmx .cx{background:transparent!important;color:#111!important;box-shadow:none!important}
 .cmx .cm-top{display:flex;align-items:baseline;gap:10px;margin:0 0 2px}.cmx .cm-top b{font-size:21px;font-weight:700;color:#111}.cmx .cm-top small{color:#6b6b6b;font-size:14px}
@@ -2111,6 +2117,12 @@ async function spRender(commit){const q=$('#spq'),L=$('#spl');if(!q||!L)return;c
 function spOpen(){spBuild();const d=$('#sp'),q=$('#spq');if(!d)return;d.hidden=false;spOn=true;document.documentElement.classList.add('spo');try{history.pushState({sp:1},'')}catch{}q.value='';$('#spx').hidden=true;spHome();setTimeout(()=>q.focus(),60)}
 function spClose(pop){const d=$('#sp');if(!d||!spOn)return;spOn=false;spTok++;d.hidden=true;document.documentElement.classList.remove('spo');if(!pop){try{if(history.state&&history.state.sp)history.back()}catch{}}}
 $('#sq').onclick=()=>spOpen();
+
+let CMC={};
+const cmPaint=()=>{document.querySelectorAll('[data-cmk]').forEach(b=>{const n=CMC[b.dataset.cmk]||0,t=n>0?bn(n):'';if(b.textContent!==t)b.textContent=t})};
+async function cmLoad(){try{CMC=(await cache('cmc',async()=>{const r=await getDoc(D('commentCounts','all'));return (r.exists()&&r.data().c)||{}},6e5))||{};cmPaint()}catch{}}
+setTimeout(cmLoad,1200);
+try{let tm=0;new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(cmPaint,60)}).observe(document.body,{childList:true,subtree:true})}catch{}
 const cmKey=(k,r)=>{const h=[...String(r)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7).toString(36);return k+'_'+(/^[\w-]{3,60}$/.test(r)?r:h)};
 const cmAgo=t=>{const d=Math.max(0,(Date.now()-t)/1000);if(d<60)return T('এইমাত্র','just now');if(d<3600)return bn(Math.floor(d/60))+T(' মিনিট আগে',' min ago');if(d<86400)return bn(Math.floor(d/3600))+T(' ঘণ্টা আগে',' h ago');return bn(Math.floor(d/86400))+T(' দিন আগে',' d ago')};
 
@@ -2120,7 +2132,7 @@ async function loadAdminCm(){const box=$('#cma');if(!box)return;box.innerHTML='<
   const vl=(lsRead('videos')||{}).list||vds||[],nm=id=>{const k=id.slice(0,1),r=id.slice(2);if(k==='v'){const x=vl.find(y=>y.id===r);return x?x.title:'ভিডিও · '+r}if(k==='c'){const x=(comics||{})[r];return x?x.title:'কমিকস · '+r}return id};
   box.innerHTML=docs.length?docs.map(d=>`<div class=cmg><h4>${esc(nm(d.id))} <small>(${bn(d.l.length)})</small></h4>${[...d.l].sort((a,b)=>(b.t||0)-(a.t||0)).map(c=>`<div class=al><span><b>${esc(c.n)}</b> · ${cmAgo(c.t||0)}<br>${esc(c.m)}</span><button type=button data-cmdel="${esc(d.id)}|${esc(c.t)}">মুছুন</button></div>`).join('')}</div>`).join(''):'<p class=note>এখনো কোনো মন্তব্য নেই।</p>';
   box.onclick=async e=>{const b=e.target.closest('[data-cmdel]');if(!b)return;const[did,t]=b.dataset.cmdel.split('|'),d=docs.find(x=>x.id===did);if(!d||!confirm('এই মন্তব্যটি মুছবেন?'))return;
-   try{await setDoc(D('comments',did),{l:d.l.filter(c=>String(c.t)!==t)});loadAdminCm()}catch{alert('মুছা যায়নি—Firestore Rules পরীক্ষা করুন')}}
+   try{await setDoc(D('comments',did),{l:d.l.filter(c=>String(c.t)!==t)});setDoc(D('commentCounts','all'),{c:{[did]:increment(-1)}},{merge:true}).catch(()=>{});loadAdminCm()}catch{alert('মুছা যায়নি—Firestore Rules পরীক্ষা করুন')}}
  }catch{box.innerHTML='<p class=note>মন্তব্য আনা যায়নি—Firestore Rules পরীক্ষা করুন।</p>'}}
 async function openComments(kind,ref){
  let title='';if(kind==='v'){const x=vds.find(y=>y.id===ref);title=x?x.title:''}else if(kind==='c'){const x=(comics||{})[ref];title=x?x.title:''}else title=ref;
@@ -2132,7 +2144,7 @@ async function openComments(kind,ref){
   if($('#cmc'))$('#cmc').textContent=list.length?bn(list.length):'';
   const a=[...list].sort((x,y)=>(y.t||0)-(x.t||0)).slice(0,60);
   L.innerHTML=a.length?a.map(c=>{const nm=String(c.n||'?');return `<div class=cm-i><span class=cm-av style="background:${AVC[hc(nm)%AVC.length]}">${esc(nm.trim().charAt(0).toUpperCase())}</span><div class=cm-b><div class=cm-m><span>@${esc(nm)}</span><i>·</i><span>${cmAgo(c.t||0)}</span>${adm?`<button type=button class=cm-x data-cmx="${esc(c.t)}" aria-label="Delete">${ic('x')}</button>`:''}</div><p>${esc(c.m||'')}</p></div></div>`}).join(''):`<p class=cm-e>${T('এখনো কোনো মন্তব্য নেই। প্রথম মন্তব্য আপনি করুন!','No comments yet. Be the first!')}</p>`};
- $('#cml').onclick=async e=>{const x=e.target.closest('[data-cmx]');if(!x||!adm)return;const t=x.dataset.cmx;const nl=list.filter(c=>String(c.t)!==t);try{await setDoc(D('comments',key),{l:nl});list=nl;draw()}catch{}};
+ $('#cml').onclick=async e=>{const x=e.target.closest('[data-cmx]');if(!x||!adm)return;const t=x.dataset.cmx;const nl=list.filter(c=>String(c.t)!==t);try{await setDoc(D('comments',key),{l:nl});list=nl;draw();CMC[key]=Math.max(0,(CMC[key]||0)-1);cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(-1)}},{merge:true}).catch(()=>{})}catch{}};
  $('#cmp').onclick=async()=>{const n=$('#cmn').value.trim().replace(/\s+/g,' ').slice(0,24),m=$('#cmt').value.trim().slice(0,300),em=$('#cme'),bad=x=>{em.textContent=x};
   if($('#cmh').value)return;
   if(n.length<2)return bad(T('নাম লিখুন (কমপক্ষে ২ অক্ষর)।','Enter a name (at least 2 characters).'));
@@ -2143,7 +2155,7 @@ async function openComments(kind,ref){
   if(hist.length>=8)return bad(T('এক ঘণ্টায় অনেক মন্তব্য করেছেন, পরে আবার চেষ্টা করুন।','Too many comments, try again later.'));
   if(list.length>=300)return bad(T('এখানে আর মন্তব্য নেওয়া যাচ্ছে না।','Comments are full here.'));
   const b=$('#cmp');b.disabled=true;bad('');const en={n,m,t:now};
-  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}$('#cmt').value='';draw()}
+  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;CMC[key]=(CMC[key]||0)+1;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(1)}},{merge:true}).catch(()=>{});try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}$('#cmt').value='';draw()}
   catch{bad(T('পোস্ট করা যায়নি, পরে আবার চেষ্টা করুন।','Could not post. Try again later.'))}
   b.disabled=false};
  try{const r=await getDoc(D('comments',key));list=r.exists()&&Array.isArray(r.data().l)?r.data().l:[]}catch{err=true}
@@ -2201,12 +2213,13 @@ async function viewHistory(){
  let vl=(lsRead('videos')||{}).list||[];
  if(!vl.length&&Object.keys(LS.get('akVpos',{})).length){try{const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});vl=d.list||[]}catch{}}
  if(!vds.length)vds=[...vl].sort(byT);
+ if(Object.values(prog).some(a=>a&&a.k==='f')&&(!comics||!Object.keys(comics).length)){try{const cl=await list('comics');comics=Object.fromEntries(cl.map(x=>[x.id,x]))}catch{}}
  $('#app').innerHTML=`<div class="sec hy"><div class=st-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>${T('দেখা ও পড়ার ইতিহাস','Watch & read history')}</h1><span class=st-c style="visibility:hidden"></span></div><div id=hy></div></div>`;
  const draw=()=>{const nw=nowT(),vp=LS.get('akVpos',{}),
   vi=Object.entries(vp).map(([id,r])=>({id,r,x:vl.find(y=>y.id===id)})).filter(o=>o.x&&o.r&&o.r.d).sort((a,b)=>(b.r.at||0)-(a.r.at||0)),
   ci=Object.entries(prog).map(([key,a])=>({key,a})).filter(o=>o.a&&o.a.p>0&&o.a.p<o.a.n-1&&(o.a.k==='f'||(lib[o.a.ref]&&lib[o.a.ref].e>nw))).sort((x,y)=>(y.a.at||0)-(x.a.at||0));
   const vR=o=>`<div class=hy-row><button type=button class=hy-m data-vid="${esc(o.id)}"><span class=hy-th>${o.x.thumb?`<img src="${esc(o.x.thumb)}" alt="" loading=lazy>`:''}<i>${ic('tri')}</i></span><span class=hy-t><b>${esc(o.x.title)}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round(o.r.p/o.r.d*100))}%"></i></span><small>${fm(o.r.p)} / ${fm(o.r.d)}</small></span></button><button type=button class=hy-x data-hyx="v:${esc(o.id)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`;
-  const cR=o=>{const a=o.a,cv=a.k==='f'?(comics[a.ref]&&comics[a.ref].cover):(lib[a.ref]&&lib[a.ref].cv);return `<div class=hy-row><button type=button class=hy-m data-cont="${esc(a.k)}:${esc(a.ref)}"><span class=hy-th>${cv?`<img src="${esc(cv)}" alt="" loading=lazy>`:''}<i>${ic('book')}</i></span><span class=hy-t><b>${esc(a.t||'')}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%"></i></span><small>${T('পেজ','Page')} ${bn(a.p+1)}/${bn(a.n)}</small></span></button><button type=button class=hy-x data-hyx="c:${esc(o.key)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`};
+  const cR=o=>{const a=o.a,cv=a.k==='f'?(comics[a.ref]&&comics[a.ref].cover):(lib[a.ref]&&lib[a.ref].cv);return `<div class=hy-row><button type=button class=hy-m data-cont="${esc(a.k)}:${esc(a.ref)}"><span class=hy-th>${cv?`<img src="${esc(cv)}" alt="" loading=lazy>`:''}</span><span class=hy-t><b>${esc(a.t||'')}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%"></i></span><small>${T('পেজ','Page')} ${bn(a.p+1)}/${bn(a.n)}</small></span></button><button type=button class=hy-x data-hyx="c:${esc(o.key)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`};
   $('#hy').innerHTML=(vi.length||ci.length)?(vi.length?`<h3 class=hy-h>${T('ভিডিও ও মুভি','Videos & movies')}</h3>${vi.map(vR).join('')}`:'')+(ci.length?`<h3 class=hy-h>${T('কমিকস','Comics')}</h3>${ci.map(cR).join('')}`:'')+`<button type=button class=hy-clr data-hyclr>${T('সব ইতিহাস মুছুন','Clear all history')}</button>`:`<p class="ld emp e-soon">${T('এখনো অসমাপ্ত কিছু নেই। কোনো ভিডিও বা কমিকস মাঝপথে থামালে এখানে দেখাবে।','Nothing in progress yet. Anything you stop halfway will show up here.')}</p>`};
  draw();
  $('#hy').addEventListener('click',e=>{const x=e.target.closest('[data-hyx]'),c=e.target.closest('[data-hyclr]');if(!x&&!c)return;e.stopPropagation();
@@ -2274,9 +2287,9 @@ const favBtn=(t,id)=>`<button type=button class="favb${fav[t].includes(id)?' on'
 const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=>{const[t,id]=b.dataset.fav.split(':');toggleFav(b);b.querySelector('span').textContent=favLbl(t,id)});
 const isSer=c=>c.type==='series'&&c.series;
 const orB=x=>x.orig?'<span class=orb>অরিজিনাল</span>':(x.cover?'<span class="orb cr">ক্রিয়েটর</span>':'');
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><img src="${esc(x.cover)}" loading=lazy alt="">${orB(x)}<b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)}<span class=vact role=button tabindex=0 data-ccm="c:${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}</span></span></button>`;
+const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><img src="${esc(x.cover)}" loading=lazy alt="">${orB(x)}<b>${esc(x.title)}</b><span class=mt>${isNew(x)?'<em>নতুন</em> · ':''}${isSer(x)?'পর্ব '+bn(x.ep||1):'ওয়ানশট'}</span><span class=mt>${f?'<u>ফ্রি</u>':bn(x.price)+' টাকা'}</span><span class=mt>${ic('eye')}${bn(x.views||0)}<span class=vact role=button tabindex=0 data-ccm="c:${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}<b class=cmn data-cmk="${cmKey('c',x.id)}"></b></span></span></button>`;
 function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.series])return;seen[c.series]=1;out.push({ser:c.series,top:c,eps:l.filter(x=>isSer(x)&&x.series===c.series)})}else out.push({one:c})});return out}
-const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${orB({orig:e.some(x=>x.orig)?1:0,cover:1})}<b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)}<span class=vact role=button tabindex=0 data-ccm="s:${esc(g.ser)}" aria-label="মন্তব্য">${icf('msg')}</span></span></button>`};
+const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${orB({orig:e.some(x=>x.orig)?1:0,cover:1})}<b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)}<span class=vact role=button tabindex=0 data-ccm="s:${esc(g.ser)}" aria-label="মন্তব্য">${icf('msg')}<b class=cmn data-cmk="${cmKey('s',g.ser)}"></b></span></span></button>`};
 const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
@@ -2458,7 +2471,7 @@ function vPgUpd(id){const r=LS.get('akVpos',{})[id];document.querySelectorAll('.
 const vPgH=x=>{const r=LS.get('akVpos',{})[x.id];return r?`<i class=vpg style="width:${Math.min(100,Math.round(r.p/r.d*100))}%"></i>`:''};
 const owner=x=>'@'+(String(x&&x.owner||'').trim().replace(/^@+/,'')||'akano');
 const vCat=x=>x.cat||(x.series?'series':'video'),vCatL=x=>({series:T('অ্যানিমেটেড সিরিজ','Animated Series'),movie:T('অ্যানিমেটেড মুভি','Animated Movie'),video:T('ভিডিও','Video')})[vCat(x)];
-const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-k="${vCat(x)}" data-q="${esc((x.title+' '+(x.desc||'')+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${orB(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${vCat(x)!=='video'?`<span class=vcat>${vCatL(x)}</span>`:''}${ic('eye')}${bn(vv[x.id]||0)}<span class=vact role=button tabindex=0 data-vsh="${esc(x.id)}" aria-label="শেয়ার">${ic('share')}</span><span class=vact role=button tabindex=0 data-vcm="${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}</span><span class=ow>${esc(owner(x))}</span></span></button>`;
+const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-k="${vCat(x)}" data-q="${esc((x.title+' '+(x.desc||'')+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${orB(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${vCat(x)!=='video'?`<span class=vcat>${vCatL(x)}</span>`:''}${ic('eye')}${bn(vv[x.id]||0)}<span class=vact role=button tabindex=0 data-vsh="${esc(x.id)}" aria-label="শেয়ার">${ic('share')}</span><span class=vact role=button tabindex=0 data-vcm="${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}<b class=cmn data-cmk="${cmKey('v',x.id)}"></b></span><span class=ow>${esc(owner(x))}</span></span></button>`;
 const vSerCard=g=>{const e=g.eps,t=e[0];return `<button class=vc data-series="${esc(g.ser)}" data-k="series" data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><div class=th>${t.thumb?`<img src="${esc(t.thumb)}" loading=lazy alt="">`:''}<span class=pl>${ic('tri')}</span>${e.some(x=>x.orig)?orB({orig:1}):''}</div><b>${esc(g.ser)}</b><span class=mt2>সিরিজ · ${bn(e.length)} পর্ব<span class=ow>${esc(owner(t))}</span></span></button>`};
 const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
 async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
