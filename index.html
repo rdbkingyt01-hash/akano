@@ -1802,6 +1802,8 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
+.hy .hy-cic .ic{width:30px;height:30px;color:#fff;fill:currentColor}
+.vc .mt2 .vact .cmn,.card .mt .vact .cmn{font-size:11px;font-weight:600;margin-left:3px;line-height:1}
 .vc .mt2 .vact,.card .mt .vact{width:auto;min-width:30px;padding:0 6px;border-radius:16px}
 .cmn{font-size:12px;font-weight:600;margin-left:3px;font-style:normal}.cmn:empty{display:none}
 html:has(#m.on),html:has(#m.on) body{overflow:hidden!important}
@@ -2118,9 +2120,9 @@ function spOpen(){spBuild();const d=$('#sp'),q=$('#spq');if(!d)return;d.hidden=f
 function spClose(pop){const d=$('#sp');if(!d||!spOn)return;spOn=false;spTok++;d.hidden=true;document.documentElement.classList.remove('spo');if(!pop){try{if(history.state&&history.state.sp)history.back()}catch{}}}
 $('#sq').onclick=()=>spOpen();
 
-let CMC={};
-const cmPaint=()=>{document.querySelectorAll('[data-cmk]').forEach(b=>{const n=CMC[b.dataset.cmk]||0,t=n>0?bn(n):'';if(b.textContent!==t)b.textContent=t})};
-async function cmLoad(){try{CMC=(await cache('cmc',async()=>{const r=await getDoc(D('commentCounts','all'));return (r.exists()&&r.data().c)||{}},6e5))||{};cmPaint()}catch{}}
+let CMC={},CML=false;
+const cmPaint=()=>{document.querySelectorAll('[data-cmk]').forEach(b=>{const n=CMC[b.dataset.cmk]||0,t=CML?bn(n):'';if(b.textContent!==t)b.textContent=t})};
+async function cmLoad(){try{CMC=(await cache('cmc',async()=>{const r=await getDoc(D('commentCounts','all'));return (r.exists()&&r.data().c)||{}},6e5))||{};CML=true;cmPaint()}catch{}}
 setTimeout(cmLoad,1200);
 try{let tm=0;new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(cmPaint,60)}).observe(document.body,{childList:true,subtree:true})}catch{}
 const cmKey=(k,r)=>{const h=[...String(r)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7).toString(36);return k+'_'+(/^[\w-]{3,60}$/.test(r)?r:h)};
@@ -2155,10 +2157,10 @@ async function openComments(kind,ref){
   if(hist.length>=8)return bad(T('এক ঘণ্টায় অনেক মন্তব্য করেছেন, পরে আবার চেষ্টা করুন।','Too many comments, try again later.'));
   if(list.length>=300)return bad(T('এখানে আর মন্তব্য নেওয়া যাচ্ছে না।','Comments are full here.'));
   const b=$('#cmp');b.disabled=true;bad('');const en={n,m,t:now};
-  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;CMC[key]=(CMC[key]||0)+1;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(1)}},{merge:true}).catch(()=>{});try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}$('#cmt').value='';draw()}
+  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;CML=true;CMC[key]=(CMC[key]||0)+1;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(1)}},{merge:true}).catch(()=>{});try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}$('#cmt').value='';draw()}
   catch{bad(T('পোস্ট করা যায়নি, পরে আবার চেষ্টা করুন।','Could not post. Try again later.'))}
   b.disabled=false};
- try{const r=await getDoc(D('comments',key));list=r.exists()&&Array.isArray(r.data().l)?r.data().l:[]}catch{err=true}
+ try{const r=await getDoc(D('comments',key));list=r.exists()&&Array.isArray(r.data().l)?r.data().l:[];if((CMC[key]||0)!==list.length){CMC[key]=list.length;CML=true;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:list.length}},{merge:true}).catch(()=>{})}}catch{err=true}
  draw()}
 
 
@@ -2213,13 +2215,12 @@ async function viewHistory(){
  let vl=(lsRead('videos')||{}).list||[];
  if(!vl.length&&Object.keys(LS.get('akVpos',{})).length){try{const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});vl=d.list||[]}catch{}}
  if(!vds.length)vds=[...vl].sort(byT);
- if(Object.values(prog).some(a=>a&&a.k==='f')&&(!comics||!Object.keys(comics).length)){try{const cl=await list('comics');comics=Object.fromEntries(cl.map(x=>[x.id,x]))}catch{}}
  $('#app').innerHTML=`<div class="sec hy"><div class=st-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>${T('দেখা ও পড়ার ইতিহাস','Watch & read history')}</h1><span class=st-c style="visibility:hidden"></span></div><div id=hy></div></div>`;
  const draw=()=>{const nw=nowT(),vp=LS.get('akVpos',{}),
   vi=Object.entries(vp).map(([id,r])=>({id,r,x:vl.find(y=>y.id===id)})).filter(o=>o.x&&o.r&&o.r.d).sort((a,b)=>(b.r.at||0)-(a.r.at||0)),
   ci=Object.entries(prog).map(([key,a])=>({key,a})).filter(o=>o.a&&o.a.p>0&&o.a.p<o.a.n-1&&(o.a.k==='f'||(lib[o.a.ref]&&lib[o.a.ref].e>nw))).sort((x,y)=>(y.a.at||0)-(x.a.at||0));
   const vR=o=>`<div class=hy-row><button type=button class=hy-m data-vid="${esc(o.id)}"><span class=hy-th>${o.x.thumb?`<img src="${esc(o.x.thumb)}" alt="" loading=lazy>`:''}<i>${ic('tri')}</i></span><span class=hy-t><b>${esc(o.x.title)}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round(o.r.p/o.r.d*100))}%"></i></span><small>${fm(o.r.p)} / ${fm(o.r.d)}</small></span></button><button type=button class=hy-x data-hyx="v:${esc(o.id)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`;
-  const cR=o=>{const a=o.a,cv=a.k==='f'?(comics[a.ref]&&comics[a.ref].cover):(lib[a.ref]&&lib[a.ref].cv);return `<div class=hy-row><button type=button class=hy-m data-cont="${esc(a.k)}:${esc(a.ref)}"><span class=hy-th>${cv?`<img src="${esc(cv)}" alt="" loading=lazy>`:''}</span><span class=hy-t><b>${esc(a.t||'')}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%"></i></span><small>${T('পেজ','Page')} ${bn(a.p+1)}/${bn(a.n)}</small></span></button><button type=button class=hy-x data-hyx="c:${esc(o.key)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`};
+  const cR=o=>{const a=o.a,cv=a.k==='f'?(comics[a.ref]&&comics[a.ref].cover):(lib[a.ref]&&lib[a.ref].cv);return `<div class=hy-row><button type=button class=hy-m data-cont="${esc(a.k)}:${esc(a.ref)}"><span class="hy-th hy-cic">${icf('panels')}</span><span class=hy-t><b>${esc(a.t||'')}</b><span class=hy-bar><i style="width:${Math.min(100,Math.round((a.p+1)/a.n*100))}%"></i></span><small>${T('পেজ','Page')} ${bn(a.p+1)}/${bn(a.n)}</small></span></button><button type=button class=hy-x data-hyx="c:${esc(o.key)}" aria-label="${T('সরান','Remove')}">${ic('x')}</button></div>`};
   $('#hy').innerHTML=(vi.length||ci.length)?(vi.length?`<h3 class=hy-h>${T('ভিডিও ও মুভি','Videos & movies')}</h3>${vi.map(vR).join('')}`:'')+(ci.length?`<h3 class=hy-h>${T('কমিকস','Comics')}</h3>${ci.map(cR).join('')}`:'')+`<button type=button class=hy-clr data-hyclr>${T('সব ইতিহাস মুছুন','Clear all history')}</button>`:`<p class="ld emp e-soon">${T('এখনো অসমাপ্ত কিছু নেই। কোনো ভিডিও বা কমিকস মাঝপথে থামালে এখানে দেখাবে।','Nothing in progress yet. Anything you stop halfway will show up here.')}</p>`};
  draw();
  $('#hy').addEventListener('click',e=>{const x=e.target.closest('[data-hyx]'),c=e.target.closest('[data-hyclr]');if(!x&&!c)return;e.stopPropagation();
