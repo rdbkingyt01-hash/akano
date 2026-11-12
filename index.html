@@ -2242,7 +2242,7 @@ const ic=n=>`<svg class=ic viewBox="0 0 24 24" fill=none stroke=currentColor str
 Object.assign(I,{plus:I.plus||'<path d="M12 5v14M5 12h14"/>',wifioff:'<path d="M2 8.8a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16.1a5 5 0 017 0"/><circle cx="12" cy="19.5" r=".9"/><path d="M3 3l18 18"/>',imgph:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 5"/>'});
 const DEFAULT_LOGO='data:image/png;base64,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';
 const setLT=()=>{const b=document.getElementById('langToggle');if(b)b.innerHTML=ic('globe');const t=language==='en'?'বাংলা ভাষায় দেখুন':'View in English';b.setAttribute('aria-label',t);b.title=t};
-const IX_SHARE='<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>';
+
 const IF={flame:'<path d="M12 2.6c.9 3.6 5.3 5.5 5.3 10.7a5.3 5.3 0 01-10.6 0c0-2 .9-3.5 2.1-4.4.1 1.8 1 2.8 2.2 3-.6-3.6-.5-6.5 1-9.3z"/>',
 home:'<path d="M12 2.7 2.7 11a1 1 0 00.7 1.8H5V20a1.3 1.3 0 001.3 1.3h3.2v-5.1h5v5.1h3.2A1.3 1.3 0 0019 20v-7.2h1.6a1 1 0 00.7-1.8z"/>',
 play:'<path fill-rule="evenodd" d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM10 8.2c0-.7.8-1.1 1.4-.7l4.6 3.1c.5.3.5 1 0 1.4l-4.6 3.1c-.6.4-1.4 0-1.4-.7z"/>',
@@ -2336,7 +2336,7 @@ function renderNavigation(){
 renderNavigation();
 langObserver.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']});
 applyLanguage(document.body);
-$('#sq').innerHTML=ic('search');const openHs=()=>{const q=$('#hq');if(!q)return false;const b=q.closest('.sb');if(b)b.hidden=false;if(!q._hb){q._hb=1;q.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==q&&!q.value.trim()&&b)b.hidden=true},400));q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();q.dispatchEvent(new Event('input'));q.blur()}})}window.scrollTo(0,0);setTimeout(()=>q.focus(),30);return true};
+$('#sq').innerHTML=ic('search');
 /* ===== Full-screen search page (YouTube style) ===== */
 const SPH={get(){try{return JSON.parse(localStorage.akSh||'[]').filter(x=>typeof x==='string')}catch{return[]}},set(a){try{localStorage.akSh=JSON.stringify(a.slice(0,12))}catch{}},add(q){q=String(q||'').trim();if(!q)return;this.set([q,...this.get().filter(x=>x.toLowerCase()!==q.toLowerCase())])}};
 let spOn=false,spTok=0,spD=0,spSd=null;
@@ -2397,14 +2397,7 @@ try{let tm=0;new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(cmPaint,60
 const cmKey=(k,r)=>{const h=[...String(r)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7).toString(36);return k+'_'+(/^[\w-]{3,60}$/.test(r)?r:h)};
 const cmAgo=t=>{const d=Math.max(0,(Date.now()-t)/1000);if(d<60)return T('এইমাত্র','just now');if(d<3600)return bn(Math.floor(d/60))+T(' মিনিট আগে',' min ago');if(d<86400)return bn(Math.floor(d/3600))+T(' ঘণ্টা আগে',' h ago');return bn(Math.floor(d/86400))+T(' দিন আগে',' d ago')};
 
-async function loadAdminCm(){const box=$('#cma');if(!box)return;box.innerHTML='<p class=note>লোড হচ্ছে...</p>';
- if($('#cmrf'))$('#cmrf').onclick=loadAdminCm;
- try{const sn=await getDocs(collection(db,'comments')),docs=sn.docs.map(d=>({id:d.id,l:Array.isArray(d.data().l)?d.data().l:[]})).filter(x=>x.l.length);
-  const vl=(lsRead('videos')||{}).list||vds||[],nm=id=>{const k=id.slice(0,1),r=id.slice(2);if(k==='v'){const x=vl.find(y=>y.id===r);return x?x.title:'ভিডিও · '+r}if(k==='c'){const x=(comics||{})[r];return x?x.title:'কমিকস · '+r}return id};
-  box.innerHTML=docs.length?docs.map(d=>`<div class=cmg><h4>${esc(nm(d.id))} <small>(${bn(d.l.length)})</small></h4>${[...d.l].sort((a,b)=>(b.t||0)-(a.t||0)).map(c=>`<div class=al><span><b>${esc(c.n)}</b> · ${cmAgo(c.t||0)}<br>${esc(c.m)}</span><button type=button data-cmdel="${esc(d.id)}|${esc(c.t)}">মুছুন</button></div>`).join('')}</div>`).join(''):'<p class=note>এখনো কোনো মন্তব্য নেই।</p>';
-  box.onclick=async e=>{const b=e.target.closest('[data-cmdel]');if(!b)return;const[did,t]=b.dataset.cmdel.split('|'),d=docs.find(x=>x.id===did);if(!d||!confirm('এই মন্তব্যটি মুছবেন?'))return;
-   try{await setDoc(D('comments',did),{l:d.l.filter(c=>String(c.t)!==t)});setDoc(D('commentCounts','all'),{c:{[did]:increment(-1)}},{merge:true}).catch(()=>{});loadAdminCm()}catch{alert('মুছা যায়নি—Firestore Rules পরীক্ষা করুন')}}
- }catch{box.innerHTML='<p class=note>মন্তব্য আনা যায়নি—Firestore Rules পরীক্ষা করুন।</p>'}}
+
 async function openComments(kind,ref){
  let title='';if(kind==='v'){const x=vds.find(y=>y.id===ref);title=x?x.title:''}else if(kind==='c'){const x=(comics||{})[ref];title=x?x.title:''}else title=ref;
  const key=cmKey(kind,ref),AVC=['#8e24aa','#00897b','#1e88e5','#e53935','#f4511e','#6d4c41','#3949ab','#43a047'];let list=[],err=false;
@@ -2472,20 +2465,18 @@ async function settings(){
   </div>
   <div class=st-g>
    ${pwaBtn()?`<button class=st-row id=pwaI type=button>${ic('dl')}<span>${T('অ্যাপ ইনস্টল করুন','Install app')}</span>${ic('chev')}</button>`:''}
-   <button class=st-row id=ad type=button>${ic('lock')}<span>${T('অ্যাডমিন লগইন','Admin Login')}</span>${ic('chev')}</button>
   </div>
  </div>`;
  $('#stLang').onclick=()=>setLanguage(language==='en'?'bn':'en');
  $('#stDs').onclick=()=>{LS.set('akDS',!DS());document.documentElement.classList.toggle('ds',DS());settings()};
- $('#ad').onclick=()=>openAdmin();
 }
 // ---------- পেজ ----------
 /* ===== Akano Plus (মাসিক সাবস্ক্রিপশন) ===== */
 let PRE=(()=>{try{return JSON.parse(localStorage.akPre||'null')||{}}catch{return{}}})(),SUBX=null;
 const isPrem=()=>!!PRE.e&&PRE.e>Math.max(Date.now(),PRE.l||0); const dl=()=>Math.max(0,Math.ceil(((+PRE.e||0)-Math.max(Date.now(),PRE.l||0))/864e5));
 const preSave=()=>{try{if(PRE.e)localStorage.akPre=JSON.stringify(PRE);else localStorage.removeItem('akPre')}catch{}};
-function subInit(){if(SUBX)return SUBX;const a=initializeApp(cfg,'sub');SUBX={au:getAuth(a),db:initializeFirestore(a,{experimentalAutoDetectLongPolling:true})};return SUBX}
-async function subLoad(u){const x=subInit(),r=await getDoc(doc(x.db,'subs',u.uid)),d=r.exists()?r.data():null;PRE={u:u.uid,e:d&&d.status==='active'?(+d.exp||0):0,at:Date.now()};preSave();return d}
+
+
 async function preSync(){if(PRE.u){PRE={};preSave();return}if(!PRE.e)return;PRE.l=Math.max(Date.now(),PRE.l||0);
  if(PRE.c&&Date.now()-(PRE.k||0)>864e5){try{const r=await getDoc(doc(db,'codes',PRE.c));let dv='';try{await au.authStateReady();dv=(au.currentUser&&au.currentUser.uid)||''}catch{}
   if(!r.exists())PRE={};else{const c=r.data(),[cd,ca]=String(c.device||'').split('_');if(!c.device||cd!==dv)PRE={};else{const at=c.at&&c.at.toMillis?c.at.toMillis():+ca||0;if(at)PRE.e=at+(+c.days||30)*864e5;PRE.k=Date.now()}}}catch{}}
@@ -2527,14 +2518,14 @@ async function viewPremium(){
   else if(step==='new'){h=`<div class=pw-pg>${topb()}<div class=pw-card><h2 class=pw-h2>${T('প্লাসে আপগ্রেড করুন','Upgrade to Plus')}</h2><p class=pw-s2>${P.l} · ${P.p} ${T('/ মাস','/ month')}</p><form class=pw-form id=sf autocomplete=on>
 <label class=pw-l>${T('আপনার তথ্য','Your details')}</label><input name=name placeholder="${T('পুরো নাম','Full name')}" maxlength=60 required autocomplete=name>
 <div class=pw-2><input name=phone placeholder="${T('ফোন / ওয়ালেট নম্বর','Phone / wallet no.')}" maxlength=30 required autocomplete=tel><input name=whatsapp type=tel inputmode=tel placeholder="${T('হোয়াটসঅ্যাপ নম্বর','WhatsApp no.')}" maxlength=30></div>
-<input name=email type=email placeholder="${T('ইমেইল (ঐচ্ছিক)','Email (optional)')}" maxlength=120 autocomplete=email>
+<input name=email type=email placeholder="${T('Gmail / ইমেইল (কোড এখানে পাঠানো হবে)','Gmail / Email (your code is sent here)')}" maxlength=120 required autocomplete=email>
 <label class=pw-l>${T('পেমেন্টের মাধ্যম','Payment method')}</label><div class=pw-tls>${mt(P)}</div><input name=trx placeholder="${T('ট্রানজেকশন আইডি (পেমেন্টের পর, ঐচ্ছিক)','Transaction ID (after payment, optional)')}" maxlength=60>
 <input name=website tabindex=-1 autocomplete=off aria-hidden=true style="position:absolute;left:-9999px"><button class=pw-sub>${T('আবেদন জমা দিন','Submit application')}</button>${note()}<p class=pw-n id=pm></p></form></div><button type=button class=pw-lk data-step=code>${T('অ্যাক্টিভেশন কোড আছে? এখানে দিন','Have an activation code? Enter it')}</button></div>`}
   else if(step==='done'){h=`<div class=pw-pg>${topb()}<div class=pw-card><h2 class=pw-h2>${T('আবেদন জমা হয়েছে','Application submitted')}</h2><p class=pw-s2>${T('এটি আপনার রেফারেন্স পাস। সংরক্ষণ করে রাখুন।','This is your reference pass. Keep it safe.')}</p><div class=pw-pass><b>${esc(ref)}</b><button type=button data-copy>${T('কপি','Copy')}</button></div><p class=pw-n>${T('পেমেন্ট যাচাই হলে অ্যাডমিন আপনাকে একটি অ্যাক্টিভেশন কোড দেবেন। আমাদের Gmail-এ যোগাযোগ করার সময় এই পাস জানালে আপনার আবেদন চেনা যাবে।','Once payment is verified the admin will give you an activation code. When you contact us on Gmail, quote this pass so we can identify your application.')}</p><a class="pw-alt pw-gm" href="mailto:help.akano@gmail.com?subject=${encodeURIComponent('Akano Plus - '+ref)}&body=${encodeURIComponent('Reference pass: '+ref)}">${T('Gmail-এ যোগাযোগ করুন','Contact us on Gmail')}</a></div><button type=button class="pw-sub pw-go" data-step=code>${T('কোড দিয়ে অ্যাক্টিভেট করুন','Activate with code')}</button></div>`}
   else if(step==='code'){h=`<div class=pw-pg>${topb()}<div class=pw-card><h2 class=pw-h2>${T('অ্যাক্টিভেশন কোড','Activation code')}</h2><p class=pw-s2>${T('অ্যাডমিনের দেওয়া কোডটি এখানে লিখুন।','Enter the code the admin gave you.')}</p><form class=pw-form id=cf autocomplete=off><input name=code placeholder="${T('কোড','Code')}" maxlength=20 required autocapitalize=characters autocomplete=off style="text-transform:uppercase;letter-spacing:.12em;font-weight:700"><button class=pw-sub>${T('অ্যাক্টিভেট করুন','Activate')}</button><p class=pw-n id=pm></p></form></div></div>`}
   else{const ck='<svg viewBox="0 0 24 24" fill=none stroke=#ff3b30 stroke-width=3 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M5 12.5l4.2 4.2L19 7"/></svg>',pc=(k,n,sub,pr)=>`<button type=button class="pw-pc${reg===k?' on':''}" data-reg=${k}><span class=pw-pl2><b>${n}</b><small>${sub}</small></span><span class=pw-pr2><b>${pr}</b><small>${T(bn(DY())+' দিনের প্ল্যান',DY()+'-day plan')}</small></span></button>`;
    const pls=PLS(),cur=Math.min(pi,pls.length-1),chips=pls.length>1?`<div class=pw-chs>${pls.map((p,i)=>{const bs=pls[0],pr=reg==='BD'?p.b:p.i,bp=reg==='BD'?bs.b:bs.i,off=i?Math.round(100-(pr/p.d)/(bp/bs.d)*100):0;return `<button type=button class="pw-ch${i===cur?' on':''}" data-pi=${i}>${T(bn(p.d)+' দিন',p.d+' days')}${off>0?`<small>-${T(bn(off),off)}%</small>`:''}</button>`}).join('')}</div>`:'';
-   h=`<div class=pw-dk><button type=button class=pw-x data-back aria-label="Close"><svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.4 stroke-linecap=round aria-hidden=true><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class=pw-dm>${cp.img?`<img src="${esc(cp.img)}" alt="" loading=lazy>`:''}</div><div class=pw-sh>${pc('BD',T('বাংলাদেশ','Bangladesh'),'bKash · Nagad · Rocket',T('৳'+bn(fm(pbd()))+' / মাস','৳'+fm(pbd())+' / month'))}${pc('INT',T('আন্তর্জাতিক','International'),'PayPal · Wise · Card',T('$'+bn(fm(pin()))+' / মাস','$'+fm(pin())+' / month'))}${chips}<button type=button class=pw-go2 data-step=new>${T('আপগ্রেড করুন · '+P.p,'Upgrade · '+P.p)}</button><div class=pw-fl><button type=button data-ben>${T('প্লাসের সুবিধা জানুন','What Plus includes')}</button><button type=button data-step=code>${T('অ্যাক্টিভেশন কোড আছে?','Have a code?')}</button>${ref?`<button type=button data-step=done>${T('আমার আবেদনের পাস','My application pass')}</button>`:''}</div></div></div>`}
+   h=`<div class=pw-dk><button type=button class=pw-x data-back aria-label="Close"><svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.4 stroke-linecap=round aria-hidden=true><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class=pw-dm>${cp.img?`<img src="${esc(cp.img)}" alt="" loading=lazy>`:''}</div><div class=pw-sh>${pc('INT',T('আন্তর্জাতিক','International'),'PayPal · Wise · Card',T('$'+bn(fm(pin()))+' / মাস','$'+fm(pin())+' / month'))}${pc('BD',T('বাংলাদেশ','Bangladesh'),'bKash · Nagad · Rocket',T('৳'+bn(fm(pbd()))+' / মাস','৳'+fm(pbd())+' / month'))}${chips}<button type=button class=pw-go2 data-step=new>${T('আপগ্রেড করুন · '+P.p,'Upgrade · '+P.p)}</button><div class=pw-fl><button type=button data-ben>${T('প্লাসের সুবিধা জানুন','What Plus includes')}</button><button type=button data-step=code>${T('অ্যাক্টিভেশন কোড আছে?','Have a code?')}</button>${ref?`<button type=button data-step=done>${T('আমার আবেদনের পাস','My application pass')}</button>`:''}</div></div></div>`}
   box.innerHTML=h;
   [...box.querySelectorAll('form [name]')].forEach(el=>{if(el.type==='radio'){if(sv[el.name]!=null)el.checked=sv[el.name]===el.value}else if(sv[el.name]!=null)el.value=sv[el.name]});
   const msg=t=>{const m=$('#pm');if(m)m.textContent=t},busy=b=>{const x=box.querySelector('form .pw-sub');if(x)x.disabled=b},fd=f=>Object.fromEntries(new FormData(f));
@@ -2559,35 +2550,13 @@ async function viewPremium(){
  };
  draw()}
 /* ----- admin: সাবস্ক্রিপশন তালিকা ও ডাউনলোড ----- */
-const sbDate=t=>{if(!t)return'—';const d=new Date(t),q=n=>String(n).padStart(2,'0');return q(d.getDate())+'/'+q(d.getMonth()+1)+'/'+d.getFullYear()};
-const csvCell=v=>{let t=String(v==null?'':v);if(/^[=+\-@\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};
-const sbRow=d=>[d.name,d.email,d.phone,d.whatsapp,d.cur,d.amount,d.method,d.trx||'',d.status,d.exp?sbDate(d.exp):'',sbDate(d.t),d.rtrx||'',d.rmethod||'',d.rt?sbDate(d.rt):''];
-function csvDl(rows,name){const h=['Name','Email','Phone','WhatsApp','Currency','Amount','Method','TrxID','Status','Expiry','Applied','Renewal TrxID','Renewal Method','Renewal Date'],b=new Blob(['\ufeff'+[h,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},600)}
-async function pwSave(p){const cur=(await getDoc(D('site','premium'))).data()||{},d={...cur,...p,t:Date.now()};await setDoc(D('site','premium'),d);try{cacheSet('prem',d)}catch{}return d}
-let SBT=0;async function subBadge(force){if(!force&&Date.now()-SBT<6e4)return;SBT=Date.now();try{const r=await getCountFromServer(query(collection(db,'subapps'),where('status','==','pending'))),n=r.data().count,bt=document.querySelector('#atabs button[data-tab=sub]');if(bt){const o=bt.querySelector('.nb');if(o)o.remove();if(n){const i=document.createElement('i');i.className='nb';i.textContent=bn(n);bt.appendChild(i)}}}catch{}}
-async function loadAdminSubs(){const box=$('#sba');if(!box)return;box.innerHTML='<p class=note>লোড হচ্ছে...</p>';
- try{const c0=await dat('site','premium')||{};if($('#pwi'))$('#pwi').value=c0.img||'';if($('#pwt'))$('#pwt').value=c0.title||'';if($('#pws'))$('#pws').value=c0.sub||'';if($('#pwbd'))$('#pwbd').value=c0.pbd||99;if($('#pwin'))$('#pwin').value=c0.pint||0.8;if($('#pwdy'))$('#pwdy').value=c0.days||30;(c0.ex||[]).forEach((p,j)=>{const k=j+2;if($('#pxd'+k)){$('#pxd'+k).value=p.d;$('#pxb'+k).value=p.b;$('#pxi'+k).value=p.i}})}catch{}
-  if($('#pwpr'))$('#pwpr').onclick=async()=>{const m=$('#pwm'),bd=parseFloat($('#pwbd').value),it=parseFloat($('#pwin').value),dy=parseInt($('#pwdy').value,10);if(!(bd>0)||!(it>0)||!(dy>0)){m.textContent='প্রথম প্ল্যানের তিনটি ঘরেই সঠিক সংখ্যা দিন';return}
-   const ex=[];for(const k of['2','3']){const v=['#pxd','#pxb','#pxi'].map(i=>$(i+k).value),d=parseInt(v[0],10),b=parseFloat(v[1]),i=parseFloat(v[2]);if(d>0&&b>0&&i>0)ex.push({d:Math.min(d,3650),b:Math.round(b),i:Math.round(i*100)/100});else if(v.some(Boolean)){m.textContent='অতিরিক্ত প্ল্যানের তিনটি ঘরই পূরণ করুন, নয়তো সব খালি রাখুন';return}}
-   try{await pwSave({pbd:Math.round(bd),pint:Math.round(it*100)/100,days:Math.min(dy,3650),ex});m.textContent='দাম ও প্ল্যান সেভ হয়েছে ✓'}catch{m.textContent='সেভ হয়নি—Firestore Rules পরীক্ষা করুন'}};
- if($('#pwsv'))$('#pwsv').onclick=async()=>{const img=($('#pwi').value||'').trim(),m=$('#pwm');if(img&&!/^https:\/\//i.test(img)){m.textContent='ছবির লিংক https:// দিয়ে শুরু হতে হবে';return}const d={img:img.slice(0,600),title:($('#pwt').value||'').trim().slice(0,60),sub:($('#pws').value||'').trim().slice(0,120),t:Date.now()};try{await pwSave(d);m.textContent='সেভ হয়েছে ✓'}catch{m.textContent='সেভ হয়নি—Firestore Rules পরীক্ষা করুন'}};
- try{const sn=await getDocs(collection(db,'subapps'));let L=sn.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.t||0)-(a.t||0));
-  const waL=x=>{let n=String(x.whatsapp||x.phone||'').replace(/\D/g,'');if(!n||!x.code)return'';if(/^01\d{9}$/.test(n))n='88'+n;return'https://wa.me/'+n+'?text='+encodeURIComponent('Akano Plus অ্যাক্টিভেশন কোড: '+x.code+'\nপাস: '+(x.ref||x.id)+(x.days?'\nমেয়াদ: '+x.days+' দিন':'')+'\nPlus পেজে "অ্যাক্টিভেশন কোড আছে?" চেপে কোডটি দিন।')};
-  const st=x=>x.status||'pending',LB={coded:'কোড দেওয়া হয়েছে',pending:'অপেক্ষায়',cancelled:'বাতিল'};
-  const draw=f=>{f=(f||'').trim().toLowerCase();const V=L.filter(x=>!f||[x.name,x.email,x.phone,x.whatsapp,x.trx,x.ref,x.code,x.method].join(' ').toLowerCase().includes(f)),c={coded:0,pending:0};L.forEach(x=>{const s=st(x);if(c[s]!==undefined)c[s]++});
-   box.innerHTML=`<div class=ahd><h3>সাবস্ক্রিপশন (${bn(L.length)})</h3><button type=button class=btn id=sbdl>সব CSV ডাউনলোড</button></div><p class=note>অপেক্ষায় ${bn(c.pending)} · কোড দেওয়া হয়েছে ${bn(c.coded)}</p><input class=asr id=sbq placeholder="নাম, ইমেইল, ফোন বা ট্রানজেকশন আইডি..." value="${esc(f)}">`+(V.length?V.map(x=>{const s=st(x);return `<div class=sbc><div class=sbh><b>${esc(x.name||'')}</b><span class="sbt s-${s}">${LB[s]||s}</span></div><p>পাস: <b>${esc(x.ref||x.id)}</b>${x.email?' · '+esc(x.email):''}</p><p>${esc(x.phone||'')}${x.whatsapp?' · WA: '+esc(x.whatsapp):''}</p><p>${esc(String(x.amount||''))} ${esc(x.cur||'')} · ${esc(x.method||'')}${x.trx?' · Trx: '+esc(x.trx):''}</p><p>আবেদন: ${sbDate(x.t)}${x.days?' · '+bn(x.days)+' দিন':''}</p>${x.code?`<p class=sbr>কোড: <b>${esc(x.code)}</b></p>`:''}${x.rtrx?`<p class=sbr>নবায়ন: ${esc(x.rtrx)} · ${esc(x.rmethod||'')} · ${sbDate(x.rt)}</p>`:''}<div class=sba><button type=button data-sb="act|${esc(x.id)}">${x.code?'কোড দেখুন':'কোড তৈরি করুন'}</button>${x.code?`<button type=button data-sb="mv|${esc(x.id)}">ডিভাইস বদলান</button>`+(waL(x)?`<a class=sbw href="${waL(x)}" target=_blank rel=noopener>WhatsApp</a>`:''):''}<button type=button data-sb="dl|${esc(x.id)}">ডাউনলোড</button><button type=button data-sb="can|${esc(x.id)}">বাতিল</button><button type=button data-sb="del|${esc(x.id)}">মুছুন</button></div></div>`}).join(''):'<p class=note>কেউ নেই।</p>');
-   $('#sbq').oninput=e=>{draw(e.target.value);const q=$('#sbq');q.focus();q.setSelectionRange(q.value.length,q.value.length)};
-   $('#sbdl').onclick=()=>csvDl(V.map(sbRow),'akano-subscribers-'+Date.now()+'.csv')};
-  draw('');subBadge(true);
-  box.onclick=async e=>{const b=e.target.closest('[data-sb]');if(!b)return;const[a,id]=b.dataset.sb.split('|'),x=L.find(y=>y.id===id);if(!x)return;
-   try{
-    if(a==='dl'){csvDl([sbRow(x)],'akano-subscriber-'+(String(x.name||'user').replace(/[^\w\u0980-\u09FF-]+/g,'_'))+'.csv');return}
-    if(a==='act'){let code=x.code;if(!code){const pd=await dat('site','premium')||{},dyc=+x.days||+pd.days||30;if(!confirm(dyc+' দিনের প্লাস কোড তৈরি করবেন?'))return;const al='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>al[b%32]).join('');await setDoc(D('codes',code),{prem:true,days:dyc,ref:id,comicId:'prem',t:Date.now()});await updateDoc(D('subapps',id),{status:'coded',code,ct:Date.now()})}prompt('এই কোডটি কপি করে ব্যবহারকারীকে দিন (পাস: '+id+'):',code)}
-    else if(a==='mv'){const r=await getDoc(D('codes',x.code));if(!r.exists()){alert('কোড পাওয়া যায়নি');return}const c=r.data();if(!c.device){alert('এই কোড এখনো কোনো ডিভাইসে ব্যবহার হয়নি।');return}const at=c.at&&c.at.toMillis?c.at.toMillis():+String(c.device).split('_')[1]||0,rem=Math.ceil((+c.days||30)-(Date.now()-at)/864e5);if(rem<=0){alert('এই কোডের মেয়াদ শেষ।');return}if(!confirm('ডিভাইস বদলাবেন? বাকি মেয়াদ '+rem+' দিন। আগের ফোনে Plus বন্ধ হয়ে যাবে।'))return;await setDoc(D('codes',x.code),{prem:true,days:rem,ref:id,comicId:'prem',t:c.t||Date.now()});alert('হয়ে গেছে। ব্যবহারকারী নতুন ফোনে একই কোড দিলে বাকি '+rem+' দিন চলবে।')}
-    else if(a==='can'){if(!confirm('সাবস্ক্রিপশন বাতিল করবেন?'))return;if(x.code){try{await deleteDoc(D('codes',x.code))}catch{}}await updateDoc(D('subapps',id),{status:'cancelled'})}
-    else if(a==='del'){if(!confirm('এই রেকর্ড মুছে ফেলবেন?'))return;await deleteDoc(D('subapps',id))}
-    loadAdminSubs()}catch{alert('সম্পন্ন করা যায়নি—Firestore Rules পরীক্ষা করুন')}}
- }catch{box.innerHTML='<p class=note>তালিকা আনা যায়নি—Firestore Rules এ subapps অংশ যোগ করুন।</p>'}}
+
+
+
+
+
+
+
 
 async function viewHistory(){
  const p2=n=>String(n).padStart(2,'0'),fm=t=>{t=Math.max(0,Math.floor(t||0));const h=Math.floor(t/3600),m=Math.floor(t%3600/60),c=t%60;return bn((h?h+':'+p2(m):m)+':'+p2(c))};
@@ -2649,8 +2618,7 @@ function setLanguage(next){
  language=next==='bn'?'bn':'en';try{localStorage.akLang=language}catch{}
  document.documentElement.lang=language;setLT();
  renderNavigation();bnSet(currentRoute);applyLanguage(document.body);
- if(location.hash==='#admin'){if(adm&&me)panel();else login()}
- else if(V[currentRoute])go(currentRoute);
+ if(V[currentRoute])go(currentRoute);
 }
 setLT();
 $('#langToggle').onclick=()=>setLanguage(language==='en'?'bn':'en');
@@ -2672,15 +2640,9 @@ function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.s
 const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${orB({orig:e.some(x=>x.orig)?1:0,cover:1})}<b>${esc(g.ser)}</b><span class=mt>${e.some(isNew)?'<em>নতুন</em> · ':''}সিরিজ · ${bn(e.length)} পর্ব</span><span class=mt>${fc===e.length?'<u>ফ্রি</u>':fc?'কিছু পর্ব ফ্রি':bn(mp)+' টাকা থেকে'}</span><span class=mt>${ic('eye')}${bn(views)}<span class=vact role=button tabindex=0 data-ccm="s:${esc(g.ser)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('s',g.ser)}"></k-n></span></span></button>`};
 const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
-function typer(el){const W=['দেশি ফিকশন'],seg=x=>window.Intl?.Segmenter?[...new Intl.Segmenter('bn',{granularity:'grapheme'}).segment(x)].map(y=>y.segment):[...x];
- if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=W[0];return}
- let w=0,i=0,d=0,g=seg(W[0]);
- const step=()=>{if(!el.isConnected)return;
-  if(!d){i++;el.textContent=g.slice(0,i).join('');if(i>=g.length){d=1;tw=setTimeout(step,1600)}else tw=setTimeout(step,90);return}
-  i--;el.textContent=g.slice(0,i).join('');if(i<=0){d=0;w=(w+1)%W.length;g=seg(W[w]);tw=setTimeout(step,300)}else tw=setTimeout(step,45)};
- step()}
+
 const chCard=(x,g)=>{const lk=chLocked(x);return `<button class="chc${lk?' lk':''}" data-ch="${esc(x.id)}" data-s="${esc(x.series||'অন্যান্য')}" data-q="${esc(lk?'???':(x.name+' '+(x.series||'')+' '+(x.app||'')).toLowerCase())}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${lk?'':esc(x.name)}"><span class=chc-in><b>${lk?'???':esc(x.name)}</b>${lk?`<small>${T('লক করা','Locked')}</small>`:((g?x.app:(x.app||x.series))?`<small>${esc(g?x.app:(x.app||x.series))}</small>`:'')}</span></button>`};
-const contBtn=()=>{const nw=nowT(),a=Object.values(prog).filter(x=>x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];return a?`<button class=btn data-cont="${a.k}:${esc(a.ref)}">${ic('book')}পড়া চালিয়ে যান: ${esc(a.t)} (পেজ ${bn(a.p+1)}/${bn(a.n)})</button>`:''};
+
 async function home(){
  const thisRoute=routeVersion;
   $('#app').innerHTML=`<div class="sec hf"><div class=hh><small>${T('স্বাগতম','Welcome')}</small><h1>${T('আজ কী দেখবেন?','What to watch today?')}</h1></div><div class=sb id=hsb hidden>${ic('search')}<input id=hq type=search placeholder="${T('ভিডিও খুঁজুন...','Search videos...')}" autocomplete=off aria-label="${T('ভিডিও খুঁজুন','Search videos')}"></div><div id=sr></div><div id=sv><div class="sk skhero" style="margin-top:6px"></div>${skVid()}</div></div>`;
@@ -2855,16 +2817,9 @@ const owner=x=>'@'+(String(x&&x.owner||'').trim().replace(/^@+/,'')||'akano');
 const vCat=x=>x.cat||(x.series?'series':'video'),vCatL=x=>({series:T('অ্যানিমেটেড সিরিজ','Animated Series'),movie:T('অ্যানিমেটেড মুভি','Animated Movie'),video:T('ভিডিও','Video')})[vCat(x)];
 const vCard=x=>`<button class=vc data-vid="${esc(x.id)}" data-k="${vCat(x)}" data-q="${esc((x.title+' '+(x.desc||'')+' '+(x.series||'')).toLowerCase())}"${x.orig?' data-o=1':''}><div class=th>${x.thumb?`<img src="${esc(x.thumb)}" loading=lazy alt="">`:''}<span class="pl${vLk(x)?' lk':''}">${ic(vLk(x)?'lock':'tri')}</span>${vBadge(x)}${orB(x)}${vPgH(x)}${x.dur?`<em>${vFmt(x.dur)}</em>`:''}</div><b>${esc(x.title)}</b><span class=mt2>${vCat(x)!=='video'?`<span class=vcat>${vCatL(x)}</span>`:''}${ic('eye')}${bn(vv[x.id]||0)}<span class=vact role=button tabindex=0 data-vsh="${esc(x.id)}" aria-label="শেয়ার">${ic('share')}</span><span class=vact role=button tabindex=0 data-vcm="${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('v',x.id)}"></k-n></span><span class=ow>${esc(owner(x))}</span></span></button>`;
 const vSerCard=g=>{const e=g.eps,t=e[0];return `<button class=vc data-series="${esc(g.ser)}" data-k="series" data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}"${e.some(x=>x.orig)?' data-o=1':''}><div class=th>${t.thumb?`<img src="${esc(t.thumb)}" loading=lazy alt="">`:''}<span class=pl>${ic('tri')}</span>${e.some(x=>x.orig)?orB({orig:1}):''}</div><b>${esc(g.ser)}</b><span class=mt2>সিরিজ · ${bn(e.length)} পর্ব<span class=ow>${esc(owner(t))}</span></span></button>`};
-const vmParse=u=>{u=String(u||'').trim();const m=u.match(/vimeo\.com\/(?:.*\/)?(\d{6,})(?:\/([a-z0-9]+))?/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([a-z0-9]+)/i);if(q)h=q[1];return{vid:m[1],h}};
-async function vimeoMeta(u){try{const r=await tmo(fetch('https://vimeo.com/api/oembed.json?url='+encodeURIComponent(u)+'&width=1280'));if(!r.ok)throw 0;const j=await r.json();return{title:j.title,thumb:String(j.thumbnail_url||'').replace(/_\d+x\d+/,'_640'),dur:j.duration}}catch{return{}}}
-const vdPub=x=>{if(!(+x.price>0))return x;const{vid,h,...r}=x;return r},
-vdGet=async()=>{let x=null;try{x=await getDoc(D('vsecure','list'))}catch{}
- if(x&&x.exists())return x.data().list||[];
- const p=await getDoc(D('site','videos')),l=p.exists()?(p.data().list||[]):[];
- if(l.length)vdSave(l).catch(()=>{});
- return l},
-vdSave=async l=>{try{await setDoc(D('vsecure','list'),{list:l,t:Date.now()})}catch(e){if(!(e?.code==='permission-denied'&&!l.some(x=>+x.price>0)))throw new Error('Firestore Rules এ vsecure অংশ যোগ করতে হবে (কোডের শুরুর নিয়মগুলো দেখুন)')}
- await setDoc(D('site','videos'),{list:l.map(vdPub),t:Date.now()})};
+
+
+
 async function videos(){
  const thisRoute=routeVersion;
  const d=await cache('videos',async()=>(await dat('site','videos'))||{list:[]});
@@ -2881,11 +2836,11 @@ var vSaver=null;
 // ---------- বিজ্ঞাপন (Vimeo) দেখে খোলা ----------
 const vimeoRef=u=>{u=String(u||'').trim();if(!u)return null;const m=u.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([0-9a-f]+))?/i)||u.match(/^(\d{6,})(?:[\/:]([0-9a-f]+))?$/i);if(!m)return null;let h=m[2]||'';const q=u.match(/[?&]h=([0-9a-f]+)/i);if(q)h=q[1];return{vid:m[1],h}};
 const adSkip=v=>{v=String(v==null?'':v).trim();if(v==='')return '';const n=+v;return isNaN(n)?'':Math.max(0,Math.min(30,Math.round(n)))};
-const adlParse=t=>String(t||'').split('\n').map(l=>l.split('|').map(x=>x.trim())).map(p=>{const img=/\.(png|jpe?g|webp|gif|avif|svg)(\?[^\s]*)?$/i.test(p[0]||'');const u=img?(/^https:\/\//i.test(p[0])?p[0].slice(0,600):''):adClean(p[0]);return{u,ty:img?'i':'v',t:Math.max(0,Math.min(86400,Math.round(+p[1]||0))),s:img?Math.max(3,Math.min(60,Math.round(+p[2]||5))):adSkip(p[2]),k:/^https?:\/\//i.test(p[3]||'')?p[3].slice(0,600):''}}).filter(a=>a.u).slice(0,10);
-const adlText=a=>(Array.isArray(a)?a:[]).map(x=>[x.u,x.t||0,x.s===undefined?'':x.s,x.k||''].join(' | ').replace(/(\s*\|\s*)+$/,'')).join('\n');
+
+
 const adList=v=>Array.isArray(v&&v.adl)?v.adl.map(a=>({ref:a.ty==='i'?(/^https:\/\//i.test(a.u||'')?{img:a.u}:null):vimeoRef(a.u),t:Math.max(0,Math.round(+a.t||0)),name:'',skip:a.ty==='i'?'':adSkip(a.s),dur:a.ty==='i'?Math.max(3,Math.min(60,+a.s||5)):0,link:/^https?:\/\//i.test(a.k||'')?a.k:''})).filter(a=>a.ref).sort((a,b)=>a.t-b.t):[];
 const adMk=a=>({...a.ref,name:a.name||'',skip:a.skip===''?5:a.skip,dur:a.dur||0,link:a.link||''});
-const adClean=u=>{u=String(u||'').trim();return u&&vimeoRef(u)?u.slice(0,200):''};
+
 const defaultAd=async()=>{try{const a=await cache('ad',async()=>(await dat('site','ad'))||{url:''});const r=vimeoRef(a&&a.url);return r?{...r,name:String(a.name||'').slice(0,60),skip:adSkip(a.skip)}:null}catch{return null}};
 async function adGate(item,key,force){if(isPrem())return true;
  const now=Date.now();
@@ -3056,23 +3011,7 @@ async function characters(){
  let sf='';const apply=()=>{const v=($('#q')?.value||'').trim().toLowerCase();document.querySelectorAll('.chc').forEach(c=>c.hidden=!!((sf&&c.dataset.s!==sf)||!c.dataset.q.includes(v)));document.querySelectorAll('.grp').forEach(g=>g.hidden=!g.querySelector('.chc:not([hidden])'));$('#nf').hidden=!!document.querySelector('.chc:not([hidden])')};
  if($('#q'))$('#q').oninput=apply;if(window.__pf&&$('#q')){$('#q').value=window.__pf;window.__pf='';apply()}
  if($('#chf'))$('#chf').onclick=e=>{const b=e.target.closest('button');if(!b)return;sf=b.dataset.sf;[...$('#chf').children].forEach(x=>x.classList.toggle('on',x===b));apply()}}
-function about(){
- $('#app').innerHTML=`<article class="sec art"><span class=kk>আকানো · Frangowst</span><h1>গল্প বলার ভাষা বদলে দিতে চাই আমরা</h1>
- <p class=lead>আকানো Frangowst-এর একটি উদ্যোগ। আমাদের লক্ষ্য একটাই: বিশ্বের সবচেয়ে বড় পপ কালচার প্রতিষ্ঠান হয়ে ওঠা।</p>
- <h2>স্বপ্নটা বড়, আর সেটাই আমাদের শক্তি</h2>
- <p>মার্ভেল কমিকসের কয়েকটি পাতা থেকে শুরু করে পুরো পৃথিবীর গল্প বলার ধরন বদলে দিয়েছে। আমরা বিশ্বাস করি, বাংলার মাটি থেকেও তেমন একটি জগৎ গড়ে ওঠা সম্ভব। তাই আমরা খোলাখুলি বলি, মার্ভেলের সঙ্গে পাল্লা দেওয়ার স্বপ্ন দেখতে আমরা ভয় পাই না।</p>
- <blockquote>আমরা শুধু গল্প বলতে চাই না, আমরা একটি জগৎ গড়তে চাই।</blockquote>
- <h2>আকানো মানে শুধু কমিকস নয়</h2>
- <p>শিল্প, সংস্কৃতি আর বিনোদন, এই তিন জায়গাতেই আমরা কাজ করতে চাই। কমিকস দিয়ে শুরু হলেও আমাদের যাত্রা সেখানে থেমে থাকবে না। চরিত্র, গল্প, ভিডিও আর ছবি মিলিয়ে ধীরে ধীরে একটি পূর্ণ জগৎ তৈরি হচ্ছে, যেখানে প্রতিটি চরিত্রের নিজস্ব ইতিহাস আছে।</p>
- <h2>কেন দেশি গল্প</h2>
- <p>আমাদের চারপাশে বলার মতো গল্পের অভাব নেই। অভাব ছিল সেই গল্পগুলোকে বিশ্বমানের চেহারা দেওয়ার। আমরা চাই বাংলাদেশের তরুণরা শুধু বিদেশি গল্পের পাঠক হয়ে না থেকে নতুন গল্পের স্রষ্টা হয়ে উঠুক। নিজেদের চরিত্র, নিজেদের নায়ক আর নিজেদের জগৎ নিয়ে গর্ব করার দিন আসছে।</p>
- <h2>আমরা এখন যা করছি</h2>
- <p>ওয়ানশট আর ধারাবাহিক সিরিজ কমিকস প্রকাশ করছি, যার কিছু সবার জন্য বিনামূল্যে, আর কিছু কোড দিয়ে পড়ার জন্য। আকানো জগতের চরিত্রদের পরিচয় তুলে ধরছি, আর ভিডিও ও ঘোষণার মাধ্যমে পাঠকদের সঙ্গে সংযোগ রাখছি।</p>
- <h2>এই যাত্রায় আপনিও আছেন</h2>
- <p>প্রতিটি পাঠক, প্রতিটি রিভিউ আর প্রতিটি শেয়ার আমাদের এগিয়ে যাওয়ার জ্বালানি। কমিকস পড়ুন, রিভিউ দিন, বন্ধুদের জানান, আর আমাদের ফেসবুক গ্রুপে যোগ দিন। পথটা লম্বা, কিন্তু আমরা হাঁটতে শুরু করেছি।</p>
- <div class=btns><button class=btn data-go=comics>কমিকস পড়ো</button><a class="btn ghost" href="https://www.facebook.com/share/g/18VCniWUos/" target=_blank rel=noopener>ফেসবুক গ্রুপে যোগ দিন</a></div>
- <p class=sig>&mdash; আকানো পরিবার</p>
-  <div class=acard><section><small>প্রতিষ্ঠাতা</small><h3>আহমাদ শোয়াইব</h3></section><section><small>উদ্যোগ</small><h3>Frangowst</h3></section><section><small>সহযোগিতায়</small><h3>ব্লু ওক স্টুডিও</h3></section></div></article>`}
+
 function library(){
  const nw=nowT(),pos=LS.get('akVpos',{}),all=Object.entries(lib).map(([c,o])=>({c,o,d:Math.ceil((o.e-nw)/864e5),v:o.k==='v'})).sort((x,y)=>(y.d>0)-(x.d>0)||y.o.e-x.o.e);
  const row=({c,o,d,v})=>{const live=d>0,cls=!live?'end':d>7?'ok':d>2?'warn':'bad',pr=v?pos[o.vid]:prog['c:'+c];
@@ -3186,185 +3125,44 @@ addEventListener('pagehide',()=>live()&&hide(1));addEventListener('pageshow',()=
 
 // ---------- অ্যাডমিন (সাইটের URL এর শেষে #admin দিন) ----------
 const au=getAuth(app);
-const IMGBB='5486f519fe859e46f895428b61090a68';
+
 const D=(c,i)=>doc(db,c,i),all=async c=>(await getDocs(collection(db,c))).docs.map(d=>({id:d.id,...d.data()}));
 const nowT=()=>{let l=0;try{l=+localStorage.akLast||0}catch{}const t=Math.max(Date.now(),l);try{localStorage.akLast=t}catch{}return t};
-const wa=n=>{let d=String(n||'').replace(/[০-৯]/g,c=>'০১২৩৪৫৬৭৮৯'.indexOf(c)).replace(/\D/g,'');if(d.length===11&&d[0]==='0')d='88'+d;return d};
-const chGet=async()=>{const x=await getDoc(D('site','characters'));return x.exists()?(x.data().list||[]):[]},chSave=l=>setDoc(D('site','characters'),{list:l,t:Date.now()});
-const em=u=>{const v=u.trim().toLowerCase();return v.includes('@')?v:v+'@akano-admin.com'},okUser=u=>/^[a-z0-9_.]{3,20}$/i.test(u.trim());
+
+
+
 let me=null,note='',adm=false,auInit=false;
-const aerr=x=>({'auth/too-many-requests':'অনেকবার ভুল হয়েছে, কিছুক্ষণ পর চেষ্টা করুন','auth/operation-not-supported-in-this-environment':'এই ফাইল সরাসরি ফোন থেকে খুললে লগইন চলে না, সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে','auth/operation-not-allowed':'Firebase এ Email/Password সাইন-ইন চালু করা হয়নি','auth/network-request-failed':'ইন্টারনেট সংযোগ নেই','auth/unauthorized-domain':'এই ডোমেইন Firebase এর Authorized domains এ যোগ করা হয়নি','auth/invalid-credential':'ইউজারনেম বা পাসওয়ার্ড ভুল','auth/user-not-found':'ইউজারনেম বা পাসওয়ার্ড ভুল','auth/wrong-password':'ইউজারনেম বা পাসওয়ার্ড ভুল'}[x.code]||'লগইন হয়নি ('+(x.code||'অজানা ত্রুটি')+')');
-const onAuth=async u=>{if(!adm)return;
- if(!u){me=null;return login()}
- let a,er;try{a=await getDoc(D('admins',u.uid))}catch(e){er=e}
- if(!a?.exists()){note=er?.code==='permission-denied'?'Firestore Rules পাবলিশ করা হয়নি':'এই অ্যাকাউন্টের admins ডকুমেন্ট নেই (Document ID = UID মিলিয়ে দেখুন)';await signOut(au);return}
- note='';me={uid:u.uid,...a.data()};panel()};
-function startAdmin(){if(auInit)onAuth(au.currentUser);else{auInit=true;onAuthStateChanged(au,onAuth)}}
-function openAdmin(){adm=true;document.documentElement.classList.add('adm-on');tog(0);$('header').style.display='none';$('footer').style.display='none';scrollTo(0,0);$('#app').innerHTML='<p class=ld>লোড হচ্ছে...</p>';startAdmin()}
-function closeAdmin(){adm=false;document.documentElement.classList.remove('adm-on');$('header').style.display='';$('footer').style.display='';$('#app').onclick=siteClick;go('home')}
 
-function login(){
- $('#app').innerHTML=`<div class=alw><form id=lf class=box><div class=al-logo>${ic('play')}</div><h2>Akano Studio</h2><p class=al-sub>অ্যাডমিন লগইন</p><label class=al-f>${ic('face')}<input name=u placeholder="ইউজারনেম অথবা ইমেইল" autocomplete="username" required></label><label class=al-f>${ic('lock')}<input name=p type=password placeholder="পাসওয়ার্ড" autocomplete="current-password" required><button type=button class=al-eye aria-label="পাসওয়ার্ড দেখান">${ic('eye')}</button></label><button class=btn>লগইন</button><button type=button class=lnk id=hm>সাইটে ফিরুন</button><p id=msg>${esc(note||(/^https?:$/.test(location.protocol)?'':'এই ফাইল সরাসরি ফোন থেকে খোলা হয়েছে (content://)। অ্যাডমিন লগইন করতে হলে সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে।'))}</p></form></div>`;
- {const ey=$('#lf .al-eye');if(ey)ey.onclick=()=>{const i=ey.parentElement.querySelector('input');if(i)i.type=i.type==='password'?'text':'password'}}
- $('#hm').onclick=closeAdmin;
- $('#lf').onsubmit=async e=>{e.preventDefault();const f=e.target;$('#msg').textContent='';
-  try{await signInWithEmailAndPassword(au,em(f.u.value),f.p.value)}
-  catch(x){$('#msg').textContent=aerr(x)}}}
 
-const shrink=(f,w=2400,q=.96)=>new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,w/i.width),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(ok,'image/jpeg',q)};i.src=URL.createObjectURL(f)});
+
+
+
+
+
+
+
 // লোগোর বড় PNG/WebP ফাইল ছোট করে, স্বচ্ছ ব্যাকগ্রাউন্ড বজায় রেখে আপলোড
-const prepareLogo=f=>new Promise((resolve,reject)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{URL.revokeObjectURL(u);const k=Math.min(1,1200/Math.max(i.naturalWidth,i.naturalHeight)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(i.naturalWidth*k));c.height=Math.max(1,Math.round(i.naturalHeight*k));const x=c.getContext('2d');if(!x){reject(new Error('ছবি প্রসেস করা যায়নি'));return}x.drawImage(i,0,0,c.width,c.height);c.toBlob(b=>b?resolve(new File([b],'akano-logo.webp',{type:'image/webp'})):reject(new Error('ছবি ছোট করা যায়নি')),'image/webp',.88)};i.onerror=()=>{URL.revokeObjectURL(u);reject(new Error('এই ছবিটি খোলা যাচ্ছে না। PNG, JPG বা WebP ছবি দিন।'))};i.src=u});
-async function ib(b){const f=new FormData();f.append('image',b);let res;try{res=await fetch('https://api.imgbb.com/1/upload?key='+IMGBB,{method:'POST',body:f});}catch(e){throw new Error('ইন্টারনেট/ImgBB সংযোগ হচ্ছে না। ইন্টারনেট চালু করে আবার চেষ্টা করো।')}let r;try{r=await res.json()}catch(e){throw new Error('ImgBB থেকে সঠিক response আসেনি।')}if(!res.ok||!r.success||!r.data?.url)throw new Error(r.error?.message||('ImgBB upload failed (HTTP '+res.status+'). API key ঠিক আছে কি না দেখো।'));ib.th=r.data.medium?.url||r.data.url;return r.data.url}
-function loadPdf(){return window.pdfjsLib?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=()=>{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';ok()};s.onerror=no;document.head.append(s)})}
-async function pdfPages(file,cb){await loadPdf();const d=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise,out=[];
- for(let i=1;i<=d.numPages;i++){const p=await d.getPage(i),w=p.getViewport({scale:1}).width,vp=p.getViewport({scale:Math.min(2.2,2200/w)}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
-  await p.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;cb(i,d.numPages);
-  const u=await ib(await new Promise(r=>c.toBlob(r,'image/jpeg',.94)));if(i==1)pdfPages.th=ib.th;out.push(u)}
- return out}
 
-function panel(){
- $('#app').innerHTML=`<div class="box adm"><div class=ah><div class=ah-l><span class=ah-logo>${ic('play')}</span><div><h2>Akano Studio</h2><small>স্বাগতম, ${esc(me.name)}</small></div></div><div class=row><button class=lnk id=hm>সাইট দেখুন</button><button class=btn id=lo>লগআউট</button></div></div>
-<div class=stats><div class=st><b id=as1>–</b><span>কমিকস</span><small id=as1b></small></div><div class=st><b id=as2>–</b><span>অর্ডার</span></div><div class=st><b id=as3>–</b><span>অব্যবহৃত কোড</span></div><div class=st><b id=as4>–</b><span>অপেক্ষমাণ রিভিউ</span></div><div class=st><b id=as5>–</b><span>ফ্রি কমিকসের ভিউ</span></div></div>
-<nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=video>ভিডিও</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=cm>মন্তব্য</button><button data-tab=sub>সাবস্ক্রিপশন</button><button data-tab=set>সেটিংস</button></nav>
- <section class=ap data-tab=sub><details class=apd id=pwd><summary>পেওয়ালের ছবি ও লেখা (Plus পেজ)</summary><p class=note>Plus পেজের উপরের ছবি। গ্যালারি থেকে ছবি বাছাই করে আপলোড করুন।</p><input type=file id=pwf accept=\"image/*\"><button type=button class=btn id=pwup>ছবি আপলোড / বদলান</button> <button type=button class=lnk id=pwrm>ছবি সরান</button><label class=pw-l>বাংলাদেশের দাম (৳)</label><input id=pwbd type=number min=1 step=1 inputmode=numeric><label class=pw-l>আন্তর্জাতিক দাম ($)</label><input id=pwin type=number min=0.01 step=0.01 inputmode=decimal><label class=pw-l>প্ল্যানের মেয়াদ (দিন)</label><input id=pwdy type=number min=1 step=1 inputmode=numeric><label class=pw-l>অতিরিক্ত প্ল্যান ২ (ঐচ্ছিক): দিন · ৳ · $</label><div class=pxr><input id=pxd2 type=number min=1 placeholder="দিন"><input id=pxb2 type=number min=1 placeholder="৳"><input id=pxi2 type=number min=0.01 step=0.01 placeholder="$"></div><label class=pw-l>অতিরিক্ত প্ল্যান ৩ (ঐচ্ছিক): দিন · ৳ · $</label><div class=pxr><input id=pxd3 type=number min=1 placeholder="দিন"><input id=pxb3 type=number min=1 placeholder="৳"><input id=pxi3 type=number min=0.01 step=0.01 placeholder="$"></div><button type=button class=btn id=pwpr>দাম ও মেয়াদ সেভ করুন</button><input id=pwi type=hidden><input id=pwt type=hidden><input id=pws type=hidden><button type=button class=btn id=pwsv style=display:none>সেভ</button><p class=note id=pwm></p></details><div id=sba><p class=note>লোড হচ্ছে...</p></div></section>
-  <section class=ap data-tab=cm><div class=ahd><h3>মন্তব্য</h3><button type=button class=btn id=cmrf>রিফ্রেশ</button></div><div id=cma><p class=note>লোড হচ্ছে...</p></div></section>
-  <section class=ap data-tab=comics><details class=apd><summary>নতুন কমিকস যোগ করুন</summary><input id=ct placeholder="শিরোনাম"><input id=cp type=number min=0 placeholder="দাম (টাকা)"><label><input type=checkbox id=fr style="width:auto"> ফ্রি কমিকস (কোড লাগবে না)</label><label><input type=checkbox id=cfh style="width:auto"> হোম পেজে ফিচারড</label><select id=cor><option value="">ক্রিয়েটর কমিকস (পাবলিক)</option><option value=1>অরিজিনাল</option></select>
- <select id=cty><option value=oneshot>ওয়ানশট (একক কমিকস)</option><option value=series>সিরিজ (চলমান, পর্ব আছে)</option></select><input id=csr placeholder="সিরিজের নাম (সিরিজ হলে)"><input id=cep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><input id=ccr placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><label><input type=checkbox id=cadg style="width:auto"> বিজ্ঞাপন দেখে খুলবে (ফ্রি কমিকসে)</label><input id=cadu placeholder="বিজ্ঞাপনের Vimeo লিংক (ফাঁকা বা ভুল হলে ডিফল্ট বিজ্ঞাপন)"><input id=cadn placeholder="বিজ্ঞাপনের নাম (ঐচ্ছিক)"><input id=cads type=number min=0 max=30 placeholder="স্কিপ করা যাবে কত সেকেন্ড পর (০–৩০; ফাঁকা = ডিফল্ট)">
- <label>কভার ছবি (না দিলে প্রথম পেজ কভার হবে)<input type=file id=cv accept="image/*"></label><label>কমিকসের PDF<input type=file id=cf accept="application/pdf"></label><button class=btn id=ca>আপলোড</button><p id=pr></p></details><div class=ahd><h3>কমিকস তালিকা</h3><input class=asr data-for=cl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=cl></div></section>
-<section class=ap data-tab=orders><div class=ahd><h3>অর্ডার</h3><input class=asr data-for=ol placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=ol></div><details class=apd><summary>কোড তৈরি করুন</summary><select id=cs></select><input id=ce type=email placeholder="ক্রেতার ইমেইল (ঐচ্ছিক)"><button class=btn id=cg>কোড তৈরি করুন</button></details><div class=ahd><h3>কোড তালিকা</h3><input class=asr data-for=kl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=kl></div></section>
-<section class=ap data-tab=chars><details class=apd><summary>নতুন ক্যারেক্টার যোগ করুন</summary><input id=chn placeholder="নাম"><input id=chs placeholder="কোন সিরিজ (যেমন: গর্ডেন্স)"><input id=cha placeholder="অ্যাপিয়ারেন্স (যেমন: প্রথম আবির্ভাব, সংখ্যা ১)"><input id=chu placeholder="কোন কমিকস পড়ার পর আনলক হবে (কমিকসের নাম; ঐচ্ছিক, ফাঁকা = সবসময় দেখা যাবে)"><textarea id=chd placeholder="বিবরণ (ঐচ্ছিক)"></textarea><label>ছবি<input type=file id=chi accept="image/*"></label><button class=btn id=chb>ক্যারেক্টার যোগ করুন</button><p id=chm></p></details><div class=ahd><h3>ক্যারেক্টার তালিকা</h3><input class=asr data-for=chl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=chl></div></section>
-<section class=ap data-tab=media><details class=apd><summary>নতুন ঘোষণা / কনটেস্ট</summary><select id=nt><option>ঘোষণা</option><option>কনটেস্ট</option></select><input id=nh placeholder="শিরোনাম (ব্যানারে নামসহ দেখাবে)"><textarea id=nb placeholder="বিস্তারিত লেখা (ঐচ্ছিক)"></textarea><label>ব্যানার ছবি<input type=file id=ni accept="image/*"></label><input id=nk placeholder="লিংক (ঐচ্ছিক, https://...)"><button class=btn id=na>প্রকাশ করুন</button></details><div class=ahd><h3>ঘোষণা / কনটেস্ট</h3></div><div id=nls></div><details class=apd><summary>হোম পোস্ট যোগ করুন</summary><textarea id=gc placeholder="পোস্টের লেখা (ঐচ্ছিক)"></textarea><input id=gk placeholder="লিংক (ঐচ্ছিক, https://...)"><label>ছবি (ঐচ্ছিক — একাধিক দিলে প্রতিটি আলাদা পোস্ট হবে)<input type=file id=gi accept="image/*" multiple></label><button class=btn id=ga>পোস্ট করুন</button><p id=gp></p></details><div class=ahd><h3>হোম পোস্ট</h3></div><div id=gl></div></section>
-<section class=ap data-tab=video><details class=apd><summary>নতুন ভিডিও যোগ করুন (Vimeo)</summary><input id=vl placeholder="Vimeo লিংক (যেমন: https://vimeo.com/123456789)"><input id=vt placeholder="শিরোনাম (না দিলে Vimeo থেকে নেওয়া হবে)"><textarea id=vd placeholder="বর্ণনা (ঐচ্ছিক)"></textarea><input id=vth placeholder="থাম্বনেইল URL (ঐচ্ছিক, না দিলে Vimeo থেকে আসবে)"><input id=vpr type=number min=0 placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><input id=vsr list=vsl placeholder="সিরিজের নাম (ঐচ্ছিক — কমিকস সিরিজের নামও দেওয়া যায়)"><datalist id=vsl></datalist><input id=vep type=number min=1 placeholder="পর্ব নম্বর (সিরিজ হলে)"><select id=vcat><option value=video>ভিডিও (সাধারণ)</option><option value=series>অ্যানিমেটেড সিরিজ</option><option value=movie>অ্যানিমেটেড মুভি</option></select><input id=vow placeholder="ওনারের নাম (যেমন @akano — ফাঁকা থাকলে @akano)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vadg style="width:auto"> বিজ্ঞাপন দেখে চলবে (ফ্রি ভিডিওতে)</label><input id=vadu placeholder="বিজ্ঞাপনের Vimeo লিংক (ফাঁকা বা ভুল হলে ডিফল্ট বিজ্ঞাপন)"><input id=vadn placeholder="বিজ্ঞাপনের নাম (ঐচ্ছিক)"><textarea id=vadl rows=4 placeholder=\"একাধিক বিজ্ঞাপন (প্রতি লাইনে একটি): Vimeo বা ছবির (https) লিংক | ভিডিওর কত সেকেন্ডে চলবে | স্কিপ/ছবি কত সেকেন্ড | ক্লিক লিংক (ঐচ্ছিক)&#10;০ = ভিডিওর আগে। যেমন:&#10;https://vimeo.com/123456 | 0 | 5 | https://example.com&#10;https://example.com/ad.jpg | 120 | 8 | https://example.com\"></textarea><input id=vads type=number min=0 max=30 placeholder="স্কিপ করা যাবে কত সেকেন্ড পর (০–৩০; ফাঁকা = ডিফল্ট)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vor style="width:auto"> আকানো অরিজিনাল</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox id=vf style="width:auto"> হোম পেজে ফিচারড</label><button class=btn id=vb>ভিডিও যোগ করুন</button><p id=vm></p></details><div class=ahd><h3>ভিডিও তালিকা</h3><input class=asr data-for=vls placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=vls></div></section>
-<section class=ap data-tab=rev><div class=ahd><h3>রিভিউ</h3><input class=asr data-for=rvl placeholder="খুঁজুন..." aria-label="খুঁজুন"></div><div id=rvl></div></section>
-<section class=ap data-tab=set><details class=apd><summary>ডিফল্ট বিজ্ঞাপন (Vimeo)</summary><p class=note>যেসব কমিকস/ভিডিওতে “বিজ্ঞাপন দেখে খুলবে” টিক দেওয়া আছে এবং নিজস্ব লিংক নেই, সেগুলোতে এই বিজ্ঞাপন চলবে। বিজ্ঞাপন শুধু ফ্রি কনটেন্টে দেখায়; কেনা/পেইড কনটেন্টে নয়। প্রতি ২০ মিনিট পর পর একটি বিজ্ঞাপন আসবে (খোলার সময়, এবং ভিডিও ২০ মিনিট চলার পরও)।</p><input id=adu0 placeholder="Vimeo লিংক বা আইডি (যেমন https://vimeo.com/123456789)"><input id=adn0 placeholder="বিজ্ঞাপনের নাম (ঐচ্ছিক)"><input id=ads0 type=number min=0 max=30 placeholder="কত সেকেন্ড পর স্কিপ করা যাবে (০–৩০; ফাঁকা = ৫)"><button class=btn id=adsv>সংরক্ষণ</button> <button class=lnk id=adrm>সরান</button><p id=adm></p></details><details class=apd><summary>লোগো</summary><p class=note>হেডারে শুধু আপলোড করা লোগো দেখাবে। PNG, JPG, WebP বা GIF ছবি ব্যবহার করতে পারো। স্বচ্ছ ব্যাকগ্রাউন্ডের জন্য PNG/WebP ভালো।</p><input type=file id=lg accept="image/png,image/webp,image/jpeg,image/gif"><button class=btn id=logoUploadBtn>লোগো আপলোড / বদলান</button> <button class=lnk id=lgd>লোগো সরান</button></details><details class=apd><summary>হোম ব্যানার ছবি</summary><p class=note>“দেশি ফিকশন” লেখার নিচে সোজাভাবে দেখাবে। স্বচ্ছ ব্যাকগ্রাউন্ডের PNG/WebP সবচেয়ে ভালো।</p><input type=file id=hb accept="image/*"><button class=btn id=hbb>ব্যানার আপলোড / বদলান</button> <button class=lnk id=hbd>ব্যানার সরান</button></details><div class=ahd><h3>অ্যাডমিনগণ</h3></div><div id=al></div><details class=apd><summary>নতুন অ্যাডমিন যোগ করুন</summary><input id=an placeholder="নাম (যেমন: সাইফুল)"><input id=au placeholder="ইউজারনেম (ইংরেজি, ৩-২০ অক্ষর)"><input id=ap type=password placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="new-password"><button class=btn id=aa>অ্যাডমিন যোগ করুন</button></details><details class=apd><summary>আমার পাসওয়ার্ড</summary><button class=btn id=pw>পাসওয়ার্ড বদলান</button></details></section></div>`;
- refresh.first=true;
- {const showTab=t=>{document.querySelectorAll('.ap').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));document.querySelectorAll('#atabs button').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));try{sessionStorage.akTab=t}catch{}if(t==='cm')loadAdminCm();if(t==='sub')loadAdminSubs();else subBadge()};
-  $('#atabs').onclick=e=>{const b=e.target.closest('button');if(b){showTab(b.dataset.tab);window.scrollTo({top:0,behavior:'smooth'})}};
-  let t0='comics';try{t0=sessionStorage.akTab||'comics'}catch{}if(!document.querySelector('.ap[data-tab="'+t0+'"]'))t0='comics';showTab(t0)}
- $('#lo').onclick=()=>signOut(au);$('#hm').onclick=closeAdmin;
- $('#pwup').onclick=async()=>{const f=$('#pwf').files[0],m=$('#pwm');if(!f)return alert('ছবি বাছাই করুন');if(!f.type.startsWith('image/'))return alert('একটি image ফাইল বাছাই করুন');m.textContent='আপলোড হচ্ছে...';try{const url=await ib(f),d={img:url,t:Date.now()};await pwSave(d);$('#pwi').value=url;$('#pwf').value='';m.textContent='ছবি সেভ হয়েছে ✓'}catch(e){m.textContent=e.message||'আপলোড হয়নি'}};
-  $('#pwrm').onclick=async()=>{const m=$('#pwm');try{const d={img:'',t:Date.now()};await pwSave(d);$('#pwi').value='';m.textContent='ছবি সরানো হয়েছে ✓'}catch(e){m.textContent='হয়নি—Firestore Rules পরীক্ষা করুন'}};
-  $('#logoUploadBtn').onclick=async()=>{const f=$('#lg').files[0];if(!f)return alert('ছবি বাছাই করুন');if(!f.type.startsWith('image/'))return alert('একটি image ফাইল বাছাই করুন');try{const url=await ib(f),logo={url,t:Date.now()};await setDoc(D('site','logo'),logo);cacheSet('logo_v2',logo);$('#logo').src=url;$('#logo').hidden=false;$('#flogo').src=url;$('#flogo').hidden=false;$('#fbt').hidden=true;$('#lg').value='';alert('লোগো সেভ হয়েছে')}catch(e){alert('লোগো আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট/API key/ImgBB সংযোগ পরীক্ষা করুন। কিছুক্ষণ পর আবার চেষ্টা করুন।'))}};
-  dat('site','ad').then(a=>{const i=$('#adu0');if(i){i.value=(a&&a.url)||'';$('#adn0').value=(a&&a.name)||'';$('#ads0').value=a&&a.skip!==undefined&&a.skip!==''?a.skip:''}}).catch(()=>{});
-  $('#adsv').onclick=async()=>{const u=$('#adu0').value.trim();if(u&&!vimeoRef(u))return alert('সঠিক Vimeo লিংক বা আইডি দিন');try{await setDoc(D('site','ad'),{url:u,name:$('#adn0').value.trim().slice(0,60),skip:adSkip($('#ads0').value)});try{localStorage.removeItem('ak_ad')}catch{}$('#adm').textContent=u?'সংরক্ষণ হয়েছে':'সরানো হয়েছে'}catch{$('#adm').textContent='সংরক্ষণ হয়নি — Firestore Rules পরীক্ষা করুন'}};
-  $('#adrm').onclick=()=>{$('#adu0').value='';$('#adn0').value='';$('#ads0').value='';$('#adsv').click()};
-  $('#lgd').onclick=async()=>{if(!confirm('লোগো সরাবেন?'))return;try{await deleteDoc(D('site','logo'));cacheSet('logo_v2',null);logoDefault();alert('লোগো সরানো হয়েছে')}catch{alert('লোগো সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
- $('#hbb').onclick=async()=>{const f=$('#hb').files[0];if(!f)return alert('ব্যানার ছবি বাছাই করুন');try{const url=await ib(f);await setDoc(D('site','homeBanner'),{url,t:Date.now()});$('#hb').value='';alert('হোম ব্যানার সেভ হয়েছে');}catch(e){alert('ব্যানার আপলোড হয়নি: '+(e?.message||'ইন্টারনেট/API key পরীক্ষা করুন'))}};
- $('#hbd').onclick=async()=>{if(!confirm('হোম ব্যানার সরাবেন?'))return;try{await deleteDoc(D('site','homeBanner'));alert('ব্যানার সরানো হয়েছে');}catch{alert('ব্যানার সরানো যায়নি—Firestore Rules পরীক্ষা করুন')}};
-  $('#ca').onclick=async()=>{const t=$('#ct').value.trim(),f=$('#cf').files[0],p=$('#cp').value,fr=$('#fr').checked;if(!t||!f||(!p&&!fr))return alert('শিরোনাম, দাম (বা ফ্রি টিক) ও PDF দিন');
-  const ty=$('#cty').value,sr=$('#csr').value.trim(),ep=+$('#cep').value||0;if(ty==='series'&&(!sr||!ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-   try{const urls=await pdfPages(f,(i,n)=>$('#pr').textContent=`পেজ ${bn(i)}/${bn(n)} আপলোড হচ্ছে...`),cf=$('#cv').files[0],cover=cf?(await ib(cf),ib.th):pdfPages.th,id=doc(collection(db,'comics')).id;
-    await setDoc(D('pages',id),{urls});await setDoc(D('comics',id),{title:t,price:fr?0:+p,free:fr,feat:$('#cfh').checked,orig:$('#cor').value==='1',cover,type:ty,series:ty==='series'?sr:'',ep:ty==='series'?ep:0,creator:$('#ccr').value.trim(),adg:$('#cadg').checked,adu:adClean($('#cadu').value),adn:$('#cadn').value.trim().slice(0,60),ads:adSkip($('#cads').value),t:Date.now(),ct:Date.now()});$('#cadg').checked=false;['cadu','cadn','cads'].forEach(i=>{const e=$('#'+i);if(e)e.value=''});$('#pr').textContent='আপলোড সম্পূর্ণ';refresh()}
-  catch(e){$('#pr').textContent='আপলোড ব্যর্থ: '+(e?.message||'ইন্টারনেট, ImgBB API key ও Firestore Rules পরীক্ষা করুন')}};
- $('#na').onclick=async()=>{const h=$('#nh').value.trim(),f=$('#ni').files[0];if(!h||!f)return alert('শিরোনাম ও ব্যানার ছবি দিন');
-  try{const img=await ib(f);await setDoc(doc(collection(db,'news')),{type:$('#nt').value,title:h,text:$('#nb').value.trim(),img,link:$('#nk').value.trim(),t:Date.now()});['nh','nb','nk','ni'].forEach(i=>$('#'+i).value='');refresh()}catch{alert('প্রকাশ করা যায়নি')}};
- $('#ga').onclick=async()=>{const fs=[...$('#gi').files],cap=$('#gc').value.trim(),lk=$('#gk').value.trim();if(!fs.length&&!cap)return alert('ছবি বা লেখা দিন');
- try{if(!fs.length)await setDoc(doc(collection(db,'gallery')),{url:'',th:'',cap,link:lk,t:Date.now()});else for(let i=0;i<fs.length;i++){$('#gp').textContent=`ছবি ${bn(i+1)}/${bn(fs.length)} আপলোড হচ্ছে...`;const url=await ib(fs[i]);await setDoc(doc(collection(db,'gallery')),{url,th:ib.th,cap,link:lk,t:Date.now()+i})}
-  $('#gp').textContent='পোস্ট হয়েছে';$('#gc').value='';$('#gk').value='';$('#gi').value='';refresh()}catch{$('#gp').textContent='পোস্ট ব্যর্থ'}};
- $('#vb').onclick=async()=>{const u=$('#vl').value.trim(),pp=vmParse(u);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
-  try{$('#vm').textContent='তথ্য আনা হচ্ছে...';const m=await vimeoMeta(u),l=await vdGet();
-   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:$('#vt').value.trim()||m.title||'ভিডিও',desc:$('#vd').value.trim(),vid:pp.vid,h:pp.h,thumb:$('#vth').value.trim()||m.thumb||'',dur:m.dur||0,price:Math.max(0,+$('#vpr').value||0),series:$('#vsr').value.trim(),ep:+$('#vep').value||0,orig:$('#vor').checked,feat:$('#vf').checked,owner:$('#vow').value.trim().replace(/^@+/,'').slice(0,40),adg:$('#vadg').checked,adu:adClean($('#vadu').value),adn:$('#vadn').value.trim().slice(0,60),ads:adSkip($('#vads').value),adl:adlParse($('#vadl').value),cat:$('#vcat').value,t:Date.now()});
-   await vdSave(l);$('#vadg').checked=false;['vl','vt','vd','vth','vpr','vsr','vep','vow','vadu','vadn','vads'].forEach(i=>$('#'+i).value='');$('#vf').checked=false;$('#vor').checked=false;$('#vm').textContent='ভিডিও যোগ হয়েছে';refresh()}
-  catch(e){$('#vm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট ও Firestore Rules পরীক্ষা করুন')}};
- $('#chb').onclick=async()=>{const n=$('#chn').value.trim(),f=$('#chi').files[0];if(!n||!f)return alert('নাম ও ছবি দিন');
-  try{const ul=await resolveUnlock($('#chu').value);if(ul===false)return alert('এই নামে কোনো কমিকস পাওয়া যায়নি');$('#chm').textContent='আপলোড হচ্ছে...';const img=await ib(f),th=ib.th,l=await chGet();
-   l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:n,series:$('#chs').value.trim(),app:$('#cha').value.trim(),desc:$('#chd').value.trim(),img,th,...(ul||{}),t:Date.now()});
-   await chSave(l);['chn','chs','cha','chu','chd','chi'].forEach(i=>$('#'+i).value='');$('#chm').textContent='ক্যারেক্টার যোগ হয়েছে';refresh()}
-  catch(e){$('#chm').textContent='যোগ করা যায়নি: '+(e?.message||'ইন্টারনেট, ImgBB ও Firestore Rules পরীক্ষা করুন')}};
- $('#cg').onclick=()=>mk($('#cs').value,$('#ce').value.trim());
- $('#aa').onclick=async()=>{const n=$('#an').value.trim(),u=$('#au').value.trim().toLowerCase(),p=$('#ap').value;
-  if(!n||!okUser(u)||p.length<6)return alert('নাম, সঠিক ইউজারনেম ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
-  try{const s=initializeApp(cfg,'s'+Date.now()),sa=getAuth(s),c=await createUserWithEmailAndPassword(sa,em(u),p);
-   await setDoc(D('admins',c.user.uid),{name:n,user:u,t:Date.now()});await signOut(sa);
-   ['an','au','ap'].forEach(i=>$('#'+i).value='');refresh();alert('অ্যাডমিন যোগ হয়েছে')}
-  catch(x){alert(x.code==='auth/email-already-in-use'?'এই ইউজারনেম আগেই আছে':'যোগ করা যায়নি')}};
- $('#pw').onclick=async()=>{const p=prompt('নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর):');if(!p)return;if(p.length<6)return alert('খুব ছোট');
-  try{await updatePassword(au.currentUser,p);alert('পাসওয়ার্ড বদলেছে')}catch{alert('নিরাপত্তার জন্য লগআউট করে আবার লগইন করে চেষ্টা করুন')}};
- $('#app').onclick=async e=>{const b=e.target.closest('button'),d=b?.dataset;if(!d)return;
-  if(d.vpv){const v=(await vdGet()).find(x=>x.id===d.vpv);if(v)playVideo(v);return}
-  if(d.vdel){if(!confirm('মুছে ফেলবেন?'))return;try{await vdSave((await vdGet()).filter(x=>x.id!==d.vdel));refresh()}catch{alert('মুছা যায়নি')}return}
-   if(d.vft){try{const l=await vdGet(),x=l.find(y=>y.id===d.vft);if(x){x.feat=!x.feat;await vdSave(l);refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
-   if(d.cft){try{const x=await dat('comics',d.cft);if(x){await updateDoc(D('comics',d.cft),{feat:!x.feat,t:Date.now()});refresh()}}catch{alert('পরিবর্তন করা যায়নি')}return}
-  if(d.ved){const l=await vdGet(),x=l.find(y=>y.id===d.ved);if(x)editVideo(x,l);return}
-  if(d.cdel){if(!confirm('মুছে ফেলবেন?'))return;try{await chSave((await chGet()).filter(x=>x.id!==d.cdel));refresh()}catch{alert('মুছা যায়নি')}return}
-  if(d.ced){const l=await chGet(),x=l.find(y=>y.id===d.ced);if(!x)return alert('তথ্য পাওয়া যায়নি');
-   const nm=prompt('নাম:',x.name);if(nm===null)return;const se=prompt('সিরিজ:',x.series||'');if(se===null)return;const ap=prompt('অ্যাপিয়ারেন্স:',x.app||'');if(ap===null)return;const ds=prompt('বিবরণ:',x.desc||'');if(ds===null)return;const un=prompt('কোন কমিকস পড়ার পর আনলক হবে (কমিকসের নাম; ফাঁকা = সবসময় দেখা যাবে):',x.unlockT||'');if(un===null)return;let ul2=null;if(un.trim()){ul2=await resolveUnlock(un);if(ul2===false)return alert('এই নামে কোনো কমিকস পাওয়া যায়নি')}const im=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(im===null)return;
-   Object.assign(x,{name:nm.trim()||x.name,series:se.trim(),app:ap.trim(),desc:ds.trim(),unlock:ul2?ul2.unlock:'',unlockT:ul2?ul2.unlockT:''});if(im.trim()){x.img=im.trim();x.th=im.trim()}
-   try{await chSave(l);refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}return}
-  if(d.apv){try{await updateDoc(D('reviews',d.apv),{approved:true});refresh()}catch{alert('অনুমোদন করা যায়নি—Firestore Rules পরীক্ষা করুন')}return}
-  if(d.del){if(d.del==='admins/'+me.uid)return alert('নিজেকে মুছা যাবে না');
-   if(!confirm('মুছে ফেলবেন?'))return;const[c,i]=d.del.split('/');await deleteDoc(D(c,i));if(d.also)await deleteDoc(D(d.also,i));refresh()}
-  if(d.edit){const [c,i]=d.edit.split('/');const q=await dat(c,i);if(!q)return alert('তথ্য পাওয়া যায়নি');
-   try{
-    if(c==='comics'){editComic(i,q);return}
-    else if(c==='news'){const title=prompt('শিরোনাম:',q.title);if(title===null)return;const body=prompt('বিস্তারিত:',q.text||'');if(body===null)return;const link=prompt('লিংক:',q.link||'');if(link===null)return;await updateDoc(D(c,i),{title:title.trim(),text:body,link:link.trim(),t:Date.now()})}
-    else if(c==='gallery'){const cap=prompt('ক্যাপশন:',q.cap||'');if(cap===null)return;const url=prompt('নতুন ছবির URL (না বদলালে ফাঁকা রাখুন):','');if(url===null)return;const lk=prompt('লিংক (ঐচ্ছিক, ফাঁকা রাখলে সরে যাবে):',q.link||'');if(lk===null)return;const patch={cap:cap.trim(),link:lk.trim(),t:Date.now()};if(url.trim()){patch.url=url.trim();patch.th=url.trim()}await updateDoc(D(c,i),patch)}
-    refresh()
-   }catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}
-  if(d.rs){await updateDoc(D('codes',d.rs),{device:deleteField()});refresh()}
-  if(d.mk)mk(d.mk,d.em,d.ml)};
- refresh()}
 
-function editComic(id,q){
- const d=document.createElement('dialog');d.className='cedit';
-  d.innerHTML=`<form id=cef><h3>কমিকস এডিট</h3><input name=title value="${esc(q.title)}" placeholder="কমিকসের নাম" required><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=free style="width:auto"${q.free?' checked':''}> ফ্রি কমিকস (কোড লাগবে না)</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${q.feat?' checked':''}> হোম পেজে ফিচারড</label><select name=orig><option value="">ক্রিয়েটর কমিকস (পাবলিক)</option><option value=1${q.orig?' selected':''}>অরিজিনাল</option></select><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=adg style="width:auto"${q.adg?' checked':''}> বিজ্ঞাপন দেখে খুলবে (ফ্রি কমিকসে)</label><input name=adu value="${esc(q.adu||'')}" placeholder="বিজ্ঞাপনের Vimeo লিংক (ফাঁকা বা ভুল হলে ডিফল্ট)"><input name=adn value="${esc(q.adn||'')}" placeholder="বিজ্ঞাপনের নাম (ঐচ্ছিক)"><input name=ads type=number min=0 max=30 value="${esc(q.ads===undefined?'':q.ads)}" placeholder="স্কিপ করা যাবে কত সেকেন্ড পর (০–৩০; ফাঁকা = ডিফল্ট)"><input name=price type=number value="${q.price||''}" placeholder="দাম (টাকা)"><div class=cvr><img src="${esc(q.cover||'')}" alt=""><label class=cvl>কভার বদলান (ঐচ্ছিক)<input type=file name=cvf accept="image/*"></label></div><input name=cover placeholder="অথবা নতুন কভারের URL (না বদলালে ফাঁকা রাখুন)"><select name=type><option value=oneshot${q.type!=='series'?' selected':''}>ওয়ানশট (একক কমিকস)</option><option value=series${q.type==='series'?' selected':''}>সিরিজ (চলমান, পর্ব আছে)</option></select><input name=series value="${esc(q.series||'')}" placeholder="সিরিজের নাম"><input name=ep type=number min=1 value="${q.ep||''}" placeholder="পর্ব নম্বর"><input name=creator value="${esc(q.creator||'')}" placeholder="ক্রিয়েটরের নাম (ঐচ্ছিক)"><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=cxl>বাতিল</button></div></form>`;
- document.body.appendChild(d);d.showModal();
- const ty=d.querySelector('[name=type]'),fr=d.querySelector('[name=free]'),pi=d.querySelector('[name=price]'),tg=()=>{const on=ty.value==='series';d.querySelector('[name=series]').hidden=!on;d.querySelector('[name=ep]').hidden=!on;pi.hidden=fr.checked};tg();ty.onchange=tg;fr.onchange=tg;
- const cl=()=>{d.close();d.remove()};d.querySelector('#cxl').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
- d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),isS=f.type==='series',pr=Number(f.price)||0,fr=!!f.free;
-  if(!fr&&pr<=0)return alert('পেইড করতে দাম দিন (০ এর বেশি)');
-  if(isS&&(!f.series.trim()||!+f.ep))return alert('সিরিজের নাম ও পর্ব নম্বর দিন');
-   const patch={title:f.title.trim(),price:fr?(pr||q.price||0):pr,free:fr,feat:!!f.feat,orig:!!f.orig,adg:!!f.adg,adu:adClean(f.adu),adn:(f.adn||'').trim().slice(0,60),ads:adSkip(f.ads),type:isS?'series':'oneshot',series:isS?f.series.trim():'',ep:isS?+f.ep:0,creator:f.creator.trim(),t:Date.now()};let cvu=f.cover.trim();const cfl=d.querySelector('[name=cvf]').files[0];if(cfl){const sb=d.querySelector('form .btn');if(sb){sb.disabled=true;sb.textContent='আপলোড হচ্ছে...'}try{await ib(cfl);cvu=ib.th}catch{if(sb){sb.disabled=false;sb.textContent='সংরক্ষণ'}return alert('কভার আপলোড হয়নি—ইন্টারনেট ও ImgBB API key পরীক্ষা করুন')}}if(cvu)patch.cover=cvu;
-  try{await updateDoc(D('comics',id),patch);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
-function editVideo(x,l){
- const d=document.createElement('dialog');d.className='cedit';
- d.innerHTML=`<form><h3>ভিডিও এডিট</h3><input name=title value="${esc(x.title)}" required><textarea name=desc placeholder="বর্ণনা">${esc(x.desc||'')}</textarea><input name=link value="https://vimeo.com/${esc(x.vid)}${x.h?'/'+esc(x.h):''}" placeholder="Vimeo লিংক"><div class=cvr><img class=v src="${esc(x.thumb||'')}" alt=""><label class=cvl>থাম্বনেইল বদলান (ঐচ্ছিক)<input type=file name=thf accept="image/*"></label></div><input name=thumb value="${esc(x.thumb||'')}" placeholder="অথবা থাম্বনেইল URL"><input name=price type=number min=0 value="${+x.price>0?+x.price:''}" placeholder="দাম (টাকা) — ফ্রি হলে ফাঁকা রাখুন"><input name=series value="${esc(x.series||'')}" placeholder="সিরিজের নাম (ঐচ্ছিক)"><input name=ep type=number min=1 value="${x.ep||''}" placeholder="পর্ব নম্বর (সিরিজ হলে)"><select name=cat><option value=video${vCat(x)==='video'?' selected':''}>ভিডিও (সাধারণ)</option><option value=series${vCat(x)==='series'?' selected':''}>অ্যানিমেটেড সিরিজ</option><option value=movie${vCat(x)==='movie'?' selected':''}>অ্যানিমেটেড মুভি</option></select><input name=owner value="${esc(x.owner||'')}" placeholder="ওনারের নাম (যেমন @akano)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=adg style="width:auto"${x.adg?' checked':''}> বিজ্ঞাপন দেখে চলবে (ফ্রি ভিডিওতে)</label><input name=adu value="${esc(x.adu||'')}" placeholder="বিজ্ঞাপনের Vimeo লিংক (ফাঁকা বা ভুল হলে ডিফল্ট)"><input name=adn value="${esc(x.adn||'')}" placeholder="বিজ্ঞাপনের নাম (ঐচ্ছিক)"><textarea name=adl rows=4 placeholder=\"একাধিক বিজ্ঞাপন (প্রতি লাইনে একটি): Vimeo বা ছবির (https) লিংক | ভিডিওর কত সেকেন্ডে চলবে | স্কিপ/ছবি কত সেকেন্ড | ক্লিক লিংক (ঐচ্ছিক)&#10;০ = ভিডিওর আগে। যেমন:&#10;https://vimeo.com/123456 | 0 | 5 | https://example.com&#10;https://example.com/ad.jpg | 120 | 8 | https://example.com\">${esc(adlText(x.adl))}</textarea><input name=ads type=number min=0 max=30 value="${esc(x.ads===undefined?'':x.ads)}" placeholder="স্কিপ করা যাবে কত সেকেন্ড পর (০–৩০; ফাঁকা = ডিফল্ট)"><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=orig style="width:auto"${x.orig?' checked':''}> আকানো অরিজিনাল</label><label style="display:flex;align-items:center;gap:10px"><input type=checkbox name=feat style="width:auto"${x.feat?' checked':''}> হোম পেজে ফিচারড</label><div class=row><button class=btn>সংরক্ষণ</button><button type=button class=btn id=vcx>বাতিল</button></div></form>`;
- document.body.appendChild(d);d.showModal();
- const cl=()=>{d.close();d.remove()};d.querySelector('#vcx').onclick=cl;d.addEventListener('cancel',()=>setTimeout(()=>d.remove(),0));
- d.querySelector('form').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),pp=vmParse(f.link);if(!pp)return alert('সঠিক Vimeo লিংক দিন');
-  let th=f.thumb.trim();const tf=d.querySelector('[name=thf]').files[0];if(tf){const sb=d.querySelector('form .btn');if(sb){sb.disabled=true;sb.textContent='আপলোড হচ্ছে...'}try{await ib(tf);th=ib.th}catch{if(sb){sb.disabled=false;sb.textContent='সংরক্ষণ'}return alert('থাম্বনেইল আপলোড হয়নি—ইন্টারনেট ও ImgBB API key পরীক্ষা করুন')}}
-  Object.assign(x,{title:f.title.trim()||x.title,desc:f.desc.trim(),vid:pp.vid,h:pp.h,thumb:th,price:Math.max(0,+f.price||0),series:f.series.trim(),ep:+f.ep||0,orig:!!f.orig,feat:!!f.feat,owner:(f.owner||'').trim().replace(/^@+/,'').slice(0,40),adg:!!f.adg,adu:adClean(f.adu),adn:(f.adn||'').trim().slice(0,60),ads:adSkip(f.ads),adl:adlParse(f.adl),cat:f.cat||'video'});
-  try{await vdSave(l);cl();refresh()}catch{alert('এডিট করা যায়নি—Firestore Rules পরীক্ষা করুন')}}}
-const ordEn=o=>o.lang==='en'||/\[কোড: English\]/.test(o.trx||'');
-async function mk(id,email,lang){if(!id)return alert('কমিকস বা ভিডিও বাছাই করুন');const isVd=String(id).startsWith('v_'),ttl=isVd?vds.find(y=>y.id===id.slice(2))?.title:comics[id]?.title;
- const code=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
- let sec={};if(isVd){const v=(await vdGet()).find(y=>y.id===id.slice(2));if(!v||!v.vid)return alert('ভিডিওর Vimeo তথ্য পাওয়া যায়নি');sec={vid:v.vid,h:v.h||''}}
- await setDoc(D('codes',code),{comicId:id,email:email||'',t:Date.now(),...sec});refresh();
- const en=lang==='en',sub=en?(isVd?'Akano - Your video code':'Akano - Your comic code'):(isVd?'আকানো - ভিডিওর কোড':'আকানো - কমিকসের কোড'),
-  body=en?`Your code: ${code}\n${isVd?'Video':'Comic'}: ${ttl}\nOn the Akano site, tap the ${isVd?'video':'comic'} card and enter this code under "Have a code?".`:(isVd?`আপনার কোড: ${code}\nভিডিও: ${ttl}\nআকানো সাইটের ভিডিওর কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`:`আপনার কোড: ${code}\nকমিকস: ${ttl}\nআকানো সাইটের কমিকসের কার্ডে ট্যাপ করে “কোড আছে?” অংশে কোডটি দিন।`);
- if(email)open(`mailto:${email}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`);else prompt('কোড:',code)}
 
-function toast(m){let t=$('#tos');if(!t){t=document.createElement('div');t.id='tos';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{t.hidden=true},2200)}
-function adminStats(cs,o,k,rv,quiet){const fr=cs.filter(c=>c.free),pend=rv.filter(x=>!x.approved).length;
- $('#as1').textContent=bn(cs.length);$('#as1b').textContent=bn(cs.length-fr.length)+' পেইড · '+bn(fr.length)+' ফ্রি';
- $('#as2').textContent=bn(o.length);$('#as3').textContent=bn(k.filter(x=>!x.device).length);$('#as4').textContent=bn(pend);
- $('#as5').textContent=bn(fr.reduce((t,c)=>t+(c.views||0),0));
- $('#at2').textContent=o.length?bn(o.length):'';$('#at4').textContent=pend?bn(pend):'';
- if(!quiet)toast('আপডেট হয়েছে')}
-async function refresh(){
- const quiet=refresh.first;refresh.first=false;
- ['comics','news','gallery','chars','videos'].forEach(k=>{try{localStorage.removeItem('ak_'+k)}catch{}});
- const[cs,o,k,a,n,g,ch,rv,vd]=await Promise.all([all('comics'),all('orders'),all('codes'),all('admins'),all('news'),all('gallery'),chGet(),all('reviews').catch(()=>[]),vdGet().catch(()=>[])]),by=(x,y)=>(y.t||0)-(x.t||0);
- comics=Object.fromEntries(cs.map(c=>[c.id,c]));
- $('#nls').innerHTML=n.sort(by).map(x=>`<div class=al><img src="${esc(x.img)}" width=48 alt=""><span><b>${esc(x.type)}</b> | ${esc(x.title)}</span><button data-edit="news/${x.id}">এডিট</button><button data-del="news/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#chl').innerHTML=ch.map(x=>`<div class=al><img src="${esc(x.th||x.img)}" width=48 alt=""><span><b>${esc(x.name)}</b> | ${esc(x.series||'-')} | ${esc(x.app||'-')}</span><button data-ced="${esc(x.id)}">এডিট</button><button data-cdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
- vds=[...vd].sort(by);vv=await vviews();
- $('#vls').innerHTML=vds.map(x=>`<div class=al>${x.thumb?`<img src="${esc(x.thumb)}" alt="">`:''}<span><b>${esc(x.title)}</b> | ${+x.price>0?bn(x.price)+' টাকা':'ফ্রি'} | ${x.feat?'ফিচারড':'সাধারণ'} | ভিউ: ${bn(vv[x.id]||0)}</span><button data-vpv="${esc(x.id)}">দেখুন</button><button data-vft="${esc(x.id)}">${x.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-ved="${esc(x.id)}">এডিট</button><button data-vdel="${esc(x.id)}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#rvl').innerHTML=rv.sort(by).map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${bn(x.rating)}/৫ | ${esc(x.comic||'সাধারণ')} | ${x.approved?'অনুমোদিত':'অপেক্ষমাণ'}<br>${esc(x.text)}</span>${x.approved?'':`<button data-apv="${x.id}">অনুমোদন</button>`}<button data-del="reviews/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#gl').innerHTML=g.sort(by).map(x=>`<div class=al>${x.th?`<img src="${esc(x.th)}" width=48 alt="">`:'<b>লেখা</b>'}<span>${esc(x.cap||'-')}</span><button data-edit="gallery/${x.id}">এডিট</button><button data-del="gallery/${x.id}">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#cl').innerHTML=cs.sort(by).map(c=>`<div class=al><img src="${esc(c.cover)}" width=36 alt=""><span>${esc(c.title)} &mdash; ${c.free?'ফ্রি':bn(c.price)+' টাকা'}${c.type==='series'&&c.series?' | '+esc(c.series)+' (পর্ব '+bn(c.ep||1)+')':' | ওয়ানশট'}${c.free?' | ভিউ: '+bn(c.views||0):''}</span><button data-cft="${c.id}">${c.feat?'ফিচারড সরান':'ফিচারড করুন'}</button><button data-edit="comics/${c.id}">এডিট</button><button data-del="comics/${c.id}" data-also="pages">মুছুন</button></div>`).join('')||'কিছু নেই';
- $('#cs').innerHTML=cs.filter(c=>!c.free).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('')+vds.filter(x=>+x.price>0).map(x=>`<option value="v_${esc(x.id)}">[ভিডিও] ${esc(x.title)}</option>`).join('');
-  $('#vsl').innerHTML=[...new Set([...cs.filter(isSer).map(c=>c.series),...vds.map(x=>x.series).filter(Boolean)])].map(n=>`<option value="${esc(n)}">`).join('');
- $('#ol').innerHTML=o.sort(by).map(x=>`<div class=al><span><b>${esc(x.comic)}</b><br>${esc(x.name)} | ${esc(x.email)} | ${esc(x.phone)} | হোয়াটসঅ্যাপ: ${x.whatsapp?`<a href="https://wa.me/${wa(x.whatsapp)}" target=_blank rel=noopener>${esc(x.whatsapp)}</a>`:'-'} | মাধ্যম: ${esc(x.method||'-')} | কোডের ভাষা: ${ordEn(x)?'English':'বাংলা ভাষা'} | ট্রানজেকশন: ${esc(x.trx||'-')}</span><button data-mk="${x.comicId}" data-em="${esc(x.email)}" data-ml="${ordEn(x)?'en':'bn'}">কোড পাঠান</button><button data-del="orders/${x.id}">মুছুন</button></div>`).join('')||'কোনো অর্ডার নেই';
- $('#kl').innerHTML=k.sort(by).map(x=>`<div class=al><span><b>${esc(x.id)}</b> | ${esc(String(x.comicId).startsWith('v_')?(vds.find(y=>y.id===String(x.comicId).slice(2))?.title?'[ভিডিও] '+vds.find(y=>y.id===String(x.comicId).slice(2)).title:'মুছে গেছে'):(comics[x.comicId]?.title||'মুছে গেছে'))} | ${esc(x.email||'-')} | <em class="${x.device?'u':'n'}">${x.device?'ব্যবহৃত':'নতুন'}</em>${+String(x.device||'').split('_')[1]?` | মেয়াদ: ${dateLabel(+String(x.device).split('_')[1]+20*864e5)}`:''}</span>${x.device?`<button data-rs="${x.id}">ডিভাইস রিসেট</button>`:''}<button data-del="codes/${x.id}">মুছুন</button></div>`).join('');
- adminStats(cs,o,k,rv,quiet);
- $('#al').innerHTML=a.map(x=>`<div class=al><span><b>${esc(x.name)}</b> | ${esc(x.user)}</span>${x.id===me.uid?'<i>আপনি</i>':`<button data-del="admins/${x.id}">সরান</button>`}</div>`).join('')}
+
+
+
+
+
+
+
+
+
+
+
+
 
 const logoDefault=()=>{[$('#logo'),$('#flogo')].forEach(el=>{if(el){el.src=DEFAULT_LOGO;el.hidden=false}});$('#fbt').hidden=true};
 $('#logo').onerror=()=>{if($('#logo').src!==DEFAULT_LOGO)logoDefault()};
 try{if(!localStorage.getItem('ak_logo_v2'))logoDefault()}catch{logoDefault()}
 cache('logo_v2',()=>dat('site','logo')).then(l=>{if(l?.url){$('#logo').src=l.url;$('#logo').hidden=false;$('#flogo').src=l.url;$('#flogo').hidden=false;$('#fbt').hidden=true}else logoDefault()}).catch(()=>logoDefault());
-if(location.hash==='#admin')openAdmin();else go('home');
+go('home');
 
 // ---------- PWA: install করা যায় এমন অ্যাপ ----------
 (()=>{
@@ -3453,14 +3251,7 @@ function kbScore(q){
  const X=kbIndex(),W=X.words(q),nq=aNorm(q),tq=aTri(nq),wt=x=>Math.log(1+X.N/(1+(X.df[x]||0)));
  return X.docs.map(d=>{const dw=d.qw||(d.qw=[...d.qt].reduce((a,x)=>a+wt(x),0));let tot=0,hit=0,hq=0;W.forEach(({t,k})=>{const kn=/^g\d+$/.test(t)||X.df[t]||(k&&X.df[k]),w=(kn?1:.5)*Math.max(wt(t),k?wt(k)*.9:0);tot+=w;let h=0,qq=0;[[t,1],[k,.9]].forEach(([x,f])=>{if(!x)return;if(d.qt.has(x)){h=Math.max(h,wt(x)*f);qq=Math.max(qq,wt(x))}else if(d.at.has(x))h=Math.max(h,wt(x)*f*.45)});hit+=Math.min(h,w);hq+=qq});
   const cov=tot?hit/tot:0,pr=dw?Math.sqrt(Math.min(1,hq/dw)):0,sc=W.length?(.65*cov+.2*pr+.15*aDice(tq,d.tri)):0;return{d,sc}}).sort((a,b)=>b.sc-a.sc)}
-function entityMatch(q){
- const X=kbIndex(),nq=aNorm(q),qs=new Set(nq.split(' ').filter(Boolean).map(aStem)),tq=aTri(nq),out=[];
- const seen=lsRead('x')||null;
- const push=(kind,id,title,meta,go)=>{const nt=aNorm(title);if(!nt)return;const tt=nt.split(' ').filter(Boolean).map(aStem);let h=0;tt.forEach(t=>{if(qs.has(t))h++});const cov=tt.length?h/tt.length:0,dc=aDice(tq,aTri(nt)),sc=Math.max(cov*.9+(h?.1:0),dc*.85);if(sc>=.55&&(h>0||dc>=.6))out.push({kind,id,title,meta,go,sc})};
- (lsRead('comics')||[]).forEach(c=>c&&c.title&&push('comic',c.id,c.title,(c.free?T('ফ্রি','Free'):bn(c.price||0)+' '+T('টাকা','BDT'))+(c.orig?' · '+T('অরিজিনাল','Original'):''),'comics'));
- ((lsRead('videos')||{}).list||[]).forEach(v=>v&&v.title&&push('video',v.id,v.title,(+v.price>0?bn(v.price)+' '+T('টাকা','BDT'):T('ফ্রি','Free'))+' · '+owner(v),'videos'));
- const sn=seenIds();((lsRead('chars')||{}).list||[]).forEach(x=>{if(x&&x.name&&(!x.unlock||sn[x.unlock]))push('char',x.id,x.name,x.series||'','chars')});
- return out.sort((a,b)=>b.sc-a.sc).slice(0,3)}
+
 const aEsc=esc;
 function aLinks(go){if(!go||!go.length)return '';return '<div class=as-act>'+go.map(([r,b,e,x])=>r==='mail'?`<a class=as-a href="mailto:help.akano@gmail.com${x?'?subject='+encodeURIComponent('Fragiks')+'&body='+encodeURIComponent(x):''}">${ic('mail')}${T(b,e)}</a>`:r==='fb'?`<a class=as-a href="${FBG}" target=_blank rel=noopener>${FBX}${T(b,e)}</a>`:`<button type=button class=as-a data-go="${r}">${T(b,e)}${ic('chev')}</button>`).join('')+'</div>'}
 const aSay=()=>`<button type=button class=say data-say aria-label="${T('শুনুন','Listen')}">${ic('vol')}<span>${T('শুনুন','Listen')}</span></button>`;
@@ -3517,30 +3308,8 @@ function aLev(a,b,mx){const n=a.length,m=b.length;if(Math.abs(n-m)>mx)return mx+
  for(let i=1;i<=n;i++){const c=[i];let mn=i;for(let j=1;j<=m;j++){let v=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])v=Math.min(v,p2[j-2]+1);c[j]=v;if(v<mn)mn=v}
   if(mn>mx)return mx+1;p2=p;p=c}return p[m]}
 /* নিরাপদ ক্যালকুলেটর (eval ছাড়া) */
-function aCalcEval(s){let i=0;const ws=()=>{while(s[i]===' ')i++};
- const num=()=>{ws();let neg=1;while(s[i]==='-'||s[i]==='+'){if(s[i]==='-')neg=-neg;i++;ws()}
-  if(s[i]==='('){i++;const v=add();ws();if(s[i]!==')')throw 0;i++;return neg*v}
-  const m=/^\d+(\.\d+)?|^\.\d+/.exec(s.slice(i));if(!m)throw 0;i+=m[0].length;return neg*parseFloat(m[0])};
- const mul=()=>{let v=num();for(;;){ws();const c=s[i];if(c==='*'){i++;v*=num()}else if(c==='/'){i++;v/=num()}else return v}};
- const add=()=>{let v=mul();for(;;){ws();const c=s[i];if(c==='+'){i++;v+=mul()}else if(c==='-'){i++;v-=mul()}else return v}};
- const r=add();ws();if(i<s.length)throw 0;return r}
-function aCalc(q){
- let s=aDig(q).toLowerCase().replace(/,/g,'');
- let m=s.match(/(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent)\s*(?:of|এর|er)?\s*(\d+(?:\.\d+)?)/);
- let r=null,ex='';
- const m2=s.match(/(\d+(?:\.\d+)?)\s*(?:এর|er|of)\s*(\d+(?:\.\d+)?)\s*(?:%|শতাংশ|percent|persent)/);
- if(m){r=+m[1]/100*+m[2];ex=m[1]+'% × '+m[2]}
- else if(m2){r=+m2[2]/100*+m2[1];ex=m2[2]+'% × '+m2[1]}
- else{
-  s=s.replace(/(\d)\s*[x×]\s*(\d)/g,'$1*$2').replace(/÷/g,'/').replace(/(^| )(plus|যোগ|jog)( |$)/g,' + ').replace(/(^| )(minus|বিয়োগ|biyog)( |$)/g,' - ').replace(/(^| )(times|multiplied by|multiply|গুণ|gun|into)( |$)/g,' * ').replace(/(^| )(divided by|ভাগ|bhag|vag)( |$)/g,' / ');
-  const rest=s.replace(/[0-9+\-*/().\s=?]/g,'').replace(/(calculate|calc|what|is|equals|answer|result|কত|হবে|হিসাব|করো|কর|কী|কি|koto|hobe|ans|দেখাও)/g,'').trim();
-  if(rest)return null;
-  const e=s.replace(/[=?]/g,' ').replace(/(calculate|calc|what|is|equals|answer|result|কত|হবে|হিসাব|করো|কর|কী|কি|koto|hobe|ans|দেখাও)/g,' ').replace(/\s+/g,' ').trim();
-  if(!/\d/.test(e)||!/\d\s*[+\-*/]\s*[-+(]?\s*[\d.(]/.test(e))return null;
-  try{r=aCalcEval(e)}catch{return null}ex=e.replace(/\*/g,'×').replace(/\//g,'÷')}
- if(r===null)return null;
- if(!isFinite(r))return T('শূন্য দিয়ে ভাগ করা যায় না।','You cannot divide by zero.');
- return ex+' = '+(Math.round(r*1e6)/1e6)}
+
+
 const aRx=(...w)=>new RegExp('(^| )('+w.join('|')+')');
 const RX={
  price:aRx('দাম','মূল্য','প্রাইস','price','cost','dam','mulyo','koto taka','কত টাকা','how much','কত দাম'),
@@ -3748,13 +3517,7 @@ function aMNorm(raw,keepX){
 function aMVal(e,vars){return mParse(mPrep(e),vars)}
 const aMDisp=e=>e.replace(/sqrt\(/g,'√(').replace(/cbrt\(/g,'∛(').replace(/\*/g,'×').replace(/\bpi\b/g,'π');
 const aMErr=()=>aAns(T('এই হিসাবটি করা যাচ্ছে না (শূন্য দিয়ে ভাগ বা অসংজ্ঞায়িত মান)।','This cannot be calculated (division by zero or undefined value).'));
-function aMSolve(raw){
- let s=aDig(raw).toLowerCase();if(!/=/.test(s))return null;
- s=s.replace(/(?:x\s*এর\s*মান(?:\s*কত)?|value of x|find x|solve for x|solve|হলে|তাহলে|then|\bif\b|x\s*কত|x\s*কি|x\s*কী|সমাধান\s*করো|সমাধান|বের\s*করো)/g,' ');
- s=aMNorm(s,true);if(/y/.test(s)&&!/x/.test(s))s=s.replace(/y/g,'x');
- const parts=s.split(/\s*=\s*/);
- // '=' was stripped by aMNorm — redo split on original
- return null}
+
 function aMSolve2(raw){
  let s=aDig(raw).toLowerCase();if((s.match(/=/g)||[]).length!==1)return null;
  s=s.replace(/(?:x\s*এর\s*মান(?:\s*কত)?|value of x|find x|solve for x|solve|হলে|তাহলে|then|\bif\b|x\s*কত|x\s*কি|x\s*কী|সমাধান\s*করো|সমাধান|বের\s*করো)/g,' ');
@@ -4127,18 +3890,8 @@ function track(k,id){
  const t=todayS();if(!s.days.includes(t)){s.days.push(t);s.days=s.days.slice(-120)}
  s.best=Math.max(s.best,curStreak(s));LS.set('akStats',s)}
 const seenIds=()=>{const s=LS.get('akSeen',{});Object.values(prog||{}).forEach(p=>{if(p&&p.cid)s[p.cid]=1});return s};
-const nk=o=>Object.keys(o||{}).length;
-const BADGES=[
- {id:'r1',i:'book',b:['প্রথম পাঠ','First read'],d:['প্রথম কমিকস পড়ুন','Read your first comic'],ok:s=>nk(s.read)>=1},
- {id:'r5',i:'shelf',b:['পাঠক','Reader'],d:['৫টি কমিকস পড়ুন','Read 5 comics'],ok:s=>nk(s.read)>=5},
- {id:'r15',i:'panels',b:['আকানো ভক্ত','Akano Fan'],d:['১৫টি কমিকস পড়ুন','Read 15 comics'],ok:s=>nk(s.read)>=15},
- {id:'w1',i:'play',b:['দর্শক','Viewer'],d:['একটি ভিডিও ২৫% দেখুন','Watch 25% of a video'],ok:s=>nk(s.watch)>=1},
- {id:'w10',i:'film',b:['ভিডিওপ্রেমী','Video Lover'],d:['১০টি ভিডিও দেখুন','Watch 10 videos'],ok:s=>nk(s.watch)>=10},
- {id:'s3',i:'mark',b:['নিয়মিত','Regular'],d:['টানা ৩ দিন আসুন','Visit 3 days in a row'],ok:s=>s.best>=3},
- {id:'s7',i:'shield',b:['সাপ্তাহিক যোদ্ধা','Weekly Warrior'],d:['টানা ৭ দিন আসুন','Visit 7 days in a row'],ok:s=>s.best>=7},
- {id:'s30',i:'gift',b:['আকানো লিজেন্ড','Akano Legend'],d:['টানা ৩০ দিন আসুন','Visit 30 days in a row'],ok:s=>s.best>=30},
- {id:'rv',i:'msg',b:['মতামতদাতা','Voice'],d:['একটি রিভিউ দিন','Leave a review'],ok:s=>s.rev>=1},
- {id:'sh',i:'share',b:['প্রচারক','Promoter'],d:['একটি শেয়ার কার্ড বানান','Create a share card'],ok:s=>s.share>=1}];
+
+
 function badges(){
  const s=stGet(),cs=curStreak(s),en=language==='en',set=new Set(s.days),t0=dayNum(todayS());
  const wk=['র','সো','ম','বু','বৃ','শু','শ'],wke=['S','M','T','W','T','F','S'];
@@ -4180,7 +3933,7 @@ async function shareCard(o){
 // ================= ক্যারেক্টার আনলক (স্পয়লার-সেফ) =================
 const chLocked=x=>!!(x&&x.unlock)&&!seenIds()[x.unlock];
 const chLockHtml=x=>`<div class=cd-b style="text-align:center;padding:30px 10px"><span class=wr2-ic style="margin:0 auto 16px">${ic('lock')}</span><h2>${T('লক করা চরিত্র','Locked character')}</h2><p class=cd-ds>${T('“'+(x.unlockT||'কমিকস')+'” পড়লে এই চরিত্র আনলক হবে।','Read \u201c'+(x.unlockT||'the comic')+'\u201d to unlock this character.')}</p></div>`;
-async function resolveUnlock(v){v=String(v||'').trim();if(!v)return null;const cl=await all('comics'),n=aNorm(v),c=cl.find(x=>aNorm(x.title)===n)||cl.find(x=>aNorm(x.title).includes(n));return c?{unlock:c.id,unlockT:c.title}:false}
+
 
 // ================= একটি সাধারণ ক্লিক হ্যান্ডলার =================
 document.addEventListener('click',e=>{
