@@ -1803,6 +1803,60 @@ body .aiw .ai-model,body .aiw .ai-spk{background:#f6efee;box-shadow:none}
 body .aiw .ai-spk.send{background:#111;color:#fff}
 body .aiw .ai-spk.on{background:#e10600;color:#fff}
 .hf .sb[hidden]{display:none!important}
+/* ===== Admin: Studio-style app UI ===== */
+html.adm-on body{background:#f6f6f8!important}
+html.adm-on .box.adm{max-width:1180px;padding:0 16px 96px;margin:0 auto}
+html.adm-on .ah{position:sticky;top:0;z-index:30;margin:0 -16px 0;padding:12px 16px;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid #e9e9ec;flex-wrap:nowrap}
+html.adm-on .ah-l{display:flex;align-items:center;gap:12px;min-width:0}
+html.adm-on .ah-logo{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#e10600;color:#fff}html.adm-on .ah-logo .ic{width:20px;height:20px;fill:#fff}
+html.adm-on .ah h2{margin:0;font-size:18px;font-weight:700;color:#111;line-height:1.2}html.adm-on .ah small{display:block;margin-top:1px;font-size:12.5px;color:#767680}
+html.adm-on .ah .row{flex-wrap:nowrap;gap:8px;flex:none}
+html.adm-on .box .lnk{background:#fff;border:1px solid #dcdce0;border-radius:999px;padding:9px 16px;font-size:14px;color:#111;font-weight:600}html.adm-on .box .lnk:hover{background:#f0f0f2;color:#111;border-color:#dcdce0}
+html.adm-on .box .btn{background:#111;color:#fff;border:0;border-radius:999px;padding:10px 18px;font-size:14.5px;font-weight:600;box-shadow:none;cursor:pointer}html.adm-on .box .btn:hover{background:#2c2c30}html.adm-on .box .btn:disabled{opacity:.55}
+html.adm-on .stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0 4px}
+html.adm-on .st{background:#fff;border:1px solid #e9e9ec;border-radius:16px;padding:14px 16px;gap:4px;box-shadow:none}
+html.adm-on .st b{font-size:28px;color:#111;font-weight:700}html.adm-on .st span{font-size:13.5px;color:#606068;font-weight:500}html.adm-on .st small{font-size:12px;color:#8a8a94}
+html.adm-on .atabs{position:sticky;top:64px;z-index:25;margin:0 -16px 14px;padding:0 10px;gap:2px;background:#fff;border-bottom:1px solid #e9e9ec;overflow-x:auto}
+html.adm-on .atabs button{border:0!important;border-bottom:3px solid transparent!important;border-radius:0;background:transparent!important;color:#6a6a74!important;padding:14px 14px 11px;font-size:14.5px;font-weight:600}
+html.adm-on .atabs button.on{background:transparent!important;color:#111!important;border-bottom-color:#e10600!important}
+html.adm-on .atabs i{background:#e10600;color:#fff;box-shadow:none;border-radius:999px;font-size:11.5px;padding:1px 7px}
+html.adm-on .ap{margin-top:6px}
+html.adm-on .box h3{margin:26px 0 12px;font-size:18px;color:#111;font-weight:700}html.adm-on .box h3::before{display:none}
+html.adm-on .ahd{margin:18px 0 10px}html.adm-on .ahd h3{margin:0}
+html.adm-on .apd{background:#fff;border:1px solid #e9e9ec;border-radius:16px;padding:0 16px;margin:0 0 14px}
+html.adm-on .apd summary{padding:15px 0;font-size:15px;color:#111;font-weight:700}html.adm-on .apd summary::before{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:#f0f0f2;color:#111;font-size:15px;line-height:1;vertical-align:middle}
+html.adm-on .apd[open]{padding-bottom:16px}
+html.adm-on .box input,html.adm-on .box select,html.adm-on .box textarea{background:#f4f4f6;border:1px solid transparent;border-radius:12px;padding:12px 14px;font-size:15px;color:#111;box-shadow:none}
+html.adm-on .box input:focus,html.adm-on .box select:focus,html.adm-on .box textarea:focus{background:#fff;border-color:#111;outline:0}
+html.adm-on .asr{max-width:280px;border-radius:999px!important;padding:10px 16px!important}
+html.adm-on .al,html.adm-on .ap .al{background:#fff;border:1px solid #e9e9ec;border-radius:14px;box-shadow:none;padding:12px 14px;gap:12px}
+html.adm-on .al button{border:0;background:#f0f0f2;color:#111;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600}html.adm-on .al button:hover{background:#e2e2e6;color:#111}
+html.adm-on .al button[data-del],html.adm-on .al button[data-cdel]{background:#fdecea;color:#c0392b}html.adm-on .al button[data-del]:hover,html.adm-on .al button[data-cdel]:hover{background:#c0392b;color:#fff}
+html.adm-on .al em.n{background:#e3f6e9;color:#0a7a2f}html.adm-on .al em.u{background:#eeeef1;color:#666}
+html.adm-on .note{color:#666;font-weight:400;font-size:13.5px}
+/* login */
+html.adm-on .alw{min-height:calc(100vh - 20px);display:grid;place-items:center;padding:24px 16px;background:radial-gradient(120% 50% at 50% 0%,rgba(225,6,0,.13) 0%,rgba(225,6,0,.04) 46%,rgba(225,6,0,0) 78%)}
+html.adm-on #lf{width:100%;max-width:400px;margin:0;padding:30px 24px 24px;background:#fff;border:1px solid #e9e9ec;border-radius:26px;box-shadow:0 24px 60px -34px rgba(20,20,40,.35);display:flex;flex-direction:column;gap:10px}
+html.adm-on .al-logo{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 6px;border-radius:18px;background:#e10600;color:#fff}html.adm-on .al-logo .ic{width:26px;height:26px;fill:#fff}
+html.adm-on #lf h2{margin:0;text-align:center;font-size:23px;font-weight:800;color:#111}
+html.adm-on .al-sub{margin:0 0 10px;text-align:center;font-size:14px;color:#767680}
+html.adm-on .al-f{display:flex;align-items:center;gap:10px;background:#f4f4f6;border-radius:14px;padding:0 14px;margin:0}html.adm-on .al-f .ic{width:18px;height:18px;flex:none;color:#8a8a94}
+html.adm-on #lf .al-f input{flex:1;min-width:0;background:transparent;border:0;padding:14px 0;font-size:15.5px;border-radius:0}html.adm-on #lf .al-f input:focus{background:transparent}
+html.adm-on .al-eye{border:0;background:transparent;color:#8a8a94;padding:6px;display:grid;place-items:center;cursor:pointer}html.adm-on .al-eye .ic{width:18px;height:18px}
+html.adm-on #lf .btn{width:100%;padding:14px 18px;font-size:16px;margin-top:4px}html.adm-on #lf .lnk{width:100%;justify-content:center;padding:12px 18px;font-size:14.5px}
+html.adm-on #lf #msg{margin:4px 0 0;text-align:center;font-size:13px;color:#c0392b;font-weight:400;min-height:0}
+/* desktop: left sidebar like Studio */
+@media(min-width:960px){
+ html.adm-on .box.adm{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:28px;align-items:start}
+ html.adm-on .ah{grid-column:1/-1;margin:0 -16px 18px}
+ html.adm-on .atabs{grid-column:1;grid-row:2/span 4;flex-direction:column;position:sticky;top:86px;margin:0;padding:6px;gap:2px;border:1px solid #e9e9ec;border-radius:18px;overflow:visible}
+ html.adm-on .atabs button{width:100%;justify-content:flex-start;border-bottom:0!important;border-radius:12px;padding:12px 14px}
+ html.adm-on .atabs button.on{background:#f0f0f3!important;border-bottom:0!important}
+ html.adm-on .stats{grid-column:2;grid-row:2;margin-top:0}
+ html.adm-on .ap{grid-column:2}
+ html.adm-on .atabs i{margin-left:auto}
+}
+
 /* ===== paywall v2 / login / payment (reference style, red theme) ===== */
 .pw{max-width:560px;margin:0 auto;padding:0 0 40px}
 .pw-pg{padding:0 16px}
@@ -3146,11 +3200,12 @@ const onAuth=async u=>{if(!adm)return;
  if(!a?.exists()){note=er?.code==='permission-denied'?'Firestore Rules পাবলিশ করা হয়নি':'এই অ্যাকাউন্টের admins ডকুমেন্ট নেই (Document ID = UID মিলিয়ে দেখুন)';await signOut(au);return}
  note='';me={uid:u.uid,...a.data()};panel()};
 function startAdmin(){if(auInit)onAuth(au.currentUser);else{auInit=true;onAuthStateChanged(au,onAuth)}}
-function openAdmin(){adm=true;tog(0);$('header').style.display='none';$('footer').style.display='none';scrollTo(0,0);$('#app').innerHTML='<p class=ld>লোড হচ্ছে...</p>';startAdmin()}
-function closeAdmin(){adm=false;$('header').style.display='';$('footer').style.display='';$('#app').onclick=siteClick;go('home')}
+function openAdmin(){adm=true;document.documentElement.classList.add('adm-on');tog(0);$('header').style.display='none';$('footer').style.display='none';scrollTo(0,0);$('#app').innerHTML='<p class=ld>লোড হচ্ছে...</p>';startAdmin()}
+function closeAdmin(){adm=false;document.documentElement.classList.remove('adm-on');$('header').style.display='';$('footer').style.display='';$('#app').onclick=siteClick;go('home')}
 
 function login(){
- $('#app').innerHTML=`<form id=lf class=box><h2>অ্যাডমিন লগইন</h2><input name=u placeholder="ইউজারনেম অথবা ইমেইল" autocomplete="username" required><input name=p type=password placeholder="পাসওয়ার্ড" autocomplete="current-password" required><button class=btn>লগইন</button> <button type=button class=lnk id=hm>সাইটে ফিরুন</button><p id=msg>${esc(note||(/^https?:$/.test(location.protocol)?'':'এই ফাইল সরাসরি ফোন থেকে খোলা হয়েছে (content://)। অ্যাডমিন লগইন করতে হলে সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে।'))}</p></form>`;
+ $('#app').innerHTML=`<div class=alw><form id=lf class=box><div class=al-logo>${ic('play')}</div><h2>Akano Studio</h2><p class=al-sub>অ্যাডমিন লগইন</p><label class=al-f>${ic('face')}<input name=u placeholder="ইউজারনেম অথবা ইমেইল" autocomplete="username" required></label><label class=al-f>${ic('lock')}<input name=p type=password placeholder="পাসওয়ার্ড" autocomplete="current-password" required><button type=button class=al-eye aria-label="পাসওয়ার্ড দেখান">${ic('eye')}</button></label><button class=btn>লগইন</button><button type=button class=lnk id=hm>সাইটে ফিরুন</button><p id=msg>${esc(note||(/^https?:$/.test(location.protocol)?'':'এই ফাইল সরাসরি ফোন থেকে খোলা হয়েছে (content://)। অ্যাডমিন লগইন করতে হলে সাইটটি https ওয়েবসাইট হিসেবে হোস্ট করতে হবে।'))}</p></form></div>`;
+ {const ey=$('#lf .al-eye');if(ey)ey.onclick=()=>{const i=ey.parentElement.querySelector('input');if(i)i.type=i.type==='password'?'text':'password'}}
  $('#hm').onclick=closeAdmin;
  $('#lf').onsubmit=async e=>{e.preventDefault();const f=e.target;$('#msg').textContent='';
   try{await signInWithEmailAndPassword(au,em(f.u.value),f.p.value)}
@@ -3168,7 +3223,7 @@ async function pdfPages(file,cb){await loadPdf();const d=await pdfjsLib.getDocum
  return out}
 
 function panel(){
- $('#app').innerHTML=`<div class="box adm"><div class=ah><div><h2>স্বাগতম, ${esc(me.name)}</h2><small>অ্যাডমিন প্যানেল</small></div><div class=row><button class=lnk id=hm>সাইট</button><button class=btn id=lo>লগআউট</button></div></div>
+ $('#app').innerHTML=`<div class="box adm"><div class=ah><div class=ah-l><span class=ah-logo>${ic('play')}</span><div><h2>Akano Studio</h2><small>স্বাগতম, ${esc(me.name)}</small></div></div><div class=row><button class=lnk id=hm>সাইট দেখুন</button><button class=btn id=lo>লগআউট</button></div></div>
 <div class=stats><div class=st><b id=as1>–</b><span>কমিকস</span><small id=as1b></small></div><div class=st><b id=as2>–</b><span>অর্ডার</span></div><div class=st><b id=as3>–</b><span>অব্যবহৃত কোড</span></div><div class=st><b id=as4>–</b><span>অপেক্ষমাণ রিভিউ</span></div><div class=st><b id=as5>–</b><span>ফ্রি কমিকসের ভিউ</span></div></div>
 <nav class=atabs id=atabs><button data-tab=comics>কমিকস</button><button data-tab=orders>অর্ডার ও কোড<i id=at2></i></button><button data-tab=chars>ক্যারেক্টার</button><button data-tab=media>ঘোষণা ও গ্যালারি</button><button data-tab=video>ভিডিও</button><button data-tab=rev>রিভিউ<i id=at4></i></button><button data-tab=cm>মন্তব্য</button><button data-tab=sub>সাবস্ক্রিপশন</button><button data-tab=set>সেটিংস</button></nav>
  <section class=ap data-tab=sub><details class=apd id=pwd><summary>পেওয়ালের ছবি ও লেখা (Plus পেজ)</summary><p class=note>Plus পেজের উপরের ছবি। গ্যালারি থেকে ছবি বাছাই করে আপলোড করুন।</p><input type=file id=pwf accept=\"image/*\"><button type=button class=btn id=pwup>ছবি আপলোড / বদলান</button> <button type=button class=lnk id=pwrm>ছবি সরান</button><label class=pw-l>বাংলাদেশের দাম (৳)</label><input id=pwbd type=number min=1 step=1 inputmode=numeric><label class=pw-l>আন্তর্জাতিক দাম ($)</label><input id=pwin type=number min=0.01 step=0.01 inputmode=decimal><label class=pw-l>প্ল্যানের মেয়াদ (দিন)</label><input id=pwdy type=number min=1 step=1 inputmode=numeric><label class=pw-l>অতিরিক্ত প্ল্যান ২ (ঐচ্ছিক): দিন · ৳ · $</label><div class=pxr><input id=pxd2 type=number min=1 placeholder="দিন"><input id=pxb2 type=number min=1 placeholder="৳"><input id=pxi2 type=number min=0.01 step=0.01 placeholder="$"></div><label class=pw-l>অতিরিক্ত প্ল্যান ৩ (ঐচ্ছিক): দিন · ৳ · $</label><div class=pxr><input id=pxd3 type=number min=1 placeholder="দিন"><input id=pxb3 type=number min=1 placeholder="৳"><input id=pxi3 type=number min=0.01 step=0.01 placeholder="$"></div><button type=button class=btn id=pwpr>দাম ও মেয়াদ সেভ করুন</button><input id=pwi type=hidden><input id=pwt type=hidden><input id=pws type=hidden><button type=button class=btn id=pwsv style=display:none>সেভ</button><p class=note id=pwm></p></details><div id=sba><p class=note>লোড হচ্ছে...</p></div></section>
