@@ -36,6 +36,7 @@ label{font-weight:600;font-size:14px}
 .prog{height:6px;background:var(--card);border-radius:3px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:#000}
 </style></head><body>
 <header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><button class="ib" id="mb">⋮</button><div class="av" id="av" onclick="location.hash='#/me'">A</div><div id="mn"></div></div></header>
+<div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
 <main id="m"></main><div id="toast"></div>
 <nav id="nav"></nav>
 
@@ -45,13 +46,16 @@ label{font-weight:600;font-size:14px}
 <script>
 const ADMINS=['monowaamasum@gmail.com'];
 const IMGBB='718d414b6ea52d893542fac3fbeba1f1';
-firebase.initializeApp({apiKey:"AIzaSyDk5WuV2QlFOJaLTJqmDN6Da73FEofVi_A",authDomain:"rdb-store.firebaseapp.com",projectId:"rdb-store",storageBucket:"rdb-store.firebasestorage.app",messagingSenderId:"296925523426",appId:"1:296925523426:web:7b8d4f8b92c0640ad3ddbb"});
+firebase.initializeApp({apiKey:"AIzaSyBQqJYlZbU_eNY5rWiVBsfJGY1cII6eB2E",authDomain:"frangowst-apps.firebaseapp.com",projectId:"frangowst-apps",storageBucket:"frangowst-apps.firebasestorage.app",messagingSenderId:"304578058733",appId:"1:304578058733:web:9c64df017486e9f2ae6fe4"});
 const auth=firebase.auth(),db=firebase.firestore(),FV=firebase.firestore.FieldValue;
 const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',admin:'অ্যাডমিন প্যানেল',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',alogin:'অ্যাডমিন লগইন',anot:'এটি অ্যাডমিন অ্যাকাউন্ট নয়',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
 en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',admin:'Admin Panel',sq:'Search apps',load:'Loading…',ver:'Version',alogin:'Admin Login',anot:'This is not an admin account',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
 let L='en';try{L=localStorage.getItem('l')||'en'}catch(e){}
 const t=k=>T[L][k]||k;
 let U=null,APPS={},$=s=>document.querySelector(s);
+const bnr=m=>{const b=$('#bn');b.style.display=m?'block':'none';b.textContent=m||''};
+const pr=(m,c)=>{const e=$('#er');if(e){e.style.color=c||'#c00';e.textContent=m}};
+window.onerror=(m)=>bnr('Script error: '+m);window.onunhandledrejection=e=>bnr('Error: '+(e.reason&&e.reason.message||e.reason));
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isAdmin=()=>U&&ADMINS.includes((U.email||'').toLowerCase());
 const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
@@ -64,7 +68,7 @@ $('#mb').onclick=e=>{e.stopPropagation();const m=$('#mn');if(m.style.display==='
 $('#mn').onclick=e=>{const d=e.target.closest('div[data-h],div[data-o]');if(!d)return;if(d.dataset.o)auth.signOut();else location.hash=d.dataset.h};
 document.addEventListener('click',()=>$('#mn').style.display='none');
 auth.onAuthStateChanged(u=>{U=u;setAv();route()});
-db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());route()},e=>toast('Database: '+e.message));
+db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());bnr();route()},e=>bnr('Database error ('+e.code+'): '+e.message));
 addEventListener('hashchange',route);
 
 function route(){
@@ -164,9 +168,9 @@ function admin(){
     try{const o={name:$('#n').value.trim(),dev:$('#d').value.trim(),cats:$('#c').value,desc:$('#ds').value,ads:$('#ad').checked,ver:$('#vr').value.trim()||'1.0.0',wn:$('#wn').value,updatedAt:Date.now()};
       if(!o.name)throw new Error('Name required');
       const ic=$('#ic').files[0],shs=[...$('#sh').files],ap=$('#ap').files[0];
-      if(ic)o.icon=await img(ic);else if(!a.icon)throw new Error('Icon required');
+      pr('1/3 Uploading icon…','#555');if(ic)o.icon=await img(ic);else if(!a.icon)throw new Error('Icon required — select an app icon');
       if(shs.length)o.shots=await Promise.all(shs.map(img));
-      const gm=$('#gh').value.trim().match(/^(?:https?:\/\/github\.com\/)?([\w.-]+\/[\w.-]+)/);
+      pr('2/3 Checking APK / GitHub…','#555');const gm=$('#gh').value.trim().match(/^(?:https?:\/\/github\.com\/)?([\w.-]+\/[\w.-]+)/);
       if(gm){o.gh=gm[1];const r=await fetch('https://api.github.com/repos/'+o.gh+'/releases/latest');
         if(!r.ok)throw new Error('GitHub Release not found (repo must be Public and a Release must be published)');
         const j=await r.json(),as=(j.assets||[]).find(x=>/\.apk$/i.test(x.name));
@@ -176,9 +180,9 @@ function admin(){
       else{o.gh='';o.apk=$('#al').value.trim().replace(/^https?:\/\/github\.com\/([^\/]+\/[^\/]+)\/blob\//,'https://raw.githubusercontent.com/$1/');
         if(!/^https?:\/\//.test(o.apk))throw new Error('GitHub repo or APK link required');
         if(ap)o.size=ap.size;else if($('#sz').value)o.size=Math.round($('#sz').value*1048576)}
-      if(editId)await db.collection('apps').doc(editId).update(o);else await db.collection('apps').add({...o,downloads:0,createdAt:Date.now()});
-      toast('Done ✓');editId=null;admin()}
-    catch(e){const m=e.code==='permission-denied'?'Permission denied: publish the Firestore rules and log in as admin':e.message;$('#er').textContent=m;toast(m);b.disabled=false;b.textContent=editId?'Save changes':'Publish'}}
+      pr('3/3 Saving to database…','#555');if(editId)await db.collection('apps').doc(editId).update(o);else await db.collection('apps').add({...o,downloads:0,createdAt:Date.now()});
+      toast('Done ✓');editId=null;admin();pr('Published ✓','#080')}
+    catch(e){const m=e.code==='permission-denied'?'Permission denied: publish the Firestore rules and log in as admin':e.message;pr(m);toast(m);b.disabled=false;b.textContent=editId?'Save changes':'Publish'}}
 }
 async function del(id){if(confirm('Delete this app?'))await db.collection('apps').doc(id).delete()}
 </script></body></html>
