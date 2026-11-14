@@ -65,6 +65,10 @@ nav{left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));bor
 nav a.on .p{background:#000;color:#fff}
 #toast{border-radius:999px}
 .stars span{margin-right:2px}.stars span svg{display:block}.stars span path{fill:#d9d9d9;stroke:#d9d9d9}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
+#al2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.ac{background:#f7f7f7;border-radius:20px;padding:14px 10px;text-align:center}.ac img{width:68px;height:68px;border-radius:24%;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.ac b{display:block;margin-top:8px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac small{display:block;color:#6b6b6b;font-size:12px;margin:2px 0 10px}
+.ab{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}.ab .btn.sm{padding:7px 10px;font-size:12px;background:#fff}
 </style></head><body>
 <header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><button class="ib" id="mb">⋮</button><div class="av" id="av" onclick="location.hash='#/me'">A</div><div id="mn"></div></div></header>
 <div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
@@ -183,7 +187,7 @@ let editId=null;
 function adminLogin(){$('#m').innerHTML=`<h2>${t('alogin')}</h2><label>Email</label><input id="ae" type="email"><label>Password</label><input id="ap2" type="password"><button class="btn" id="ag">${t('login')}</button>`;
   $('#ag').onclick=async()=>{try{const c=await auth.signInWithEmailAndPassword($('#ae').value.trim(),$('#ap2').value);
     if(!ADMINS.includes((c.user.email||'').toLowerCase())){await auth.signOut();toast(t('anot'))}}catch(e){toast(e.message)}}}
-function adminList(){const e=$('#al2');if(e)e.innerHTML=list().map(x=>`<div class="row"><img src="${E(x.icon)}"><div style="flex:1"><b>${E(x.name)}</b><br><small>${fmt(x.size)} · ${x.downloads||0} downloads · v${E(x.ver||'1.0.0')}</small></div><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div>`).join('')}
+function adminList(){const e=$('#al2');if(e)e.innerHTML=list().map(x=>`<div class="ac"><img src="${E(x.icon)}"><b>${E(x.name)}</b><small>${x.downloads||0} downloads · v${E(x.ver||'1.0.0')}<br>${fmt(x.size)}</small><div class="ab"><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="rs('${x.id}')">Reset</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div></div>`).join('')}
 function admin(){
   const l=list(),a=editId?APPS[editId]:{};
   $('#m').innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h2>${editId?'Edit':'Upload'} app</h2><button class="btn o sm" onclick="auth.signOut()">Logout</button></div>
@@ -219,5 +223,6 @@ function admin(){
       toast('Done ✓');editId=null;admin();pr('Published ✓','#080')}
     catch(e){const m=e.code==='permission-denied'?'Permission denied: publish the Firestore rules and log in as admin':e.message;pr(m);toast(m);b.disabled=false;b.textContent=editId?'Save changes':'Publish'}}
 }
+async function rs(id){if(confirm('Reset download count to 0?')){try{await db.collection('apps').doc(id).update({downloads:0});toast('Download count reset ✓')}catch(e){toast(e.message)}}}
 async function del(id){if(confirm('Delete this app?'))await db.collection('apps').doc(id).delete()}
 </script></body></html>
