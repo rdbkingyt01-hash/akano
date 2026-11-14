@@ -2,6 +2,7 @@
 <html lang="bn"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Frangowst Apps</title>
+<meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fff;--fg:#000;--mut:#555;--card:#f1f3f4;--bd:#000;color-scheme:light}
@@ -63,10 +64,17 @@ input,textarea{background:#f3f3f3;border:0;border-radius:18px;padding:14px 16px}
 nav{left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(0,0,0,.14);padding:8px 6px}
 nav a.on .p{background:#000;color:#fff}
 #toast{border-radius:999px}
-.stars{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 0 12px}.stars span{display:inline-flex;flex:none;cursor:pointer}.stars span svg{display:block}.stars span path{fill:#d9d9d9;stroke:#d9d9d9}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
+.stars{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 0 12px}.stars span{display:inline-flex;flex:none;cursor:pointer}.stars span svg{display:block}.stars span path{fill:none;stroke:#b5b5b5}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
 .ac b{display:block;margin-top:8px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac small{display:block;color:#6b6b6b;font-size:12px;margin:2px 0 10px}
+
+.pill{border:0;background:#000;color:#fff;border-radius:999px;padding:9px 14px;font:600 13px Inter,sans-serif;cursor:pointer}.pill[hidden]{display:none}
+.rsum{display:flex;gap:22px;align-items:center;background:#f3f3f3;border-radius:22px;padding:16px 18px;margin-bottom:16px}
+.rsum .big{text-align:center;flex:none}.rsum .big b{display:block;font-size:44px;font-weight:700;line-height:1;letter-spacing:-.03em}.rsum .big small{color:#6b6b6b}
+.rsum .dist{flex:1}.rsum .dist>div{display:flex;align-items:center;gap:8px;font-size:12px;color:#6b6b6b;margin:4px 0}.rsum .dist span{width:10px}
+.tr{flex:1;height:8px;background:#e2e2e2;border-radius:99px;overflow:hidden}.tr i{display:block;height:100%;background:#FFCC00;border-radius:99px}
+.hb{display:inline-flex;align-items:center;gap:6px;border:0;background:#fff;border-radius:999px;padding:7px 13px;font:600 12.5px Inter,sans-serif;cursor:pointer;margin-top:6px;color:#000}.hb.on{background:#000;color:#fff}
 </style></head><body>
-<header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><div class="av" id="av" onclick="location.hash='#/me'">A</div></div></header>
+<header><h1>Frangowst Apps</h1><div class="hr"><button class="pill" id="ins" hidden></button><button class="ib" id="lg"></button><div class="av" id="av" onclick="location.hash='#/me'">A</div></div></header>
 <div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
 <main id="m"></main><div class="lb" id="lb" hidden></div><div id="toast"></div>
 <nav id="nav"></nav>
@@ -77,20 +85,29 @@ nav a.on .p{background:#000;color:#fff}
 <script>
 firebase.initializeApp({apiKey:"AIzaSyBQqJYlZbU_eNY5rWiVBsfJGY1cII6eB2E",authDomain:"frangowst-apps.firebaseapp.com",projectId:"frangowst-apps",storageBucket:"frangowst-apps.firebasestorage.app",messagingSenderId:"304578058733",appId:"1:304578058733:web:9c64df017486e9f2ae6fe4"});
 const auth=firebase.auth(),db=firebase.firestore(),FV=firebase.firestore.FieldValue;
-const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
-en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',sq:'Search apps',load:'Loading…',ver:'Version',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
+const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',iap:'অ্যাপের ভেতরে কেনাকাটা',pick:'আগে একটি স্টার বেছে নিন',help:'কাজের',del:'মুছুন',conf:'আপনার রিভিউ মুছবেন?',delok:'রিভিউ মুছে গেছে',yr:'আপনার রিভিউ',nor:'এখনও কোনো রিভিউ নেই',ins:'অ্যাপ ইনস্টল',insios:'iPhone-এ: Share চেপে Add to Home Screen দিন',ver:'ভার্সন',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
+en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ads',iap:'In-app purchases',pick:'Tap a star to rate',help:'Helpful',del:'Delete',conf:'Delete your review?',delok:'Review deleted',yr:'Your review',nor:'No reviews yet',ins:'Install app',insios:'On iPhone: tap Share → Add to Home Screen',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',sq:'Search apps',load:'Loading…',ver:'Version',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
 let L='en';try{L=localStorage.getItem('l')||'en'}catch(e){}
 const t=k=>T[L][k]||k;
 let U=null,APPS={},$=s=>document.querySelector(s);
 const bnr=m=>{const b=$('#bn');b.style.display=m?'block':'none';b.textContent=m||''};
 window.onerror=(m)=>bnr('Script error: '+m);window.onunhandledrejection=e=>bnr('Error: '+(e.reason&&e.reason.message||e.reason));
 const SV=(c,z=18)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" style="vertical-align:-3px"><path d="M12 3.6l2.5 5.2 5.7.8-4.2 4 1 5.7L12 16.6l-5 2.7 1-5.7-4.2-4 5.7-.8z" fill="${c}" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+const iosHint=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)&&!navigator.standalone?`<p style="color:#6b6b6b;font-size:13px;margin-top:18px">${t('insios')}</p>`:'';
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
 const toast=x=>{const e=$('#toast');e.textContent=x;e.style.display='block';setTimeout(()=>e.style.display='none',2800)};
 const ic={h:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10H3z"/></svg>',s:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>',u:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>'};
 const setAv=()=>{$('#av').textContent=U?[...(U.displayName||U.email||'A')][0].toUpperCase():'A'};
 $('#lg').onclick=()=>{L=L==='bn'?'en':'bn';try{localStorage.setItem('l',L)}catch(e){}route()};
+let dip=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#ins').textContent=t('ins');$('#ins').hidden=false});
+addEventListener('appinstalled',()=>{dip=null;$('#ins').hidden=true});
+$('#ins').onclick=async()=>{if(!dip)return;dip.prompt();await dip.userChoice;dip=null;$('#ins').hidden=true};
+(function(){const mk=z=>{const c=document.createElement('canvas');c.width=c.height=z;const g=c.getContext('2d');g.fillStyle='#000';g.beginPath();if(g.roundRect)g.roundRect(0,0,z,z,z*.22);else g.rect(0,0,z,z);g.fill();g.strokeStyle='#fff';g.lineWidth=z*.085;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(z*.27,z*.76);g.lineTo(z*.5,z*.22);g.lineTo(z*.73,z*.76);g.moveTo(z*.35,z*.58);g.lineTo(z*.65,z*.58);g.stroke();return c.toDataURL('image/png')};
+  try{const i1=mk(192),i2=mk(512),dir=location.origin+location.pathname.replace(/[^\/]*$/,'');
+    const man={name:'Frangowst Apps',short_name:'Frangowst',start_url:dir,scope:dir,display:'standalone',background_color:'#ffffff',theme_color:'#000000',icons:[{src:i1,sizes:'192x192',type:'image/png',purpose:'any'},{src:i2,sizes:'512x512',type:'image/png',purpose:'any'}]};
+    const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));document.head.appendChild(l);
+    const a=document.createElement('link');a.rel='apple-touch-icon';a.href=i1;document.head.appendChild(a)}catch(e){}})();
 auth.onAuthStateChanged(u=>{U=u;setAv();route()});
 db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());bnr();route()},e=>bnr('Database error ('+e.code+'): '+e.message));
 let stk=[location.hash||'#/'];
@@ -120,41 +137,48 @@ function detail(id){
   const a=APPS[id];if(!a)return $('#m').innerHTML=`<h2>${t('load')}</h2>`;
   const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean);
   $('#m').innerHTML=`<button class="bkb" onclick="goBack()" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>${a.banner?`<img class="banner" src="${E(a.banner)}">`:''}
-  <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
+  <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p><small>${[a.ads?t('ads'):'',a.iap?t('iap'):''].filter(Boolean).join(' · ')}</small></div></div>
   <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
   <button class="btn gr" onclick="dl('${id}')">${t('dl')}</button>
   ${(a.shots||[]).length?`<div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
   ${a.wn?`<h2>${t('wn')}</h2><p style="white-space:pre-wrap">${E(a.wn)}</p>`:''}
   ${a.desc?`<h2>${t('about')}</h2><p style="white-space:pre-wrap">${E(a.desc)}</p>`:''}
   ${cats.length?`<div class="chips" style="margin-top:16px">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
-  <h2>${t('rat')} <span id="avg"></span></h2><div id="rf"></div><div id="rl"></div>`;
+  <h2>${t('rat')}</h2><div id="rsm"></div><div id="rf"></div><div id="rl"></div>`;
   $('#m').querySelectorAll('.shots img').forEach((im,i)=>im.onclick=()=>lbOpen(a.shots,i));
-  const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.values(v).sort((x,y)=>y.ts-x.ts);
-    const av=l.length?(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';$('#rc').textContent=l.length;$('#avg').innerHTML=av?SV('#FFCC00',18)+' '+av:'';$('#a2').innerHTML=av?av+' '+SV('#FFCC00',15):'—';
-    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> <span style="white-space:nowrap">${Array(x.rating).fill(SV('#FFCC00',14)).join('')}</span><br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
+  const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.entries(v).map(([k,x])=>({k,...x})).sort((x,y)=>y.ts-x.ts);
+    const n=l.length,av=n?l.reduce((q,x)=>q+x.rating,0)/n:0,avs=n?av.toFixed(1):'';
+    $('#rc').textContent=n;$('#a2').innerHTML=avs?avs+' '+SV('#FFCC00',15):'—';
+    const cn=[5,4,3,2,1].map(r=>l.filter(x=>x.rating===r).length);
+    $('#rsm').innerHTML=n?`<div class="rsum"><div class="big"><b>${avs}</b><div>${[1,2,3,4,5].map(i=>SV(i<=Math.round(av)?'#FFCC00':'#d9d9d9',16)).join('')}</div><small>${n} ${t('rv')}</small></div><div class="dist">${cn.map((c,i)=>`<div><span>${5-i}</span><div class="tr"><i style="width:${c/n*100}%"></i></div></div>`).join('')}</div></div>`:`<p style="color:#6b6b6b;margin-bottom:12px">${t('nor')}</p>`;
+    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> <span style="white-space:nowrap">${[1,2,3,4,5].map(i=>SV(i<=x.rating?'#FFCC00':'#d9d9d9',14)).join('')}</span><br><small>${new Date(x.ts).toLocaleDateString()}</small>${x.text?`<p>${E(x.text)}</p>`:''}</div>`).join('');
     form(id,U&&v[U.uid])});
   offs.push(un);
 }
-let rate=5;
+let rate=0;
 function form(id,mine){const f=$('#rf');if(!f)return;
+  const key=(U?U.uid:'')+'|'+(mine?mine.rating+'|'+mine.text:'-');if(f.dataset.k===key&&f.innerHTML)return;f.dataset.k=key;
   if(!U)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('lr')}</button>`;
-  rate=mine?mine.rating:5;
-  f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">${SV('#d9d9d9',32)}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
+  rate=mine?mine.rating:0;
+  f.innerHTML=`<p style="font-weight:600;margin:4px 0">${mine?t('yr'):t('write')}</p><div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">${SV('#b5b5b5',34)}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><div style="display:flex;gap:8px"><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>${mine?`<button class="btn o sm" id="rd">${t('del')}</button>`:''}</div>`;
   f.querySelectorAll('.stars span').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;f.querySelectorAll('.stars span').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate))});
-  $('#rs').onclick=async()=>{await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});toast(t('saved'))}}
+  const ref=db.collection('apps').doc(id).collection('reviews').doc(U.uid);
+  $('#rs').onclick=async()=>{if(!rate)return toast(t('pick'));const o={rating:rate,text:$('#rt').value.trim().slice(0,500)};
+    try{if(mine)await ref.update({...o,edited:Date.now()});else await ref.set({...o,name:U.displayName||U.email.split('@')[0],ts:Date.now()});toast(t('saved'))}catch(e){toast(e.message)}};
+  if(mine)$('#rd').onclick=async()=>{if(!confirm(t('conf')))return;try{await ref.delete();f.dataset.k='';toast(t('delok'))}catch(e){toast(e.message)}}}
 
 async function dl(id){
   const a=APPS[id];if(!U){toast(t('needlogin'));location.hash='#/me';return}
   const ap=db.collection('apps').doc(id),r=ap.collection('dl').doc(U.uid);let ok=false;
   try{await db.runTransaction(async tx=>{const s=await tx.get(r),n=Date.now();
     if(!s.exists||n-s.data().ts.toMillis()>864e5){tx.set(r,{ts:FV.serverTimestamp()});tx.update(ap,{downloads:FV.increment(1)});ok=true}})}catch(e){console.error(e)}
-  if(!ok)toast(t('once'));const l=document.createElement('a');l.href=a.apk;l.download='';l.rel='noopener';document.body.appendChild(l);l.click();l.remove();
+  const l=document.createElement('a');l.href=a.apk;l.download='';l.rel='noopener';document.body.appendChild(l);l.click();l.remove();
 }
 
 function me(){const m=$('#m');
-  if(U){m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p><button class="btn o" onclick="auth.signOut()">${t('out')}</button>`;
+  if(U){m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p><button class="btn o" onclick="auth.signOut()">${t('out')}</button>${iosHint()}`;
     return}
-  m.innerHTML=`<h2>${t('acc')}</h2><div id="nw" style="display:none"><label>${t('name')}</label><input id="nm"></div><label>${t('email')}</label><input id="e" type="email" placeholder="example@gmail.com"><label>${t('pass')}</label><input id="p" type="password"><button class="btn" id="go">${t('login')}</button><p style="text-align:center;margin-top:14px"><a href="#" id="tg" style="color:#000;font-weight:600">${t('noacc')}</a></p>`;
+  m.innerHTML=`<h2>${t('acc')}</h2><div id="nw" style="display:none"><label>${t('name')}</label><input id="nm"></div><label>${t('email')}</label><input id="e" type="email" placeholder="example@gmail.com"><label>${t('pass')}</label><input id="p" type="password"><button class="btn" id="go">${t('login')}</button><p style="text-align:center;margin-top:14px"><a href="#" id="tg" style="color:#000;font-weight:600">${t('noacc')}</a></p>${iosHint()}`;
   let up=false;const go=p=>p.catch(e=>toast(e.message));
   $('#tg').onclick=e=>{e.preventDefault();up=!up;$('#nw').style.display=up?'block':'none';$('#go').textContent=up?t('su'):t('login');$('#tg').textContent=up?t('has'):t('noacc')};
   $('#go').onclick=()=>{const em=$('#e').value.trim(),pw=$('#p').value;
