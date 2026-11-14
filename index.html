@@ -31,47 +31,11 @@ nav a.on{color:#000}nav .p{padding:4px 22px;border-radius:16px;display:flex}nav 
 input,textarea{width:100%;padding:12px;border:2px solid #000;border-radius:12px;font:inherit;background:#fff;color:#000;margin:4px 0 10px}
 label{font-weight:600;font-size:14px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--card)}.row img{width:44px;height:44px;border-radius:10px}
-.stars span{font-size:28px;cursor:pointer;color:#bbb}.stars span.on{color:#f5a623}
+.stars{display:flex;flex-direction:row;align-items:center;gap:8px;width:max-content;margin:8px 0 14px}.stars span{display:inline-block;font-size:32px;line-height:1;cursor:pointer;color:#c7c7c7;user-select:none}.stars span.on{color:#f5a623}
 #toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;display:none;z-index:9}
 .prog{height:6px;background:var(--card);border-radius:3px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:#000}
-
-.bk{font-size:28px;padding:10px 0 2px;cursor:pointer;width:44px;line-height:1}
-.top{margin-top:8px}.top h3{font-size:24px}.top p{color:#0b57d0;font-weight:600}.top small{color:var(--mut);font-weight:500}
-.st{display:flex;margin:22px 0 6px;text-align:center}.st>div{flex:1;border-left:1px solid #dadce0;padding:2px 4px}.st>div:first-child{border:0}
-.st b{display:block;font-size:15px;font-weight:600}.st span{font-size:12px;color:var(--mut)}
-.btn.gr{background:#01875f;border-radius:24px;font-size:16px;padding:12px;margin:14px 0 20px}
-.chip{border:1px solid #747775;border-radius:8px;font-size:13px;font-weight:500;padding:7px 14px}
-.shots img{height:320px;border-radius:16px}
-
-:root{--card:#f3f3f3;--mut:#6b6b6b}
-body{letter-spacing:-.01em;padding-bottom:104px}
-header{padding:16px 20px}header h1{font-size:22px;font-weight:700;letter-spacing:-.02em}
-.ib{background:#f3f3f3;width:40px;height:40px;border-radius:50%}
-h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
-.grid{grid-template-columns:repeat(3,1fr);gap:24px 14px}
-.tile{transition:transform .15s}.tile:active{transform:scale(.96)}
-.tile img{border-radius:24%;box-shadow:0 6px 18px rgba(0,0,0,.14)}.tile b{font-size:13.5px;margin-top:10px}
-.top .ico{width:104px;border-radius:24%;box-shadow:0 8px 24px rgba(0,0,0,.16)}
-.top h3{font-size:26px;font-weight:700;letter-spacing:-.02em}.top p{color:#000;opacity:.6;font-weight:500}
-.st{background:#f3f3f3;border-radius:22px;padding:14px 0;margin:22px 0 6px}.st>div{border-left:1px solid #dcdcdc}.st b{font-size:16px;font-weight:700}
-.btn{border-radius:999px}.btn.o{background:#f3f3f3;border:0;color:#000}
-.btn.gr{background:#000;color:#fff;height:54px;padding:0;font-size:17px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.22);margin:16px 0 22px}.btn:active{transform:scale(.98)}
-.shots img{height:340px;border-radius:22px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
-.chip{background:#f3f3f3;border:0;border-radius:999px;font-weight:600;font-size:13.5px;padding:9px 16px}
-input,textarea{background:#f3f3f3;border:0;border-radius:18px;padding:14px 16px}
-.rev{background:#f7f7f7;border:0;border-radius:18px;padding:14px 16px;margin-bottom:10px}
-.row{background:#f7f7f7;border:0;border-radius:18px;padding:10px 12px;margin-bottom:8px}
-nav{left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(0,0,0,.14);padding:8px 6px}
-nav a.on .p{background:#000;color:#fff}
-#toast{border-radius:999px}
-.stars span{margin-right:2px}.stars span svg{display:block}.stars span path{fill:#d9d9d9;stroke:#d9d9d9}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
-#al2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.ac{background:#f7f7f7;border-radius:20px;padding:14px 10px;text-align:center}.ac img{width:68px;height:68px;border-radius:24%;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,.12)}
-.ac b{display:block;margin-top:8px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac small{display:block;color:#6b6b6b;font-size:12px;margin:2px 0 10px}
-.ab{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}.ab .btn.sm{padding:7px 10px;font-size:12px;background:#fff}
 </style></head><body>
 <header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><button class="ib" id="mb">⋮</button><div class="av" id="av" onclick="location.hash='#/me'">A</div><div id="mn"></div></div></header>
-<div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
 <main id="m"></main><div id="toast"></div>
 <nav id="nav"></nav>
 
@@ -81,17 +45,13 @@ nav a.on .p{background:#000;color:#fff}
 <script>
 const ADMINS=['monowaamasum@gmail.com'];
 const IMGBB='718d414b6ea52d893542fac3fbeba1f1';
-firebase.initializeApp({apiKey:"AIzaSyBQqJYlZbU_eNY5rWiVBsfJGY1cII6eB2E",authDomain:"frangowst-apps.firebaseapp.com",projectId:"frangowst-apps",storageBucket:"frangowst-apps.firebasestorage.app",messagingSenderId:"304578058733",appId:"1:304578058733:web:9c64df017486e9f2ae6fe4"});
+firebase.initializeApp({apiKey:"AIzaSyDk5WuV2QlFOJaLTJqmDN6Da73FEofVi_A",authDomain:"rdb-store.firebaseapp.com",projectId:"rdb-store",storageBucket:"rdb-store.firebasestorage.app",messagingSenderId:"296925523426",appId:"1:296925523426:web:7b8d4f8b92c0640ad3ddbb"});
 const auth=firebase.auth(),db=firebase.firestore(),FV=firebase.firestore.FieldValue;
 const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',admin:'অ্যাডমিন প্যানেল',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',alogin:'অ্যাডমিন লগইন',anot:'এটি অ্যাডমিন অ্যাকাউন্ট নয়',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
 en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',admin:'Admin Panel',sq:'Search apps',load:'Loading…',ver:'Version',alogin:'Admin Login',anot:'This is not an admin account',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
 let L='en';try{L=localStorage.getItem('l')||'en'}catch(e){}
 const t=k=>T[L][k]||k;
 let U=null,APPS={},$=s=>document.querySelector(s);
-const bnr=m=>{const b=$('#bn');b.style.display=m?'block':'none';b.textContent=m||''};
-const pr=(m,c)=>{const e=$('#er');if(e){e.style.color=c||'#c00';e.textContent=m}};
-window.onerror=(m)=>bnr('Script error: '+m);window.onunhandledrejection=e=>bnr('Error: '+(e.reason&&e.reason.message||e.reason));
-const SV=(c,z=18)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" style="vertical-align:-3px"><path d="M12 3.6l2.5 5.2 5.7.8-4.2 4 1 5.7L12 16.6l-5 2.7 1-5.7-4.2-4 5.7-.8z" fill="${c}" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isAdmin=()=>U&&ADMINS.includes((U.email||'').toLowerCase());
 const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
@@ -104,14 +64,14 @@ $('#mb').onclick=e=>{e.stopPropagation();const m=$('#mn');if(m.style.display==='
 $('#mn').onclick=e=>{const d=e.target.closest('div[data-h],div[data-o]');if(!d)return;if(d.dataset.o)auth.signOut();else location.hash=d.dataset.h};
 document.addEventListener('click',()=>$('#mn').style.display='none');
 auth.onAuthStateChanged(u=>{U=u;setAv();route()});
-db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());bnr();if((location.hash||'').startsWith('#/admin')&&$('#sv'))adminList();else route()},e=>bnr('Database error ('+e.code+'): '+e.message));
+db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());route()});
 addEventListener('hashchange',route);
 
 function route(){
   const h=location.hash||'#/',p=h.split('/');$('#lg').textContent=L==='bn'?'EN':'বাং';
   const tabs=[['#/','h',t('home')],['#/search','s',t('search')],['#/me','u',t('acc')]];
   $('#nav').innerHTML=tabs.map(x=>`<a class="${h===x[0]||(x[0]==='#/'&&p[1]==='app')?'on':''}" href="${x[0]}"><span class="p">${ic[x[1]]}</span>${x[2]}</a>`).join('');
-  revOff();$('header').style.display=p[1]==='app'?'none':'';
+  revOff();
   if(p[1]==='app')return detail(p[2]);
   if(p[1]==='search')return search();
   if(p[1]==='me')return me();
@@ -128,28 +88,37 @@ let offs=[];const revOff=()=>{offs.forEach(f=>f());offs=[]};
 function detail(id){
   const a=APPS[id];if(!a)return $('#m').innerHTML=`<h2>${t('load')}</h2>`;
   const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean);
-  $('#m').innerHTML=`<div class="bk" onclick="location.hash='#/'">←</div>
-  <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
-  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
-  <button class="btn gr" onclick="dl('${id}')">${t('dl')}</button>
-  ${(a.shots||[]).length?`<div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
+  $('#m').innerHTML=`<div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
+  <button class="btn" onclick="dl('${id}')">${t('dl')}</button>
+  <div class="stats"><div><b id="rc">0</b><span>${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b></div></div>
+  <p style="text-align:center;color:var(--mut);font-size:13px">${t('ver')} ${E(a.ver||'1.0.0')} · ${t('up')} ${new Date(a.updatedAt||a.createdAt||Date.now()).toLocaleDateString()}</p>
+  ${cats.length?`<h2>${t('cats')}</h2><div class="chips">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
+  ${(a.shots||[]).length?`<h2>${t('shots')}</h2><div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
   ${a.wn?`<h2>${t('wn')}</h2><p style="white-space:pre-wrap">${E(a.wn)}</p>`:''}
   ${a.desc?`<h2>${t('about')}</h2><p style="white-space:pre-wrap">${E(a.desc)}</p>`:''}
-  ${cats.length?`<div class="chips" style="margin-top:16px">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
   <h2>${t('rat')} <span id="avg"></span></h2><div id="rf"></div><div id="rl"></div>`;
   const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.values(v).sort((x,y)=>y.ts-x.ts);
-    const av=l.length?(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';$('#rc').textContent=l.length;$('#avg').innerHTML=av?SV('#FFCC00',18)+' '+av:'';$('#a2').innerHTML=av?av+' '+SV('#FFCC00',15):'—';
-    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> ${Array(x.rating).fill(SV('#FFCC00',14)).join('')}<br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
+    $('#rc').textContent=l.length;$('#avg').textContent=l.length?'★ '+(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';
+    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> <span style="color:#f5a623">${'★'.repeat(x.rating)}</span><br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
     form(id,U&&v[U.uid])});
   offs.push(un);
 }
-let rate=5;
+let rate=0;
 function form(id,mine){const f=$('#rf');if(!f)return;
   if(!U)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('lr')}</button>`;
-  rate=mine?mine.rating:5;
-  f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">${SV('#d9d9d9',32)}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
-  f.querySelectorAll('.stars span').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;f.querySelectorAll('.stars span').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate))});
-  $('#rs').onclick=async()=>{await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});toast(t('saved'))}}
+  rate=mine?mine.rating:0;
+  f.innerHTML=`<div class="stars" role="group" aria-label="Choose a rating">${[1,2,3,4,5].map(i=>`<span role="button" tabindex="0" aria-label="${i} star${i===1?'':'s'}" data-i="${i}" class="${i<=rate?'on':''}">${i<=rate?'★':'☆'}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
+  const paintStars=()=>f.querySelectorAll('.stars span').forEach(x=>{const active=+x.dataset.i<=rate;x.classList.toggle('on',active);x.textContent=active?'★':'☆'});
+  f.querySelectorAll('.stars span').forEach(s=>{
+    const choose=()=>{rate=+s.dataset.i;paintStars()};
+    s.onclick=choose;
+    s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}};
+  });
+  $('#rs').onclick=async()=>{
+    if(!rate)return toast('Please select a star rating');
+    await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});
+    toast(t('saved'))
+  }}
 
 async function dl(id){
   const a=APPS[id];if(!U){toast(t('needlogin'));location.hash='#/me';return}
@@ -180,14 +149,11 @@ function me(){const m=$('#m');
 }
 
 /* ---------- ADMIN ---------- */
-function small(f,max,png){return new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext('2d').drawImage(i,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL(png?'image/png':'image/jpeg',0.75))};i.onerror=()=>no(new Error('Cannot read this image'));i.src=u})}
-async function img(file,max,png){try{const f=new FormData();f.append('image',file);const r=await fetch('https://api.imgbb.com/1/upload?key='+IMGBB,{method:'POST',body:f}),j=await r.json();if(!j.success)throw 0;return j.data.url}catch(e){return await small(file,max,png)}}
-const to=(p,ms)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('Timed out: Firestore database not created, rules not published, or no internet')),ms))]);
+async function img(file){const f=new FormData();f.append('image',file);const r=await fetch('https://api.imgbb.com/1/upload?key='+IMGBB,{method:'POST',body:f}),j=await r.json();if(!j.success)throw new Error('Image upload failed');return j.data.url}
 let editId=null;
 function adminLogin(){$('#m').innerHTML=`<h2>${t('alogin')}</h2><label>Email</label><input id="ae" type="email"><label>Password</label><input id="ap2" type="password"><button class="btn" id="ag">${t('login')}</button>`;
   $('#ag').onclick=async()=>{try{const c=await auth.signInWithEmailAndPassword($('#ae').value.trim(),$('#ap2').value);
     if(!ADMINS.includes((c.user.email||'').toLowerCase())){await auth.signOut();toast(t('anot'))}}catch(e){toast(e.message)}}}
-function adminList(){const e=$('#al2');if(e)e.innerHTML=list().map(x=>`<div class="ac"><img src="${E(x.icon)}"><b>${E(x.name)}</b><small>${x.downloads||0} downloads · v${E(x.ver||'1.0.0')}<br>${fmt(x.size)}</small><div class="ab"><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="rs('${x.id}')">Reset</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div></div>`).join('')}
 function admin(){
   const l=list(),a=editId?APPS[editId]:{};
   $('#m').innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h2>${editId?'Edit':'Upload'} app</h2><button class="btn o sm" onclick="auth.signOut()">Logout</button></div>
@@ -201,15 +167,15 @@ function admin(){
   <label>GitHub repo (username/repo) — auto-fills APK link, size &amp; version from the latest Release</label><input id="gh" value="${E(a.gh)}" placeholder="username/repo">
   <label>APK file (only to read its size — NOT uploaded)</label><input type="file" id="ap" accept=".apk">
   <label>or APK direct download link</label><input id="al" value="${E(a.apk)}" placeholder="https://..."><label>Size in MB (only if you did not select the file)</label><input id="sz" type="number" step="0.1">
-  <button class="btn" id="sv">${editId?'Save changes':'Publish'}</button><p id="er" style="color:#c00;font-weight:600;margin-top:10px"></p>${editId?'<button class="btn o" onclick="editId=null;admin()">Cancel</button>':''}
-  <h2>All apps</h2><div id="al2"></div>`;adminList();
+  <button class="btn" id="sv">${editId?'Save changes':'Publish'}</button>${editId?'<button class="btn o" onclick="editId=null;admin()">Cancel</button>':''}
+  <h2>All apps</h2>`+l.map(x=>`<div class="row"><img src="${E(x.icon)}"><div style="flex:1"><b>${E(x.name)}</b><br><small>${fmt(x.size)} · ${x.downloads||0} downloads · v${E(x.ver||'1.0.0')}</small></div><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div>`).join('');
   $('#sv').onclick=async()=>{const b=$('#sv');b.disabled=true;b.textContent='Wait…';
     try{const o={name:$('#n').value.trim(),dev:$('#d').value.trim(),cats:$('#c').value,desc:$('#ds').value,ads:$('#ad').checked,ver:$('#vr').value.trim()||'1.0.0',wn:$('#wn').value,updatedAt:Date.now()};
       if(!o.name)throw new Error('Name required');
       const ic=$('#ic').files[0],shs=[...$('#sh').files],ap=$('#ap').files[0];
-      pr('1/3 Uploading images…','#555');if(ic)o.icon=await img(ic,192,true);else if(!a.icon)throw new Error('Icon required — select an app icon');
-      if(shs.length)o.shots=await Promise.all(shs.slice(0,6).map(f=>img(f,800,false)));
-      pr('2/3 Checking APK / GitHub…','#555');const gm=$('#gh').value.trim().match(/^(?:https?:\/\/github\.com\/)?([\w.-]+\/[\w.-]+)/);
+      if(ic)o.icon=await img(ic);else if(!a.icon)throw new Error('Icon required');
+      if(shs.length)o.shots=await Promise.all(shs.map(img));
+      const gm=$('#gh').value.trim().match(/^(?:https?:\/\/github\.com\/)?([\w.-]+\/[\w.-]+)/);
       if(gm){o.gh=gm[1];const r=await fetch('https://api.github.com/repos/'+o.gh+'/releases/latest');
         if(!r.ok)throw new Error('GitHub Release not found (repo must be Public and a Release must be published)');
         const j=await r.json(),as=(j.assets||[]).find(x=>/\.apk$/i.test(x.name));
@@ -219,10 +185,9 @@ function admin(){
       else{o.gh='';o.apk=$('#al').value.trim().replace(/^https?:\/\/github\.com\/([^\/]+\/[^\/]+)\/blob\//,'https://raw.githubusercontent.com/$1/');
         if(!/^https?:\/\//.test(o.apk))throw new Error('GitHub repo or APK link required');
         if(ap)o.size=ap.size;else if($('#sz').value)o.size=Math.round($('#sz').value*1048576)}
-      pr('3/3 Saving to database…','#555');await to(editId?db.collection('apps').doc(editId).update(o):db.collection('apps').add({...o,downloads:0,createdAt:Date.now()}),20000);
-      toast('Done ✓');editId=null;admin();pr('Published ✓','#080')}
-    catch(e){const m=e.code==='permission-denied'?'Permission denied: publish the Firestore rules and log in as admin':e.message;pr(m);toast(m);b.disabled=false;b.textContent=editId?'Save changes':'Publish'}}
+      if(editId)await db.collection('apps').doc(editId).update(o);else await db.collection('apps').add({...o,downloads:0,createdAt:Date.now()});
+      toast('Done ✓');editId=null;admin()}
+    catch(e){toast(e.message);b.disabled=false;b.textContent='Publish'}}
 }
-async function rs(id){if(confirm('Reset download count to 0?')){try{await db.collection('apps').doc(id).update({downloads:0});toast('Download count reset ✓')}catch(e){toast(e.message)}}}
 async function del(id){if(confirm('Delete this app?'))await db.collection('apps').doc(id).delete()}
 </script></body></html>
