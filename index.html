@@ -42,6 +42,29 @@ label{font-weight:600;font-size:14px}
 .btn.gr{background:#01875f;border-radius:24px;font-size:16px;padding:12px;margin:14px 0 20px}
 .chip{border:1px solid #747775;border-radius:8px;font-size:13px;font-weight:500;padding:7px 14px}
 .shots img{height:320px;border-radius:16px}
+
+:root{--card:#f3f3f3;--mut:#6b6b6b}
+body{letter-spacing:-.01em;padding-bottom:104px}
+header{padding:16px 20px}header h1{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.ib{background:#f3f3f3;width:40px;height:40px;border-radius:50%}
+h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.grid{grid-template-columns:repeat(3,1fr);gap:24px 14px}
+.tile{transition:transform .15s}.tile:active{transform:scale(.96)}
+.tile img{border-radius:24%;box-shadow:0 6px 18px rgba(0,0,0,.14)}.tile b{font-size:13.5px;margin-top:10px}
+.top .ico{width:104px;border-radius:24%;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.top h3{font-size:26px;font-weight:700;letter-spacing:-.02em}.top p{color:#000;opacity:.6;font-weight:500}
+.st{background:#f3f3f3;border-radius:22px;padding:14px 0;margin:22px 0 6px}.st>div{border-left:1px solid #dcdcdc}.st b{font-size:16px;font-weight:700}
+.btn{border-radius:999px}.btn.o{background:#f3f3f3;border:0;color:#000}
+.btn.gr{background:#000;color:#fff;height:54px;padding:0;font-size:17px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.22);margin:16px 0 22px}.btn:active{transform:scale(.98)}
+.shots img{height:340px;border-radius:22px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.chip{background:#f3f3f3;border:0;border-radius:999px;font-weight:600;font-size:13.5px;padding:9px 16px}
+input,textarea{background:#f3f3f3;border:0;border-radius:18px;padding:14px 16px}
+.rev{background:#f7f7f7;border:0;border-radius:18px;padding:14px 16px;margin-bottom:10px}
+.row{background:#f7f7f7;border:0;border-radius:18px;padding:10px 12px;margin-bottom:8px}
+nav{left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(0,0,0,.14);padding:8px 6px}
+nav a.on .p{background:#000;color:#fff}
+#toast{border-radius:999px}
+.stars span{margin-right:2px}.stars span svg{display:block}.stars span path{fill:#d9d9d9;stroke:#d9d9d9}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
 </style></head><body>
 <header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><button class="ib" id="mb">⋮</button><div class="av" id="av" onclick="location.hash='#/me'">A</div><div id="mn"></div></div></header>
 <div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
@@ -64,6 +87,7 @@ let U=null,APPS={},$=s=>document.querySelector(s);
 const bnr=m=>{const b=$('#bn');b.style.display=m?'block':'none';b.textContent=m||''};
 const pr=(m,c)=>{const e=$('#er');if(e){e.style.color=c||'#c00';e.textContent=m}};
 window.onerror=(m)=>bnr('Script error: '+m);window.onunhandledrejection=e=>bnr('Error: '+(e.reason&&e.reason.message||e.reason));
+const SV=(c,z=18)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" style="vertical-align:-3px"><path d="M12 3.6l2.5 5.2 5.7.8-4.2 4 1 5.7L12 16.6l-5 2.7 1-5.7-4.2-4 5.7-.8z" fill="${c}" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isAdmin=()=>U&&ADMINS.includes((U.email||'').toLowerCase());
 const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
@@ -102,7 +126,7 @@ function detail(id){
   const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean);
   $('#m').innerHTML=`<div class="bk" onclick="location.hash='#/'">←</div>
   <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
-  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>⬇ ${fmt(a.size)}</b><span>${t('ver')} ${E(a.ver||'1.0.0')}</span></div></div>
+  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
   <button class="btn gr" onclick="dl('${id}')">${t('dl')}</button>
   ${(a.shots||[]).length?`<div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
   ${a.wn?`<h2>${t('wn')}</h2><p style="white-space:pre-wrap">${E(a.wn)}</p>`:''}
@@ -110,8 +134,8 @@ function detail(id){
   ${cats.length?`<div class="chips" style="margin-top:16px">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
   <h2>${t('rat')} <span id="avg"></span></h2><div id="rf"></div><div id="rl"></div>`;
   const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.values(v).sort((x,y)=>y.ts-x.ts);
-    const av=l.length?(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';$('#rc').textContent=l.length;$('#avg').textContent=av?'★ '+av:'';$('#a2').textContent=av?av+' ★':'—';
-    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> <span style="color:#f5a623">${'★'.repeat(x.rating)}</span><br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
+    const av=l.length?(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';$('#rc').textContent=l.length;$('#avg').innerHTML=av?SV('#FFCC00',18)+' '+av:'';$('#a2').innerHTML=av?av+' '+SV('#FFCC00',15):'—';
+    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> ${Array(x.rating).fill(SV('#FFCC00',14)).join('')}<br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
     form(id,U&&v[U.uid])});
   offs.push(un);
 }
@@ -119,7 +143,7 @@ let rate=5;
 function form(id,mine){const f=$('#rf');if(!f)return;
   if(!U)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('lr')}</button>`;
   rate=mine?mine.rating:5;
-  f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">★</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
+  f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">${SV('#d9d9d9',32)}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
   f.querySelectorAll('.stars span').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;f.querySelectorAll('.stars span').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate))});
   $('#rs').onclick=async()=>{await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});toast(t('saved'))}}
 
