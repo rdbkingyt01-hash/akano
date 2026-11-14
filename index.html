@@ -42,19 +42,18 @@ label{font-weight:600;font-size:14px}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth-compat.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore-compat.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-storage-compat.min.js"></script>
 <script>
-const ADMINS=['YOUR_EMAIL@gmail.com']; // <-- admin email(gulo) ekhane din
+const ADMINS=['monowaamasum@gmail.com'];
 const IMGBB='718d414b6ea52d893542fac3fbeba1f1';
 firebase.initializeApp({apiKey:"AIzaSyDk5WuV2QlFOJaLTJqmDN6Da73FEofVi_A",authDomain:"rdb-store.firebaseapp.com",projectId:"rdb-store",storageBucket:"rdb-store.firebasestorage.app",messagingSenderId:"296925523426",appId:"1:296925523426:web:7b8d4f8b92c0640ad3ddbb"});
-const auth=firebase.auth(),db=firebase.firestore(),st=firebase.storage(),FV=firebase.firestore.FieldValue;
-const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',admin:'অ্যাডমিন প্যানেল',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…'},
-en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',admin:'Admin Panel',sq:'Search apps',load:'Loading…'}};
-let L='bn';try{L=localStorage.getItem('l')||'bn'}catch(e){}
+const auth=firebase.auth(),db=firebase.firestore(),FV=firebase.firestore.FieldValue;
+const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',admin:'অ্যাডমিন প্যানেল',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
+en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',admin:'Admin Panel',sq:'Search apps',load:'Loading…',ver:'Version',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
+let L='en';try{L=localStorage.getItem('l')||'en'}catch(e){}
 const t=k=>T[L][k]||k;
 let U=null,APPS={},$=s=>document.querySelector(s);
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const isAdmin=()=>U&&ADMINS.includes((U.email||'').toLowerCase());
+const isAdmin=()=>U&&U.emailVerified&&ADMINS.includes((U.email||'').toLowerCase());
 const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
 const toast=x=>{const e=$('#toast');e.textContent=x;e.style.display='block';setTimeout(()=>e.style.display='none',2800)};
 const ic={h:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10H3z"/></svg>',s:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>',u:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>'};
@@ -92,8 +91,10 @@ function detail(id){
   $('#m').innerHTML=`<div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
   <button class="btn" onclick="dl('${id}')">${t('dl')}</button>
   <div class="stats"><div><b id="rc">0</b><span>${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b></div></div>
+  <p style="text-align:center;color:var(--mut);font-size:13px">${t('ver')} ${E(a.ver||'1.0.0')} · ${t('up')} ${new Date(a.updatedAt||a.createdAt||Date.now()).toLocaleDateString()}</p>
   ${cats.length?`<h2>${t('cats')}</h2><div class="chips">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
   ${(a.shots||[]).length?`<h2>${t('shots')}</h2><div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
+  ${a.wn?`<h2>${t('wn')}</h2><p style="white-space:pre-wrap">${E(a.wn)}</p>`:''}
   ${a.desc?`<h2>${t('about')}</h2><p style="white-space:pre-wrap">${E(a.desc)}</p>`:''}
   <h2>${t('rat')} <span id="avg"></span></h2><div id="rf"></div><div id="rl"></div>`;
   const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.values(v).sort((x,y)=>y.ts-x.ts);
@@ -105,6 +106,7 @@ function detail(id){
 let rate=5;
 function form(id,mine){const f=$('#rf');if(!f)return;
   if(!U)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('lr')}</button>`;
+  if(!U.emailVerified)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('vnote')}</button>`;
   rate=mine?mine.rating:5;
   f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">★</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
   f.querySelectorAll('.stars span').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;f.querySelectorAll('.stars span').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate))});
@@ -112,21 +114,32 @@ function form(id,mine){const f=$('#rf');if(!f)return;
 
 async function dl(id){
   const a=APPS[id];if(!U){toast(t('needlogin'));location.hash='#/me';return}
+  if(!U.emailVerified){toast(t('vnote'));location.hash='#/me';return}
   const ap=db.collection('apps').doc(id),r=ap.collection('dl').doc(U.uid);let ok=false;
   try{await db.runTransaction(async tx=>{const s=await tx.get(r),n=Date.now();
-    if(!s.exists||n-s.data().ts>864e5){tx.set(r,{ts:n});tx.update(ap,{downloads:FV.increment(1)});ok=true}})}catch(e){console.error(e)}
+    if(!s.exists||n-s.data().ts.toMillis()>864e5){tx.set(r,{ts:FV.serverTimestamp()});tx.update(ap,{downloads:FV.increment(1)});ok=true}})}catch(e){console.error(e)}
   if(!ok)toast(t('once'));window.open(a.apk,'_blank');
 }
 
 function me(){const m=$('#m');
-  if(U)return m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p>${isAdmin()?`<button class="btn" onclick="location.hash='#/admin'">${t('admin')}</button>`:''}<button class="btn o" onclick="auth.signOut()">${t('out')}</button>`;
+  if(U){m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p>${U.emailVerified?'':`<p style="margin:14px 0;font-weight:600">${t('vnote')}</p><div style="display:flex;gap:10px"><button class="btn sm" id="rsd">${t('resend')}</button><button class="btn o sm" id="ver">${t('done')}</button></div>`}${isAdmin()?`<button class="btn" onclick="location.hash='#/admin'">${t('admin')}</button>`:''}<button class="btn o" onclick="auth.signOut()">${t('out')}</button>`;
+    if(!U.emailVerified){$('#rsd').onclick=()=>U.sendEmailVerification().then(()=>toast(t('sent'))).catch(e=>toast(e.message));
+      $('#ver').onclick=async()=>{await U.reload();await U.getIdToken(true);setAv();route();if(!U.emailVerified)toast(t('notyet'))}}
+    return}
   m.innerHTML=`<h2>${t('acc')}</h2><div id="nw" style="display:none"><label>${t('name')}</label><input id="nm"></div><label>${t('email')}</label><input id="e" type="email" placeholder="example@gmail.com"><label>${t('pass')}</label><input id="p" type="password"><button class="btn" id="go">${t('login')}</button><p style="text-align:center;margin-top:14px"><a href="#" id="tg" style="color:#000;font-weight:600">${t('noacc')}</a></p>`;
   let up=false;const go=p=>p.catch(e=>toast(e.message));
   $('#tg').onclick=e=>{e.preventDefault();up=!up;$('#nw').style.display=up?'block':'none';$('#go').textContent=up?t('su'):t('login');$('#tg').textContent=up?t('has'):t('noacc')};
   $('#go').onclick=()=>{const em=$('#e').value.trim(),pw=$('#p').value;
     if(!up)return go(auth.signInWithEmailAndPassword(em,pw));
     const nm=$('#nm').value.trim();if(!nm)return toast(t('nn'));
-    go(auth.createUserWithEmailAndPassword(em,pw).then(c=>c.user.updateProfile({displayName:nm})).then(()=>{setAv();route()}))};
+    const lp=em.toLowerCase().split('@')[0];if(!/^[^@\s]+@gmail\.com$/i.test(em)||lp.includes('+'))return toast(t('gonly'));
+    let arr=[];try{arr=JSON.parse(localStorage.getItem('su')||'[]').filter(x=>Date.now()-x<864e5)}catch(e){}
+    if(arr.length>=2)return toast(t('lim'));
+    go((async()=>{const c=await auth.createUserWithEmailAndPassword(em,pw);
+      try{await db.collection('emails').doc(lp.replace(/\./g,'')+'@gmail.com').set({uid:c.user.uid})}catch(e){await c.user.delete();throw new Error(t('used'))}
+      await c.user.updateProfile({displayName:nm});await c.user.sendEmailVerification();
+      try{arr.push(Date.now());localStorage.setItem('su',JSON.stringify(arr))}catch(e){}
+      setAv();route();toast(t('sent'))})())};
 }
 
 /* ---------- ADMIN ---------- */
@@ -137,24 +150,23 @@ function admin(){
   $('#m').innerHTML=`<h2>${editId?'Edit':'Upload'} app</h2>
   <label>App name</label><input id="n" value="${E(a.name)}"><label>Developer</label><input id="d" value="${E(a.dev||'Frangowst')}">
   <label>Categories (comma)</label><input id="c" value="${E(a.cats)}" placeholder="Entertainment, Streaming, Animation">
+  <label>Version (e.g. 1.0.0)</label><input id="vr" value="${E(a.ver||'1.0.0')}"><label>What's new</label><textarea id="wn" rows="2">${E(a.wn)}</textarea>
   <label>Description</label><textarea id="ds" rows="3">${E(a.desc)}</textarea>
   <label><input type="checkbox" id="ad" style="width:auto" ${a.ads!==false?'checked':''}> Contains ad</label><br><br>
   <label>App icon ${editId?'(optional)':''}</label><input type="file" id="ic" accept="image/*">
   <label>Screenshots</label><input type="file" id="sh" accept="image/*" multiple>
-  <label>APK file (size auto)</label><input type="file" id="ap" accept=".apk">
-  <label>or APK link</label><input id="al" value="${E(a.apk)}" placeholder="https://..."><label>Link size (MB, optional)</label><input id="sz" type="number" step="0.1">
-  <div class="prog"><i id="pg"></i></div><button class="btn" id="sv">${editId?'Save changes':'Publish'}</button>${editId?'<button class="btn o" onclick="editId=null;admin()">Cancel</button>':''}
-  <h2>All apps</h2>`+l.map(x=>`<div class="row"><img src="${E(x.icon)}"><div style="flex:1"><b>${E(x.name)}</b><br><small>${fmt(x.size)} · ${x.downloads||0} downloads</small></div><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div>`).join('');
+  <label>APK file (only to read its size — NOT uploaded)</label><input type="file" id="ap" accept=".apk">
+  <label>APK direct download link</label><input id="al" value="${E(a.apk)}" placeholder="https://..."><label>Size in MB (only if you did not select the file)</label><input id="sz" type="number" step="0.1">
+  <button class="btn" id="sv">${editId?'Save changes':'Publish'}</button>${editId?'<button class="btn o" onclick="editId=null;admin()">Cancel</button>':''}
+  <h2>All apps</h2>`+l.map(x=>`<div class="row"><img src="${E(x.icon)}"><div style="flex:1"><b>${E(x.name)}</b><br><small>${fmt(x.size)} · ${x.downloads||0} downloads · v${E(x.ver||'1.0.0')}</small></div><button class="btn o sm" onclick="editId='${x.id}';admin();scrollTo(0,0)">Edit</button><button class="btn o sm" onclick="del('${x.id}')">Delete</button></div>`).join('');
   $('#sv').onclick=async()=>{const b=$('#sv');b.disabled=true;b.textContent='Wait…';
-    try{const o={name:$('#n').value.trim(),dev:$('#d').value.trim(),cats:$('#c').value,desc:$('#ds').value,ads:$('#ad').checked};
+    try{const o={name:$('#n').value.trim(),dev:$('#d').value.trim(),cats:$('#c').value,desc:$('#ds').value,ads:$('#ad').checked,ver:$('#vr').value.trim()||'1.0.0',wn:$('#wn').value,updatedAt:Date.now()};
       if(!o.name)throw new Error('Name required');
       const ic=$('#ic').files[0],shs=[...$('#sh').files],ap=$('#ap').files[0];
       if(ic)o.icon=await img(ic);else if(!a.icon)throw new Error('Icon required');
       if(shs.length)o.shots=await Promise.all(shs.map(img));
-      if(ap){const tk=st.ref('apks/'+Date.now()+'_'+ap.name).put(ap);
-        await new Promise((ok,no)=>tk.on('state_changed',s=>$('#pg').style.width=(s.bytesTransferred/s.totalBytes*100)+'%',no,ok));
-        o.apk=await tk.snapshot.ref.getDownloadURL();o.size=ap.size}
-      else{o.apk=$('#al').value.trim();if(!o.apk)throw new Error('APK file or link required');if($('#sz').value)o.size=Math.round($('#sz').value*1048576)}
+      o.apk=$('#al').value.trim();if(!/^https?:\/\//.test(o.apk))throw new Error('APK link required');
+      if(ap)o.size=ap.size;else if($('#sz').value)o.size=Math.round($('#sz').value*1048576);
       if(editId)await db.collection('apps').doc(editId).update(o);else await db.collection('apps').add({...o,downloads:0,createdAt:Date.now()});
       toast('Done ✓');editId=null;admin()}
     catch(e){toast(e.message);b.disabled=false;b.textContent='Publish'}}
