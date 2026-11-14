@@ -4,141 +4,144 @@
 <title>Frangowst Apps</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--card:#f1f3f4;--line:#e3e5e8;--acc:#01875f;--star:#f5a623;color-scheme:light}
+:root{--bg:#fff;--fg:#000;--mut:#555;--card:#f1f3f4;--bd:#000;color-scheme:light}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-body{font-family:Inter,'Hind Siliguri',sans-serif;background:var(--bg);color:var(--fg);padding-bottom:84px}
-header{display:flex;align-items:center;gap:10px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));position:sticky;top:0;background:var(--bg);z-index:5}
-header h1{flex:1;font-size:21px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ib{border:0;background:var(--card);border-radius:50%;min-width:40px;height:40px;font:600 13px Inter,sans-serif;cursor:pointer;padding:0 8px;display:inline-flex;align-items:center;justify-content:center;color:var(--fg);flex:none}
-.ib[hidden]{display:none}
-.ib svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.av{width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:700;font-size:19px;cursor:pointer;flex:none}
+body{font-family:Inter,'Hind Siliguri',sans-serif;background:#fff;color:#000;padding-bottom:84px}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;background:#fff;z-index:5}
+header h1{font-size:21px;font-weight:600}.hr{display:flex;align-items:center;gap:8px;position:relative}
+.ib{border:0;background:var(--card);border-radius:50%;min-width:38px;height:38px;font:600 13px Inter,sans-serif;cursor:pointer;padding:0 8px}
+.av{width:40px;height:40px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;font-weight:700;font-size:20px;cursor:pointer}
 main{padding:0 20px;max-width:720px;margin:auto}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:18px 12px}
 .tile{cursor:pointer}.tile img,.ico{width:100%;aspect-ratio:1;border-radius:22%;object-fit:cover;background:var(--card);display:block}
 .tile b{display:block;font-size:13px;font-weight:600;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile small{color:var(--mut);font-size:12px}
 h2{font-size:20px;margin:22px 0 12px}
-.banner{width:calc(100% + 40px);margin:0 -20px 14px;aspect-ratio:2/1;object-fit:cover;display:block;background:var(--card)}
-.top{display:flex;gap:16px;align-items:center}.top .ico{width:92px;flex:none}.top h3{font-size:26px;font-weight:600;line-height:1.15}.top p{color:var(--acc);font-weight:600;margin-top:2px}.top small{font-weight:600;font-size:13px;color:var(--mut)}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:999px;padding:13px 20px;font:600 17px Inter,'Hind Siliguri',sans-serif;width:100%;cursor:pointer;margin-top:16px}
-.btn.sm{width:auto;font-size:14px;padding:9px 18px;margin:0}.btn.o{background:none;color:var(--acc);border:1.5px solid var(--line)}
-.stats{display:flex;text-align:center;margin:22px 0 6px}.stats>div{flex:1;padding:2px 6px;border-left:1px solid var(--line)}.stats>div:first-child{border-left:0}
-.stats b{display:block;font-size:17px;font-weight:600}.stats b em{font-style:normal;font-size:12px;margin-left:2px}.stats span{font-size:12.5px;color:var(--mut)}
-.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:600;font-size:13.5px}
-.shots{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}.shots img{height:300px;border-radius:14px;flex:none;cursor:zoom-in;scroll-snap-align:start;background:var(--card)}
-.note{text-align:center;color:var(--mut);font-size:13px;margin-top:6px}
-/* stars (always one row) */
-.sr{display:inline-flex;flex-direction:row;flex-wrap:nowrap;gap:1px;vertical-align:middle}
-.sr i{display:inline-flex;width:14px;height:14px;color:#d0d3d7}.sr i.on{color:var(--star)}.sr svg{width:100%;height:100%;fill:currentColor}
-.stars{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 0 12px}
-.stars .sb{border:0;background:none;padding:2px;width:42px;height:42px;display:inline-flex;flex:none;color:#d0d3d7;cursor:pointer}.stars .sb.on{color:var(--star)}.stars .sb svg{width:100%;height:100%;fill:currentColor}
-.rsum{display:flex;gap:22px;align-items:center;margin:6px 0 14px}.rsum .big{text-align:center;min-width:84px}.rsum .big b{display:block;font-size:46px;font-weight:500;line-height:1}.rsum .big small{color:var(--mut);display:block;margin-top:4px}
-.bars{flex:1}.br{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin:3px 0}.br span{width:10px}
-.prog{flex:1;height:8px;background:var(--card);border-radius:4px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--acc);border-radius:4px}
-.rev{padding:12px 0;border-bottom:1px solid var(--card)}.rev small{color:var(--mut);margin-left:6px}.rev p{margin-top:4px;white-space:pre-wrap}
-textarea,input{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff;color:var(--fg);margin:4px 0 10px}
-textarea:focus,input:focus{outline:0;border-color:var(--acc)}label{font-weight:600;font-size:14px}
+.top{display:flex;gap:14px;align-items:center}.top .ico{width:92px;flex:none}.top h3{font-size:30px;font-weight:600;line-height:1.1}.top p{color:var(--mut);font-weight:600}.top small{font-weight:600;font-size:13px}
+.btn{background:#000;color:#fff;border:0;border-radius:16px;padding:14px 20px;font:600 18px Inter,'Hind Siliguri',sans-serif;width:100%;cursor:pointer;margin-top:16px}
+.btn.sm{width:auto;font-size:14px;padding:9px 16px;margin:0;border-radius:12px}.btn.o{background:none;color:#000;border:2px solid #000}
+.stats{display:flex;justify-content:space-around;text-align:center;margin:26px 0 8px}.stats b{display:block;font-size:24px;font-weight:500}.stats span{font-weight:600;font-size:14px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}.chip{border:2px solid #000;border-radius:12px;padding:8px 16px;font-weight:600;font-size:15px}
+.shots{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.shots img{height:300px;border-radius:14px;flex:none}
+.rev{padding:12px 0;border-bottom:1px solid var(--card)}.rev small{color:var(--mut)}
 nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--card);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));z-index:6}
 nav a{display:flex;flex-direction:column;align-items:center;font-size:12px;font-weight:600;color:var(--mut);text-decoration:none;gap:3px;cursor:pointer}
-nav a.on{color:var(--fg)}nav .p{padding:4px 22px;border-radius:16px;display:flex}nav a.on .p{background:#cdeadf}nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2}
-#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#202124;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;display:none;z-index:30;max-width:90%;text-align:center}
-.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:20;display:flex}.lb[hidden]{display:none}
-.lbs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%}.lbs img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}
-.lb .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:2;border:0;background:#fff3;color:#fff;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer}
+nav a.on{color:#000}nav .p{padding:4px 22px;border-radius:16px;display:flex}nav a.on .p{background:#cfe0ff}nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2}
+input,textarea{width:100%;padding:12px;border:2px solid #000;border-radius:12px;font:inherit;background:#fff;color:#000;margin:4px 0 10px}
+label{font-weight:600;font-size:14px}
+.stars span{font-size:28px;cursor:pointer;color:#bbb}.stars span.on{color:#f5a623}
+#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;display:none;z-index:9}
+.prog{height:6px;background:var(--card);border-radius:3px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:#000}
+
+.bkb{border:0;background:#f3f3f3;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:12px;position:sticky;top:10px;z-index:4;box-shadow:0 4px 14px rgba(0,0,0,.12);color:#000}.bkb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.banner{width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:22px;display:block;margin:12px 0 0;background:#f3f3f3}
+.shots img{cursor:zoom-in}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:20;display:flex}.lb[hidden]{display:none}.lbs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%}.lbs img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}.lb .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:2;border:0;background:#fff3;color:#fff;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer}
+.top{margin-top:8px}.top h3{font-size:24px}.top p{color:#0b57d0;font-weight:600}.top small{color:var(--mut);font-weight:500}
+.st{display:flex;margin:22px 0 6px;text-align:center}.st>div{flex:1;border-left:1px solid #dadce0;padding:2px 4px}.st>div:first-child{border:0}
+.st b{display:block;font-size:15px;font-weight:600}.st span{font-size:12px;color:var(--mut)}
+.btn.gr{background:#01875f;border-radius:24px;font-size:16px;padding:12px;margin:14px 0 20px}
+.chip{border:1px solid #747775;border-radius:8px;font-size:13px;font-weight:500;padding:7px 14px}
+.shots img{height:320px;border-radius:16px}
+
+:root{--card:#f3f3f3;--mut:#6b6b6b}
+body{letter-spacing:-.01em;padding-bottom:104px}
+header{padding:16px 20px}header h1{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.ib{background:#f3f3f3;width:40px;height:40px;border-radius:50%}
+h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.grid{grid-template-columns:repeat(3,1fr);gap:24px 14px}
+.tile{transition:transform .15s}.tile:active{transform:scale(.96)}
+.tile img{border-radius:24%;box-shadow:0 6px 18px rgba(0,0,0,.14)}.tile b{font-size:13.5px;margin-top:10px}
+.top .ico{width:104px;border-radius:24%;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.top h3{font-size:26px;font-weight:700;letter-spacing:-.02em}.top p{color:#000;opacity:.6;font-weight:500}
+.st{background:#f3f3f3;border-radius:22px;padding:14px 0;margin:22px 0 6px}.st>div{border-left:1px solid #dcdcdc}.st b{font-size:16px;font-weight:700}
+.btn{border-radius:999px}.btn.o{background:#f3f3f3;border:0;color:#000}
+.btn.gr{background:#000;color:#fff;height:54px;padding:0;font-size:17px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.22);margin:16px 0 22px}.btn:active{transform:scale(.98)}
+.shots img{height:340px;border-radius:22px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.chip{background:#f3f3f3;border:0;border-radius:999px;font-weight:600;font-size:13.5px;padding:9px 16px}
+input,textarea{background:#f3f3f3;border:0;border-radius:18px;padding:14px 16px}
+.rev{background:#f7f7f7;border:0;border-radius:18px;padding:14px 16px;margin-bottom:10px}
+nav{left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(0,0,0,.14);padding:8px 6px}
+nav a.on .p{background:#000;color:#fff}
+#toast{border-radius:999px}
+.stars{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 0 12px}.stars span{display:inline-flex;flex:none;cursor:pointer}.stars span svg{display:block}.stars span path{fill:#d9d9d9;stroke:#d9d9d9}.stars span.on path{fill:#FFCC00;stroke:#FFCC00}
+.ac b{display:block;margin-top:8px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac small{display:block;color:#6b6b6b;font-size:12px;margin:2px 0 10px}
 </style></head><body>
-<header><button class="ib" id="bk" hidden aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h1 id="ttl">Frangowst Apps</h1><button class="ib" id="lg"></button><div class="av" id="av" onclick="location.hash='#/me'">A</div></header>
-<main id="m"></main><div id="toast"></div><div class="lb" id="lb" hidden></div>
+<header><h1>Frangowst Apps</h1><div class="hr"><button class="ib" id="lg"></button><div class="av" id="av" onclick="location.hash='#/me'">A</div></div></header>
+<div id="bn" style="display:none;background:#fde8e8;color:#900;padding:10px 20px;font-weight:600;font-size:13px"></div>
+<main id="m"></main><div class="lb" id="lb" hidden></div><div id="toast"></div>
 <nav id="nav"></nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth-compat.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore-compat.min.js"></script>
 <script>
-const ADMINS=['monowaamasum@gmail.com'];
-firebase.initializeApp({apiKey:"AIzaSyDk5WuV2QlFOJaLTJqmDN6Da73FEofVi_A",authDomain:"rdb-store.firebaseapp.com",projectId:"rdb-store",storageBucket:"rdb-store.firebasestorage.app",messagingSenderId:"296925523426",appId:"1:296925523426:web:7b8d4f8b92c0640ad3ddbb"});
+firebase.initializeApp({apiKey:"AIzaSyBQqJYlZbU_eNY5rWiVBsfJGY1cII6eB2E",authDomain:"frangowst-apps.firebaseapp.com",projectId:"frangowst-apps",storageBucket:"frangowst-apps.firebasestorage.app",messagingSenderId:"304578058733",appId:"1:304578058733:web:9c64df017486e9f2ae6fe4"});
 const auth=firebase.auth(),db=firebase.firestore(),FV=firebase.firestore.FieldValue;
-const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',admin:'অ্যাডমিন প্যানেল',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',wn:'নতুন কী আছে',up:'আপডেট',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',size:'সাইজ',back:'ফিরে যান',pick:'তারকা বেছে নিন',norv:'এখনও কোনো রিভিউ নেই'},
-en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Reviews',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ads',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',admin:'Admin Panel',sq:'Search apps',load:'Loading…',ver:'Version',wn:"What's new",up:'Updated',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',size:'Size',back:'Back',pick:'Please select a star rating',norv:'No reviews yet'}};
+const T={bn:{apps:'অ্যাপস',none:'কোনো অ্যাপ নেই',dl:'ডাউনলোড',rv:'রিভিউ',dls:'ডাউনলোড',cats:'ক্যাটাগরি',shots:'স্ক্রিনশট',about:'অ্যাপ সম্পর্কে',rat:'রেটিং ও রিভিউ',lr:'রিভিউ দিতে লগইন করুন',post:'রিভিউ দিন',upd:'আপডেট করুন',write:'রিভিউ লিখুন',saved:'রিভিউ সেভ হয়েছে',acc:'অ্যাকাউন্ট',name:'নাম',email:'জিমেইল / ইমেইল',pass:'পাসওয়ার্ড (৬+)',login:'লগইন',su:'সাইন আপ',noacc:'অ্যাকাউন্ট নেই? সাইন আপ',has:'অ্যাকাউন্ট আছে? লগইন',out:'লগআউট',home:'হোম',search:'সার্চ',ads:'বিজ্ঞাপন আছে',needlogin:'ডাউনলোড গণনার জন্য আগে লগইন করুন',once:'২৪ ঘণ্টায় একই অ্যাকাউন্ট থেকে একবারই গণনা হয়',nn:'নাম দিন',sq:'অ্যাপ খুঁজুন',load:'লোড হচ্ছে…',ver:'ভার্সন',wn:'নতুন কী আছে',up:'আপডেট',vnote:'আপনার Gmail verify করুন (ইনবক্স/স্প্যাম দেখুন), তারপর রিভিউ ও ডাউনলোড গণনা চালু হবে।',resend:'আবার পাঠান',done:'আমি verify করেছি',notyet:'এখনও verify হয়নি',gonly:'শুধু @gmail.com ব্যবহার করুন (+ চিহ্ন ছাড়া)',used:'এই Gmail আগেই ব্যবহার হয়েছে',lim:'এই ডিভাইস থেকে আজ আর অ্যাকাউন্ট খোলা যাবে না',sent:'Verification ইমেইল পাঠানো হয়েছে'},
+en:{apps:'Apps',none:'No apps yet',dl:'Download',rv:'Review',dls:'Downloads',cats:'Categories',shots:'Screenshots',about:'About this app',rat:'Ratings & reviews',lr:'Login to review',post:'Post review',upd:'Update review',write:'Write a review',saved:'Review saved',acc:'Account',name:'Name',email:'Gmail / Email',pass:'Password (6+)',login:'Login',su:'Sign up',noacc:'No account? Sign up',has:'Have an account? Login',out:'Logout',home:'Home',search:'Search',ads:'Contains ad',needlogin:'Login first so your download is counted',once:'Only one download per account is counted every 24 hours',nn:'Enter your name',sq:'Search apps',load:'Loading…',ver:'Version',wn:"What's new",up:'Updated',vnote:'Please verify your Gmail (check inbox/spam). Reviews and download counting unlock after that.',resend:'Resend email',done:'I have verified',notyet:'Not verified yet',gonly:'Use a @gmail.com address (no + sign)',used:'This Gmail is already registered',lim:'Too many sign-ups from this device today',sent:'Verification email sent'}};
 let L='en';try{L=localStorage.getItem('l')||'en'}catch(e){}
 const t=k=>T[L][k]||k;
 let U=null,APPS={},$=s=>document.querySelector(s);
+const bnr=m=>{const b=$('#bn');b.style.display=m?'block':'none';b.textContent=m||''};
+window.onerror=(m)=>bnr('Script error: '+m);window.onunhandledrejection=e=>bnr('Error: '+(e.reason&&e.reason.message||e.reason));
+const SV=(c,z=18)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" style="vertical-align:-3px"><path d="M12 3.6l2.5 5.2 5.7.8-4.2 4 1 5.7L12 16.6l-5 2.7 1-5.7-4.2-4 5.7-.8z" fill="${c}" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const isAdmin=()=>U&&ADMINS.includes((U.email||'').toLowerCase());
-const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+' MB':Math.round(b/1024)+' KB';
-const toast=x=>{const e=$('#toast');e.textContent=x;e.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>e.style.display='none',2800)};
+const fmt=b=>!b?'—':b>=1048576?(b/1048576).toFixed(b>=10485760?0:1)+'MB':Math.round(b/1024)+'KB';
+const toast=x=>{const e=$('#toast');e.textContent=x;e.style.display='block';setTimeout(()=>e.style.display='none',2800)};
 const ic={h:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10H3z"/></svg>',s:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>',u:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>'};
-const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6 6.5.9-4.8 4.6 1.2 6.5L12 17.5l-5.8 3.1 1.2-6.5L2.6 9.5l6.5-.9z"/></svg>';
-const rowStars=n=>`<span class="sr">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(n)?'on':''}">${STAR}</i>`).join('')}</span>`;
 const setAv=()=>{$('#av').textContent=U?[...(U.displayName||U.email||'A')][0].toUpperCase():'A'};
 $('#lg').onclick=()=>{L=L==='bn'?'en':'bn';try{localStorage.setItem('l',L)}catch(e){}route()};
-
-/* back button: in-app history stack, so it never leaves the store */
+auth.onAuthStateChanged(u=>{U=u;setAv();route()});
+db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());bnr();route()},e=>bnr('Database error ('+e.code+'): '+e.message));
 let stk=[location.hash||'#/'];
 addEventListener('hashchange',()=>{const h=location.hash||'#/';if(stk.length>1&&stk[stk.length-2]===h)stk.pop();else if(stk[stk.length-1]!==h)stk.push(h);route()});
-$('#bk').onclick=()=>{if(stk.length>1)history.back();else location.hash='#/'};
-
-auth.onAuthStateChanged(u=>{U=u;setAv();route()});
-db.collection('apps').onSnapshot(s=>{APPS={};s.forEach(d=>APPS[d.id]=d.data());route()});
+const goBack=()=>{if(stk.length>1)history.back();else location.hash='#/'};
 
 function route(){
   const h=location.hash||'#/',p=h.split('/');$('#lg').textContent=L==='bn'?'EN':'বাং';
   const tabs=[['#/','h',t('home')],['#/search','s',t('search')],['#/me','u',t('acc')]];
   $('#nav').innerHTML=tabs.map(x=>`<a class="${h===x[0]||(x[0]==='#/'&&p[1]==='app')?'on':''}" href="${x[0]}"><span class="p">${ic[x[1]]}</span>${x[2]}</a>`).join('');
-  $('#bk').hidden=!['app','search','me'].includes(p[1]);
-  $('#ttl').textContent=p[1]==='search'?t('search'):p[1]==='me'?t('acc'):p[1]==='app'?'':'Frangowst Apps';
-  revOff();
+  revOff();$('header').style.display=p[1]==='app'?'none':'';
   if(p[1]==='app')return detail(p[2]);
   if(p[1]==='search')return search();
   if(p[1]==='me')return me();
   home();
 }
 const list=()=>Object.entries(APPS).map(([id,a])=>({id,...a})).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
-const tile=a=>`<div class="tile" onclick="location.hash='#/app/${a.id}'"><img src="${E(a.icon)}" alt=""><b>${E(a.name)}</b><small>${fmt(a.size)}</small></div>`;
+const tile=a=>`<div class="tile" onclick="location.hash='#/app/${a.id}'"><img src="${E(a.icon)}"><b>${E(a.name)}</b><small>${fmt(a.size)}</small></div>`;
 function home(){const l=list();$('#m').innerHTML=`<h2>${t('apps')}</h2>`+(l.length?`<div class="grid">${l.map(tile).join('')}</div>`:`<p>${t('none')}</p>`)}
 function search(){$('#m').innerHTML=`<input id="q" placeholder="${t('sq')}"><div class="grid" id="r"></div>`;
   const f=()=>{const q=$('#q').value.toLowerCase();$('#r').innerHTML=list().filter(a=>(a.name+(a.cats||'')).toLowerCase().includes(q)).map(tile).join('')};$('#q').oninput=f;f()}
 
-function lightbox(l,i){const lb=$('#lb');lb.innerHTML=`<button class="x" aria-label="Close">✕</button><div class="lbs">${l.map(s=>`<img src="${E(s)}" alt="">`).join('')}</div>`;lb.hidden=false;document.body.style.overflow='hidden';
-  const s=lb.querySelector('.lbs');s.scrollLeft=i*s.clientWidth;lb.onclick=e=>{if(e.target.tagName!=='IMG')lbOff()}}
 function lbOff(){const lb=$('#lb');if(lb){lb.hidden=true;lb.innerHTML=''}document.body.style.overflow=''}
+function lbOpen(l,i){const lb=$('#lb');lb.innerHTML=`<button class="x" aria-label="Close">✕</button><div class="lbs">${l.map(x=>`<img src="${E(x)}">`).join('')}</div>`;lb.hidden=false;document.body.style.overflow='hidden';const sc=lb.querySelector('.lbs');sc.scrollLeft=i*sc.clientWidth;lb.onclick=e=>{if(e.target.tagName!=='IMG')lbOff()}}
 let offs=[];const revOff=()=>{lbOff();offs.forEach(f=>f());offs=[]};
-
 function detail(id){
   const a=APPS[id];if(!a)return $('#m').innerHTML=`<h2>${t('load')}</h2>`;
-  const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean),shots=a.shots||[];
-  $('#m').innerHTML=`${a.banner?`<img class="banner" src="${E(a.banner)}" alt="">`:''}<div class="top"><img class="ico" src="${E(a.icon)}" alt=""><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
-  <div class="stats"><div><b id="s1">–</b><span id="s2">${t('rv')}</span></div><div><b>${fmt(a.size)}</b><span>${t('size')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div></div>
-  <button class="btn" id="dlb">${t('dl')}</button>
-  <p class="note">${t('ver')} ${E(a.ver||'1.0.0')} · ${t('up')} ${new Date(a.updatedAt||a.createdAt||Date.now()).toLocaleDateString()}</p>
-  ${shots.length?`<h2>${t('shots')}</h2><div class="shots">${shots.map(s=>`<img src="${E(s)}" alt="">`).join('')}</div>`:''}
+  const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean);
+  $('#m').innerHTML=`<button class="bkb" onclick="goBack()" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>${a.banner?`<img class="banner" src="${E(a.banner)}">`:''}
+  <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p>${a.ads?`<small>${t('ads')}</small>`:''}</div></div>
+  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
+  <button class="btn gr" onclick="dl('${id}')">${t('dl')}</button>
+  ${(a.shots||[]).length?`<div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
   ${a.wn?`<h2>${t('wn')}</h2><p style="white-space:pre-wrap">${E(a.wn)}</p>`:''}
   ${a.desc?`<h2>${t('about')}</h2><p style="white-space:pre-wrap">${E(a.desc)}</p>`:''}
-  ${cats.length?`<h2>${t('cats')}</h2><div class="chips">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
-  <h2>${t('rat')}</h2>
-  <div class="rsum"><div class="big"><b id="avg">–</b><span id="avs"></span><small id="cnt"></small></div><div class="bars">${[5,4,3,2,1].map(n=>`<div class="br"><span>${n}</span><div class="prog"><i id="b${n}"></i></div></div>`).join('')}</div></div>
-  <div id="rf"></div><div id="rl"></div>`;
-  $('#dlb').onclick=()=>dl(id);
-  $('#m').querySelectorAll('.shots img').forEach((im,i)=>im.onclick=()=>lightbox(shots,i));
+  ${cats.length?`<div class="chips" style="margin-top:16px">${cats.map(c=>`<span class="chip">${E(c)}</span>`).join('')}</div>`:''}
+  <h2>${t('rat')} <span id="avg"></span></h2><div id="rf"></div><div id="rl"></div>`;
+  $('#m').querySelectorAll('.shots img').forEach((im,i)=>im.onclick=()=>lbOpen(a.shots,i));
   const un=db.collection('apps').doc(id).collection('reviews').onSnapshot(s=>{const v={};s.forEach(d=>v[d.id]=d.data());const l=Object.values(v).sort((x,y)=>y.ts-x.ts);
-    const n=l.length,avg=n?l.reduce((q,x)=>q+x.rating,0)/n:0;
-    $('#s1').innerHTML=n?avg.toFixed(1)+'<em>★</em>':'–';$('#s2').textContent=n+' '+t('rv');
-    $('#avg').textContent=n?avg.toFixed(1):'–';$('#avs').innerHTML=n?rowStars(avg):'';$('#cnt').textContent=n?n+' '+t('rv'):t('norv');
-    [1,2,3,4,5].forEach(k=>{$('#b'+k).style.width=n?Math.round(l.filter(x=>x.rating===k).length/n*100)+'%':'0'});
-    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b><small>${new Date(x.ts).toLocaleDateString()}</small><div>${rowStars(x.rating)}</div><p>${E(x.text)}</p></div>`).join('');
+    const av=l.length?(l.reduce((n,x)=>n+x.rating,0)/l.length).toFixed(1):'';$('#rc').textContent=l.length;$('#avg').innerHTML=av?SV('#FFCC00',18)+' '+av:'';$('#a2').innerHTML=av?av+' '+SV('#FFCC00',15):'—';
+    $('#rl').innerHTML=l.map(x=>`<div class="rev"><b>${E(x.name)}</b> <span style="white-space:nowrap">${Array(x.rating).fill(SV('#FFCC00',14)).join('')}</span><br><small>${new Date(x.ts).toLocaleDateString()}</small><p>${E(x.text)}</p></div>`).join('');
     form(id,U&&v[U.uid])});
   offs.push(un);
 }
-let rate=0;
+let rate=5;
 function form(id,mine){const f=$('#rf');if(!f)return;
   if(!U)return f.innerHTML=`<button class="btn o sm" onclick="location.hash='#/me'">${t('lr')}</button>`;
-  rate=mine?mine.rating:0;
-  f.innerHTML=`<div class="stars" style="display:flex;flex-direction:row;flex-wrap:nowrap" role="group">${[1,2,3,4,5].map(i=>`<button type="button" class="sb ${i<=rate?'on':''}" data-i="${i}" aria-label="${i}">${STAR}</button>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
-  const paint=()=>f.querySelectorAll('.sb').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate));
-  f.querySelectorAll('.sb').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;paint()});
-  $('#rs').onclick=async()=>{
-    if(!rate)return toast(t('pick'));
-    try{await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});toast(t('saved'))}catch(e){toast(e.message)}
-  }}
+  rate=mine?mine.rating:5;
+  f.innerHTML=`<div class="stars">${[1,2,3,4,5].map(i=>`<span data-i="${i}" class="${i<=rate?'on':''}">${SV('#d9d9d9',32)}</span>`).join('')}</div><textarea id="rt" rows="3" placeholder="${t('write')}">${E(mine?mine.text:'')}</textarea><button class="btn sm" id="rs">${mine?t('upd'):t('post')}</button>`;
+  f.querySelectorAll('.stars span').forEach(s=>s.onclick=()=>{rate=+s.dataset.i;f.querySelectorAll('.stars span').forEach(x=>x.classList.toggle('on',+x.dataset.i<=rate))});
+  $('#rs').onclick=async()=>{await db.collection('apps').doc(id).collection('reviews').doc(U.uid).set({name:U.displayName||U.email.split('@')[0],rating:rate,text:$('#rt').value.trim(),ts:Date.now()});toast(t('saved'))}}
 
 async function dl(id){
   const a=APPS[id];if(!U){toast(t('needlogin'));location.hash='#/me';return}
@@ -149,16 +152,15 @@ async function dl(id){
 }
 
 function me(){const m=$('#m');
-  if(U){m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p>${isAdmin()?`<button class="btn" onclick="location.href='admin.html'">${t('admin')}</button>`:''}<button class="btn o" onclick="auth.signOut()">${t('out')}</button>`;
+  if(U){m.innerHTML=`<h2>${E(U.displayName||t('acc'))}</h2><p>${E(U.email)}</p><button class="btn o" onclick="auth.signOut()">${t('out')}</button>`;
     return}
-  m.innerHTML=`<h2>${t('acc')}</h2><div id="nw" style="display:none"><label>${t('name')}</label><input id="nm"></div><label>${t('email')}</label><input id="e" type="email" placeholder="example@gmail.com"><label>${t('pass')}</label><input id="p" type="password"><button class="btn" id="go">${t('login')}</button><p style="text-align:center;margin-top:14px"><a href="#" id="tg" style="color:var(--acc);font-weight:600">${t('noacc')}</a></p>`;
+  m.innerHTML=`<h2>${t('acc')}</h2><div id="nw" style="display:none"><label>${t('name')}</label><input id="nm"></div><label>${t('email')}</label><input id="e" type="email" placeholder="example@gmail.com"><label>${t('pass')}</label><input id="p" type="password"><button class="btn" id="go">${t('login')}</button><p style="text-align:center;margin-top:14px"><a href="#" id="tg" style="color:#000;font-weight:600">${t('noacc')}</a></p>`;
   let up=false;const go=p=>p.catch(e=>toast(e.message));
   $('#tg').onclick=e=>{e.preventDefault();up=!up;$('#nw').style.display=up?'block':'none';$('#go').textContent=up?t('su'):t('login');$('#tg').textContent=up?t('has'):t('noacc')};
   $('#go').onclick=()=>{const em=$('#e').value.trim(),pw=$('#p').value;
     if(!up)return go(auth.signInWithEmailAndPassword(em,pw));
     const nm=$('#nm').value.trim();if(!nm)return toast(t('nn'));
     const lp=em.toLowerCase().split('@')[0];if(!/^[^@\s]+@gmail\.com$/i.test(em)||lp.includes('+'))return toast(t('gonly'));
-    if(ADMINS.includes(em.toLowerCase()))return toast(t('used'));
     let arr=[];try{arr=JSON.parse(localStorage.getItem('su')||'[]').filter(x=>Date.now()-x<864e5)}catch(e){}
     if(arr.length>=2)return toast(t('lim'));
     go((async()=>{const c=await auth.createUserWithEmailAndPassword(em,pw);
@@ -167,4 +169,5 @@ function me(){const m=$('#m');
       try{arr.push(Date.now());localStorage.setItem('su',JSON.stringify(arr))}catch(e){}
       setAv();route()})())};
 }
+
 </script></body></html>
