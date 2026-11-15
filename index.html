@@ -144,7 +144,7 @@ function detail(id){
   const cats=(a.cats||'').split(',').map(s=>s.trim()).filter(Boolean);
   $('#m').innerHTML=`<button class="bkb" onclick="goBack()" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>${a.banner?`<img class="banner" src="${E(a.banner)}">`:''}
   <div class="top"><img class="ico" src="${E(a.icon)}"><div><h3>${E(a.name)}</h3><p>${E(a.dev)}</p><small>${[a.ads?t('ads'):'',a.iap?t('iap'):''].filter(Boolean).join(' · ')}</small></div></div>
-  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${a.downloads||0}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
+  <div class="st"><div><b id="a2">—</b><span><i id="rc" style="font-style:normal">0</i> ${t('rv')}</span></div><div><b>${(a.downloads||0).toLocaleString('en-US')}</b><span>${t('dls')}</span></div><div><b>${fmt(a.size)}</b><span>v${E(a.ver||'1.0.0')}</span></div></div>
   <button class="btn gr" onclick="dl('${id}')">${t('dl')}</button>
   <p class="apkn">${t('apkn')}</p>
   ${(a.shots||[]).length?`<div class="shots">${a.shots.map(s=>`<img src="${E(s)}">`).join('')}</div>`:''}
@@ -180,7 +180,7 @@ async function dl(id){
   const l=document.createElement('a');l.href=a.apk;l.download='';l.rel='noopener';document.body.appendChild(l);l.click();l.remove();
   const ap=db.collection('apps').doc(id),r=ap.collection('dl').doc(U.uid);
   try{await db.runTransaction(async tx=>{const s=await tx.get(r),n=Date.now();
-    if(!s.exists||n-s.data().ts.toMillis()>864e5){tx.set(r,{ts:FV.serverTimestamp()});tx.update(ap,{downloads:FV.increment(1)})}})}catch(e){console.error(e)}
+    if(!s.exists){tx.set(r,{ts:FV.serverTimestamp()});tx.update(ap,{downloads:FV.increment(1)})}})}catch(e){console.error(e)}
 }
 
 function me(){const m=$('#m');
