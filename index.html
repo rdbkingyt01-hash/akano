@@ -2409,7 +2409,7 @@ html body .ep2 .pt,html body .ep2 .pt.f{border:0;padding:0;background:none;borde
 .ep2 .e2m{gap:5px;min-width:0}
 .ep2 .e2p{padding:4px 8px;gap:5px;font-size:13px;min-width:0;max-width:100%}
 
-html body header #logo{height:52px!important;max-width:min(62vw,300px)!important}
+html body header #logo{height:var(--lgh,52px)!important;max-width:min(62vw,300px)!important}
 </style>
 </head>
 <body>
@@ -3564,7 +3564,7 @@ let me=null,note='',adm=false,auInit=false;
 const logoDefault=()=>{[$('#logo'),$('#flogo')].forEach(el=>{if(el){el.src=DEFAULT_LOGO;el.hidden=false}});$('#fbt').hidden=true};
 $('#logo').onerror=()=>{if($('#logo').src!==DEFAULT_LOGO)logoDefault()};
 try{if(!localStorage.getItem('ak_logo_v2'))logoDefault()}catch{logoDefault()}
-cache('logo_v2',()=>dat('site','logo')).then(l=>{if(l?.url){$('#logo').src=l.url;$('#logo').hidden=false;$('#flogo').src=l.url;$('#flogo').hidden=false;$('#fbt').hidden=true}else logoDefault()}).catch(()=>logoDefault());
+cache('logo_v2',()=>dat('site','logo')).then(l=>{if(l?.url){if(+l.h)document.documentElement.style.setProperty('--lgh',Math.min(96,Math.max(28,+l.h))+'px');$('#logo').src=l.url;$('#logo').hidden=false;$('#flogo').src=l.url;$('#flogo').hidden=false;$('#fbt').hidden=true}else logoDefault()}).catch(()=>logoDefault());
 go('home');
 
 // ---------- PWA: install করা যায় এমন অ্যাপ ----------
