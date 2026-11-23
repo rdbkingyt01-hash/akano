@@ -2247,6 +2247,7 @@ html.fmbg .pw-form .pw-sub{display:block!important;width:auto!important;min-widt
 .sv-top{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
 .sv-top h1{margin:0;font-size:28px;line-height:1.2}
 .sv-top .st-c .ic{transform:rotate(180deg)}
+.aiw .ai-t .ai-tl{display:block;flex:none;width:22px;height:22px;background:var(--fgx) center/contain no-repeat}
 .aiw .ai-logo{display:block;width:112px;height:112px;background:var(--fgx) center/contain no-repeat;animation:logof 6s ease-in-out infinite}
 .asb.a::before{background:var(--fgx) center/contain no-repeat!important;box-shadow:none!important;border:0!important;border-radius:0!important;width:30px!important;height:30px!important;top:6px!important}
 .asb.a{background:transparent!important;box-shadow:none!important;border:0!important;outline:0!important;padding:6px 0!important}
@@ -2490,6 +2491,16 @@ body .aiw .ai-top{background:transparent!important;-webkit-backdrop-filter:none!
 body .aiw .ai-note{background:transparent!important;box-shadow:none!important;clip-path:none!important}
 
 .pgw[data-err]{position:relative}.pgw[data-err]::after{content:'ছবি লোড হয়নি — ট্যাপ করে আবার চেষ্টা করুন';position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:#bbb;font:500 15px/1.5 Roboto,'Hind Siliguri',sans-serif}
+
+/* ===== AI page background (class-based, works without :has) ===== */
+html.ai-on,html.ai-on body{background:#eeeeef!important}
+html.ai-on body{background:transparent!important}
+html.ai-on body header{background:transparent!important}
+html.ai-on body::before{content:'';position:fixed;left:0;right:0;top:0;height:70vh;z-index:-1;pointer-events:none;background:radial-gradient(82% 62% at 50% -4%,rgba(198,28,34,.96) 0,rgba(212,52,58,.68) 36%,rgba(236,170,172,.32) 62%,rgba(238,238,239,0) 84%)}
+html.ai-on body .aiw .ai-top{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;-webkit-mask-image:none!important;mask-image:none!important}
+html.ai-on body .aiw .ai-note{background:transparent!important;box-shadow:none!important;clip-path:none!important}
+
+html.ai-on body #app,html.ai-on body main,html.ai-on body .aiw{background:transparent!important}
 </style>
 </head>
 <body>
@@ -3224,8 +3235,8 @@ function faq(){
  vmStop();
  const Q=faqData(language),sug=T('কীভাবে কমিকস কিনব?','How do I buy a comic?');
  $('#app').innerHTML=`<div class="sec aiw" id=aiw>
-  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t>Fragiks<em class=ai-beta>beta</em></span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
-  <div class=ai-stage><span class=ai-logo role=img aria-label="Fragiks"></span><h2>${T('আকানো সম্পর্কে যা জানতে চান, জিজ্ঞেস করুন','Ask anything about Akano')}</h2></div>
+  <div class=ai-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><span class=ai-t><i class=ai-tl></i>Fragiks<em class=ai-beta>beta</em></span><button class=st-c id=aiMenu aria-label="${T('প্রশ্নোত্তর','FAQ')}">${ic('menu')}<i class=ai-dot></i></button></div>
+  <div class=ai-stage><h2>${T('আকানো সম্পর্কে যা জানতে চান, জিজ্ঞেস করুন','Ask anything about Akano')}</h2></div>
   <button type=button class=ai-new id=aiNew data-new>${T('নতুন চ্যাট','New chat')}</button>
   <div class=asl id=asl></div>
   <form class=ai-box id=asf autocomplete=off>
@@ -4638,6 +4649,8 @@ async function pwaManifest(){
 
 try{const blk=e=>{const el=e.target;if(el&&el.closest&&el.closest('img,video,picture,canvas,.th,.cv,svg'))e.preventDefault()};addEventListener('contextmenu',blk,true);addEventListener('dragstart',blk,true);document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('img').forEach(i=>i.draggable=false));new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.tagName==='IMG')n.draggable=false;n.querySelectorAll&&n.querySelectorAll('img').forEach(i=>i.draggable=false)}}))).observe(document.documentElement,{childList:true,subtree:true})}catch{}
 
+
+try{let aif=0;const aip=()=>{aif=0;const on=!!document.querySelector('.aiw');document.documentElement.classList.toggle('ai-on',on);const tc=document.querySelector('meta[name=theme-color]');if(tc)tc.setAttribute('content',on?'#cf2f35':'#f5f6f8')};new MutationObserver(()=>{if(!aif)aif=requestAnimationFrame(aip)}).observe(document.body,{childList:true,subtree:true});aip()}catch{}
 </script>
 </body>
 </html>
