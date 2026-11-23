@@ -2248,9 +2248,11 @@ html.fmbg .pw-form .pw-sub{display:block!important;width:auto!important;min-widt
 .sv-top h1{margin:0;font-size:28px;line-height:1.2}
 .sv-top .st-c .ic{transform:rotate(180deg)}
 .card{position:relative}
-.cbm{position:absolute;right:8px;top:8px;z-index:4;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:#111;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.28);-webkit-tap-highlight-color:transparent}
+.cbm{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;width:28px;height:28px;margin:-6px 0 -6px 4px;color:#6b6168;cursor:pointer;background:none;border:0;box-shadow:none;-webkit-tap-highlight-color:transparent}
 .cbm svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
-.cbm.on{background:#e10600;color:#fff}
+.cbm.on{color:#e10600}
+html body .card .mt,html body .card .mt .ic,html body .card .mt .vact,html body .card .mt .vact k-n,html body .card .mt .cbm,html body .card .mt .cbm.on{color:#7c7c7c!important;font-weight:400!important}
+html body .card .mt .cbm.on svg{fill:currentColor}
 .cbm.on svg{fill:currentColor}
 .aiw .ai-t .ai-tl{display:block;flex:none;width:22px;height:22px;background:var(--fgx) center/contain no-repeat}
 .aiw .ai-logo{display:block;width:112px;height:112px;background:var(--fgx) center/contain no-repeat;animation:logof 6s ease-in-out infinite}
@@ -3101,9 +3103,9 @@ const favWire=()=>document.querySelectorAll('#m .favb').forEach(b=>b.onclick=()=
 const isSer=c=>c.type==='series'&&c.series;
 const orB=x=>x.orig?'<span class=orb>অরিজিনাল</span>':'';
 const cbm=id=>`<span class="cbm${fav.c.includes(id)?' on':''}" role=button tabindex=0 data-fav="c:${esc(id)}" aria-label="আমার তালিকা"><svg viewBox="0 0 24 24"><path d="M7 3.5h10a2 2 0 0 1 2 2V20a.8.8 0 0 1-1.25.66L12 16.6l-5.75 4.06A.8.8 0 0 1 5 20V5.5a2 2 0 0 1 2-2z"/></svg></span>`;
-const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}" data-g="${esc((x.genres||[]).join('|'))}"${x.orig?' data-o=1':''}><img src="${esc(x.cover)}" loading=lazy alt="">${orB(x)}${cbm(x.id)}<b>${esc(x.title)}</b><span class=mt>${ic('eye')}${kf(x.views||0)}<span class=vact role=button tabindex=0 data-ccm="c:${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('c',x.id)}"></k-n></span></span></button>`;
+const cardH=(x,f)=>`<button class=card data-id="${x.id}" data-ty="${isSer(x)?'series':'oneshot'}" data-q="${esc((x.title+' '+(x.series||'')).toLowerCase())}" data-g="${esc((x.genres||[]).join('|'))}"${x.orig?' data-o=1':''}><img src="${esc(x.cover)}" loading=lazy alt="">${orB(x)}<b>${esc(x.title)}</b><span class=mt>${ic('eye')}${kf(x.views||0)}<span class=vact role=button tabindex=0 data-ccm="c:${esc(x.id)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('c',x.id)}"></k-n></span>${cbm(x.id)}</span></button>`;
 function collapse(l){const seen={},out=[];l.forEach(c=>{if(isSer(c)){if(seen[c.series])return;seen[c.series]=1;out.push({ser:c.series,top:c,eps:l.filter(x=>isSer(x)&&x.series===c.series)})}else out.push({one:c})});return out}
-const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}" data-g="${esc([...new Set(e.flatMap(x=>x.genres||[]))].join('|'))}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${orB({orig:e.some(x=>x.orig)?1:0,cover:1})}${cbm(g.top.id)}<b>${esc(g.ser)}</b><span class=mt>${ic('eye')}${kf(views)}<span class=vact role=button tabindex=0 data-ccm="s:${esc(g.ser)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('s',g.ser)}"></k-n></span></span></button>`};
+const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.filter(x=>!x.free).map(x=>+x.price||0)),views=e.reduce((n,x)=>n+(+x.views||0),0);return `<button class=card data-series="${esc(g.ser)}" data-ty=series data-q="${esc((g.ser+' '+e.map(x=>x.title).join(' ')).toLowerCase())}" data-g="${esc([...new Set(e.flatMap(x=>x.genres||[]))].join('|'))}"${e.some(x=>x.orig)?' data-o=1':''}><img src="${esc(g.top.cover)}" loading=lazy alt="">${orB({orig:e.some(x=>x.orig)?1:0,cover:1})}<b>${esc(g.ser)}</b><span class=mt>${ic('eye')}${kf(views)}<span class=vact role=button tabindex=0 data-ccm="s:${esc(g.ser)}" aria-label="মন্তব্য">${icf('msg')}<k-n class=cmn data-cmk="${cmKey('s',g.ser)}"></k-n></span>${cbm(g.top.id)}</span></button>`};
 const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 
