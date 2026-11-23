@@ -2508,6 +2508,12 @@ html.ai-on body .aiw .ai-top{background:transparent!important;-webkit-backdrop-f
 html.ai-on body .aiw .ai-note{background:transparent!important;box-shadow:none!important;clip-path:none!important}
 
 html.ai-on body #app,html.ai-on body main,html.ai-on body .aiw{background:transparent!important}
+
+/* AI chat: solid header + footer note once messages exist (nothing shows through) */
+html body .aiw.chat .ai-top,html.ai-on body .aiw.chat .ai-top{background:#eeeeef!important}
+html body:has(.aiw.chat) header{background:#eeeeef!important}
+html body .aiw.chat .ai-note,html.ai-on body .aiw.chat .ai-note{background:#eeeeef!important;box-shadow:0 0 0 100vmax #eeeeef!important;clip-path:inset(0 -100vmax -100vmax -100vmax)!important}
+html body:has(.aiw.chat)::before{display:none!important}
 </style>
 </head>
 <body>
