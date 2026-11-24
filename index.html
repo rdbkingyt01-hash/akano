@@ -2529,6 +2529,11 @@ body #bn button .ai-nv,body #bn button.on .ai-nv{opacity:1!important;width:24px!
 body #bn button[data-go=faq]{flex:1!important;width:auto!important;height:54px!important;border-radius:24px!important}
 .pc-cp{display:flex;gap:8px;align-items:stretch}.pc-cp input{flex:1;min-width:0}.pc-cp .btn{flex:none;padding:0 18px;white-space:nowrap}
 .pc-old{text-decoration:line-through;color:#8a8a8a;font-size:14px;margin-right:6px}.pc-old[hidden]{display:none}
+
+/* coupon apply buttons: plain black, no glow */
+html body .pc-cp .btn,html body #cpa,html body #cpa2{background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important;filter:none!important;text-shadow:none!important}
+html body .pc-cp .btn::before,html body .pc-cp .btn::after,html body #cpa::before,html body #cpa::after,html body #cpa2::before,html body #cpa2::after{display:none!important;box-shadow:none!important}
+html body .pc-cp .btn:active,html body .pc-cp .btn:focus{box-shadow:none!important;outline:0!important}
 </style>
 </head>
 <body>
