@@ -2532,6 +2532,19 @@ button:not(:disabled):active,.card:active,.vc:active{transform:scale(.96)}
 .qst .qst-ap:active:not(:disabled){transform:translateY(3px);border-bottom-width:2px}
 .qst .qst-ap.done,.qst .qst-ap:disabled{background:#e5e5e5;border-color:#e5e5e5;border-bottom-width:2px;color:#afafaf;cursor:default;transform:none}
 .qst .qst-ln{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#111;font-weight:600;font-size:14px}
+.qst-tp{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qst-tm{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:#555;background:#f2f2f2;border-radius:999px;padding:4px 10px}
+.qst-tm.off{color:#afafaf}
+.qst-act{display:flex;gap:10px;margin-top:12px}
+.qst-act .qst-ap{margin-top:0}
+.qst a.qst-ap,.qst span.qst-ap{display:flex;align-items:center;justify-content:center;flex:1;text-align:center;text-decoration:none}
+.qst .qst-ap.off{background:#e5e5e5;border-color:#e5e5e5;border-bottom-width:2px;color:#afafaf}
+.qst .qst-i{flex:none;width:56px;padding:0;display:flex;align-items:center;justify-content:center;color:#555}
+.qst-cd{display:flex;gap:10px;margin-top:12px}
+.qst-cd input{flex:1;min-width:0;border:2px solid #e5e5e5;border-radius:14px;background:#f7f7f7;padding:0 14px;font-size:15px;text-transform:uppercase}
+.qst-cd .qst-ap{margin-top:0;width:auto;flex:none;padding:12px 16px;font-size:14px}
+.qst-er{margin:8px 2px 0;color:#d33;font-size:13px;min-height:0}.qst-er:empty{display:none}
+.qst-ok{margin-top:12px;padding:14px;border-radius:16px;background:#e5e5e5;color:#777;text-align:center;font-weight:700}.qst-ok.off{color:#afafaf}
 </style>
 </head>
 <body>
@@ -3231,23 +3244,33 @@ async function shop(){
 function showGal(i){const n=gl.length;i=(i+n)%n;const x=gl[i];modal(`<div class=gv><img src="${esc(x.url)}" alt="${esc(x.cap)}">${n>1?`<button class="gn p" aria-label="আগেরটি">${ic('arrow')}</button><button class="gn n" aria-label="পরেরটি">${ic('arrow')}</button>`:''}</div><div class=gvf>${x.cap?`<p>${esc(x.cap)}</p>`:'<p></p>'}<span>${bn(i+1)} / ${bn(n)}</span></div>`,1);
  const m=$('#m'),go=d=>showGal(i+d);if(m.querySelector('.gn.p')){m.querySelector('.gn.p').onclick=()=>go(-1);m.querySelector('.gn.n').onclick=()=>go(1)}
  let x0=null;const im=m.querySelector('.gv img');im.ontouchstart=e=>{x0=e.touches[0].clientX};im.ontouchend=e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;x0=null;if(n>1&&Math.abs(d)>50)go(d<0?1:-1)}}
+async function qHash(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(t).trim().toUpperCase()));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 async function news(){
  const thisRoute=routeVersion;
  const n=(await list('news')).sort(byT);
  if(thisRoute!==routeVersion)return;
- const joined=LS.get('akQuest',{}),isQ=x=>x.type!=='ঘোষণা';
- const card=x=>{const q=isQ(x),done=!!joined[x.id],lk=/^https?:\/\//.test(x.link||'')?x.link:'';
-  return `<article class="nw qst">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><span class=tag>${q?T('কোয়েস্ট','Quest'):T('ঘোষণা','Announcement')}</span><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${x.text?`<p>${esc(x.text)}</p>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${q?`<div class=qst-pk>${T('অংশ নিলেই পাবেন ১ দিন বিজ্ঞাপনমুক্ত কমিক পড়া','Join and get 1 day of ad-free comic reading')}</div><button type=button class="qst-ap${done?' done':''}" data-qa="${esc(x.id)}"${done?' disabled':''}>${done?T('অংশ নিয়েছেন','Joined'):T('অ্যাপ্লাই করুন','Apply')}</button>`:''}${lk?`<a class=qst-ln href="${esc(lk)}" target=_blank rel=noopener>${T('বিস্তারিত দেখুন','View details')}${ic('arrow')}</a>`:''}</div></article>`};
+ const joined=LS.get('akQuest',{}),isQ=x=>x.type!=='ঘোষণা',now=Date.now();
+ const CK='<svg viewBox="0 0 24 24" width=16 height=16 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><circle cx=12 cy=12 r=9></circle><path d="M12 7v5l3 2"></path></svg>';
+ const IN='<svg viewBox="0 0 24 24" width=22 height=22 fill=none stroke=currentColor stroke-width=2.4 stroke-linecap=round stroke-linejoin=round aria-hidden=true><circle cx=12 cy=12 r=9></circle><path d="M12 11v6"></path><circle cx=12 cy=7.6 r=.6 fill=currentColor></circle></svg>';
+ const left=x=>{if(!x.end)return null;const l=x.end-now;if(l<=0)return{over:1,t:T('শেষ হয়েছে','Ended')};const d=Math.ceil(l/864e5);if(l<864e5){const h=Math.max(1,Math.ceil(l/36e5));return{t:T(bn(h)+' ঘণ্টা বাকি',h+' hours left')}}return{t:T(bn(d)+' দিন বাকি',d+' days left')}};
+ const card=x=>{const q=isQ(x),done=!!joined[x.id],lk=/^(https?:|mailto:)/.test(x.link||'')?x.link:'',lf=left(x),over=!!(lf&&lf.over);
+  const act=!q?'':done?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div>`:over?`<div class=qst-ok off>${T('কোয়েস্ট শেষ হয়েছে','Quest ended')}</div>`:`<div class=qst-act>${lk?`<a class=qst-ap href="${esc(lk)}" target=_blank rel=noopener>${T('অ্যাপ্লাই করুন','Apply')}</a>`:`<span class="qst-ap off">${T('অ্যাপ্লাই করুন','Apply')}</span>`}<button type=button class="qst-ap qst-i" data-qi="${esc(x.id)}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-cd><input data-qin="${esc(x.id)}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class="qst-ap" data-qc="${esc(x.id)}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${esc(x.id)}"></p>`;
+  return `<article class="nw qst">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><div class=qst-tp><span class=tag>${q?T('কোয়েস্ট','Quest'):T('ঘোষণা','Announcement')}</span>${lf?`<span class="qst-tm${over?' off':''}">${CK}${lf.t}</span>`:''}</div><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${x.text?`<p>${esc(x.text)}</p>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${act}${!q&&lk?`<a class=qst-ln href="${esc(lk)}" target=_blank rel=noopener>${T('বিস্তারিত দেখুন','View details')}${ic('arrow')}</a>`:''}</div></article>`};
  $('#app').innerHTML=`<div class=sec><h1 class=ct>${T('কোয়েস্ট','Quests')}</h1>${n.map(card).join('')||`<p class="ld emp e-news">${T('এখনো কোনো কোয়েস্ট নেই।','No quests yet.')}</p>`}</div>`;
- document.querySelectorAll('#app [data-qa]').forEach(b=>b.onclick=()=>{
-  if(b.disabled)return;
-  const id=b.dataset.qa,m=LS.get('akQuest',{});if(m[id])return;
-  m[id]=Date.now();LS.set('akQuest',m);
-  LS.set('akAfUntil',Math.max(afU(),Date.now())+864e5);
-  b.disabled=true;b.classList.add('done');b.textContent=T('অংশ নিয়েছেন','Joined');
+ document.querySelectorAll('#app [data-qi]').forEach(b=>b.onclick=()=>{const x=n.find(y=>y.id===b.dataset.qi)||{};
+  const std=T('১. “অ্যাপ্লাই করুন” চাপলে ফর্ম/জিমেইল খুলবে।\n২. ফর্মে নাম দিন।\n৩. গ্রুপে জয়েন করুন।\n৪. আপনার কমিক গ্রুপে সাবমিট করুন।\n৫. অ্যাডমিন আপনাকে পার্টিসিপেন্ট কোড দেবে।\n৬. কোড দিয়ে “নিশ্চিত” চাপলেই অংশগ্রহণ সম্পূর্ণ, ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়তে পারবেন।','1. Tap Apply to open the form / Gmail.\n2. Enter your name in the form.\n3. Join the group.\n4. Submit your comic in the group.\n5. The admin will give you a participant code.\n6. Enter the code and tap Confirm to finish joining and get 24 hours of ad-free comics.');
+  modal(`<div class=cd-b><h2>${T('কোয়েস্টের নিয়ম','Quest rules')}</h2><p class=cd-ds style="white-space:pre-line">${esc(std)}${x.rules?'\n\n'+esc(x.rules):''}</p></div>`)});
+ document.querySelectorAll('#app [data-qc]').forEach(b=>b.onclick=async()=>{
+  const id=b.dataset.qc,x=n.find(y=>y.id===id)||{},inp=document.querySelector('#app [data-qin="'+id+'"]'),er=document.querySelector('#app [data-qe="'+id+'"]'),v=(inp&&inp.value||'').trim();
+  const bad=m=>{if(er)er.textContent=m};
+  if(!v)return bad(T('কোড লিখুন','Enter the code'));
+  if(x.end&&x.end<=Date.now())return bad(T('কোয়েস্ট শেষ হয়েছে','Quest ended'));
+  if(!x.ch)return bad(T('এই কোয়েস্টে এখনো কোড সেট করা হয়নি','No code is set for this quest yet'));
+  let h='';try{h=await qHash(v)}catch{return bad(T('কোড যাচাই করা যায়নি','Could not check the code'))}
+  if(h!==x.ch)return bad(T('কোড ঠিক নয়','Wrong code'));
+  const m=LS.get('akQuest',{});if(!m[id]){m[id]=Date.now();LS.set('akQuest',m);LS.set('akAfUntil',Math.max(afU(),Date.now())+864e5)}
   try{navigator.vibrate&&navigator.vibrate(12)}catch{}
-  aToast(T('অংশ নিয়েছেন! ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়ুন','You joined! 24 hours of ad-free comics'));
- })}
+  aToast(T('অংশগ্রহণ সম্পূর্ণ! ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined! 24 hours ad-free'));news()})}
 async function favs(){
  const thisRoute=routeVersion;let cl=[],cr=[];
  try{cl=(await list('comics')).filter(c=>fav.c.includes(c.id)).sort(byT)}catch{}
