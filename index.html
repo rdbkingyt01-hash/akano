@@ -406,16 +406,7 @@ header #logo{height:60px;max-width:min(62vw,300px)}
 .rvh{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rvc small{color:var(--m)}.rvc p{margin:6px 0 0;white-space:pre-line;line-height:1.7}
 .rs{display:inline-flex;gap:2px}.rs i{display:inline-flex}.rs .ic{width:17px;height:17px;color:#e10600}.rs i.on .ic{fill:#e10600}
-/* characters */
-.chg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px;padding-bottom:50px}
-.chc{display:block;width:100%;text-align:left;background:#fff;border:1px solid #e4e4e4;border-radius:18px;padding:10px;box-shadow:0 8px 24px -23px #111111;transition:transform .3s,border-color .3s}
-.chc:hover{transform:translateY(-3px);border-color:#e4e4e4}
-.chc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;display:block;background:#f2f2f2}
-.chc b{display:block;font-size:19px;margin:12px 4px 6px;color:var(--deep);line-height:1.3;font-weight:600}
-.chc .badge{margin:0 4px 6px;font-size:13px}
-.chc small{display:block;margin:2px 4px 4px;color:var(--m);font-size:14px}
 #chm{margin-top:8px;color:var(--r);font-weight:600}
-@media(max-width:760px){.chg{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.chc{padding:7px;border-radius:14px}.chc b{font-size:16px}}
 /* about: names on a transparent card */
 .acard{margin-top:26px;padding:6px clamp(18px,4vw,34px) 10px;border-radius:28px;background:rgba(225,6,0,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(225,6,0,.35);box-shadow:0 22px 44px -28px rgba(225,6,0,.55)}
 .acard section:first-child{border-top:0}
@@ -941,23 +932,9 @@ html[lang=en] .pc-how li:before{content:counter(n,decimal)}
 .pc-top .favb{width:40px;height:40px;background:#f2f2f2;border:1.5px solid #e10600;border-radius:50%}
 .pc-top .favb.on{background:#e10600}
 
-/* ===== characters ===== */
-.chf{display:flex;gap:8px;overflow-x:auto;margin:12px 0 2px;padding:2px 0 6px;scrollbar-width:none}
-.chf::-webkit-scrollbar{display:none}
-.chf button{flex:none;padding:7px 16px;border-radius:999px;border:1.5px solid #e4e4e4;background:#fff;color:#4a414d;font-size:14px;cursor:pointer;white-space:nowrap}
-.chf button.on{background:#e10600;border-color:#e10600;color:#fff}
 .chh{display:flex;align-items:center;gap:10px;margin:22px 2px 12px}
 .chh h2{margin:0;font-size:20px;line-height:1.3}
 .chh span{font-size:12px;padding:2px 10px;border-radius:99px;background:#f2f2f2;color:#555555}
-.chg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-bottom:26px}
-@media(min-width:700px){.chg{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}}
-.chc{position:relative;display:block;width:100%;padding:0;overflow:hidden;border:0;border-radius:18px;background:#f2f2f2;aspect-ratio:3/4;box-shadow:0 14px 26px -20px rgba(26,19,32,.6);text-align:left}
-.chc:hover{transform:translateY(-3px)}
-.chc img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0;transition:transform .5s}
-.chc:hover img{transform:scale(1.05)}
-.chc .chc-in{position:absolute;left:0;right:0;bottom:0;padding:38px 12px 12px;background:linear-gradient(to top,rgba(20,12,24,.85),rgba(20,12,24,0))}
-.chc .chc-in b{display:block;margin:0;font-size:16px;line-height:1.3;color:#fff}
-.chc .chc-in small{display:block;margin:2px 0 0;font-size:12px;color:rgba(255,255,255,.78);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cd-img{position:relative;border-radius:18px;overflow:hidden;background:#f2f2f2}
 .cd-img img{display:block;width:100%;max-height:56vh;object-fit:contain}
 .cd-img .favb{position:absolute;left:10px;top:10px;margin:0;width:40px;height:40px;padding:0;justify-content:center;border-radius:50%;background:#fff}
@@ -1648,8 +1625,6 @@ a.as-chip{display:inline-block;text-decoration:none}
 #vp #vshr .ic{width:19px;height:19px}
 #vp .vbar #vx{margin-left:8px}
 
-.chc.lk img{filter:blur(14px) brightness(.55);transform:scale(1.08)}
-.chc.lk .chc-in b{letter-spacing:3px}
 .akt{position:fixed;left:50%;bottom:104px;transform:translate(-50%,24px);opacity:0;z-index:600;max-width:90vw;padding:11px 18px;border-radius:999px;background:#111;color:#fff;font-size:14px;transition:opacity .3s,transform .3s;pointer-events:none}
 .akt.on{opacity:1;transform:translate(-50%,0)}
 
@@ -2534,6 +2509,29 @@ body #bn button[data-go=faq]{flex:1!important;width:auto!important;height:54px!i
 html body .pc-cp .btn,html body #cpa,html body #cpa2{background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important;filter:none!important;text-shadow:none!important}
 html body .pc-cp .btn::before,html body .pc-cp .btn::after,html body #cpa::before,html body #cpa::after,html body #cpa2::before,html body #cpa2::after{display:none!important;box-shadow:none!important}
 html body .pc-cp .btn:active,html body .pc-cp .btn:focus{box-shadow:none!important;outline:0!important}
+
+/* ===== sponsored posts in home feed ===== */
+.pst.adp .adtg{display:inline-block;border:1px solid currentColor;border-radius:6px;padding:0 6px;font-size:11px;line-height:17px;opacity:.7}
+.pst.adp .pst-i{display:block}
+
+.emp::before{display:none!important}
+button:not(:disabled),.card,.vc,.pst{transition:transform .18s cubic-bezier(.34,1.56,.64,1)}
+button:not(:disabled):active,.card:active,.vc:active{transform:scale(.96)}
+/* ===== quests ===== */
+.nw.qst{background:#fff;border:1px solid #e4e4e4;border-radius:20px;overflow:hidden;margin-bottom:18px}
+.qst-im img{display:block;width:100%;max-height:300px;aspect-ratio:16/8;object-fit:cover;background:#f2f2f2}
+.qst-b{padding:16px 16px 18px}
+.qst-b h2{margin:8px 0 2px;font-size:21px;line-height:1.35;color:#111;font-weight:600}
+.qst-b .dt{margin:0 0 4px}
+.qst-b p{margin:10px 0 0;white-space:pre-line;color:#333}
+.qst-rw{margin-top:14px;padding:12px 14px;border-radius:14px;background:#f5f6f8}
+.qst-rw small{display:block;color:#777;font-size:12.5px;font-weight:600}
+.qst-rw b{display:block;margin-top:2px;font-size:17px;color:#111;font-weight:600}
+.qst-pk{margin:14px 0 0;color:#666;font-size:13.5px}
+.qst .qst-ap{display:block;width:100%;margin-top:12px;padding:14px 16px;border-radius:16px;background:#fff;color:#1f1f1f;border:2px solid #e5e5e5;border-bottom:5px solid #d6d6d6;box-shadow:none;font-weight:700;font-size:15.5px;line-height:1.2;text-transform:uppercase;cursor:pointer;transition:transform .08s,border-bottom-width .08s}
+.qst .qst-ap:active:not(:disabled){transform:translateY(3px);border-bottom-width:2px}
+.qst .qst-ap.done,.qst .qst-ap:disabled{background:#e5e5e5;border-color:#e5e5e5;border-bottom-width:2px;color:#afafaf;cursor:default;transform:none}
+.qst .qst-ln{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#111;font-weight:600;font-size:14px}
 </style>
 </head>
 <body>
@@ -2573,7 +2571,7 @@ try{import('https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js').t
   'অ্যাপ ইনস্টল করুন':'Install app',
   'আর দেখাবেন না':'Don’t show this again',
   'কেনা':'Purchased','▶ ভিডিও':'▶ Video','এই কোড অন্য ভিডিওর':'This code belongs to another video','ভিডিওটি পাওয়া যায়নি':'Video not found','কোড দিয়ে কেনা কমিকস ও ভিডিও এখানে মেয়াদ অনুযায়ী (২০ দিন) জমা থাকবে (এই ডিভাইসে)।':'Comics and videos purchased with a code are saved here for 20 days on this device.','এই ভিডিও কিনলে ২০ দিনের জন্য পারচেজ লাইব্রেরিতে জমা থাকবে।':'This video will be saved in your Purchase Library for 20 days.',
-  'হোম':'Home','কমিকস':'Comics','ফ্রি':'Free','রিভিউ':'Reviews','ভিডিও':'Videos','আরও':'More','ক্যারেক্টার':'Characters','পারচেজ লাইব্রেরি':'Purchase Library','আমার তালিকা':'My List','গ্যালারি':'Gallery','ঘোষণা ও কনটেস্ট':'News & Contests','প্রশ্নোত্তর':'FAQ',
+  'হোম':'Home','কমিকস':'Comics','ফ্রি':'Free','রিভিউ':'Reviews','ভিডিও':'Videos','আরও':'More','ক্যারেক্টার':'Characters','পারচেজ লাইব্রেরি':'Purchase Library','আমার তালিকা':'My List','গ্যালারি':'Gallery','কোয়েস্ট':'Quests','প্রশ্নোত্তর':'FAQ',
   'কমিউনিটি ও যোগাযোগ':'Community & Contact','ফেসবুক পেজ':'Facebook Page','ফেসবুক গ্রুপ':'Facebook Group','ইমেইল':'Email','অ্যাডমিন লগইন':'Admin Login','খুঁজুন':'Search','ফিচারড কমিকস':'Featured Comics','ফিচারড ভিডিও':'Featured Videos','সব দেখুন':'See all','শীঘ্রই আসছে':'Coming soon',
    'কমিকস বা ক্যারেক্টার খুঁজুন...':'Search comics or characters...','কমিকস বা সিরিজ খুঁজুন...':'Search comics or series...','ভিডিও খুঁজুন...':'Search videos...','প্রস্তাবিত ভিডিও':'Recommended Videos','ক্যারেক্টার খুঁজুন...':'Search characters...','কমিকস খুঁজুন':'Search comics','কিছু পাওয়া যায়নি।':'No results found.','এখনো কোনো ঘোষণা নেই।':'No announcements yet.','এখনো কোনো রিভিউ নেই। প্রথম রিভিউ আপনিই দিন!':'No reviews yet. Be the first to leave one!','রিভিউ দেখানো যাচ্ছে না। ':'Reviews could not be loaded. ',
   'সব':'All','ওয়ানশট':'One-shot','সিরিজ':'Series','বাংলায়':'In Bangla','পড় কমিকস':'Comics','পেছনে':'Back','পড়ুন':'Read','ফ্রি কমিকস':'Free comic','পেইড':'Paid','টাকা':'BDT','বার দেখা':'views','নতুন':'New',
@@ -2694,8 +2692,8 @@ const langObserver=new MutationObserver(ms=>ms.forEach(m=>{
  else if(m.type==='attributes')localizeAttrs(m.target);
  else m.addedNodes.forEach(n=>n.nodeType===Node.TEXT_NODE?localizeText(n):applyLanguage(n));
 }));
-const NAV=[['home','হোম','home'],['comics','কমিকস','panels'],['videos','Watch','play'],['lib','পারচেজ লাইব্রেরি','shelf'],['favs','আমার তালিকা','bookmark'],['chars','ক্যারেক্টার','face'],['news','ঘোষণা ও কনটেস্ট','mega'],['faq','Fragiks AI','spark']];
-const NAV_EN={settings:'More',home:'Home',comics:'Comics',videos:'Watch',lib:'Library',favs:'My List',chars:'Characters',news:'News & Contests',faq:'Fragiks AI'};
+const NAV=[['home','হোম','home'],['comics','কমিকস','panels'],['videos','Watch','play'],['lib','পারচেজ লাইব্রেরি','shelf'],['favs','আমার তালিকা','bookmark'],['news','কোয়েস্ট','mega'],['faq','Fragiks AI','spark']];
+const NAV_EN={settings:'More',home:'Home',comics:'Comics',videos:'Watch',lib:'Library',favs:'My List',news:'Quests',faq:'Fragiks AI'};
 const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
 function reveal(){document.querySelectorAll('.card,.chc,.gal button,.nw,.ab section,.mi,.sx,.rail,.gp,.ban').forEach((x,i)=>{if(x.classList.contains('rv')||x.matches('.rail .card'))return;x.classList.add('rv');x.style.setProperty('--d',(i%5)*.08+'s');io?io.observe(x):x.classList.add('in')})}
 addEventListener('scroll',()=>{const h=document.documentElement;$('header').classList.toggle('sh',scrollY>8)},{passive:true});
@@ -2831,7 +2829,6 @@ async function settings(){
    <button type=button class=st-up data-go=premium><span class=st-upi>${ic('spark')}</span><span class=st-upt><b>Akano Plus</b><small>${isPrem()?(dl()<=5?T(bn(dl())+' দিন বাকি · নবায়ন করুন',dl()+' days left · renew'):T('সক্রিয় · ধন্যবাদ!','Active · thank you!')):T('বিজ্ঞাপনমুক্ত · সব পেইড অ্যানিমেশন ও কমিকস','Ad-free · all paid animation & comics')}</small></span><span class=st-upb><i><svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.6 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M12 19V6M6 11l6-6 6 6"/></svg></i>${isPrem()?(dl()<=5?T('নবায়ন','Renew'):T('দেখুন','View')):T('আপগ্রেড','Upgrade')}</span></button>
    ${row('savedi','Saved','saved')}
    
-   ${row('face',T('ক্যারেক্টার','Characters'),'chars')}
    ${row('flame',T('আমার ব্যাজ','My Badges'),'badges')}
    
    <button class="st-row" id=stDs type=button>${ic('dl')}<span>${T('ডেটা সেভার','Data saver')}</span><i class="st-sw${DS()?' on':''}" role=switch aria-checked="${DS()}"></i></button>
@@ -2839,7 +2836,7 @@ async function settings(){
    <button class="st-row" id=stRf type=button>${ic('refresh')}<span>${T('রিফ্রেশ — নতুন কনটেন্ট দেখুন','Refresh — load latest content')}</span></button>
   </div>
   <div class=st-g>
-   ${row('mega',T('ঘোষণা ও কনটেস্ট','News & Contests'),'news')}
+   ${row('mega',T('কোয়েস্ট','Quests'),'news')}
    ${row('fragiks','Fragiks','faq')}
    ${row('give',T('আমাদের সাপোর্ট করুন','Support us'),'support')}
    ${row('creator',T('ক্রিয়েটর হোন','Be a creator'),'submit')}
@@ -3086,7 +3083,7 @@ async function saved(tab){
  root.insertAdjacentHTML('afterbegin',`<div class=sv-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>Saved</h1></div><div class=chp id=svt>${tabs.map(([k,n])=>`<button type=button data-sv=${k}${k===savedTab?' class=on':''}>${n}</button>`).join('')}</div>`);
  $('#svt').onclick=e=>{const b=e.target.closest('button');if(b&&b.dataset.sv!==savedTab)saved(b.dataset.sv)};
 }
-const V={premium:viewPremium,support:viewSupport,submit:viewSubmit,saved:()=>saved(),history:()=>saved('hist'),settings,home,comics:()=>shop(),free:()=>shop(),news,lib:()=>saved('lib'),chars:characters,favs:()=>saved('list'),faq,videos,badges};
+const V={premium:viewPremium,support:viewSupport,submit:viewSubmit,saved:()=>saved(),history:()=>saved('hist'),settings,home,comics:()=>shop(),free:()=>shop(),news,lib:()=>saved('lib'),favs:()=>saved('list'),faq,videos,badges};
 const SK='<div class=sg>'+'<div class=sk></div>'.repeat(6)+'</div>';
 const skCard=()=>'<div class=skc><div class="sk skc-i"></div><div class="sk skc-t"></div><div class="sk skc-t s"></div></div>',skVid=()=>'<div class=skv><div class="sk skv-i"></div><div class="sk skc-t"></div><div class="sk skc-t s"></div></div>',skHead=w=>`<div class="sk skh" style="width:${w}%"></div>`,skBar='<div class="sk skb"></div>';
 const SKS={
@@ -3096,7 +3093,7 @@ const SKS={
  reviews:()=>`<div class="sec skw">${skHead(52)}<div class="sk skrc"></div><div class="sk skrc" style="height:70px;margin-top:14px"></div>${'<div class="sk skrow" style="height:96px"></div>'.repeat(3)}</div>`,
  list:()=>`<div class="sec skw">${skHead(40)}${'<div class="sk skrow"></div>'.repeat(6)}</div>`
 };
-const skMap={home:'home',videos:'videos',comics:'comics',lib:'comics',favs:'comics',saved:'comics',history:'comics',chars:'comics',gallery:'comics',reviews:'reviews'};
+const skMap={home:'home',videos:'videos',comics:'comics',lib:'comics',favs:'comics',saved:'comics',history:'comics',gallery:'comics',reviews:'reviews'};
 const skel=v=>(SKS[skMap[v]||'list'])();
 let routeVersion=0,lastShop='comics',currentRoute='home';
 async function go(v){
@@ -3154,7 +3151,6 @@ const serCard=g=>{const e=g.eps,fc=e.filter(x=>x.free).length,mp=Math.min(...e.f
 const cardOf=g=>g.ser?serCard(g):cardH(g.one,!!g.one.free);
 // প্রতিপাদ্য: কল্পনার দুনিয়ায়, টাইপরাইটার অ্যানিমেশনসহ
 
-const chCard=(x,g)=>{const lk=chLocked(x);return `<button class="chc${lk?' lk':''}" data-ch="${esc(x.id)}" data-s="${esc(x.series||'অন্যান্য')}" data-q="${esc(lk?'???':(x.name+' '+(x.series||'')+' '+(x.app||'')).toLowerCase())}"><img src="${esc(x.th||x.img)}" loading=lazy alt="${lk?'':esc(x.name)}"><span class=chc-in><b>${lk?'???':esc(x.name)}</b>${lk?`<small>${T('লক করা','Locked')}</small>`:((g?x.app:(x.app||x.series))?`<small>${esc(g?x.app:(x.app||x.series))}</small>`:'')}</span></button>`};
 
 async function home(){
  const thisRoute=routeVersion;
@@ -3195,14 +3191,16 @@ async function home(){
   +(origV.length?rs('আকানো অরিজিনাল ভিডিও','videos',`<div class=rail>${origV.map(vCard).join('')}</div>`):'')+rs('ফিচারড ভিডিও','videos',featuredVideos.length?`<div class=rail>${featuredVideos.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
   const videoSection=(t,l)=>rs(t,'videos',l.length?`<div class=rail>${l.map(vCard).join('')}</div>`:'<p class="soon emp e-soon">শীঘ্রই আসছে</p>');
   let lgUrl='';try{const lo=await cache('logo_v2',()=>dat('site','logo'));if(lo&&lo.url)lgUrl=lo.url}catch{}
-  let ht='f';const hmC={f:[],r:[]};const loadHm=()=>list('comics').then(l=>{l.forEach(c=>{if(c.hm==='f'||c.hm==='r')hmC[c.hm].push(c)});hmC.f.sort((a,b)=>ordCmp(a,b)||byT(a,b));hmC.r.sort((a,b)=>ordCmp(a,b)||byT(a,b));comics=Object.assign(comics||{},Object.fromEntries(l.map(c=>[c.id,c])));if($('#sv')&&(hmC.f.length||hmC.r.length)){drawFeed();reveal()}}).catch(()=>{});const hl={f:featuredVideos,r:recommendedVideos,s:hsv},drawFeed=()=>{const sv=$('#sv');if(!sv)return;
+  let ht='f',adps=[];const hmC={f:[],r:[]};const loadHm=()=>list('comics').then(l=>{l.forEach(c=>{if(c.hm==='f'||c.hm==='r')hmC[c.hm].push(c)});hmC.f.sort((a,b)=>ordCmp(a,b)||byT(a,b));hmC.r.sort((a,b)=>ordCmp(a,b)||byT(a,b));comics=Object.assign(comics||{},Object.fromEntries(l.map(c=>[c.id,c])));if($('#sv')&&(hmC.f.length||hmC.r.length)){drawFeed();reveal()}}).catch(()=>{});const hl={f:featuredVideos,r:recommendedVideos,s:hsv},drawFeed=()=>{const sv=$('#sv');if(!sv)return;
    const lgs=lgUrl||(()=>{const l=$('#logo');return l&&!l.hidden&&l.src&&l.src!==DEFAULT_LOGO?l.src:''})();
    const pCard=(g,i)=>`<article class=pst data-sayc><div class=pst-h>${lgs?`<img src="${esc(lgs)}" alt="">`:''}<div><b>Akanoplus</b><small>${esc(dateLabel(g.t))}</small></div></div>${g.url?`<button class=pst-i data-gi=${i} aria-label="${esc(g.cap||'ছবি')}"><img src="${esc(g.url||g.th)}" loading=lazy alt="${esc(g.cap||'')}"></button>`:''}${g.cap?`<p data-sayt>${esc(g.cap)}</p><button type=button class=say data-say aria-label="${T('শুনুন','Listen')}">${ic('vol')}<span>${T('শুনুন','Listen')}</span></button>`:''}${/^https?:\/\//.test(g.link||'')?`<a class=pst-l href="${esc(g.link)}" target=_blank rel=noopener>${T('বিস্তারিত দেখুন','See details')}${ic('arrow')}</a>`:''}</article>`;
-   const arr=(hl[ht]||[]).slice().sort(ordCmp);let out='',pi=0;
-   arr.forEach((x,i)=>{out+=vCard(x);if((i===1||(i>1&&(i-1)%3===0))&&pi<posts.length){out+=pCard(posts[pi],pi);pi++}});
+   const aCard=g=>{const lk=/^https?:\/\//.test(g.link||'')?g.link:'',im=g.img?(lk?`<a class=pst-i href="${esc(lk)}" target=_blank rel="noopener noreferrer sponsored"><img src="${esc(g.img)}" loading=lazy alt=""></a>`:`<div class=pst-i><img src="${esc(g.img)}" loading=lazy alt=""></div>`):'';return `<article class="pst adp"><div class=pst-h><div><b>${esc(g.name||'')}</b><small><span class=adtg>${T('বিজ্ঞাপন','Advertisement')}</span></small></div></div>${im}${g.cap?`<p>${esc(g.cap)}</p>`:''}${lk?`<a class=pst-l href="${esc(lk)}" target=_blank rel="noopener noreferrer sponsored">${esc(g.btn||T('বিস্তারিত দেখুন','Learn more'))}${ic('arrow')}</a>`:''}</article>`};
+   let ai=0;const arr=(hl[ht]||[]).slice().sort(ordCmp);let out='',pi=0;
+   arr.forEach((x,i)=>{out+=vCard(x);if((i===1||(i>1&&(i-1)%3===0))&&pi<posts.length){out+=pCard(posts[pi],pi);pi++}if(adps.length&&(i===2||(i>2&&(i-2)%5===0))){out+=aCard(adps[ai%adps.length]);ai++}});if(adps.length&&!ai&&arr.length){out+=aCard(adps[0]);ai=1}
    for(let k=0;k<2&&pi<posts.length;k++){out+=pCard(posts[pi],pi);pi++}
    sv.innerHTML=`<div class=hft><button type=button data-ht=f class="${ht==='f'?'on':''}">ফিচারড</button><button type=button data-ht=r class="${ht==='r'?'on':''}">প্রস্তাবিত</button>${hsOn?`<button type=button data-ht=s class="${ht==='s'?'on':''}">${T('সিরিজ','Series')}</button>`:''}</div>${(hmC[ht]&&hmC[ht].length)?`<div class="grid comic-list">${collapse(hmC[ht]).map(cardOf).join('')}</div>`:''}<div class=hfl>${out||((hmC[ht]&&hmC[ht].length)?'':'<p class="soon emp e-soon">শীঘ্রই আসছে</p>')}</div>`;
    sv.querySelectorAll('[data-ht]').forEach(b=>b.onclick=()=>{ht=b.dataset.ht;drawFeed();if(hmC[ht]&&hmC[ht].length)reveal()})};
+  cache('adposts',async()=>(await dat('site','adposts'))||{list:[]}).then(d=>{adps=((d&&d.list)||[]).filter(x=>x&&x.on!==false&&(x.cap||x.img));if(adps.length&&$('#sv'))drawFeed()}).catch(()=>{});
   drawFeed();loadHm();
   reveal()}
 async function openSeries(name){
@@ -3237,14 +3235,25 @@ async function news(){
  const thisRoute=routeVersion;
  const n=(await list('news')).sort(byT);
  if(thisRoute!==routeVersion)return;
-  $('#app').innerHTML=`<div class=sec><h1 class=ct>ঘোষণা<span>ও কনটেস্ট</span></h1>${n.map(x=>`<article class=nw>${banner(x,'div')}<div class=dt>${dateLabel(x.t)}</div><p>${esc(x.text)}</p>${/^https?:\/\//.test(x.link)?`<a class=btn href="${esc(x.link)}" target=_blank rel=noopener>বিস্তারিত দেখুন${ic('arrow')}</a>`:''}</article>`).join('')||'<p class="ld emp e-news">এখনো কোনো ঘোষণা নেই।</p>'}</div>`}
+ const joined=LS.get('akQuest',{}),isQ=x=>x.type!=='ঘোষণা';
+ const card=x=>{const q=isQ(x),done=!!joined[x.id],lk=/^https?:\/\//.test(x.link||'')?x.link:'';
+  return `<article class="nw qst">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><span class=tag>${q?T('কোয়েস্ট','Quest'):T('ঘোষণা','Announcement')}</span><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${x.text?`<p>${esc(x.text)}</p>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${q?`<div class=qst-pk>${T('অংশ নিলেই পাবেন ১ দিন বিজ্ঞাপনমুক্ত কমিক পড়া','Join and get 1 day of ad-free comic reading')}</div><button type=button class="qst-ap${done?' done':''}" data-qa="${esc(x.id)}"${done?' disabled':''}>${done?T('অংশ নিয়েছেন','Joined'):T('অ্যাপ্লাই করুন','Apply')}</button>`:''}${lk?`<a class=qst-ln href="${esc(lk)}" target=_blank rel=noopener>${T('বিস্তারিত দেখুন','View details')}${ic('arrow')}</a>`:''}</div></article>`};
+ $('#app').innerHTML=`<div class=sec><h1 class=ct>${T('কোয়েস্ট','Quests')}</h1>${n.map(card).join('')||`<p class="ld emp e-news">${T('এখনো কোনো কোয়েস্ট নেই।','No quests yet.')}</p>`}</div>`;
+ document.querySelectorAll('#app [data-qa]').forEach(b=>b.onclick=()=>{
+  if(b.disabled)return;
+  const id=b.dataset.qa,m=LS.get('akQuest',{});if(m[id])return;
+  m[id]=Date.now();LS.set('akQuest',m);
+  LS.set('akAfUntil',Math.max(afU(),Date.now())+864e5);
+  b.disabled=true;b.classList.add('done');b.textContent=T('অংশ নিয়েছেন','Joined');
+  try{navigator.vibrate&&navigator.vibrate(12)}catch{}
+  aToast(T('অংশ নিয়েছেন! ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়ুন','You joined! 24 hours of ad-free comics'));
+ })}
 async function favs(){
  const thisRoute=routeVersion;let cl=[],cr=[];
  try{cl=(await list('comics')).filter(c=>fav.c.includes(c.id)).sort(byT)}catch{}
- try{cr=((await cache('chars',async()=>(await dat('site','characters'))||{list:[]})).list||[]).filter(x=>fav.h.includes(x.id))}catch{}
  if(thisRoute!==routeVersion)return;
- comics=Object.fromEntries(cl.map(c=>[c.id,c]));chs=cr;
- $('#app').innerHTML=`<div class=sec id=favp><h1 class=ct>আমার<span>তালিকা</span></h1>${cl.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${cl.map(c=>cardH(c,!!c.free)).join('')}</div>`:''}${cr.length?`<div class=sx><div><h2>${ic('face')}ক্যারেক্টার</h2></div></div><div class=chg>${cr.map(x=>chCard(x)).join('')}</div>`:''}${cl.length||cr.length?'':'<p class="ld emp e-fav">কমিকস বা ক্যারেক্টারের বুকমার্ক আইকনে ট্যাপ করলে এখানে যোগ হবে (এই ডিভাইসে)।</p>'}</div>`}
+ comics=Object.fromEntries(cl.map(c=>[c.id,c]));chs=[];
+ $('#app').innerHTML=`<div class=sec id=favp><h1 class=ct>আমার<span>তালিকা</span></h1>${cl.length?`<div class=sx><div><h2>${ic('book')}কমিকস</h2></div></div><div class=grid>${cl.map(c=>cardH(c,!!c.free)).join('')}</div>`:''}${cl.length?'':'<p class="ld emp e-fav">কমিকসের বুকমার্ক আইকনে ট্যাপ করলে এখানে যোগ হবে (এই ডিভাইসে)।</p>'}</div>`}
 function faqData(L){const T=(b,e)=>L==='en'?e:b,X=t=>L==='en'?phraseTr(t,true):t;return [
   ['comic',T('Akano Plus-এর সুবিধা কী?','What are the benefits of Akano Plus?'),T('Akano Plus নিলে অ্যানিমেশনে কোনো বিজ্ঞাপন দেখতে হয় না, সব পেইড অ্যানিমেশন এবং পূর্ণ কমিকস লাইব্রেরি খোলা পাওয়া যায়। প্ল্যান ও দাম Plus পেজে দেখানো আছে। কোনো ফ্রি ট্রায়াল নেই।','Akano Plus removes ads on animations and unlocks every paid animation and the full comics library. Plans and prices are shown on the Plus page. There is no free trial.')],
   ['comic',T('কীভাবে Akano Plus নেব?','How do I get Akano Plus?'),T('Plus পেজে “আপগ্রেড করুন” চেপে ফর্ম পূরণ করুন, আপনি একটি রেফারেন্স পাস পাবেন। পেমেন্ট যাচাইয়ের পর অ্যাডমিন একটি অ্যাক্টিভেশন কোড দেবেন। “অ্যাক্টিভেশন কোড আছে?” এ কোডটি দিলে নির্দিষ্ট মেয়াদের জন্য চালু হবে। Gmail-এ যোগাযোগের সময় পাসটি জানাবেন। একটি কোড একটি ডিভাইসে চলে।','Tap “Upgrade” on the Plus page and fill the form to get a reference pass. After payment is verified the admin gives you an activation code; enter it under “Have a code?” to start Plus for the plan period. Quote your pass when you email us. One code works on one device.')],
@@ -3521,74 +3530,6 @@ let vptLock=0;
 addEventListener('pagehide',()=>{if(vSaver)try{vSaver()}catch{}});
 ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{if(!$('#vp')?.classList.contains('on'))return;const f=document.fullscreenElement||document.webkitFullscreenElement;try{if(f)screen.orientation?.lock?.('landscape').catch(()=>{});else if(!vptLock)screen.orientation?.unlock?.()}catch{}}));
 const FBG='https://www.facebook.com/share/g/18VCniWUos/',FBI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>';
-async function reviews(){
- const thisRoute=routeVersion;let rv=[],ok=true,cl=[],rate=0;
- try{cl=(await list('comics')).sort(byT)}catch{}
- try{rv=(await cache('reviews',async()=>(await tmo(getDocs(query(collection(db,'reviews'),where('approved','==',true))))).docs.map(d=>({id:d.id,...d.data()})))).sort(byT)}catch{ok=false}
- if(thisRoute!==routeVersion)return;
- const st=r=>`<span class=rs role=img aria-label="${language==='en'?`${r} out of 5 stars`:`৫টির মধ্যে ${bn(r)} তারা`}">${[1,2,3,4,5].map(i=>`<i class="${i<=r?'on':''}" aria-hidden=true>${ic('star')}</i>`).join('')}</span>`;
- const avg=rv.length?rv.reduce((a,r)=>a+(+r.rating||0),0)/rv.length:0;
- const empty=ok?`<div class="rv-empty emp e-chat"><h3>এখনো কোনো রিভিউ নেই।</h3><p>প্রথম রিভিউ দিয়ে কমিউনিটির সঙ্গে আপনার অভিজ্ঞতা ভাগ করে নিন।</p></div>`:`<div class="rv-empty emp e-error"><h3>রিভিউ দেখানো যাচ্ছে না।</h3><p><a href="${FBG}" target=_blank rel=noopener style="color:#c40500">ফেসবুক গ্রুপে</a> রিভিউ দেখুন ও দিন।</p></div>`;
- const cnt=`${bn(rv.length)} ${language==='en'?(rv.length===1?'review':'reviews'):'টি রিভিউ'}`;
-   const T2=(b,e)=>language==='en'?e:b;
-   const dist=[5,4,3,2,1].map(n=>rv.filter(r=>Math.round(+r.rating||0)===n).length);
-   const parse=t=>{const m=/^\[([^\]]{1,80})\]\s*/.exec(t||'');return m?{tags:m[1].split(',').map(x=>x.trim()).filter(Boolean),text:t.slice(m[0].length)}:{tags:[],text:t||''}};
-   const card=r=>{const q=parse(r.text);return `<article class=rv-card><div class=rv-head><span class=rv-av aria-hidden=true>${esc(String(r.name||'?').trim().charAt(0).toUpperCase())}</span><div class=rv-meta><b>${esc(r.name)}</b><small>${r.t?esc(dateLabel(r.t)):''}</small></div>${st(+r.rating||0)}</div>${r.comic?`<span class=rv-for>${esc(r.comic)}</span>`:''}${q.tags.length?`<div class=rv-tags>${q.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}<p>${esc(q.text)}</p></article>`};
-   let sort='new',star=0,shown=6;const focusT=window.__rvFor||'';window.__rvFor='';
-   const drawRv=()=>{let a=rv.filter(r=>!star||Math.round(+r.rating||0)===star);a=[...a].sort(sort==='top'?(x,y)=>(+y.rating||0)-(+x.rating||0)||byT(x,y):sort==='low'?(x,y)=>(+x.rating||0)-(+y.rating||0)||byT(x,y):byT);
-    if(focusT)a=[...a].sort((x,y)=>(y.comic===focusT)-(x.comic===focusT));$('#rvl').innerHTML=a.length?a.slice(0,shown).map(card).join('')+(a.length>shown?`<button type=button class=rv-more id=rvmore>${language==='en'?'Show more':'আরও দেখুন'}</button>`:''):(rv.length?`<p class="ld emp e-search">${language==='en'?'No reviews for this filter.':'এই ফিল্টারে কোনো রিভিউ নেই।'}</p>`:empty);
-    const mb=$('#rvmore');if(mb)mb.onclick=()=>{shown+=6;drawRv()}};
-   const chips=[['গল্প','Story'],['আর্ট','Art'],['ক্যারেক্টার','Characters'],['ডায়ালগ','Dialogue'],['প্রিন্ট','Print quality'],['ভিডিও','Videos']];
-  $('#app').innerHTML=`<div class="sec rv-page">
-   <div class=rv-top><h1 class=ct>দর্শকদের<span>রিভিউ</span></h1></div>
-   ${rv.length?`<div class=rv-sum2><div class=rv-big><b>${bn(avg.toFixed(1))}</b>${st(Math.round(avg))}<small>${cnt}</small></div><div class=rv-dist>${dist.map((c,i)=>`<button type=button data-st=${5-i} aria-label="${language==='en'?`${5-i} star reviews`:`${bn(5-i)} তারার রিভিউ`}"><span>${bn(5-i)}</span><i><u style="width:${(c/rv.length*100).toFixed(0)}%"></u></i><em>${bn(c)}</em></button>`).join('')}</div></div>`:''}
-   <form class=rvx id=rvf autocomplete=off>
-    <button type=button class=rvx-h id=rvh aria-expanded=false><span class=rvx-ic>${icf('msg')}</span><h2>${T2('আপনার অভিজ্ঞতা কেমন?','Rate your experience')}</h2><span class=rvx-ch>${ic('chev')}</span></button><div class=rvx-b>
-    <div class=rvx-bar><div class=rt id=rt role=group aria-label="রেটিং">${[1,2,3,4,5].map(i=>`<button type=button data-rt=${i} aria-label="${language==='en'?`${i} stars`:`${bn(i)} তারা`}" aria-pressed=false>${ic('star')}</button>`).join('')}</div></div>
-    <span class=rvx-hint id=rvrange aria-live=polite>${language==='en'?'Choose from 1 to 5 stars':'১ থেকে ৫ তারা বেছে নিন'}</span>
-    <p class=rvx-q>${T2('সবচেয়ে কী ভালো লেগেছে?','What did you like the most?')}</p>
-    <div class=rvx-chips>${chips.map(c=>`<button type=button>${T2(c[0],c[1])}</button>`).join('')}</div>
-    <select name=comic id=rv-comic aria-label="রিভিউ কিসের জন্য?"><option value="">সাধারণ রিভিউ (আকানো সম্পর্কে)</option>${cl.map(c=>`<option>${esc(c.title)}</option>`).join('')}</select>
-    <input name=name maxlength=60 placeholder="আপনার নাম" value="${esc(LS.get('akRvN',''))}" required>
-    <textarea name=text maxlength=500 placeholder="আপনার মতামত লিখুন" required></textarea><small class=rvx-cnt id=rvc>${bn(0)}/${bn(500)}</small>
-    <input name=website tabindex=-1 autocomplete=off aria-hidden=true style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-    <button class=rvx-send type=submit>${T2('জমা দিন','Submit')}</button>
-    <p class=rv-fb><a href="${FBG}" target=_blank rel=noopener>${FBI}ফেসবুক গ্রুপেও রিভিউ দিতে পারেন</a></p>
-    <p class=rv-msg id=rvm role=status aria-live=polite></p></div>
-   </form>
-   <div class=rv-tools id=rvt><div class=rv-sort id=rvs><button type=button class=on data-s=new>${T2('নতুন','Newest')}</button><button type=button data-s=top>${T2('সেরা','Top rated')}</button><button type=button data-s=low>${T2('কম রেটিং','Lowest')}</button></div></div>
-   <section class=rv-list id=rvl></section>
-  </div>`;
-drawRv();
- $('#rvs').onclick=e=>{const b=e.target.closest('button');if(!b)return;sort=b.dataset.s;shown=6;[...$('#rvs').children].forEach(x=>x.classList.toggle('on',x===b));drawRv()};
- document.querySelectorAll('.rv-dist button').forEach(b=>b.onclick=()=>{const n=+b.dataset.st;star=star===n?0:n;shown=6;document.querySelectorAll('.rv-dist button').forEach(x=>x.classList.toggle('on',+x.dataset.st===star));drawRv()});
- {const ta=$('#rvf').querySelector('textarea'),cn=$('#rvc');ta.oninput=()=>{cn.textContent=bn(ta.value.length)+'/'+bn(500)};$('#rvf').querySelector('[name=name]').oninput=e=>LS.set('akRvN',e.target.value.trim().slice(0,60))}
- const msg=h=>{$('#rvm').innerHTML=h};
- const setRatingHint=()=>{$('#rvrange').textContent=rate?(language==='en'?`${rate} of 5 selected`:`৫টির মধ্যে ${bn(rate)} বেছে নিয়েছেন`):(language==='en'?'Choose from 1 to 5 stars':'১ থেকে ৫ তারা বেছে নিন')};
- $('#rt').onclick=e=>{const b=e.target.closest('button');if(!b)return;rate=+b.dataset.rt;$('#rt').parentElement.style.setProperty('--p',rate);[...$('#rt').children].forEach((x,i)=>{x.classList.toggle('on',i<rate);x.setAttribute('aria-pressed',String(i<rate))});setRatingHint()};
- $('#rvh').onclick=()=>{const o=$('#rvf').classList.toggle('open');$('#rvh').setAttribute('aria-expanded',o)};
-  if(focusT){const sel=$('#rv-comic');if(sel){let o=[...sel.options].find(x=>x.textContent===focusT);if(!o){o=document.createElement('option');o.textContent=focusT;sel.appendChild(o)}sel.value=o.value||o.textContent}$('#rvf').classList.add('open');$('#rvh').setAttribute('aria-expanded',true)}
- document.querySelectorAll('.rvx-chips button').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
- $('#rvf').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);if(f.get('website'))return;
-  const name=String(f.get('name')||'').trim().slice(0,60),text=String(f.get('text')||'').trim().slice(0,500);
-  if(!name||!text)return msg('নাম ও মতামত লিখুন');if(!rate)return msg('তারা দিয়ে রেটিং দিন');
-  let last=0;try{last=+localStorage.akRv||0}catch{}if(Date.now()-last<60000)return msg('একটু পরে আবার চেষ্টা করুন');
-  msg('জমা হচ্ছে...');
-  try{await addDoc(collection(db,'reviews'),{name,rating:rate,text:((t=>t?'['+t+'] ':'')([...document.querySelectorAll('.rvx-chips .on')].map(x=>x.textContent.trim()).join(', '))+text).slice(0,500),comic:String(f.get('comic')||'').slice(0,120),approved:true,t:Date.now()});
-   try{localStorage.akRv=Date.now()}catch{}
-   e.target.reset();rate=0;$('#rt').parentElement.style.setProperty('--p',0);document.querySelectorAll('.rvx-chips .on').forEach(x=>x.classList.remove('on'));[...$('#rt').children].forEach(x=>{x.classList.remove('on');x.setAttribute('aria-pressed','false')});setRatingHint();msg('ধন্যবাদ! অ্যাডমিন অনুমোদনের পর আপনার রিভিউ এখানে দেখা যাবে।');try{track('rev')}catch{}}
-  catch{msg(`রিভিউ জমা দেওয়া যায়নি। অনুগ্রহ করে <a href="${FBG}" target=_blank rel=noopener style="color:#e10600">ফেসবুক গ্রুপে</a> আপনার রিভিউ জানান।`)}}}
-async function characters(){
- const thisRoute=routeVersion;
- const d=await cache('chars',async()=>(await dat('site','characters'))||{list:[]});
- if(thisRoute!==routeVersion)return;
- chs=d.list||[];const g={};chs.forEach(x=>{const k=x.series||'অন্যান্য';(g[k]=g[k]||[]).push(x)});
- const sers=Object.keys(g);
- $('#app').innerHTML=`<div class=sec><h1 class=ct>আকানো<span>ক্যারেক্টার</span></h1>${chs.length?`<div class=sb>${ic('search')}<input id=q type=search placeholder="ক্যারেক্টার খুঁজুন..." autocomplete=off aria-label="ক্যারেক্টার খুঁজুন"></div>`:''}${sers.length>1?`<div class=chf id=chf><button class=on data-sf="">সব</button>${sers.map(k=>`<button data-sf="${esc(k)}">${esc(k)}</button>`).join('')}</div>`:''}${Object.entries(g).map(([k,a])=>`<div class=grp><div class=chh><h2>${esc(k)}</h2><span>${bn(a.length)}</span></div><div class=chg>${a.map(x=>chCard(x,1)).join('')}</div></div>`).join('')||'<p class="ld emp e-soon">শীঘ্রই আসছে।</p>'}<p class="ld emp e-search" id=nf hidden>কিছু পাওয়া যায়নি।</p></div>`;
- let sf='';const apply=()=>{const v=($('#q')?.value||'').trim().toLowerCase();document.querySelectorAll('.chc').forEach(c=>c.hidden=!!((sf&&c.dataset.s!==sf)||!c.dataset.q.includes(v)));document.querySelectorAll('.grp').forEach(g=>g.hidden=!g.querySelector('.chc:not([hidden])'));$('#nf').hidden=!!document.querySelector('.chc:not([hidden])')};
- if($('#q'))$('#q').oninput=apply;if(window.__pf&&$('#q')){$('#q').value=window.__pf;window.__pf='';apply()}
- if($('#chf'))$('#chf').onclick=e=>{const b=e.target.closest('button');if(!b)return;sf=b.dataset.sf;[...$('#chf').children].forEach(x=>x.classList.toggle('on',x===b));apply()}}
-
 function library(){
  const nw=nowT(),pos=LS.get('akVpos',{}),all=Object.entries(lib).map(([c,o])=>({c,o,d:Math.ceil((o.e-nw)/864e5),v:o.k==='v'})).sort((x,y)=>(y.d>0)-(x.d>0)||y.o.e-x.o.e);
  const row=({c,o,d,v})=>{const live=d>0,cls=!live?'end':d>7?'ok':d>2?'warn':'bad',pr=v?pos[o.vid]:prog['c:'+c];
@@ -3604,11 +3545,11 @@ const siteClick=e=>{
  const vi=e.target.closest('[data-vid]');if(vi){const x=vds.find(y=>y.id===vi.dataset.vid);if(x)openVideo(x);return}
  const sr=e.target.closest('[data-series]');if(sr){openSeries(sr.dataset.series);return}
  const ct=e.target.closest('[data-cont]');if(ct){const[k,r]=ct.dataset.cont.split(':');if(k==='f')openFree(r);else redeem(r).then(m=>m&&alert(m)).catch(er=>alert('সংযোগে সমস্যা ('+(er?.code||'error')+')'));return}
- const c=e.target.closest('.card,[data-open]'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]'),h=e.target.closest('[data-ch]');
+ const c=e.target.closest('.card,[data-open]'),g=e.target.closest('[data-gi]'),l=e.target.closest('[data-lib]');
  if(c)comics[c.dataset.id].free?openFree(c.dataset.id):buy(c.dataset.id);
  if(g)showGal(+g.dataset.gi);
  if(l)redeem(l.dataset.lib).then(m=>m&&alert(m)).catch(e=>alert('সংযোগে সমস্যা, আবার চেষ্টা করুন ('+(e?.code||'error')+')'));
- if(h){const x=chs.find(y=>y.id===h.dataset.ch);if(x&&chLocked(x)){modal(chLockHtml(x))}else if(x){modal(`<div class=cd-img><img src="${esc(x.img||x.th)}" alt="${esc(x.name)}">${favBtn('h',x.id)}</div><div class=cd-b>${x.series?`<span class=badge>${esc(x.series)}</span>`:''}<h2>${esc(x.name)}</h2>${x.app?`<p class=cd-ap><span>অ্যাপিয়ারেন্স</span>${esc(x.app)}</p>`:''}${x.desc?`<p class=cd-ds>${esc(x.desc)}</p>`:''}</div>`);favWire()}}};
+ };
 $('#app').onclick=siteClick;
 $('#app').addEventListener('input',e=>{const t=e.target;if(!t.classList?.contains('asr'))return;const v=t.value.trim().toLowerCase();document.querySelectorAll('#'+t.dataset.for+' .al').forEach(r=>{r.hidden=!r.textContent.toLowerCase().includes(v)})});
 
@@ -3833,7 +3774,7 @@ function kbData(){return [
   {c:'about',qb:'আকানোর লক্ষ্য কী?',qe:'What is Akano\u2019s goal?',k:'লক্ষ্য goal vision স্বপ্ন mission উদ্দেশ্য ভবিষ্যৎ future ambition target',ab:'আকানো Frangowst-এর একটি উদ্যোগ। আমাদের লক্ষ্য বিনোদনের সব ক্ষেত্রে কাজ করা এবং ওয়াল্ট ডিজনি, নেটফ্লিক্স ও বান্দাই নামকোর মতো বিশ্বের বড় প্রতিষ্ঠানগুলোর সঙ্গে প্রতিযোগিতা করা। সিনেমা, গেমিং ও অ্যানিমেশন, তিন খাতেই আমরা নেতৃত্ব দিতে চাই।',ae:'Akano is an initiative of Frangowst. Our goal is to work across every part of entertainment and compete with global giants like Walt Disney, Netflix and Bandai Namco. We want to lead in movies, gaming and animation.'},
   {c:'about',qb:'আকানো কোন কোন খাতে কাজ করতে চায়?',qe:'Which sectors does Akano want to work in?',k:'sector খাত ক্ষেত্র movie সিনেমা চলচ্চিত্র gaming গেম গেমিং animation অ্যানিমেশন entertainment বিনোদন dominate',ab:'আমরা বিনোদনের সব ক্ষেত্রেই কাজ করতে চাই: সিনেমা, গেমিং ও অ্যানিমেশন। শুরুটা কমিকস ও অ্যানিমেটেড ভিডিও দিয়ে, লক্ষ্য এই সব খাতেই শক্ত অবস্থান গড়া।',ae:'We want to work across all of entertainment: movies, gaming and animation. We started with comics and animated videos, and our aim is to build a strong position in every one of these sectors.'},
   {c:'about',qb:'আকানো কাদের সঙ্গে প্রতিযোগিতা করতে চায়?',qe:'Who does Akano want to compete with?',k:'competitor প্রতিযোগী প্রতিযোগিতা compete disney ডিজনি netflix নেটফ্লিক্স bandai namco বান্দাই নামকো giant জায়ান্ট walt',ab:'আমরা ওয়াল্ট ডিজনি, নেটফ্লিক্স ও বান্দাই নামকোর মতো বিশ্বের বড় বিনোদন প্রতিষ্ঠানগুলোর সঙ্গে প্রতিযোগিতা করার স্বপ্ন দেখি। বড় স্বপ্ন দেখাই আমাদের শক্তি।',ae:'We dream of competing with the world\u2019s biggest entertainment companies such as Walt Disney, Netflix and Bandai Namco. Dreaming big is our strength.'},
-  {c:'about',qb:'ভবিষ্যতে আকানোতে সিনেমা, গেম ও অ্যানিমেশন আসবে?',qe:'Will Akano bring movies, games and animation in the future?',k:'future ভবিষ্যৎ আসছে coming plan পরিকল্পনা movie সিনেমা game গেম animation অ্যানিমেশন upcoming',ab:'হ্যাঁ, এটাই আমাদের পরিকল্পনা। এখন কমিকস ও অ্যানিমেটেড ভিডিও আছে, ধাপে ধাপে সিনেমা, গেমিং ও অ্যানিমেশনেও আমরা আসতে চাই। নতুন কিছু এলে ঘোষণা পাতায় জানানো হবে।',ae:'Yes, that is our plan. Right now there are comics and animated videos; step by step we want to move into movies, gaming and animation too. New releases will be announced on the News page.',go:[['news','ঘোষণা দেখুন','See news']]},
+  {c:'about',qb:'ভবিষ্যতে আকানোতে সিনেমা, গেম ও অ্যানিমেশন আসবে?',qe:'Will Akano bring movies, games and animation in the future?',k:'future ভবিষ্যৎ আসছে coming plan পরিকল্পনা movie সিনেমা game গেম animation অ্যানিমেশন upcoming',ab:'হ্যাঁ, এটাই আমাদের পরিকল্পনা। এখন কমিকস ও অ্যানিমেটেড ভিডিও আছে, ধাপে ধাপে সিনেমা, গেমিং ও অ্যানিমেশনেও আমরা আসতে চাই। নতুন কিছু এলে কোয়েস্ট পাতায় জানানো হবে।',ae:'Yes, that is our plan. Right now there are comics and animated videos; step by step we want to move into movies, gaming and animation too. New releases will be announced on the Quests page.',go:[['news','কোয়েস্ট দেখুন','See quests']]},
   {c:'app',qb:'Fragiks কী?',qe:'What is Fragiks?',k:'fragiks ফ্র্যাজিক্স ai এআই assistant সহকারী beta বেটা bot model মডেল',ab:'Fragiks হলো Frangowst-এর তৈরি একটি এআই (কৃত্রিম বুদ্ধিমত্তা) সহকারী।',ae:'Fragiks is an AI (Artificial Intelligence) assistant developed by Frangowst.'},
 
  {c:'about',qb:'আকানো কী? আকানো সম্পর্কে বলুন',qe:'What is Akano? Tell me about Akano',k:'akano আকানো পরিচয় about global গ্লোবাল pop culture পপ কালচার entertainment বিনোদন brand ব্র্যান্ড frangowst ফ্রাঙ্গোস্ট company কোম্পানি rdb studio কারা মালিক owner',ab:'আকানো Frangowst-এর একটি পপ কালচার ও বিনোদন ব্র্যান্ড। আমরা গ্লোবাল কমিকস, ভিডিও ও অ্যানিমেটেড সিরিজ প্রকাশ করছি এবং শিল্প, সংস্কৃতি ও বিনোদনের একটি পূর্ণ জগৎ গড়তে চাই।',ae:'Akano is a pop culture and entertainment brand of Frangowst. We publish global comics, videos and animated series, and we want to build a complete world of art, culture and entertainment.',go:[['comics','কমিকস','Comics'],['videos','ভিডিও','Videos']]},
@@ -3851,9 +3792,7 @@ function kbData(){return [
  {c:'app',qb:'ডেটা সেভার কী? কম নেট খরচ করব কীভাবে?',qe:'What is Data Saver? How do I use less data?',k:'ডেটা data সেভার saver নেট কম internet খরচ কোয়ালিটি quality slow ধীর',ab:'সেটিংসে “ডেটা সেভার” চালু করলে ছবি ছোট সাইজে লোড হয় এবং ভিডিও কম কোয়ালিটিতে চলে, ফলে নেট কম খরচ হয়।',ae:'Turn on \u201cData saver\u201d in Settings: images load smaller and videos play at lower quality, so you use less data.',go:[['settings','সেটিংস','Settings']]},
  {c:'app',qb:'ইন্টারনেট ছাড়া কি দেখা যায়? অফলাইন',qe:'Can I use it offline?',k:'অফলাইন offline ইন্টারনেট internet ছাড়া নেট নেই',ab:'একবার দেখা তালিকা, কভার ও ছবি ইন্টারনেট ছাড়াও দেখা যায়। কেনা কমিকস বা ভিডিও চালাতে কোড যাচাইয়ের জন্য ইন্টারনেট লাগতে পারে।',ae:'Lists, covers and images you have seen before also open without internet. Purchased comics or videos may need internet to verify the code.'},
  {c:'app',qb:'স্ট্রিক কীভাবে কাজ করে?',qe:'How does the streak work?',k:'স্ট্রিক streak ব্যাজ badge আগুন fire প্রতিদিন daily',ab:'প্রতিদিন অ্যাপে এলে আপনার স্ট্রিক বাড়ে। কোনো দিন বাদ গেলে স্ট্রিক আবার ১ থেকে শুরু হয়। সেটিংসের “আমার ব্যাজ” থেকে দেখুন; এই তথ্য শুধু আপনার ফোনে থাকে। প্রতি ৭ দিন টানা লগইন করলে ১২ ঘণ্টা বিজ্ঞাপনমুক্ত পুরস্কার নেওয়া যায়।',ae:'Your streak grows when you open the app every day. If you miss a day it starts again from 1. See it under \u201cMy Badges\u201d in Settings; this data stays on your phone only. Every 7 days in a row you can claim 12 hours ad-free.',go:[['badges','আমার ব্যাজ','My Badges']]},
- {c:'app',qb:'লক করা ক্যারেক্টার কীভাবে আনলক হয়?',qe:'How do locked characters unlock?',k:'লক lock locked আনলক unlock ক্যারেক্টার character চরিত্র spoiler স্পয়লার',ab:'গল্পের স্পয়লার এড়াতে কিছু ক্যারেক্টার লক করা থাকে। সংশ্লিষ্ট কমিকস পড়লে সেগুলো আনলক হয়ে যায়।',ae:'Some characters are locked to avoid spoilers. Reading the related comic unlocks them.',go:[['chars','ক্যারেক্টার','Characters']]},
  {c:'app',qb:'শেয়ার কার্ড কীভাবে বানাব?',qe:'How do I make a share card?',k:'শেয়ার share কার্ড card ফেসবুক facebook হোয়াটসঅ্যাপ whatsapp ছবি image',ab:'কমিকস বা ভিডিওর পেজে “শেয়ার” বাটনে ট্যাপ করলে একটি সুন্দর শেয়ার কার্ড ছবি তৈরি হয়, যা ফেসবুক বা হোয়াটসঅ্যাপে পাঠানো যায়।',ae:'Tap \u201cShare\u201d on a comic or video page to create a share card image you can send on Facebook or WhatsApp.'},
- {c:'app',qb:'রিভিউ কীভাবে দেব?',qe:'How do I write a review?',k:'রিভিউ review মতামত rating স্টার star feedback',ab:'নিচের মেনুর রিভিউ আইকনে গিয়ে বক্সটি খুলুন, স্টার, পছন্দের বিষয়, নাম ও মতামত দিন। অ্যাডমিন অনুমোদনের পর রিভিউটি দেখা যাবে।',ae:'Open the Reviews page from the bottom bar, expand the box, choose stars, what you liked, your name and your comment. It appears after admin approval.',go:[]},
  {c:'buy',qb:'কেনা কমিকস বা ভিডিও আবার কোথায় পাব? লাইব্রেরি',qe:'Where do I find purchased comics or videos? Library',k:'লাইব্রেরি library পারচেজ purchased কেনা মেয়াদ expire ২০ দিন',ab:'কেনা কমিকস সেটিংসের “পারচেজ লাইব্রেরি”-তে ২০ দিনের জন্য জমা থাকে (কোডের মেয়াদ অনুযায়ী)। সেখান থেকেই আবার পড়তে পারবেন।',ae:'Purchased comics are kept in \u201cLibrary\u201d under Settings for 20 days (as per the code validity). You can read them again from there.',go:[['lib','পারচেজ লাইব্রেরি','Library']]},
  {c:'buy',qb:'বিজ্ঞাপন কেন দেখায়?',qe:'Why do I see an ad?',k:'বিজ্ঞাপন ad ads advertisement vimeo',ab:'কিছু ফ্রি কমিকস বা ভিডিওর সাথে প্রতি ২০ মিনিট পর পর একটি ছোট বিজ্ঞাপন আসে। কিছুক্ষণ পর “বিজ্ঞাপন স্কিপ করুন” বাটন চাপা যায়। কেনা কনটেন্টে বিজ্ঞাপন থাকে না।',ae:'Some free comics or videos show a short ad every 20 minutes. After a few seconds you can tap \u201cSkip ad\u201d. Purchased content has no ads.'},
  {c:'help',qb:'আমার তথ্য কোথায় থাকে? প্রাইভেসি',qe:'Where is my data stored? Privacy',k:'প্রাইভেসি privacy তথ্য data অ্যাকাউন্ট account ফোন localstorage',ab:'আমরা আলাদা অ্যাকাউন্ট চাই না। আমার তালিকা, পড়ার অগ্রগতি, ব্যাজের মতো তথ্য আপনার ফোনেই থাকে।',ae:'We do not ask you to create an account. Your list, reading progress and badges stay on your phone.'},
@@ -3888,8 +3827,8 @@ function catCtx(){
  try{const en=language==='en',pr=(f,p)=>f||!(+p>0)?(en?'Free':'ফ্রি'):p+(en?' BDT':' টাকা');
   const c=(lsRead('comics')||[]).filter(x=>x&&x.title).map(x=>x.title+' ('+pr(x.free,x.price)+(x.orig?(en?', Original':', অরিজিনাল'):'')+')');
   const v=((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title).map(x=>x.title+' ('+pr(0,x.price)+')');
-  const h=((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name).map(x=>x.name);
-  return ('COMICS: '+(c.join('; ')||'-')+'\nVIDEOS: '+(v.join('; ')||'-')+'\nCHARACTERS: '+(h.join('; ')||'-')).slice(0,1800)}catch{return ''}}
+  
+  return ('COMICS: '+(c.join('; ')||'-')+'\nVIDEOS: '+(v.join('; ')||'-')).slice(0,1800)}catch{return ''}}
 async function aiAsk(q,ctx){
  if(!AI_ENDPOINT)return null;
  const dayK=new Date().toISOString().slice(0,10),st=LS.get('akAiN',{d:dayK,n:0});if(st.d!==dayK){st.d=dayK;st.n=0}
@@ -3956,7 +3895,7 @@ const aKindL=()=>({comic:T('কমিকস','Comic'),video:T('ভিডিও',
 const aCardsH=a=>`<div class=as-cards>${a.map(x=>`<button type=button class=as-card data-find="${aEsc(x.title)}" data-to="${x.go}"><span>${aKindL()[x.kind]}</span><b>${aEsc(x.title)}</b><small>${aEsc(x.meta)}</small></button>`).join('')}</div>`;
 const aFree=x=>!!x.free||!(+x.price>0);
 const aPr=x=>aFree(x)?T('ফ্রি','Free'):bn(x.price)+' '+T('টাকা','BDT');
-function aCat(){const cs=(lsRead('comics')||[]).filter(x=>x&&x.title&&!x.priv),vs=((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title&&!x.priv),hs=((lsRead('chars')||{}).list||[]).filter(x=>x&&x.name);return{cs,vs,hs}}
+function aCat(){const cs=(lsRead('comics')||[]).filter(x=>x&&x.title&&!x.priv),vs=((lsRead('videos')||{}).list||[]).filter(x=>x&&x.title&&!x.priv),hs=[];return{cs,vs,hs}}
 const aMkC=c=>({kind:'comic',id:c.id,title:c.title,go:'comics',raw:c,meta:aPr(c)+(c.orig?' · '+T('অরিজিনাল','Original'):'')});
 const aMkV=v=>({kind:'video',id:v.id,title:v.title,go:'videos',raw:v,meta:aPr(v)+' · '+owner(v)});
 const aVN=id=>{try{return+JSON.parse(localStorage['ak_vvc_'+id]).n||0}catch{return 0}};
@@ -3997,7 +3936,7 @@ function aSmall(q,nq,nw){
   if(/^(ok|okay|ওকে|ঠিক আছে|আচ্ছা|accha|thik ache|thik achhe|hmm|hm)$/.test(nq))return aAns(T('ঠিক আছে! আর কিছু লাগলে জিজ্ঞেস করুন।','Okay! Ask me if you need anything else.'));
   if(/(তোমার নাম|আপনার নাম|your name|apnar nam|tomar nam|tumi ke|apni ke|who are you|what are you)/.test(nq))return aAns(T('আমি Fragiks, Frangowst-এর তৈরি একটি এআই (কৃত্রিম বুদ্ধিমত্তা) সহকারী। কমিকস, ভিডিও, কোড, পেমেন্ট ও অ্যাপ নিয়ে আপনাকে সাহায্য করি।','I am Fragiks, an AI (Artificial Intelligence) assistant developed by Frangowst. I help with comics, videos, codes, payments and the app.'),null,aChips(cap.slice(0,3)));
   if(/(কে বানিয়েছে|কে তৈরি করেছে|তোমাকে কে|who made you|who created you|who built you|tomake ke baniyeche|tomake ke)/.test(nq))return aAns(T('আমি Frangowst-এর আকানো অ্যাপের জন্য তৈরি সহকারী Fragiks।','I am Fragiks, the assistant built for Frangowst\u2019s Akano app.'));
-  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|তোমার কাজ কী|তোমার কাজ কি|আপনার কাজ কী|আপনার কাজ কি|তুমি কী কর|তুমি কি কর|tomar kaj ki|apnar kaj ki|tumi ki koro|tumi ki kaj koro|tumi ki kaj|what do you do|what is your job|whats your job|your job|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস, ভিডিও ও ক্যারেক্টারের তথ্য, দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা আবহাওয়া, মুদ্রার রেট, নামাজের সময়, দেশের তথ্য এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell details, prices and lists of comics, videos and characters, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date weather, currency rates, prayer times, country facts and look up general questions online.'),null,aChips(cap))
+  if(/(কী পারো|কি পারো|কী করতে পারো|কি করতে পারো|তোমার কাজ কী|তোমার কাজ কি|আপনার কাজ কী|আপনার কাজ কি|তুমি কী কর|তুমি কি কর|tomar kaj ki|apnar kaj ki|tumi ki koro|tumi ki kaj koro|tumi ki kaj|what do you do|what is your job|whats your job|your job|what can you do|help me|সাহায্য করো|tumi ki parao|tumi ki korte paro|^help$|^সাহায্য$)/.test(nq))return aAns(T('আমি যা পারি: অ্যাপের প্রশ্নের উত্তর দেওয়া, কমিকস ও ভিডিওর তথ্য, দাম ও তালিকা বলা, নতুন ও জনপ্রিয় কনটেন্ট দেখানো, আপনার জন্য কী পড়বেন সাজেস্ট করা, আপনার স্ট্রিক ও লাইব্রেরির মেয়াদ বলা, হিসাব করা, আজকের তারিখ বলা আবহাওয়া, মুদ্রার রেট, নামাজের সময়, দেশের তথ্য এবং সাধারণ প্রশ্নে ইন্টারনেট থেকে খুঁজে দেওয়া।','I can answer app questions, tell details, prices and lists of comics and videos, show new and popular content, suggest what to read, tell your streak and library expiry, do calculations, tell today\u2019s date weather, currency rates, prayer times, country facts and look up general questions online.'),null,aChips(cap))
   if(/^(wow|nice|great|awesome|good job|well done|darun|দারুণ|অসাধারণ|সুন্দর|ভালো|valo|bhalo|osadharon|perfect|cool|smart|জিনিয়াস|genius)( |$)/.test(nq)&&nw<=4)return aAns(aPick([T('ধন্যবাদ! আপনার ভালো লাগলে আমারও ভালো লাগে।','Thank you! I am glad you liked it.'),T('অনেক ধন্যবাদ! আর কিছু জানতে চাইলে বলুন।','Thanks a lot! Ask me if you want to know more.')]));
   if(/(বোকা|stupid|idiot|useless|dumb|ফালতু|faltu|বাজে)/.test(nq)&&nw<=5)return aAns(T('দুঃখিত, ভালো উত্তর দিতে পারিনি। প্রশ্নটা অন্যভাবে লিখে দেখবেন? আমি চেষ্টা করব।','Sorry I could not answer well. Could you rephrase it? I will try again.'),null,aChips(cap.slice(0,3)));
   if(/(i love you|ভালোবাসি|valobashi|love you)/.test(nq))return aAns(T('ধন্যবাদ! আমি একটি এআই, তবে কমিকস পড়ার সঙ্গী হতে পারি।','Thank you! I am an AI, but I can be your companion for comics.'));
@@ -4013,7 +3952,7 @@ function aPersonal(nq,qt,K){
  if(mine&&/(লাইব্রেরি|library|কেনা|purchased|মেয়াদ|expire|বাকি|baki|kena)/.test(nq)){const nw=nowT(),act=Object.values(lib).filter(o=>o&&o.e>nw).sort((a,b)=>a.e-b.e);
   if(!act.length)return aAns(T('আপনার লাইব্রেরিতে এখন কোনো চালু কমিকস বা ভিডিও নেই।','You have no active comics or videos in your library right now.'),[['lib','লাইব্রেরি','Library']]);
   return aAns(T('আপনার লাইব্রেরি: ','Your library: ')+act.slice(0,5).map(o=>`${o.t} — ${bn(Math.ceil((o.e-nw)/864e5))} ${T('দিন বাকি','days left')}`).join(' | '),[['lib','লাইব্রেরি খুলুন','Open library']])}
- if(mine&&/(তালিকা|list|ফেভারিট|favou?rite|bookmark|বুকমার্ক|প্রিয়)/.test(nq)){return aAns(T(`আপনার তালিকায় ${bn(fav.c.length)}টি কমিকস ও ${bn(fav.h.length)}টি ক্যারেক্টার আছে।`,`Your list has ${fav.c.length} comics and ${fav.h.length} characters.`),[['favs','আমার তালিকা','My List']])}
+ if(mine&&/(তালিকা|list|ফেভারিট|favou?rite|bookmark|বুকমার্ক|প্রিয়)/.test(nq)){return aAns(T(`আপনার তালিকায় ${bn(fav.c.length)}টি কমিকস আছে।`,`Your list has ${fav.c.length} comics.`),[['favs','আমার তালিকা','My List']])}
  if(/(কোথায় ছিলাম|কোথায় থেমেছিলাম|শেষ কোথায়|চালিয়ে যা|continue reading|where did i stop|last read|kothay chilam)/.test(nq)){const nw=nowT(),a=Object.values(prog).filter(x=>x&&x.p>0&&x.p<x.n-1&&(x.k==='f'||(lib[x.ref]&&lib[x.ref].e>nw))).sort((x,y)=>y.at-x.at)[0];
   if(!a)return aAns(T('চালিয়ে যাওয়ার মতো কোনো অসমাপ্ত কমিকস পাইনি।','I did not find an unfinished comic to continue.'));
   return aAns(T(`আপনি “${a.t}”-এর ${bn(a.p+1)}/${bn(a.n)} পেজে ছিলেন।`,`You stopped “${a.t}” at page ${a.p+1}/${a.n}.`),null,`<div class=as-act><button type=button class=as-a data-cont="${a.k}:${aEsc(a.ref)}">${T('পড়া চালিয়ে যান','Continue reading')}${ic('chev')}</button></div>`)}
@@ -4296,10 +4235,8 @@ window.__asLive=async q=>{const nq=aNorm(q);if(!(RXW.test(nq)||RXP.test(nq)||RXC
 const ABUSE=/(^| )(fuck|fucking|fucker|motherfucker|shit|bitch|asshole|bastard|cunt|whore|slut|dick|pussy|chudi|chudbo|chod|choda|chodna|madarchod|bhenchod|behenchod|bokachoda|magi|khanki|haramj\w*|harami|gandu|kutta|kuttar|shuor|bhoda|চুদ\S*|চোদ\S*|মাগি|মাগী|খানকি|হারামি|হারামজাদা|বেজন্মা|কুত্তা|শুয়োর|শুওর|ভোদা|গান্ডু|গাণ্ডু|বাল|মাদারচোদ|বোকাচোদা)( |$)/;
 const aAbuse=nq=>ABUSE.test(nq);
 /* রিভিউ বুদ্ধি: অ্যাপের ক্যাশ ব্যবহার করে, নতুন করে অতিরিক্ত রিড কম */
-async function aRevLoad(){try{const rv=await aAwait(cache('reviews',async()=>(await tmo(getDocs(query(collection(db,'reviews'),where('approved','==',true))))).docs.map(d=>({id:d.id,...d.data()}))));return Array.isArray(rv)?rv.filter(r=>r&&r.approved!==false):[]}catch{return null}}
-const aRevParse=t=>{const m=/^\[([^\]]{1,80})\]\s*/.exec(t||'');return m?{tags:m[1].split(',').map(x=>x.trim()).filter(Boolean),text:t.slice(m[0].length)}:{tags:[],text:t||''}};
-const aStars=n=>{n=Math.max(0,Math.min(5,Math.round(n)));return '★'.repeat(n)+'☆'.repeat(5-n)};
-const RVIEW=/(রিভিউ|review|reviews|রেটিং|rating|ratings|মতামত|feedback|কেমন বলছে|কী বলছে|কি বলছে|কেমন লাগছে|ki bolche|ki bolse|what do people say|what are people saying|what people say|what people think|কে কী|ke ki)/;
+async function aRevLoad(){return[]}
+const RVIEW=/(?!x)x/;
 const RVHOW=/(কীভাবে|কিভাবে|kivabe|kibhabe|how (do|to|can|may|should)|দেব|দিব|dibo|দিতে|dite|submit|লিখব|লিখবো|likhbo)/;
 const aRevIntent=nq=>false;
 async function aReviews(q,nq,E){
@@ -4393,7 +4330,7 @@ async function aLive(q,nq){
 const aLearnGet=()=>{try{const o=JSON.parse(localStorage.akAL||'{}');return o&&typeof o==='object'?o:{}}catch{return{}}};
 const aLearnSet=(k,v)=>{if(!k||!v||k===aNorm(v))return;try{const o=aLearnGet();delete o[k];o[k]=String(v).slice(0,200);const ks=Object.keys(o);while(ks.length>80)delete o[ks.shift()];localStorage.akAL=JSON.stringify(o)}catch{}};
 let AI_PRE=0;
-async function aPre(){try{const t=[];if(!lsRead('chars'))t.push(cache('chars',async()=>(await dat('site','characters'))||{list:[]}));if(!lsRead('videos'))t.push(cache('videos',async()=>vPub(await dat('site','videos'))));if(!lsRead('comics'))t.push(list('comics'));if(!lsRead('genres'))t.push(cache('genres',async()=>(await dat('site','genres'))||{list:[]}));if(t.length)await tmo(Promise.allSettled(t),8000)}catch{}}
+async function aPre(){try{const t=[];if(!lsRead('videos'))t.push(cache('videos',async()=>vPub(await dat('site','videos'))));if(!lsRead('comics'))t.push(list('comics'));if(!lsRead('genres'))t.push(cache('genres',async()=>(await dat('site','genres'))||{list:[]}));if(t.length)await tmo(Promise.allSettled(t),8000)}catch{}}
 const aGenreList=cs=>{const base=((lsRead('genres')||{}).list||[]);const used=cs.flatMap(c=>c.genres||[]);return[...new Set([...base,...used])].filter(g=>g&&String(g).trim().length>=2)};
 const TL_L={english:'en',inglish:'en','ইংরেজি':'en','ইংলিশ':'en',bangla:'bn',bengali:'bn','বাংলা':'bn','বাঙলা':'bn',hindi:'hi','হিন্দি':'hi',urdu:'ur','উর্দু':'ur',arabic:'ar','আরবি':'ar','আরবী':'ar',spanish:'es','স্প্যানিশ':'es',french:'fr','ফরাসি':'fr',german:'de','জার্মান':'de',japanese:'ja','জাপানি':'ja',korean:'ko','কোরিয়ান':'ko',chinese:'zh-CN','চীনা':'zh-CN','চাইনিজ':'zh-CN',russian:'ru','রুশ':'ru','রাশিয়ান':'ru',turkish:'tr','তুর্কি':'tr',portuguese:'pt','পর্তুগিজ':'pt',italian:'it','ইতালিয়ান':'it',indonesian:'id',malay:'ms',nepali:'ne','নেপালি':'ne',tamil:'ta',telugu:'te',thai:'th',persian:'fa','ফার্সি':'fa'};
 const TL_N={en:['English','ইংরেজি'],bn:['Bangla','বাংলা'],hi:['Hindi','হিন্দি'],ur:['Urdu','উর্দু'],ar:['Arabic','আরবি'],es:['Spanish','স্প্যানিশ'],fr:['French','ফরাসি'],de:['German','জার্মান'],ja:['Japanese','জাপানি'],ko:['Korean','কোরিয়ান'],'zh-CN':['Chinese','চীনা'],ru:['Russian','রুশ'],tr:['Turkish','তুর্কি'],pt:['Portuguese','পর্তুগিজ'],it:['Italian','ইতালিয়ান'],id:['Indonesian','ইন্দোনেশীয়'],ms:['Malay','মালয়'],ne:['Nepali','নেপালি'],ta:['Tamil','তামিল'],te:['Telugu','তেলুগু'],th:['Thai','থাই'],fa:['Persian','ফার্সি']};
@@ -4434,7 +4371,7 @@ async function asAnswerCore(q){
  h=await aLive(q,nq);if(h){aMem('',null);return h}
  if(nw<=6&&/(^| )(gmail|jimail|email|e mail|mail|ইমেইল|ইমেল|জিমেইল|জিমেল|মেইল)( |$)/.test(nq)&&!/(কোড|code|পেমেন্ট|payment|বিকাশ|bkash|নগদ|nagad|অর্ডার|order|পাসওয়ার্ড|password|লগইন|login)/.test(nq)){aMem('',null);return aAns(T('আকানোর ইমেইল: help.akano@gmail.com। কোনো সমস্যা বা প্রশ্ন থাকলে এখানে লিখতে পারেন।','Akano\u2019s email: help.akano@gmail.com. You can write to us here for any problem or question.'),[['mail','ইমেইল করুন','Email us']])}
   const X=kbIndex(),qt=new Set(X.toks(q));
- const K={c:/(কমিক|comic|komik)/.test(nq)||qt.has('g6'),v:/(ভিডিও|video|vidio|অ্যানিমেটেড|animated|পর্ব|episode|সিরিজ|series)/.test(nq)||qt.has('g5')||qt.has('g4'),h:/(ক্যারেক্টার|character|চরিত্র|caractar)/.test(nq)||qt.has('g7')};
+ const K={c:/(কমিক|comic|komik)/.test(nq)||qt.has('g6'),v:/(ভিডিও|video|vidio|অ্যানিমেটেড|animated|পর্ব|episode|সিরিজ|series)/.test(nq)||qt.has('g5')||qt.has('g4'),h:false};
  h=aPersonal(nq,qt,K);if(h){aMem('',null);return h}
  const ent=aEnt(q),follow=AIC.q&&Date.now()-AIC.t<6e5&&(/(^| )(ওটা|এটা|সেটা|ওটার|এটার|সেটার|এটি|ওটি|এর|ওর|তার|it|its|that|this|eta|ota|seta|etar|otar|আর|আরও|আরো|more|details|বিস্তারিত|তাহলে|then)( |$)/.test(nq));
  let E=ent[0]||null;if(!E&&follow&&AIC.ent&&(RX.price.test(nq)||nw<=3))E=AIC.ent;
@@ -4600,9 +4537,6 @@ async function shareCard(o){
  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:o.title||'Akano',text:txt,url});track('share');return}catch(e){if(e&&e.name==='AbortError')return}}
  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='akano-share.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);track('share');aToast(T('শেয়ার কার্ড সেভ হয়েছে','Share card saved'))}
 
-// ================= ক্যারেক্টার আনলক (স্পয়লার-সেফ) =================
-const chLocked=x=>!!(x&&x.unlock)&&!seenIds()[x.unlock];
-const chLockHtml=x=>`<div class=cd-b style="text-align:center;padding:30px 10px"><span class=wr2-ic style="margin:0 auto 16px">${ic('lock')}</span><h2>${T('লক করা চরিত্র','Locked character')}</h2><p class=cd-ds>${T('“'+(x.unlockT||'কমিকস')+'” পড়লে এই চরিত্র আনলক হবে।','Read \u201c'+(x.unlockT||'the comic')+'\u201d to unlock this character.')}</p></div>`;
 
 
 // ================= একটি সাধারণ ক্লিক হ্যান্ডলার =================
@@ -4742,6 +4676,7 @@ addEventListener('keyup',e=>{if(e.key==='PrintScreen'&&rdOn()){try{navigator.cli
 addEventListener('keydown',e=>{if(!rdOn())return;const k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='p'||k==='s'||k==='u')||(e.ctrlKey&&e.shiftKey&&(k==='s'||k==='i'))||e.key==='F12'){e.preventDefault();hide();setTimeout(show,800)}},true);
 addEventListener('beforeprint',hide);addEventListener('afterprint',show);
 document.addEventListener('copy',e=>{if(rdOn())e.preventDefault()},true)}catch{}
+
 </script>
 </body>
 </html>
