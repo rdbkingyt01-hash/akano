@@ -3320,27 +3320,25 @@ function showGal(i){const n=gl.length;i=(i+n)%n;const x=gl[i];modal(`<div class=
 function qDev(){let d;try{d=localStorage.akDev||(localStorage.akDev=Math.random().toString(36).slice(2))}catch{d=window.__d||(window.__d=Math.random().toString(36).slice(2))}return d}
 const qJoined=()=>{const m=LS.get('akQuest',{});return m&&typeof m==='object'?m:{}},qEm=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 function qPCard(o){
- const W=1600,H=1131,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),F='"Noto Sans Bengali","Hind Siliguri","Segoe UI",system-ui,sans-serif';
+ const W=1600,H=1131,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),F='"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif';
  g.fillStyle='#fff';g.fillRect(0,0,W,H);
- g.lineWidth=3;g.strokeStyle='#111';g.strokeRect(46,46,W-92,H-92);
- g.lineWidth=2;g.strokeStyle='#c4c4c4';g.strokeRect(62,62,W-124,H-124);
- g.textBaseline='alphabetic';g.textAlign='center';const cx=W/2,maxW=W-340;
+ g.textBaseline='alphabetic';g.textAlign='center';const cx=W/2,maxW=W-300;
  const fit=(txt,wt,sz,min)=>{let f=sz;do{g.font=wt+' '+f+'px '+F;f-=4}while(g.measureText(txt).width>maxW&&f>min)};
- g.fillStyle='#111';g.font='800 60px '+F;g.fillText('Akano',cx,190);
- g.font='800 74px '+F;g.fillText(T('অংশগ্রহণের সনদ','Certificate of Participation'),cx,330);
- g.fillStyle='#333';g.font='500 36px '+F;g.fillText(T('এই মর্মে প্রত্যয়ন করা হচ্ছে যে','This is to certify that'),cx,450);
- g.fillStyle='#111';fit(o.name,'800',118,48);g.fillText(o.name,cx,590);
- g.fillStyle='#333';g.font='500 38px '+F;g.fillText(T('অংশগ্রহণ করেছেন','Has participated in')+' '+o.kind,cx,690);
- if(o.title){g.fillStyle='#111';fit(o.title,'800',46,28);g.fillText(o.title,cx,750)}
- g.fillStyle='#333';g.font='500 28px '+F;
- g.textAlign='left';g.fillText(T('প্রদানকারী: Akano','Issued by: Akano'),150,985);
- g.textAlign='center';g.fillText(T('সনদ আইডি: ','Certificate ID: ')+(o.code||'—'),cx,985);
- g.textAlign='right';g.fillText(T('প্রদানের তারিখ: ','Issued date: ')+o.date,W-150,985);
+ g.fillStyle='#111';g.font='700 60px '+F;g.fillText('Akano',cx,190);
+ g.font='700 76px '+F;g.fillText('অংশগ্রহণের সনদ',cx,330);
+ g.fillStyle='#333';g.font='500 38px '+F;g.fillText('এই মর্মে প্রত্যয়ন করা হচ্ছে যে',cx,450);
+ g.fillStyle='#111';fit(o.name,'700',124,48);g.fillText(o.name,cx,595);
+ g.fillStyle='#333';g.font='500 40px '+F;g.fillText(o.kind+'ে অংশগ্রহণ করেছেন',cx,695);
+ if(o.title){g.fillStyle='#111';fit(o.title,'700',48,28);g.fillText(o.title,cx,760)}
+ g.fillStyle='#333';g.font='500 30px '+F;
+ g.textAlign='left';g.fillText('প্রদানকারী: Akano',120,990);
+ g.textAlign='center';g.fillText('সনদ আইডি: '+(o.code||'—'),cx,990);
+ g.textAlign='right';g.fillText('প্রদানের তারিখ: '+o.date,W-120,990);
  return c}
 function qFloat(h){document.querySelectorAll('.qfo').forEach(x=>x.remove());const o=document.createElement('div');o.className='qfo';o.innerHTML=`<div class=qfc role=dialog><button type=button class=qfx aria-label="${T('বন্ধ','Close')}">${ic('x')}</button>${h}</div>`;o.onclick=e=>{if(e.target===o||e.target.closest('.qfx'))o.remove()};document.body.appendChild(o);return o}
-function qShowCard(x,r){
+async function qShowCard(x,r){try{await Promise.all([document.fonts.load('500 40px "Hind Siliguri"'),document.fonts.load('700 40px "Hind Siliguri"')])}catch{}
  r=typeof r==='object'&&r?r:{};
- const c=qPCard({kind:T('আর্ট কোয়েস্ট','Art Quest'),label:T('পার্টিসিপেন্ট','Participant'),name:r.n||T('পার্টিসিপেন্ট','Participant'),title:x.title||'',dk:T('যোগদানের তারিখ','Joined on'),date:new Date(r.t||Date.now()).toLocaleDateString(language==='en'?'en-GB':'bn-BD',{day:'numeric',month:'long',year:'numeric'}),ck:T('পার্টিসিপেন্ট কোড','Participant code'),code:r.c||'—',foot:T('Akano কোয়েস্টে অংশগ্রহণের স্বীকৃতি','Proof of joining an Akano quest')});
+ const c=qPCard({kind:'আর্ট কোয়েস্ট',name:r.n||'পার্টিসিপেন্ট',title:x.title||'',date:new Date(r.t||Date.now()).toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'}),code:r.c||'—'});
  let url='';try{url=c.toDataURL('image/png')}catch{return aToast(T('কার্ড বানানো যায়নি','Could not create the card'))}
  qFloat(`<div class=cd-b><h2>${T('আপনার পার্টিসিপেন্ট কার্ড','Your participant card')}</h2><img src="${url}" alt="" style="width:100%;border-radius:18px;border:2px solid #e5e5e5;display:block;margin:10px 0 14px"><button type=button class=qbtn id=qdl>${T('সেভ করুন','Save')}</button></div>`);
  setTimeout(()=>{const b=document.getElementById('qdl');if(b)b.onclick=async()=>{const bl=await new Promise(r=>c.toBlob(r,'image/png'));if(!bl)return aToast(T('কার্ড বানানো যায়নি','Could not create the card'));const f=new File([bl],'akano-participant-card.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'Akano'});return}catch(e){if(e&&e.name==='AbortError')return}}const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='akano-participant-card.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);aToast(T('কার্ড সেভ হয়েছে','Card saved'))}},0)}
