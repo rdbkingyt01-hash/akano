@@ -2570,6 +2570,14 @@ body #bn button .ic,body #bn [data-go=videos] .ic{width:28px;height:28px}
 body #bn [data-go=comics] .ic{width:25px;height:25px}
 @media(min-width:900px){body #bn{height:52px}body #bn button{height:44px}body #bn button .ic,body #bn [data-go=videos] .ic{width:24px;height:24px}body #bn [data-go=comics] .ic{width:22px;height:22px}}
 .qst-top h1.ct{font-size:22px!important;line-height:1.2!important;margin:0}
+
+.pw-ic,.pw-ic.dk{width:44px!important;height:44px!important;border-radius:14px!important;background:#fff!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;color:#111!important;box-shadow:none!important}
+.back{background:#fff!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;border-radius:14px!important;padding:8px 14px 6px 10px!important;color:#111!important}
+#spb{background:#fff!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;border-radius:14px!important;width:44px!important;height:44px!important;margin-left:0!important;color:#111!important}
+.soon,.soon.emp{font-weight:600!important;color:#555!important}
+.qst-rl{margin-top:12px;padding:12px 14px;border-radius:14px;background:#f5f6f8;font-size:14px}
+.qst-rl h3{margin:12px 0 4px;font-size:14.5px;color:#111}.qst-rl h3:first-child{margin-top:0}
+.qst-rl p{margin:0;white-space:pre-line;color:#444}
 </style>
 </head>
 <body>
@@ -2667,7 +2675,7 @@ NI.fragiks='<image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADAC
 Object.assign(IF,{home:NI.home,play:NI.play,gear:NI.gear});IF.dots='<path d="M5.2 5.9h13.6a1.3 1.3 0 0 1 0 2.6H5.2a1.3 1.3 0 0 1 0-2.6zM5.2 10.7h13.6a1.3 1.3 0 0 1 0 2.6H5.2a1.3 1.3 0 0 1 0-2.6zM5.2 15.5h13.6a1.3 1.3 0 0 1 0 2.6H5.2a1.3 1.3 0 0 1 0-2.6z"/>';
 IF.play='<path fill-rule="evenodd" d="M8 3h8a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5zM9.9 8.3v7.4c0 .7.8 1.1 1.4.7l5.6-3.7c.5-.3.5-1.1 0-1.4l-5.6-3.7c-.6-.4-1.4 0-1.4.7z"/>';
 IF.panels='<rect x="3" y="3" width="8" height="10" rx="2.2"/><rect x="13" y="3" width="8" height="6" rx="2.2"/><rect x="13" y="11" width="8" height="10" rx="2.2"/><rect x="3" y="15" width="8" height="6" rx="2.2"/>';
-IF.bolt='<path d="M13.4 2.6L5.2 13.2h5.6l-1 8.2 8.9-11.4h-5.8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>';
+IF.bolt='<path fill-rule="evenodd" d="M8.5 3h7A5.5 5.5 0 0121 8.5v7a5.5 5.5 0 01-5.5 5.5h-7A5.5 5.5 0 013 15.5v-7A5.5 5.5 0 018.5 3zM13.4 6.3L8 12.8h3.2l-.7 5 5.5-6.8h-3.3z"/>';
 const icf=n=>`<svg class="ic fl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${IF[n]}</svg>`;
 const textSources=new WeakMap(),attrSources=new WeakMap();
 let _pk;
@@ -3314,7 +3322,7 @@ async function news(){
  const left=x=>{if(!x.end)return null;const l=x.end-Date.now();if(l<864e5){const h=Math.max(1,Math.ceil(l/36e5));return T(bn(h)+' ঘণ্টা বাকি',h+' hours left')}const d=Math.ceil(l/864e5);return T(bn(d)+' দিন বাকি',d+' days left')};
  const lkf=t=>esc(t).replace(/(https?:\/\/[^\s<]+)/g,u=>`<a href="${u}" target=_blank rel=noopener>${u}</a>`);
  const card=x=>{const q=x.type!=='ঘোষণা',r=qJoined()[x.id],lf=left(x),id=esc(x.id);
-  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
+  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-rl hidden data-qrl="${id}">${rulesH(x)}</div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
   const su=location.host+location.pathname.replace(/\/$/,'')+'?quest='+x.id;
   return `<article class="nw qst" data-qid="${id}">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${q?`<div class=qst-ch>${lf?`<span class=qst-tm>${CK}${lf}</span>`:''}<span class=qst-tm>${PPL}<span class=qst-n>${jt(+x.joins||0)}</span></span></div>`:''}${x.text?`<p class=qst-d data-qd>${lkf(x.text)}</p><button type=button class=qst-mo data-qmo hidden>${T('আরও দেখুন','See more')}</button>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${act}<div class=qst-sl><span class=qst-su>${esc(su)}</span><button type=button class=qst-sb data-qsh="${id}">${SH}${T('শেয়ার','Share')}</button></div></div></article>`};
  const TABS=[['art',T('আর্ট কোয়েস্ট','Art Quest'),1],['app',T('অ্যাপ কোয়েস্ট','App Quest'),0],['other',T('অন্যান্য','Others'),0]];
@@ -3334,9 +3342,9 @@ async function news(){
    if(!qEm.test(x.mail||''))return er(T('অ্যাডমিন এখনো ইমেইল ঠিকানা সেট করেননি','The admin has not set an email address yet'));
    const a=document.createElement('a');a.href='mailto:'+x.mail+'?subject='+encodeURIComponent('Akano Art Quest — '+x.title)+'&body='+encodeURIComponent('Quest: '+x.title+'\nName: '+nm+'\nGmail: '+em+(lk?'\nDrive link: '+lk:'')+'\n');
    document.body.appendChild(a);a.click();a.remove();aToast(T('ইমেইল অ্যাপ খুলেছে — পাঠিয়ে দিন','Your email app opened — send it'))}},0)};
- const rules=x=>{const std=T('১. “অ্যাপ্লাই করুন” চেপে নাম, Gmail ও (থাকলে) ছবির Drive লিংক দিন।\n২. ইমেইল অ্যাপ খুললে সেটি পাঠিয়ে দিন।\n৩. বিবরণে দেওয়া Facebook গ্রুপে জয়েন করে আপনার আর্ট পোস্ট করুন।\n৪. অ্যাডমিন যাচাই করে আপনার Gmail-এ পার্টিসিপেন্ট কোড পাঠাবে।\n৫. কোড দিয়ে “নিশ্চিত” চাপুন — পার্টিসিপেন্ট কার্ড পাবেন ও ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়তে পারবেন।','1. Tap Apply and enter your name, Gmail and (optionally) a Drive link to your art.\n2. Send the email that opens.\n3. Join the Facebook group from the description and post your art.\n4. The admin will check and send a participant code to your Gmail.\n5. Enter the code and tap Confirm — you get a participant card and 24 hours of ad-free comics.');
-  const sec=(h,t)=>`<h3 style="margin:14px 0 6px;font-size:16px">${h}</h3><p class=cd-ds style="white-space:pre-line;margin:0">${esc(t)}</p>`;
-  modal(`<div class=cd-b><h2>${T('নিয়ম','Rules')}</h2>${sec(T('জয়েন করার নিয়ম','How to join'),x.jrules||std)}${x.rules?sec(T('কোয়েস্টের নিয়ম','Quest rules'),x.rules):''}</div>`)};
+ const rulesH=x=>{const std=T('১. “অ্যাপ্লাই করুন” চেপে নাম, Gmail ও (থাকলে) ছবির Drive লিংক দিন।\n২. ইমেইল অ্যাপ খুললে সেটি পাঠিয়ে দিন।\n৩. বিবরণে দেওয়া Facebook গ্রুপে জয়েন করে আপনার আর্ট পোস্ট করুন।\n৪. অ্যাডমিন যাচাই করে আপনার Gmail-এ পার্টিসিপেন্ট কোড পাঠাবে।\n৫. কোড দিয়ে “নিশ্চিত” চাপুন — পার্টিসিপেন্ট কার্ড পাবেন ও ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়তে পারবেন।','1. Tap Apply and enter your name, Gmail and (optionally) a Drive link to your art.\n2. Send the email that opens.\n3. Join the Facebook group from the description and post your art.\n4. The admin will check and send a participant code to your Gmail.\n5. Enter the code and tap Confirm — you get a participant card and 24 hours of ad-free comics.');
+  const sec=(h,t)=>`<h3>${h}</h3><p>${esc(t)}</p>`;
+  return `${sec(T('জয়েন করার নিয়ম','How to join'),x.jrules||std)}${x.rules?sec(T('কোয়েস্টের নিয়ম','Quest rules'),x.rules):''}`};
  const claim=async(id,v)=>{const x=find(id),er=document.querySelector('#app [data-qe="'+id+'"]'),bad=m=>{if(er)er.textContent=m};
   const code=v.trim().toUpperCase().replace(/\s+/g,'');
   if(!code)return bad(T('কোড লিখুন','Enter the code'));
@@ -3358,7 +3366,7 @@ async function news(){
   q('[data-qbk]').forEach(b=>b.onclick=()=>go('home'));
   q('[data-qtab]').forEach(b=>b.onclick=()=>{tab=b.dataset.qtab;draw()});
   q('[data-qap]').forEach(b=>b.onclick=()=>form(find(b.dataset.qap)));
-  q('[data-qi]').forEach(b=>b.onclick=()=>rules(find(b.dataset.qi)));
+  q('[data-qi]').forEach(b=>b.onclick=()=>{const p=document.querySelector('#app [data-qrl="'+b.dataset.qi+'"]');if(p)p.hidden=!p.hidden});
   q('[data-qc]').forEach(b=>b.onclick=()=>{const i=document.querySelector('#app [data-qin="'+b.dataset.qc+'"]');claim(b.dataset.qc,i?i.value:'')});
   q('[data-qcard]').forEach(b=>b.onclick=()=>qShowCard(find(b.dataset.qcard),qJoined()[b.dataset.qcard]));
   q('[data-qmo]').forEach(b=>b.onclick=()=>{const p=b.previousElementSibling,o=p.classList.toggle('open');b.textContent=o?T('কম দেখুন','See less'):T('আরও দেখুন','See more')});
