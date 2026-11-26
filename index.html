@@ -2578,6 +2578,13 @@ body #bn [data-go=comics] .ic{width:25px;height:25px}
 .qst-rl{margin-top:12px;padding:12px 14px;border-radius:14px;background:#f5f6f8;font-size:14px}
 .qst-rl h3{margin:12px 0 4px;font-size:14.5px;color:#111}.qst-rl h3:first-child{margin-top:0}
 .qst-rl p{margin:0;white-space:pre-line;color:#444}
+
+.nw.qst{overflow:visible}
+.qst-im img{border-radius:19px 19px 0 0}
+.qst-ar{position:relative}
+.qst-rl{position:absolute;left:0;right:0;bottom:calc(100% + 10px);z-index:6;max-height:46vh;overflow:auto;margin:0;padding:14px;background:#fff;border:2px solid #e5e5e5;border-bottom:4px solid #d6d6d6;border-radius:18px;box-shadow:0 16px 34px -12px rgba(0,0,0,.35)}
+.qst-rl[hidden]{display:none}
+.st-c{width:44px!important;height:44px!important;border-radius:14px!important;background:#fff!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;color:#111!important;box-shadow:none!important}
 </style>
 </head>
 <body>
@@ -3322,7 +3329,7 @@ async function news(){
  const left=x=>{if(!x.end)return null;const l=x.end-Date.now();if(l<864e5){const h=Math.max(1,Math.ceil(l/36e5));return T(bn(h)+' ঘণ্টা বাকি',h+' hours left')}const d=Math.ceil(l/864e5);return T(bn(d)+' দিন বাকি',d+' days left')};
  const lkf=t=>esc(t).replace(/(https?:\/\/[^\s<]+)/g,u=>`<a href="${u}" target=_blank rel=noopener>${u}</a>`);
  const card=x=>{const q=x.type!=='ঘোষণা',r=qJoined()[x.id],lf=left(x),id=esc(x.id);
-  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-rl hidden data-qrl="${id}">${rulesH(x)}</div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
+  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-ar><div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-rl hidden data-qrl="${id}">${rulesH(x)}</div></div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
   const su=location.host+location.pathname.replace(/\/$/,'')+'?quest='+x.id;
   return `<article class="nw qst" data-qid="${id}">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${q?`<div class=qst-ch>${lf?`<span class=qst-tm>${CK}${lf}</span>`:''}<span class=qst-tm>${PPL}<span class=qst-n>${jt(+x.joins||0)}</span></span></div>`:''}${x.text?`<p class=qst-d data-qd>${lkf(x.text)}</p><button type=button class=qst-mo data-qmo hidden>${T('আরও দেখুন','See more')}</button>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${act}<div class=qst-sl><span class=qst-su>${esc(su)}</span><button type=button class=qst-sb data-qsh="${id}">${SH}${T('শেয়ার','Share')}</button></div></div></article>`};
  const TABS=[['art',T('আর্ট কোয়েস্ট','Art Quest'),1],['app',T('অ্যাপ কোয়েস্ট','App Quest'),0],['other',T('অন্যান্য','Others'),0]];
@@ -3366,7 +3373,8 @@ async function news(){
   q('[data-qbk]').forEach(b=>b.onclick=()=>go('home'));
   q('[data-qtab]').forEach(b=>b.onclick=()=>{tab=b.dataset.qtab;draw()});
   q('[data-qap]').forEach(b=>b.onclick=()=>form(find(b.dataset.qap)));
-  q('[data-qi]').forEach(b=>b.onclick=()=>{const p=document.querySelector('#app [data-qrl="'+b.dataset.qi+'"]');if(p)p.hidden=!p.hidden});
+  q('[data-qi]').forEach(b=>b.onclick=()=>{const p=document.querySelector('#app [data-qrl="'+b.dataset.qi+'"]');document.querySelectorAll('.qst-rl').forEach(o=>{if(o!==p)o.hidden=true});if(p)p.hidden=!p.hidden});
+  if(!window.__qo){window.__qo=1;document.addEventListener('click',e=>{if(e.target.closest('.qst-rl,[data-qi]'))return;document.querySelectorAll('.qst-rl').forEach(p=>p.hidden=true)})}
   q('[data-qc]').forEach(b=>b.onclick=()=>{const i=document.querySelector('#app [data-qin="'+b.dataset.qc+'"]');claim(b.dataset.qc,i?i.value:'')});
   q('[data-qcard]').forEach(b=>b.onclick=()=>qShowCard(find(b.dataset.qcard),qJoined()[b.dataset.qcard]));
   q('[data-qmo]').forEach(b=>b.onclick=()=>{const p=b.previousElementSibling,o=p.classList.toggle('open');b.textContent=o?T('কম দেখুন','See less'):T('আরও দেখুন','See more')});
