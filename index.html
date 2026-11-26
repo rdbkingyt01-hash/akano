@@ -2608,6 +2608,13 @@ body #bn [data-go=comics] .ic{width:25px;height:25px}
 .pw .pw-tl:active span{transform:translateY(2px);border-bottom-width:2px!important}
 .pw .pw-alt,.pw .pw-pass button,.pw .pw-form .pw-sub,.pw .pw-sub{border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#111!important;border-radius:14px!important;box-shadow:none!important}
 .pw .pw-alt:active,.pw .pw-pass button:active,.pw .pw-sub:active{transform:translateY(2px);border-bottom-width:2px!important}
+
+/* quest buttons: always light, readable (no forced dark / no black fill) */
+:root{color-scheme:only light}
+.qst .qst-ap,.qbtn,.qst-sb,.qst-bk,.qst-tab:not(.on){-webkit-appearance:none;appearance:none;background-color:#fff!important;color:#1f1f1f!important;-webkit-text-fill-color:#1f1f1f}
+.qst .qst-ap.done,.qst .qst-ap:disabled,.qst .qst-ap.off{background-color:#e5e5e5!important;color:#afafaf!important;-webkit-text-fill-color:#afafaf}
+.qst .qst-i{color:#333!important;-webkit-text-fill-color:initial}
+.qst .qst-i svg{display:block;width:24px;height:24px;fill:currentColor;stroke:none}
 </style>
 </head>
 <body>
@@ -3348,7 +3355,7 @@ async function news(){
  try{const m=qJoined(),ids=new Set(n.map(x=>x.id));let ch=0;Object.keys(m).forEach(k=>{if(!ids.has(k)){delete m[k];ch=1}});if(ch)LS.set('akQuest',m)}catch{}
  let tab='art';
  const sv=(p,e)=>`<svg viewBox="0 0 24 24" width=${e||16} height=${e||16} fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${p}</svg>`;
- const CK=sv('<circle cx=12 cy=12 r=9></circle><path d="M12 7v5l3 2"></path>'),PPL=sv('<circle cx=9 cy=8 r=3.5></circle><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"></path><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4c2.2.7 3.5 2.6 3.5 5.6"></path>'),IN=sv('<circle cx=12 cy=12 r=9></circle><path d="M12 11v6"></path><circle cx=12 cy=7.6 r=.6 fill=currentColor></circle>',22),SH=sv('<path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"></path><path d="M16 6l-4-4-4 4M12 2v13"></path>',16),BK=sv('<path d="M19 12H5M12 19l-7-7 7-7"></path>',22);
+ const CK=sv('<circle cx=12 cy=12 r=9></circle><path d="M12 7v5l3 2"></path>'),PPL=sv('<circle cx=9 cy=8 r=3.5></circle><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"></path><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4c2.2.7 3.5 2.6 3.5 5.6"></path>'),IN='<svg viewBox="0 0 24 24" width=24 height=24 fill=currentColor aria-hidden=true><path fill-rule="evenodd" d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM12 10.6a1 1 0 00-1 1v4.2a1 1 0 002 0v-4.2a1 1 0 00-1-1zm0-3.7a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z"/></svg>',SH=sv('<path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"></path><path d="M16 6l-4-4-4 4M12 2v13"></path>',16),BK=sv('<path d="M19 12H5M12 19l-7-7 7-7"></path>',22);
  const jt=c=>T(bn(c)+' জন জয়েন করেছেন',c+' joined');
  const left=x=>{if(!x.end)return null;const l=x.end-Date.now();if(l<864e5){const h=Math.max(1,Math.ceil(l/36e5));return T(bn(h)+' ঘণ্টা বাকি',h+' hours left')}const d=Math.ceil(l/864e5);return T(bn(d)+' দিন বাকি',d+' days left')};
  const lkf=t=>esc(t).replace(/(https?:\/\/[^\s<]+)/g,u=>`<a href="${u}" target=_blank rel=noopener>${u}</a>`);
