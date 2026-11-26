@@ -2585,6 +2585,28 @@ body #bn [data-go=comics] .ic{width:25px;height:25px}
 .qst-rl{position:absolute;left:0;right:0;bottom:calc(100% + 10px);z-index:6;max-height:46vh;overflow:auto;margin:0;padding:14px;background:#fff;border:2px solid #e5e5e5;border-bottom:4px solid #d6d6d6;border-radius:18px;box-shadow:0 16px 34px -12px rgba(0,0,0,.35)}
 .qst-rl[hidden]{display:none}
 .st-c{width:44px!important;height:44px!important;border-radius:14px!important;background:#fff!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;color:#111!important;box-shadow:none!important}
+
+.qfo{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.5)}
+.qfc{position:relative;width:100%;max-width:420px;max-height:82vh;overflow:auto;background:#fff;border:2px solid #e5e5e5;border-bottom:5px solid #d6d6d6;border-radius:24px;padding:20px 18px;box-shadow:0 24px 60px -16px rgba(0,0,0,.5)}
+.qfc h2{margin:0 40px 10px 0;font-size:20px}
+.qfc h3{margin:14px 0 4px;font-size:15px}
+.qfc p{margin:0;white-space:pre-line;color:#444;font-size:14.5px}
+.qfx{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:12px;background:#fff;border:2px solid #e5e5e5;border-bottom:3px solid #d6d6d6;display:grid;place-items:center;padding:0;color:#111;cursor:pointer}
+.qfx .ic{width:18px;height:18px}
+
+/* support page: Duolingo-style gray/white buttons */
+.pw .pw-chs,.pw-card>.pw-chs{display:flex!important;flex-wrap:wrap;gap:10px!important;background:none!important;padding:0!important;border-radius:0!important;width:auto!important;margin:2px 0 12px!important}
+.pw-card>.pw-chs{justify-content:center}
+.pw .pw-chs .pw-ch,.pw-card>.pw-chs .pw-ch{flex:1!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#555!important;border-radius:16px!important;padding:12px 14px!important;font-size:14.5px!important;font-weight:700!important;box-shadow:none!important;cursor:pointer}
+.pw .pw-chs .pw-ch.on,.pw-card>.pw-chs .pw-ch.on{background:#e9e9ec!important;border-color:#c9c9d0!important;border-bottom-color:#b0b0b8!important;color:#111!important}
+.pw .pw-chs .pw-ch:active{transform:translateY(2px);border-bottom-width:2px!important}
+.pw .pw-tl span{border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;border-radius:16px!important;background:#fff!important;padding:11px 16px!important;box-shadow:none!important}
+.pw .pw-tl b{color:#555;font-weight:700}
+.pw .pw-tl input:checked+span{background:#e9e9ec!important;border-color:#c9c9d0!important;border-bottom-color:#b0b0b8!important;padding:11px 16px!important;box-shadow:none!important}
+.pw .pw-tl input:checked+span b{color:#111}
+.pw .pw-tl:active span{transform:translateY(2px);border-bottom-width:2px!important}
+.pw .pw-alt,.pw .pw-pass button{border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#111!important;border-radius:16px!important;box-shadow:none!important}
+.pw .pw-alt:active,.pw .pw-pass button:active{transform:translateY(2px);border-bottom-width:2px!important}
 </style>
 </head>
 <body>
@@ -3310,11 +3332,12 @@ function qPCard(o){
  g.beginPath();g.arc(W-230,H-290,120,0,Math.PI*2);g.fillStyle='rgba(225,6,0,.16)';g.fill();
  g.fillStyle='#e10600';g.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?46:96;g.lineTo(W-230+Math.cos(a)*r,H-290+Math.sin(a)*r)}g.closePath();g.fill();
  return c}
+function qFloat(h){document.querySelectorAll('.qfo').forEach(x=>x.remove());const o=document.createElement('div');o.className='qfo';o.innerHTML=`<div class=qfc role=dialog><button type=button class=qfx aria-label="${T('বন্ধ','Close')}">${ic('x')}</button>${h}</div>`;o.onclick=e=>{if(e.target===o||e.target.closest('.qfx'))o.remove()};document.body.appendChild(o);return o}
 function qShowCard(x,r){
  r=typeof r==='object'&&r?r:{};
  const c=qPCard({kind:T('আর্ট কোয়েস্ট','ART QUEST'),label:T('পার্টিসিপেন্ট','PARTICIPANT'),name:r.n||T('পার্টিসিপেন্ট','Participant'),title:x.title||'',dk:T('যোগদানের তারিখ','JOINED ON'),date:new Date(r.t||Date.now()).toLocaleDateString(language==='en'?'en-GB':'bn-BD',{day:'numeric',month:'long',year:'numeric'}),ck:T('পার্টিসিপেন্ট কোড','PARTICIPANT CODE'),code:r.c||'—',foot:T('Akano কোয়েস্টে অংশগ্রহণের স্বীকৃতি','Proof of joining an Akano quest')});
  let url='';try{url=c.toDataURL('image/png')}catch{return aToast(T('কার্ড বানানো যায়নি','Could not create the card'))}
- modal(`<div class=cd-b><h2>${T('আপনার পার্টিসিপেন্ট কার্ড','Your participant card')}</h2><img src="${url}" alt="" style="width:100%;border-radius:18px;display:block;margin:10px 0 14px"><button type=button class=qbtn id=qdl>${T('ডাউনলোড','Download')}</button></div>`);
+ qFloat(`<div class=cd-b><h2>${T('আপনার পার্টিসিপেন্ট কার্ড','Your participant card')}</h2><img src="${url}" alt="" style="width:100%;border-radius:18px;display:block;margin:10px 0 14px"><button type=button class=qbtn id=qdl>${T('ডাউনলোড','Download')}</button></div>`);
  setTimeout(()=>{const b=document.getElementById('qdl');if(b)b.onclick=()=>c.toBlob(bl=>{if(!bl)return;const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='akano-participant-card.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},'image/png')},0)}
 async function news(){
  const thisRoute=routeVersion;
@@ -3329,7 +3352,7 @@ async function news(){
  const left=x=>{if(!x.end)return null;const l=x.end-Date.now();if(l<864e5){const h=Math.max(1,Math.ceil(l/36e5));return T(bn(h)+' ঘণ্টা বাকি',h+' hours left')}const d=Math.ceil(l/864e5);return T(bn(d)+' দিন বাকি',d+' days left')};
  const lkf=t=>esc(t).replace(/(https?:\/\/[^\s<]+)/g,u=>`<a href="${u}" target=_blank rel=noopener>${u}</a>`);
  const card=x=>{const q=x.type!=='ঘোষণা',r=qJoined()[x.id],lf=left(x),id=esc(x.id);
-  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-ar><div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-rl hidden data-qrl="${id}">${rulesH(x)}</div></div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
+  const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div><button type=button class=qbtn data-qcard="${id}">${T('পার্টিসিপেন্ট কার্ড','Participant card')}</button>`:`<div class=qst-ar><div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
   const su=location.host+location.pathname.replace(/\/$/,'')+'?quest='+x.id;
   return `<article class="nw qst" data-qid="${id}">${x.img?`<div class=qst-im><img src="${esc(x.img)}" loading=lazy alt=""></div>`:''}<div class=qst-b><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${q?`<div class=qst-ch>${lf?`<span class=qst-tm>${CK}${lf}</span>`:''}<span class=qst-tm>${PPL}<span class=qst-n>${jt(+x.joins||0)}</span></span></div>`:''}${x.text?`<p class=qst-d data-qd>${lkf(x.text)}</p><button type=button class=qst-mo data-qmo hidden>${T('আরও দেখুন','See more')}</button>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${act}<div class=qst-sl><span class=qst-su>${esc(su)}</span><button type=button class=qst-sb data-qsh="${id}">${SH}${T('শেয়ার','Share')}</button></div></div></article>`};
  const TABS=[['art',T('আর্ট কোয়েস্ট','Art Quest'),1],['app',T('অ্যাপ কোয়েস্ট','App Quest'),0],['other',T('অন্যান্য','Others'),0]];
@@ -3341,7 +3364,7 @@ async function news(){
   requestAnimationFrame(()=>document.querySelectorAll('#app [data-qd]').forEach(p=>{const b=p.nextElementSibling;if(b&&b.hasAttribute('data-qmo')&&p.scrollHeight>p.clientHeight+2)b.hidden=false}));
   const dq=window.__qDeep;if(dq&&tab==='art'){window.__qDeep=null;const el=document.querySelector('#app [data-qid="'+CSS.escape(dq)+'"]');if(el)setTimeout(()=>{el.scrollIntoView({block:'center'});el.classList.add('hl')},150)}
  };
- const form=x=>{modal(`<div class=cd-b><h2>${T('অ্যাপ্লাই ফর্ম','Apply form')}</h2><p class=cd-ds style="margin:0 0 12px">${esc(x.title)}</p><input id=qfn class=qin placeholder="${T('আপনার নাম','Your name')}" autocomplete=name><input id=qfe class=qin type=email placeholder="${T('আপনার Gmail','Your Gmail')}" autocomplete=email><input id=qfl class=qin placeholder="${T('ছবির Google Drive লিংক (ঐচ্ছিক)','Google Drive link of your art (optional)')}"><p class=qst-er id=qfr></p><button type=button class=qbtn id=qfs>${T('জমা দিন','Submit')}</button></div>`);
+ const form=x=>{qFloat(`<div class=cd-b><h2>${T('অ্যাপ্লাই ফর্ম','Apply form')}</h2><p class=cd-ds style="margin:0 0 12px">${esc(x.title)}</p><input id=qfn class=qin placeholder="${T('আপনার নাম','Your name')}" autocomplete=name><input id=qfe class=qin type=email placeholder="${T('আপনার Gmail','Your Gmail')}" autocomplete=email><input id=qfl class=qin placeholder="${T('ছবির Google Drive লিংক (ঐচ্ছিক)','Google Drive link of your art (optional)')}"><p class=qst-er id=qfr></p><button type=button class=qbtn id=qfs>${T('জমা দিন','Submit')}</button></div>`);
   setTimeout(()=>{const s=document.getElementById('qfs');if(!s)return;s.onclick=()=>{const nm=document.getElementById('qfn').value.trim(),em=document.getElementById('qfe').value.trim(),lk=document.getElementById('qfl').value.trim(),er=m=>{document.getElementById('qfr').textContent=m};
    if(nm.length<2)return er(T('আপনার নাম লিখুন','Enter your name'));
    if(!qEm.test(em))return er(T('সঠিক Gmail লিখুন','Enter a valid Gmail'));
@@ -3373,7 +3396,7 @@ async function news(){
   q('[data-qbk]').forEach(b=>b.onclick=()=>go('home'));
   q('[data-qtab]').forEach(b=>b.onclick=()=>{tab=b.dataset.qtab;draw()});
   q('[data-qap]').forEach(b=>b.onclick=()=>form(find(b.dataset.qap)));
-  q('[data-qi]').forEach(b=>b.onclick=()=>{const p=document.querySelector('#app [data-qrl="'+b.dataset.qi+'"]');document.querySelectorAll('.qst-rl').forEach(o=>{if(o!==p)o.hidden=true});if(p)p.hidden=!p.hidden});
+  q('[data-qi]').forEach(b=>b.onclick=()=>qFloat(`<h2>${T('নিয়ম','Rules')}</h2>${rulesH(find(b.dataset.qi))}`));
   if(!window.__qo){window.__qo=1;document.addEventListener('click',e=>{if(e.target.closest('.qst-rl,[data-qi]'))return;document.querySelectorAll('.qst-rl').forEach(p=>p.hidden=true)})}
   q('[data-qc]').forEach(b=>b.onclick=()=>{const i=document.querySelector('#app [data-qin="'+b.dataset.qc+'"]');claim(b.dataset.qc,i?i.value:'')});
   q('[data-qcard]').forEach(b=>b.onclick=()=>qShowCard(find(b.dataset.qcard),qJoined()[b.dataset.qcard]));
