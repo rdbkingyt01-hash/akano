@@ -3320,21 +3320,22 @@ function showGal(i){const n=gl.length;i=(i+n)%n;const x=gl[i];modal(`<div class=
 function qDev(){let d;try{d=localStorage.akDev||(localStorage.akDev=Math.random().toString(36).slice(2))}catch{d=window.__d||(window.__d=Math.random().toString(36).slice(2))}return d}
 const qJoined=()=>{const m=LS.get('akQuest',{});return m&&typeof m==='object'?m:{}},qEm=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 function qPCard(o){
- const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),F='"Noto Sans Bengali","Hind Siliguri","Segoe UI",system-ui,sans-serif';
- const rr=(x,y,w,h,r)=>{g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()};
+ const W=1600,H=1131,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),F='"Noto Sans Bengali","Hind Siliguri","Segoe UI",system-ui,sans-serif';
  g.fillStyle='#fff';g.fillRect(0,0,W,H);
- rr(60,60,W-120,H-120,64);g.fillStyle='#d6d6d6';g.fill();
- rr(60,60,W-120,H-136,64);g.fillStyle='#fff';g.fill();g.lineWidth=6;g.strokeStyle='#e5e5e5';g.stroke();
- g.textBaseline='alphabetic';g.textAlign='left';
- g.fillStyle='#777';g.font='700 36px '+F;g.fillText(String(o.label||'').toUpperCase(),130,470);
- let fs=120;const maxW=W-260;do{g.font='800 '+fs+'px '+F;fs-=4}while(g.measureText(o.name).width>maxW&&fs>44);
- g.fillStyle='#111';g.fillText(o.name,130,610);
- g.fillStyle='#111';rr(130,656,120,10,5);g.fill();
- g.fillStyle='#555';g.font='600 42px '+F;
- const ws=String(o.title||'').split(/\s+/),ls=[];let cur='';for(const w of ws){const t=cur?cur+' '+w:w;if(g.measureText(t).width>maxW&&cur){ls.push(cur);cur=w}else cur=t}if(cur)ls.push(cur);
- ls.slice(0,2).forEach((l,i)=>g.fillText(l+(i===1&&ls.length>2?'…':''),130,750+i*60));
- g.fillStyle='#777';g.font='600 32px '+F;g.fillText(o.dk,130,1040);
- g.fillStyle='#111';g.font='700 46px '+F;g.fillText(o.date,130,1100);
+ g.lineWidth=3;g.strokeStyle='#111';g.strokeRect(46,46,W-92,H-92);
+ g.lineWidth=2;g.strokeStyle='#c4c4c4';g.strokeRect(62,62,W-124,H-124);
+ g.textBaseline='alphabetic';g.textAlign='center';const cx=W/2,maxW=W-340;
+ const fit=(txt,wt,sz,min)=>{let f=sz;do{g.font=wt+' '+f+'px '+F;f-=4}while(g.measureText(txt).width>maxW&&f>min)};
+ g.fillStyle='#111';g.font='800 60px '+F;g.fillText('Akano',cx,190);
+ g.font='800 74px '+F;g.fillText(T('অংশগ্রহণের সনদ','Certificate of Participation'),cx,330);
+ g.fillStyle='#333';g.font='500 36px '+F;g.fillText(T('এই মর্মে প্রত্যয়ন করা হচ্ছে যে','This is to certify that'),cx,450);
+ g.fillStyle='#111';fit(o.name,'800',118,48);g.fillText(o.name,cx,590);
+ g.fillStyle='#333';g.font='500 38px '+F;g.fillText(T('অংশগ্রহণ করেছেন','Has participated in')+' '+o.kind,cx,690);
+ if(o.title){g.fillStyle='#111';fit(o.title,'800',46,28);g.fillText(o.title,cx,750)}
+ g.fillStyle='#333';g.font='500 28px '+F;
+ g.textAlign='left';g.fillText(T('প্রদানকারী: Akano','Issued by: Akano'),150,985);
+ g.textAlign='center';g.fillText(T('সনদ আইডি: ','Certificate ID: ')+(o.code||'—'),cx,985);
+ g.textAlign='right';g.fillText(T('প্রদানের তারিখ: ','Issued date: ')+o.date,W-150,985);
  return c}
 function qFloat(h){document.querySelectorAll('.qfo').forEach(x=>x.remove());const o=document.createElement('div');o.className='qfo';o.innerHTML=`<div class=qfc role=dialog><button type=button class=qfx aria-label="${T('বন্ধ','Close')}">${ic('x')}</button>${h}</div>`;o.onclick=e=>{if(e.target===o||e.target.closest('.qfx'))o.remove()};document.body.appendChild(o);return o}
 function qShowCard(x,r){
