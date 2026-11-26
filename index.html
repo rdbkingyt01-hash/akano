@@ -2600,13 +2600,6 @@ body #bn [data-go=comics] .ic{width:25px;height:25px}
 .pw .pw-chs .pw-ch,.pw-card>.pw-chs .pw-ch{flex:1!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#555!important;border-radius:16px!important;padding:12px 14px!important;font-size:14.5px!important;font-weight:700!important;box-shadow:none!important;cursor:pointer}
 .pw .pw-chs .pw-ch.on,.pw-card>.pw-chs .pw-ch.on{background:#e9e9ec!important;border-color:#c9c9d0!important;border-bottom-color:#b0b0b8!important;color:#111!important}
 .pw .pw-chs .pw-ch:active{transform:translateY(2px);border-bottom-width:2px!important}
-.pw .pw-tl span{border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;border-radius:16px!important;background:#fff!important;padding:11px 16px!important;box-shadow:none!important}
-.pw .pw-tl b{color:#555;font-weight:700}
-.pw .pw-tl input:checked+span{background:#e9e9ec!important;border-color:#c9c9d0!important;border-bottom-color:#b0b0b8!important;padding:11px 16px!important;box-shadow:none!important}
-.pw .pw-tl input:checked+span b{color:#111}
-.pw .pw-tl:active span{transform:translateY(2px);border-bottom-width:2px!important}
-.pw .pw-alt,.pw .pw-pass button{border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#111!important;border-radius:16px!important;box-shadow:none!important}
-.pw .pw-alt:active,.pw .pw-pass button:active{transform:translateY(2px);border-bottom-width:2px!important}
 </style>
 </head>
 <body>
@@ -3369,9 +3362,10 @@ async function news(){
    if(nm.length<2)return er(T('আপনার নাম লিখুন','Enter your name'));
    if(!qEm.test(em))return er(T('সঠিক Gmail লিখুন','Enter a valid Gmail'));
    if(lk&&!/^https?:\/\//i.test(lk))return er(T('Drive লিংক https:// দিয়ে শুরু হতে হবে','The Drive link must start with https://'));
-   if(!qEm.test(x.mail||''))return er(T('অ্যাডমিন এখনো ইমেইল ঠিকানা সেট করেননি','The admin has not set an email address yet'));
-   const a=document.createElement('a');a.href='mailto:'+x.mail+'?subject='+encodeURIComponent('Akano Art Quest — '+x.title)+'&body='+encodeURIComponent('Quest: '+x.title+'\nName: '+nm+'\nGmail: '+em+(lk?'\nDrive link: '+lk:'')+'\n');
-   document.body.appendChild(a);a.click();a.remove();aToast(T('ইমেইল অ্যাপ খুলেছে — পাঠিয়ে দিন','Your email app opened — send it'))}},0)};
+   const done=LS.get('akQApp',{});if(done[x.id])return er(T('আপনি আগেই আবেদন করেছেন','You have already applied'));
+   const btn=document.getElementById('qfs');btn.disabled=true;er('');
+   const al='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',rid='QA'+Array.from(crypto.getRandomValues(new Uint8Array(8)),v=>al[v%32]).join('');
+   setDoc(doc(db,'qapps',rid),{quest:x.id,name:nm.slice(0,60),email:em.toLowerCase().slice(0,120),drive:lk.slice(0,300),status:'pending',t:Date.now()}).then(()=>{done[x.id]=Date.now();LS.set('akQApp',done);const fo=document.querySelector('.qfo');if(fo)fo.remove();aToast(T('আবেদন জমা হয়েছে। অ্যাডমিন যাচাই করে আপনার Gmail-এ কোড পাঠাবে।','Application sent. The admin will check it and email you a code.'))}).catch(er2=>{btn.disabled=false;er(er2&&er2.code==='permission-denied'?T('সার্ভারের অনুমতি নেই — Firestore Rules আপডেট করতে হবে','Permission denied — Firestore rules need updating'):T('সংযোগে সমস্যা, আবার চেষ্টা করুন','Connection problem, try again'))})}},0)};
  const rulesH=x=>{const std=T('১. “অ্যাপ্লাই করুন” চেপে নাম, Gmail ও (থাকলে) ছবির Drive লিংক দিন।\n২. ইমেইল অ্যাপ খুললে সেটি পাঠিয়ে দিন।\n৩. বিবরণে দেওয়া Facebook গ্রুপে জয়েন করে আপনার আর্ট পোস্ট করুন।\n৪. অ্যাডমিন যাচাই করে আপনার Gmail-এ পার্টিসিপেন্ট কোড পাঠাবে।\n৫. কোড দিয়ে “নিশ্চিত” চাপুন — পার্টিসিপেন্ট কার্ড পাবেন ও ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত কমিক পড়তে পারবেন।','1. Tap Apply and enter your name, Gmail and (optionally) a Drive link to your art.\n2. Send the email that opens.\n3. Join the Facebook group from the description and post your art.\n4. The admin will check and send a participant code to your Gmail.\n5. Enter the code and tap Confirm — you get a participant card and 24 hours of ad-free comics.');
   const sec=(h,t)=>`<h3>${h}</h3><p>${esc(t)}</p>`;
   return `${sec(T('জয়েন করার নিয়ম','How to join'),x.jrules||std)}${x.rules?sec(T('কোয়েস্টের নিয়ম','Quest rules'),x.rules):''}`};
