@@ -2627,6 +2627,20 @@ html.fmbg body .pw-card>.pw-chs{background:none!important;padding:0!important;bo
 html.fmbg body .pw-card>.pw-chs .pw-ch{flex:1!important;border:2px solid #e5e5e5!important;border-bottom:4px solid #d6d6d6!important;background:#fff!important;color:#555!important;border-radius:14px!important;padding:12px 14px!important;font-size:14.5px!important;font-weight:700!important;box-shadow:none!important}
 html.fmbg body .pw-card>.pw-chs .pw-ch.on{background:#e9e9ec!important;border-color:#c9c9d0!important;border-bottom-color:#b0b0b8!important;color:#111!important;box-shadow:none!important}
 html.fmbg body .pw-card>.pw-chs .pw-ch:active{transform:translateY(2px);border-bottom-width:2px!important}
+
+/* Warning / status cards: one look (white rounded card) for alerts, toasts and the offline banner */
+.akd-o{position:fixed;inset:0;z-index:2147483000;background:rgba(0,0,0,.33);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;transition:opacity .18s}
+.akd-o.on{opacity:1}
+.akd-c{background:#fff;color:#111;border-radius:32px;padding:28px 24px 14px 28px;width:100%;max-width:420px;box-shadow:0 26px 60px -20px rgba(0,0,0,.4);transform:scale(.95);transition:transform .18s}
+.akd-o.on .akd-c{transform:none}
+.akd-m{margin:0 0 26px;font-size:17px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.akd-b{display:flex;justify-content:flex-end}
+.akd-b button{border:0;background:none;color:#111;font:inherit;font-size:17px;font-weight:700;padding:10px 18px;border-radius:14px;cursor:pointer}
+.akd-b button:active{background:#f0f0f0}
+html body .akt{background:#fff!important;color:#111!important;border-radius:26px!important;padding:15px 24px!important;font-size:15px!important;line-height:1.45;text-align:center;box-shadow:0 18px 44px -14px rgba(0,0,0,.4)!important;border:2px solid #ececec}
+html body #off{background:#fff!important;color:#111!important;border-radius:26px!important;padding:13px 22px!important;font-size:14px!important;box-shadow:0 18px 44px -14px rgba(0,0,0,.4)!important;border:2px solid #ececec;width:max-content}
+html body #off.on{gap:10px}
+html body #off svg{flex:none;width:20px;height:20px;stroke:#111;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
@@ -4667,6 +4681,18 @@ function touchDay(){track('')}
 
 // ================= শেয়ার কার্ড =================
 function aToast(m){const d=document.createElement('div');d.className='akt';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.classList.add('on'),20);setTimeout(()=>{d.classList.remove('on');setTimeout(()=>d.remove(),400)},2600)}
+/* in-app warning card (replaces the system alert): same white rounded card + OK */
+{const Q=[];let cur=null;
+const next=()=>{if(cur||!Q.length)return;const m=Q.shift(),o=document.createElement('div');o.className='akd-o';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');
+ const c=document.createElement('div'),p=document.createElement('p'),w=document.createElement('div'),b=document.createElement('button');
+ c.className='akd-c';p.className='akd-m';p.textContent=m;w.className='akd-b';b.type='button';b.textContent=language==='en'?'OK':'ঠিক আছে';
+ w.appendChild(b);c.appendChild(p);c.appendChild(w);o.appendChild(c);document.body.appendChild(o);cur={o,m};
+ const done=()=>{document.removeEventListener('keydown',kd,true);o.classList.remove('on');setTimeout(()=>{o.remove();cur=null;next()},180)};
+ const kd=e=>{if(e.key==='Escape'||e.key==='Enter'){e.preventDefault();e.stopPropagation();done()}};
+ b.onclick=done;document.addEventListener('keydown',kd,true);
+ requestAnimationFrame(()=>{o.classList.add('on');try{b.focus({preventScroll:true})}catch{}})};
+window.alert=m=>{m=m==null?'':String(m);if(language==='en'){try{m=phraseTr(m,true)}catch{}}
+ if((cur&&cur.m===m)||Q.includes(m))return;Q.push(m);next()}}
 const shBtn=(t,s,i)=>`<button type=button class=shr data-t="${esc(t||'')}" data-s="${esc(s||'')}" data-i="${esc(i||'')}" aria-label="${T('শেয়ার','Share')}">${ic('share')}<span>${T('শেয়ার','Share')}</span></button>`;
 async function shareCard(o){
  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
