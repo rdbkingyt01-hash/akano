@@ -2787,7 +2787,7 @@ body header #pfb .avs{width:36px;height:36px;border-radius:50%;display:block;box
 .pfs-xb i{display:block;height:100%;background:#ffc800;border-radius:4px}
 
 .dq-bar{overflow:visible!important}
-.dq-bar i{background:linear-gradient(180deg,#ff3b30,#e10600)!important;box-shadow:none!important}
+.dq-bar i{background:linear-gradient(180deg,#2b2b2b,#111)!important;box-shadow:none!important}
 .dq-bar{height:18px!important;border-radius:9px!important}
 .dq-bar i{border-radius:9px!important}
 .dq-bar span{font-size:12px!important}
@@ -2801,36 +2801,6 @@ body header #pfb .avs{width:36px;height:36px;border-radius:50%;display:block;box
 .pfx-xp{grid-column:1/-1}
 .pfx-fx svg{display:block;width:24px;height:24px}
 
-/* social profile v2 */
-.pfs{border-radius:26px;padding-bottom:0;box-shadow:0 14px 30px -22px rgba(0,0,0,.35)}
-.pfs-cv{height:124px;position:relative}
-.pfs-cv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 45%,rgba(0,0,0,.14))}
-.pfs-hd{margin-top:-54px;padding:0 18px;position:relative;z-index:1}
-.pfs .pfx-av,.pfs .pfx-av #pfAv{width:104px;height:104px}
-.pfs .pfx-av #pfAv{border:5px solid #fff;box-shadow:0 6px 16px -6px rgba(0,0,0,.35)}
-.pfs .pfx-ed{background:#111!important;color:#fff;border:0!important;border-radius:999px!important;padding:10px 18px!important;font-size:14px;margin-bottom:8px;box-shadow:none}
-.pfs .pfx-ed:active{transform:scale(.97)}
-.pfs-id{padding:12px 20px 0}
-.pfs-id b{font-size:24px;letter-spacing:-.01em}
-.pq-lv{padding:16px 20px 0}
-.pq-lt{display:flex;align-items:center;justify-content:space-between}
-.pq-chip{background:#fff3c4;color:#7a4f00;font-weight:800;font-size:13px;border-radius:999px;padding:4px 12px}
-.pq-xt{font-size:13px;font-weight:700;color:#666}
-.pq-lv .pfs-xb{height:10px;border-radius:5px;margin-top:10px;background:#eee}
-.pq-lv .pfs-xb i{border-radius:5px;min-width:6px}
-.pq-nx{display:block;margin-top:6px;font-size:12px;color:#999}
-.pq-row{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border-top:2px solid #f0f0f0}
-.pq-s{display:flex;flex-direction:column;align-items:center;gap:3px;padding:14px 2px 13px}
-.pq-s+.pq-s{border-left:2px solid #f0f0f0}
-.pq-s b{font-size:20px;line-height:1.1;color:#111;font-weight:800}
-.pq-s small{font-size:12px;font-weight:600;color:#8a8a8a}
-.pq-s .pfx-fl svg,.pq-i svg{display:block;width:24px;height:24px}
-.pq-bg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pq-b{display:flex;flex-direction:column;gap:2px;padding:14px;background:#fff;border:2px solid #e5e5e5;border-radius:18px;opacity:.5;filter:grayscale(1)}
-.pq-b.on{opacity:1;filter:none}
-.pq-bi{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#f5f6f8;margin-bottom:6px}
-.pq-bi svg{width:22px;height:22px;color:#ff9600;fill:currentColor}
-.pq-b b{font-size:14.5px;color:#111}.pq-b small{font-size:12px;color:#888}
 </style>
 </head>
 <body>
@@ -4943,19 +4913,15 @@ const avBare=(k,px)=>`<svg class=avb viewBox="0 0 120 120" width="${px}" height=
 const pfCv=a=>`radial-gradient(circle at 85% 0,rgba(255,255,255,.32),transparent 55%),${(AVL[a]||AVL.box)[0]}`;
 function profile(){
  const p=pfGet(),st=pfStats(),en=language==='en',nn=n=>en?String(n):bn(n);
- const xp=xpGet(),lv=lvOf(xp),xr=xp%100,bs=Math.max(stGet().best||0,st.streak);
  const CAM='<svg viewBox="0 0 24 24" width=18 height=18 fill=currentColor aria-hidden=true><path fill-rule="evenodd" d="M9 4a1 1 0 00-.8.4L7.1 6H5a3 3 0 00-3 3v8a3 3 0 003 3h14a3 3 0 003-3V9a3 3 0 00-3-3h-2.1l-1.1-1.6A1 1 0 0015 4H9zm3 4.5a4 4 0 110 8 4 4 0 010-8zm0 2a2 2 0 100 4 2 2 0 000-4z"/></svg>',CMX='<svg viewBox="0 0 24 24" aria-hidden=true><rect x=3 y=3 width=8 height=10 rx=2.2 fill="#1cb0f6"/><rect x=13 y=3 width=8 height=6 rx=2.2 fill="#ff9600"/><rect x=13 y=11 width=8 height=10 rx=2.2 fill="#ff5ea8"/><rect x=3 y=15 width=8 height=6 rx=2.2 fill="#58cc02"/></svg>';
  const PEN='<svg viewBox="0 0 24 24" width=18 height=18 fill=currentColor aria-hidden=true><path d="M16.9 3.3a2.4 2.4 0 013.4 3.4L8.6 18.4l-4.9 1.2a.6.6 0 01-.7-.7l1.2-4.9L16.9 3.3z"/></svg>';
  $('#app').innerHTML=`<div class="sec pfp"><div class=st-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>${T('প্রোফাইল','Profile')}</h1><span class=st-c style="visibility:hidden"></span></div>
-  <div class=pfs><div class=pfs-cv id=pfCv style="background:${pfCv(p.a)}"></div><div class=pfs-hd><button type=button class=pfx-av id=pfAvB aria-label="${T('অবতার বদলান','Change avatar')}"><span id=pfAv>${pfAv(p,104)}</span><i class=pfx-cam>${CAM}</i></button><button type=button class=pfx-ed id=pfEd aria-label="${T('নাম বদলান','Edit name')}">${T('প্রোফাইল এডিট','Edit profile')}</button></div><div class=pfs-id><b id=pfUn>@${esc(p.u)}</b><small>${T('যোগ দিয়েছেন','Joined')} ${pfJoin(p)}</small></div>
-  <div class=pq-lv><div class=pq-lt><span class=pq-chip>${T('লেভেল '+bn(lv),'Level '+lv)}</span><span class=pq-xt>${nn(xr)} / ${nn(100)} XP</span></div><div class=pfs-xb><i style="width:${xr}%"></i></div><small class=pq-nx>${T('পরের লেভেলে আর '+bn(100-xr)+' XP','Next level in '+(100-xr)+' XP')}</small></div>
-  <div class=pq-row>
-   <div class=pq-s><span class=pfx-fl>${icf('flame')}</span><b>${nn(st.streak)}</b><small>${T('স্ট্রিক','Streak')}</small></div>
-   <div class=pq-s><span class=pq-i><svg viewBox="0 0 24 24" aria-hidden=true><path d="M3 5.5q4.5-2 9 0 4.5-2 9 0V19q-4.5-2-9 0-4.5-2-9 0z" fill="#ffc800" stroke="#c98f00" stroke-width="1.6" stroke-linejoin="round"/></svg></span><b>${nn(st.read)}</b><small>${T('পড়া','Read')}</small></div>
-   <div class=pq-s><span class=pq-i><svg viewBox="0 0 24 24" aria-hidden=true><rect x="2" y="4" width="20" height="16" rx="5" fill="#ff3b30"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/></svg></span><b>${nn(st.watch)}</b><small>${T('দেখা','Watched')}</small></div>
-   <div class=pq-s><span class=pq-i><svg viewBox="0 0 24 24" aria-hidden=true><path d="M13.4 2.6L5.2 13.2h5.6l-1 8.2 8.9-11.4h-5.8z" fill="#ffc800" stroke="#ffc800" stroke-width="1.6" stroke-linejoin="round"/></svg></span><b>${nn(xp)}</b><small>XP</small></div>
-  </div></div>
-  <h2 class=pfx-h>${T('ব্যাজ','Badges')}</h2><div class=pq-bg>${[[st.read>=1,'<svg viewBox="0 0 24 24" aria-hidden=true><path d="M3 5.5q4.5-2 9 0 4.5-2 9 0V19q-4.5-2-9 0-4.5-2-9 0z" fill="#ffc800" stroke="#c98f00" stroke-width="1.6" stroke-linejoin="round"/></svg>',T('প্রথম কমিক','First comic'),T('১টি কমিক পড়ুন','Read 1 comic')],[bs>=7,icf('flame'),T('৭ দিনের স্ট্রিক','7-day streak'),T('টানা ৭ দিন','7 days in a row')],[st.watch>=5,'<svg viewBox="0 0 24 24" aria-hidden=true><rect x="2" y="4" width="20" height="16" rx="5" fill="#ff3b30"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/></svg>',T('দর্শক','Viewer'),T('৫টি ভিডিও দেখুন','Watch 5 videos')],[lv>=5,'<svg viewBox="0 0 24 24" aria-hidden=true><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6 6.6 19.5l1.1-6.1-4.5-4.2 6.1-.8z" fill="#58cc02"/></svg>',T('লেভেল ৫','Level 5'),T('৪০০ XP অর্জন করুন','Earn 400 XP')]].map(b=>`<div class="pq-b${b[0]?' on':''}"><span class=pq-bi>${b[1]}</span><b>${b[2]}</b><small>${b[3]}</small></div>`).join('')}</div>`;
+  <div class=pfs><div class=pfs-cv id=pfCv style="background:${pfCv(p.a)}"></div><div class=pfs-hd><button type=button class=pfx-av id=pfAvB aria-label="${T('অবতার বদলান','Change avatar')}"><span id=pfAv>${pfAv(p,92)}</span><i class=pfx-cam>${CAM}</i></button><button type=button class=pfx-ed id=pfEd aria-label="${T('নাম বদলান','Edit name')}">${T('পরিবর্তন','Change')}</button></div><div class=pfs-id><b id=pfUn>@${esc(p.u)}</b><small>${T('যোগ দিয়েছেন','Joined')} ${pfJoin(p)}</small></div>
+  <h2 class=pfx-h>${T('ওভারভিউ','Overview')}</h2><div class=pfx-grid>
+   <div class=pfx-st><div class=pfx-r><span class=pfx-fl>${icf('flame')}</span><b>${nn(st.streak)}</b></div><small>${T('দিনের স্ট্রিক','Day streak')}</small></div>
+   <div class=pfx-st><div class=pfx-r><span class=pfx-fa>${avBare('box',34)}</span><b>${nn(st.read)}</b></div><small>${T('কমিকস পড়া','Comics read')}</small></div>
+   <div class="pfx-st pfx-xp"><div class=pfx-r><span class=pfx-fx><svg viewBox="0 0 24 24" aria-hidden=true><path d="M13.4 2.6L5.2 13.2h5.6l-1 8.2 8.9-11.4h-5.8z" fill="#ffc800" stroke="#ffc800" stroke-width="1.6" stroke-linejoin="round"/></svg></span><b>${nn(xpGet())}</b></div><small>${T('XP · লেভেল '+bn(lvOf(xpGet())),'XP · Level '+lvOf(xpGet()))}</small></div>
+  </div></div>`;
  $('#pfAvB').onclick=()=>{const q0=pfGet(),o=qFloat(`<h2>${T('অবতার বেছে নিন','Choose avatar')}</h2><div class=pfx-g>${AVK.map(k=>`<button type=button class="pfx-o${k===q0.a?' on':''}" data-av="${k}" aria-label="${k}">${avSvg(k,64)}</button>`).join('')}</div>`);
   o.querySelector('.pfx-g').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;const q=pfGet();q.a=b.dataset.av;LS.set('akProf',q);const a=$('#pfAv');if(a)a.innerHTML=avSvg(q.a,92);const cv=$('#pfCv');if(cv)cv.style.background=pfCv(q.a);pfHdr();o.remove()}};
  $('#pfEd').onclick=()=>{const o=qFloat(`<h2>${T('নাম বদলান','Edit name')}</h2><input class=qin id=pfIn maxlength=20 autocomplete=off autocapitalize=off spellcheck=false value="${esc(pfGet().u)}" aria-label="${T('ইউজারনেম','Username')}"><p id=pfMsg style="margin:0 2px 10px;font-size:13px;color:#777">${T('৩–২০ অক্ষর: a–z, ০–৯ (0–9), _ এবং . — মন্তব্যেও এই নাম দেখাবে','3–20 characters: a–z, 0–9, _ and . — also shown on your comments')}</p><button type=button class=qbtn id=pfSv>${T('সেভ করুন','Save')}</button>`);
