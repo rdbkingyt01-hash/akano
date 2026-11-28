@@ -2747,6 +2747,28 @@ body header #pfb .avs{width:36px;height:36px;border-radius:50%;display:block;box
 .pfx-grid{gap:12px}
 
 .vc b{font-weight:500!important;font-size:15px!important;line-height:1.38!important;color:#1b1b1b!important;letter-spacing:0!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* daily quests */
+.dq-hd{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 12px}
+.dq-hd h2{margin:0;font-size:21px;font-weight:700;color:#111}
+.dq-tm{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#e10600}
+.dq-l{background:#fff;border:2px solid #e5e5e5;border-radius:20px;overflow:hidden}
+.dq-r{display:flex;align-items:center;gap:14px;padding:16px 16px}
+.dq-r+.dq-r{border-top:2px solid #e5e5e5}
+.dq-i{flex:none;width:44px;height:44px;display:grid;place-items:center}
+.dq-i svg{width:40px;height:40px}
+.dq-m{flex:1;min-width:0}
+.dq-m b{display:block;font-size:16px;font-weight:700;color:#111;line-height:1.3;margin-bottom:8px}
+.dq-bar{position:relative;height:24px;border-radius:12px;background:#e5e5e5;overflow:hidden}
+.dq-bar i{position:absolute;left:0;top:0;bottom:0;background:#e10600;border-radius:12px;overflow:hidden}
+.dq-bar span{position:absolute;top:0;left:0;height:100%;width:100%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.dq-bar .t0{color:#777}
+.dq-bar .t1{color:#fff;width:auto}
+.dq-c{flex:none;width:46px;height:46px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:default}
+.dq-c .l{fill:#d3d6db}.dq-c .b{fill:#bfc3ca}.dq-c .k{fill:#fff}
+.dq-c.rd{cursor:pointer;animation:dqp 1.4s ease-in-out infinite}
+.dq-c.rd .l{fill:#ffb82e}.dq-c.rd .b{fill:#f08c00}
+.dq-c.cl .l,.dq-c.cl .b{fill:#e3e5e8}
+@keyframes dqp{50%{transform:scale(1.12)}}
 </style>
 </head>
 <body>
@@ -3018,7 +3040,7 @@ async function openComments(kind,ref){await cmAd();
   if(hist.length>=8)return bad(T('এক ঘণ্টায় অনেক মন্তব্য করেছেন, পরে আবার চেষ্টা করুন।','Too many comments, try again later.'));
   if(list.length>=300)return bad(T('এখানে আর মন্তব্য নেওয়া যাচ্ছে না।','Comments are full here.'));
   const b=$('#cmp');b.disabled=true;bad('');const en={n,m,t:now};
-  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;CML=true;CMC[key]=(CMC[key]||0)+1;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(1)}},{merge:true}).catch(()=>{});try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}$('#cmt').value='';draw()}
+  try{await setDoc(D('comments',key),{l:arrayUnion(en)},{merge:true});list=[...list,en];err=false;CML=true;CMC[key]=(CMC[key]||0)+1;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:increment(1)}},{merge:true}).catch(()=>{});try{localStorage.akCn=n;hist.push(now);localStorage.akCh=JSON.stringify(hist)}catch{}try{track('cm')}catch{}$('#cmt').value='';draw()}
   catch{bad(T('পোস্ট করা যায়নি, পরে আবার চেষ্টা করুন।','Could not post. Try again later.'))}
   b.disabled=false};
  try{const r=await getDoc(D('comments',key));list=r.exists()&&Array.isArray(r.data().l)?r.data().l:[];if((CMC[key]||0)!==list.length){CMC[key]=list.length;CML=true;cacheSet('cmc',CMC);cmPaint();setDoc(D('commentCounts','all'),{c:{[key]:list.length}},{merge:true}).catch(()=>{})}}catch{err=true}
@@ -3468,13 +3490,22 @@ async function news(){
   const act=!q?'':r?`<div class=qst-ok>${T('অংশ নিয়েছেন · ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত','Joined · 24 hours ad-free')}</div>`:`<div class=qst-ar><div class=qst-act><button type=button class=qst-ap data-qap="${id}">${T('অ্যাপ্লাই করুন','Apply')}</button><button type=button class="qst-ap qst-i" data-qi="${id}" aria-label="${T('নিয়ম','Rules')}">${IN}</button></div><div class=qst-cd><input data-qin="${id}" placeholder="${T('পার্টিসিপেন্ট কোড','Participant code')}" autocomplete=off autocapitalize=characters><button type=button class=qst-ap data-qc="${id}">${T('নিশ্চিত','Confirm')}</button></div><p class=qst-er data-qe="${id}"></p>`;
   const su=location.host+location.pathname.replace(/\/$/,'')+'?quest='+x.id;
   return `<article class="nw qst" data-qid="${id}">${x.img?`<div class=qst-im><img src="${esc(x.img)}"${/^[1-4]\/[1-4]$/.test(x.cr||'')?` style="aspect-ratio:${x.cr};max-height:none"`:''} loading=lazy alt=""></div>`:''}<div class=qst-b><h2>${esc(x.title)}</h2><div class=dt>${dateLabel(x.t)}</div>${q?`<div class=qst-ch>${lf?`<span class=qst-tm>${CK}${lf}</span>`:''}<span class=qst-tm>${PPL}<span class=qst-n>${jt(+x.joins||0)}</span></span></div>`:''}${x.text?`<p class=qst-d data-qd>${lkf(x.text)}</p><button type=button class=qst-mo data-qmo hidden>${T('আরও দেখুন','See more')}</button>`:''}${q&&x.reward?`<div class=qst-rw><small>${T('বিজয়ীর পুরস্কার','Winner reward')}</small><b>${esc(x.reward)}</b></div>`:''}${act}<div class=qst-sl><span class=qst-su>${esc(su)}</span><button type=button class=qst-sb data-qsh="${id}">${SH}${T('শেয়ার','Share')}</button></div></div></article>`};
- const TABS=[['art',T('আর্ট কোয়েস্ট','Art Quest'),1],['app',T('অ্যাপ কোয়েস্ট','App Quest'),0],['other',T('অন্যান্য','Others'),0]];
- const SOON={app:[T('অ্যাপ কোয়েস্ট','App Quest'),T('অ্যাপ ঘুরে দেখা, শেয়ার ও রিভিউয়ের মতো কোয়েস্ট — শীঘ্রই আসছে।','Quests like exploring, sharing and reviewing the app — coming soon.')],other:[T('অন্যান্য','Others'),T('আরও নতুন ধরনের কোয়েস্ট — শীঘ্রই আসছে।','More new kinds of quests — coming soon.')]};
+ const TABS=[['art',T('আর্ট কোয়েস্ট','Art Quest'),1],['app',T('ডেইলি কোয়েস্ট','Daily Quests'),1],['other',T('অন্যান্য','Others'),0]];
+ const SOON={other:[T('অন্যান্য','Others'),T('আরও নতুন ধরনের কোয়েস্ট — শীঘ্রই আসছে।','More new kinds of quests — coming soon.')]};
+ 
+ const nn=v=>language==='en'?String(v):bn(v);
+ const CHEST='<svg viewBox="0 0 32 32" width=36 height=36 aria-hidden=true><path class=l d="M4 13c0-4.4 3.6-8 8-8h8c4.4 0 8 3.6 8 8v1H4z"/><path class=b d="M4 15.5h24V25a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><rect class=k x=13.5 y=13 width=5 height=7 rx=1.4 /></svg>';
+ const ICQ={read:'<svg viewBox="0 0 24 24" aria-hidden=true><rect x=3 y=3 width=8 height=10 rx=2.2 fill="#1cb0f6"/><rect x=13 y=3 width=8 height=6 rx=2.2 fill="#ff9600"/><rect x=13 y=11 width=8 height=10 rx=2.2 fill="#ff5ea8"/><rect x=3 y=15 width=8 height=6 rx=2.2 fill="#58cc02"/></svg>',watch:'<svg viewBox="0 0 24 24" aria-hidden=true><circle cx=12 cy=12 r=11 fill="#1cb0f6"/><path d="M10 7.8v8.4l6.6-4.2z" fill="#fff"/></svg>',comment:'<svg viewBox="0 0 24 24" aria-hidden=true><path d="M4 4.5h16a2 2 0 012 2v8.5a2 2 0 01-2 2h-7l-5 4v-4H4a2 2 0 01-2-2V6.5a2 2 0 012-2z" fill="#58cc02"/><circle cx=8 cy=10.7 r=1.3 fill="#fff"/><circle cx=12 cy=10.7 r=1.3 fill="#fff"/><circle cx=16 cy=10.7 r=1.3 fill="#fff"/></svg>',open:'<svg viewBox="0 0 24 24" aria-hidden=true><path d="M13.4 2.6L5.2 13.2h5.6l-1 8.2 8.9-11.4h-5.8z" fill="#ffc800" stroke="#ffc800" stroke-width="1.6" stroke-linejoin="round"/></svg>'};
+ const dqPanel=()=>{
+  const d=dqGet(),it=n.filter(x=>x.qt==='app').sort((a,b)=>(a.t||0)-(b.t||0)),t=new Date(),h=Math.max(1,Math.ceil((new Date(t.getFullYear(),t.getMonth(),t.getDate()+1)-t)/36e5));
+  const row=x=>{const m=ICQ[x.metric]?x.metric:'read',tg=Math.max(1,+x.target||1),v=Math.min(tg,dqVal(d,m)),done=v>=tg,cl=!!d.cl[x.id],p=Math.round(v/tg*100),lab=nn(v)+' / '+nn(tg);
+   return `<div class=dq-r><span class=dq-i>${ICQ[m]}</span><div class=dq-m><b>${esc(x.title)}</b><div class=dq-bar><span class=t0>${lab}</span>${p?`<i style="width:${p}%"><span class=t1 style="width:${10000/p}%">${lab}</span></i>`:''}</div></div><button type=button class="dq-c${cl?' cl':done?' rd':''}" data-dqc="${esc(x.id)}"${done&&!cl?'':' disabled'} aria-label="${T('পুরস্কার','Reward')}">${CHEST}</button></div>`};
+  return `<div class=dq-hd><h2>${T('ডেইলি কোয়েস্ট','Daily Quests')}</h2><span class=dq-tm>${CK}${T(bn(h)+' ঘণ্টা',h+' hours')}</span></div>${it.length?`<div class=dq-l>${it.map(row).join('')}</div>`:`<p class="ld emp e-news">${T('আজকের জন্য এখনো কোনো ডেইলি কোয়েস্ট নেই।','No daily quests yet.')}</p>`}`};
  const soon=k=>`<div class=qsn><div class=qsn-t><b>${SOON[k][0]}</b><small>${T('শীঘ্রই','Soon')}</small></div><p>${SOON[k][1]}</p></div>`;
  const find=id=>n.find(y=>y.id===id)||{};
  const draw=()=>{
   const list_=n.filter(x=>tab==='art'&&(x.qt||'art')==='art');
-  $('#app').innerHTML=`<div class=sec><div class=qst-top><button type=button class=qst-bk data-qbk aria-label="${T('পেছনে','Back')}">${BK}</button><h1 class=ct>${T('কোয়েস্ট','Quests')}</h1></div><div class=qst-tabs>${TABS.map(([k,l,on])=>`<button type=button class="qst-tab${tab===k?' on':''}" data-qtab="${k}">${l}${on?'':`<small>${T('শীঘ্রই','Soon')}</small>`}</button>`).join('')}</div>${tab!=='art'?soon(tab):list_.map(card).join('')||`<p class="ld emp e-news">${T('এখনো কোনো কোয়েস্ট নেই।','No quests yet.')}</p>`}</div>`;
+  $('#app').innerHTML=`<div class=sec><div class=qst-top><button type=button class=qst-bk data-qbk aria-label="${T('পেছনে','Back')}">${BK}</button><h1 class=ct>${T('কোয়েস্ট','Quests')}</h1></div><div class=qst-tabs>${TABS.map(([k,l,on])=>`<button type=button class="qst-tab${tab===k?' on':''}" data-qtab="${k}">${l}${on?'':`<small>${T('শীঘ্রই','Soon')}</small>`}</button>`).join('')}</div>${tab==='app'?dqPanel():tab!=='art'?soon(tab):list_.map(card).join('')||`<p class="ld emp e-news">${T('এখনো কোনো কোয়েস্ট নেই।','No quests yet.')}</p>`}</div>`;
   bind();
   requestAnimationFrame(()=>document.querySelectorAll('#app [data-qd]').forEach(p=>{const b=p.nextElementSibling;if(b&&b.hasAttribute('data-qmo')&&p.scrollHeight>p.clientHeight+2)b.hidden=false}));
   const dq=window.__qDeep;if(dq&&tab==='art'){window.__qDeep=null;const el=document.querySelector('#app [data-qid="'+CSS.escape(dq)+'"]');if(el)setTimeout(()=>{el.scrollIntoView({block:'center'});el.classList.add('hl')},150)}
@@ -3511,6 +3542,7 @@ async function news(){
   const q=s=>document.querySelectorAll('#app '+s);
   q('[data-qbk]').forEach(b=>b.onclick=()=>go('home'));
   q('[data-qtab]').forEach(b=>b.onclick=()=>{tab=b.dataset.qtab;draw()});
+  q('[data-dqc]').forEach(b=>b.onclick=()=>{const id=b.dataset.dqc,x=find(id),d=dqGet(),m=x.metric||'read',tg=Math.max(1,+x.target||1);if(d.cl[id]||dqVal(d,m)<tg)return;d.cl[id]=1;LS.set('akDQ',d);const hh=Math.max(0,+x.rh||0);if(hh>0)LS.set('akAfUntil',Math.max(afU(),Date.now())+hh*36e5);aToast(hh>0?T('পুরস্কার পেয়েছেন! '+bn(hh)+' ঘণ্টা বিজ্ঞাপনমুক্ত','Reward claimed! '+hh+'h ad-free'):T('কোয়েস্ট সম্পন্ন!','Quest completed!'));draw()});
   q('[data-qap]').forEach(b=>b.onclick=()=>form(find(b.dataset.qap)));
   q('[data-qi]').forEach(b=>b.onclick=()=>qFloat(`<h2>${T('নিয়ম','Rules')}</h2>${rulesH(find(b.dataset.qi))}`));
   if(!window.__qo){window.__qo=1;document.addEventListener('click',e=>{if(e.target.closest('.qst-rl,[data-qi]'))return;document.querySelectorAll('.qst-rl').forEach(p=>p.hidden=true)})}
@@ -4768,11 +4800,15 @@ const todayS=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMont
 const dayNum=ds=>{const[y,m,d]=ds.split('-').map(Number);return Math.round(Date.UTC(y,m-1,d)/864e5)};
 const curStreak=s=>{const set=new Set(s.days.map(dayNum));let n=dayNum(todayS()),c=0;if(!set.has(n))n--;while(set.has(n)){c++;n--}return c};
 function track(k,id){
+ try{dqBump(k,id)}catch{}
  const s=stGet();
  if(k==='read'&&id){s.read[id]=1;const sn=LS.get('akSeen',{});sn[id]=1;LS.set('akSeen',sn)}
  else if(k==='watch'&&id)s.watch[id]=1;else if(k==='rev')s.rev++;else if(k==='share')s.share++;
  const t=todayS();if(!s.days.includes(t)){s.days.push(t);s.days=s.days.slice(-1000)}
  s.best=Math.max(s.best,curStreak(s));LS.set('akStats',s)}
+function dqGet(){let d=LS.get('akDQ',null);const t=todayS();if(!d||d.d!==t){d={d:t,read:[],watch:[],cm:0,cl:{}};LS.set('akDQ',d)}d.read=d.read||[];d.watch=d.watch||[];d.cm=d.cm||0;d.cl=d.cl||{};return d}
+function dqBump(k,id){const d=dqGet();if(k==='read'&&id){if(!d.read.includes(id))d.read.push(id)}else if(k==='watch'&&id){if(!d.watch.includes(id))d.watch.push(id)}else if(k==='cm')d.cm++;else return;LS.set('akDQ',d)}
+const dqVal=(d,m)=>m==='read'?d.read.length:m==='watch'?d.watch.length:m==='comment'?d.cm:1;
 const seenIds=()=>{const s=LS.get('akSeen',{});Object.values(prog||{}).forEach(p=>{if(p&&p.cid)s[p.cid]=1});return s};
 
 
