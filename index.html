@@ -2732,11 +2732,6 @@ body header #pfb .avs{width:36px;height:36px;border-radius:50%;display:block;box
 
 .pfx-st b{font-family:inherit!important;font-size:21px;font-weight:700;color:#111}
 
-.pfx-hero{position:relative}
-.pfx-cr{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;align-items:center;gap:2px;width:50px;padding:7px 0 5px;border-radius:14px;background:#fff;border:2px solid #e5e5e5;border-bottom:4px solid #d6d6d6;color:#b5b5b5;cursor:pointer}
-.pfx-cr svg{width:24px;height:24px}
-.pfx-cr small{font-size:10px;font-weight:700;color:#999}
-.pfx-cr:active{transform:translateY(2px)}
 </style>
 </head>
 <body>
@@ -4833,9 +4828,8 @@ function profile(){
  const CAM='<svg viewBox="0 0 24 24" width=18 height=18 fill=currentColor aria-hidden=true><path fill-rule="evenodd" d="M9 4a1 1 0 00-.8.4L7.1 6H5a3 3 0 00-3 3v8a3 3 0 003 3h14a3 3 0 003-3V9a3 3 0 00-3-3h-2.1l-1.1-1.6A1 1 0 0015 4H9zm3 4.5a4 4 0 110 8 4 4 0 010-8zm0 2a2 2 0 100 4 2 2 0 000-4z"/></svg>',CMX='<svg viewBox="0 0 24 24" aria-hidden=true><rect x=3 y=3 width=8 height=10 rx=2.2 fill="#1cb0f6"/><rect x=13 y=3 width=8 height=6 rx=2.2 fill="#ff9600"/><rect x=13 y=11 width=8 height=10 rx=2.2 fill="#ff5ea8"/><rect x=3 y=15 width=8 height=6 rx=2.2 fill="#58cc02"/></svg>';
  const PEN='<svg viewBox="0 0 24 24" width=18 height=18 fill=currentColor aria-hidden=true><path d="M16.9 3.3a2.4 2.4 0 013.4 3.4L8.6 18.4l-4.9 1.2a.6.6 0 01-.7-.7l1.2-4.9L16.9 3.3z"/></svg>';
  $('#app').innerHTML=`<div class="sec pfp"><div class=st-top><button class=st-c data-go=settings aria-label="${T('ফিরে যান','Back')}">${ic('arrow')}</button><h1>${T('প্রোফাইল','Profile')}</h1><span class=st-c style="visibility:hidden"></span></div>
-  <div class=pfx-hero><button type=button class=pfx-cr id=pfCr aria-label="${T('ক্রিয়েটর','Creator')}"><svg viewBox="0 0 24 24" fill=currentColor aria-hidden=true><path d="M12 2.8l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.1l6-.8z" stroke=currentColor stroke-width=1.6 stroke-linejoin=round /></svg><small>${T('শীঘ্রই','Soon')}</small></button><button type=button class=pfx-av id=pfAvB aria-label="${T('অবতার বদলান','Change avatar')}"><span id=pfAv>${pfAv(p,120)}</span><i class=pfx-cam>${CAM}</i></button><div class=pfx-nm><b id=pfUn>@${esc(p.u)}</b><button type=button class=pfx-ed id=pfEd aria-label="${T('নাম বদলান','Edit name')}">${T('পরিবর্তন','Change')}</button></div></div>
+  <div class=pfx-hero><button type=button class=pfx-av id=pfAvB aria-label="${T('অবতার বদলান','Change avatar')}"><span id=pfAv>${pfAv(p,120)}</span><i class=pfx-cam>${CAM}</i></button><div class=pfx-nm><b id=pfUn>@${esc(p.u)}</b><button type=button class=pfx-ed id=pfEd aria-label="${T('নাম বদলান','Edit name')}">${T('পরিবর্তন','Change')}</button></div></div>
   <h2 class=pfx-h>${T('ওভারভিউ','Overview')}</h2><div class=pfx-grid><div class=pfx-st><div class=pfx-r><span class=pfx-fl>${icf('flame')}</span><b>${nn(st.streak)}</b></div><small>${T('দিনের স্ট্রিক','Day streak')}</small></div><div class=pfx-st><div class=pfx-r><span class=pfx-fa>${avBare('box',34)}</span><b>${nn(st.read)}</b></div><small>${T('কমিকস পড়া','Comics read')}</small></div></div></div>`;
- $('#pfCr').onclick=()=>qFloat(`<h2>${T('ক্রিয়েটর','Creator')}</h2><p>${T('নিজের কমিক বা আর্ট জমা দিয়ে ক্রিয়েটর হওয়ার সুযোগ — শীঘ্রই আসছে।','A chance to become a creator by submitting your own comics or art — coming soon.')}</p>`);
  $('#pfAvB').onclick=()=>{const q0=pfGet(),o=qFloat(`<h2>${T('অবতার বেছে নিন','Choose avatar')}</h2><div class=pfx-g>${AVK.map(k=>`<button type=button class="pfx-o${k===q0.a?' on':''}" data-av="${k}" aria-label="${k}">${avSvg(k,64)}</button>`).join('')}</div>`);
   o.querySelector('.pfx-g').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;const q=pfGet();q.a=b.dataset.av;LS.set('akProf',q);const a=$('#pfAv');if(a)a.innerHTML=avSvg(q.a,120);pfHdr();o.remove()}};
  $('#pfEd').onclick=()=>{const o=qFloat(`<h2>${T('নাম বদলান','Edit name')}</h2><input class=qin id=pfIn maxlength=20 autocomplete=off autocapitalize=off spellcheck=false value="${esc(pfGet().u)}" aria-label="${T('ইউজারনেম','Username')}"><p id=pfMsg style="margin:0 2px 10px;font-size:13px;color:#777">${T('৩–২০ অক্ষর: a–z, ০–৯ (0–9), _ এবং . — মন্তব্যেও এই নাম দেখাবে','3–20 characters: a–z, 0–9, _ and . — also shown on your comments')}</p><button type=button class=qbtn id=pfSv>${T('সেভ করুন','Save')}</button>`);
